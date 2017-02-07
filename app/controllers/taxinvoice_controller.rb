@@ -2133,7 +2133,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20170207-05"
+    mgtKey = "20170207-01"
 
     begin
       @value = TaxinvoiceController::TIService.getMailURL(
