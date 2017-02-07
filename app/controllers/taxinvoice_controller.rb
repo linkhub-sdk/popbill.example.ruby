@@ -523,7 +523,7 @@ class TaxinvoiceController < ApplicationController
 
       # 통장사본 이미지 첨부여부
       "bankBookYN" => false,
-      
+
 
       ######################### 수정세금계산서 정보 ##########################
       # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
@@ -770,6 +770,16 @@ class TaxinvoiceController < ApplicationController
 
       # 통장사본 이미지 첨부여부
       "bankBookYN" => false,
+
+      ######################### 수정세금계산서 정보 ##########################
+      # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
+      # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+
+      # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+      "modifyCode" => nil,
+
+      # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+      "originalTaxinvoiceKey" => "",
 
 
       ######################### 공급자정보 #########################
