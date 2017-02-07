@@ -1,0 +1,73 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <ul>
+      <li>writeDate(작성일자) : <%=@Response["writeDate"]%></li>
+      <li>issueDT(발행일시) : <%=@Response["issueDT"]%></li>
+      <li>invoiceType(전자세금계산서 종류) : <%=@Response["invoiceType"]%></li>
+      <li>taxType(과세형태) : <%=@Response["taxType"]%></li>
+      <li>supplyCostTotal(공급가액 합계) : <%=@Response["supplyCostTotal"]%></li>
+      <li>taxTotal(세액 합계) : <%=@Response["taxTotal"]%></li>
+      <li>totalAmount(합계금액) : <%=@Response["totalAmount"]%></li>
+      <li>purposeType(영수/청구) : <%=@Response["purposeType"]%></li>
+      <li>serialNum(일련번호) : <%=@Response["serialNum"]%></li>
+      <li>cash(현금) : <%=@Response["cash"]%></li>
+      <li>chkBill(수표) : <%=@Response["chkBill"]%></li>
+      <li>credit(외상) : <%=@Response["credit"]%></li>
+      <li>note(어음) : <%=@Response["note"]%></li>
+      <li>remark1(비고1) : <%=@Response["remark1"]%></li>
+      <li>remark2(비고2) : <%=@Response["remark2"]%></li>
+      <li>remakr3(비고3) : <%=@Response["remakr3"]%></li>
+      <li>ntsconfirmNum(국세청승인번호) : <%=@Response["ntsconfirmNum"]%></li>
+
+      <li>modifyCode(수정 사유코드) : <%=@Response["modifyCode"]%></li>
+      <li>orgNTSConfirmNum(원본 국세청승인번호) : <%=@Response["orgNTSConfirmNum"]%></li>
+
+      <li>invoicerCorpNum(공급자 사업자번호) : <%=@Response["invoicerCorpNum"]%></li>
+      <li>invoicerTaxRegID(공급자 종사업장 식별번호) : <%=@Response["invoicerTaxRegID"]%></li>
+      <li>invoicerMgtKey(공급자 관리번호) : <%=@Response["invoicerMgtKey"]%></li>
+      <li>invoicerCorpName(공급자 상호) : <%=@Response["invoicerCorpName"]%></li>
+      <li>invoicerCEOName(공급자 대표자성명) : <%=@Response["invoicerCEOName"]%></li>
+      <li>invoicerAddr(공급자 주소) : <%=@Response["invoicerAddr"]%></li>
+      <li>invoicerBizClass(공급자 종목) : <%=@Response["invoicerBizClass"]%></li>
+      <li>invoicerBizType(공급자 업태) : <%=@Response["invoicerBizType"]%></li>
+      <li>invoicerContactName(담당자 성명) : <%=@Response["invoicerContactName"]%></li>
+      <li>invoicerTEL(담당자 연락처) : <%=@Response["invoicerTEL"]%></li>
+      <li>invoicerEmail(담당자 이메일) : <%=@Response["invoicerEmail"]%></li>
+
+      <li>invoiceeType(공급받는자 구분) : <%=@Response["invoiceeType"]%></li>
+      <li>invoiceeCorpNum(공급받는자 사업자번호) : <%=@Response["invoiceeCorpNum"]%></li>
+      <li>invoiceeTaxRegID(공급받는자 종사업장 식별번호) : <%=@Response["invoiceeTaxRegID"]%></li>
+      <li>invoiceeMgtKey(공급받는자 문서관리번호) : <%=@Response["invoiceeMgtKey"]%></li>
+      <li>invoiceeCorpName(공급받는자 상호) : <%=@Response["invoiceeCorpName"]%></li>
+      <li>invoiceeCEOName(공급받는자 대표자 성명) : <%=@Response["invoiceeCEOName"]%></li>
+      <li>invoiceeAddr(공급받는자 주소) : <%=@Response["invoiceeAddr"]%></li>
+      <li>invoiceeBizType(공급받는자 업태) : <%=@Response["invoiceeBizType"]%></li>
+      <li>invoiceeBizClass(공급받는자 종목) : <%=@Response["invoiceeBizClass"]%></li>
+      <li>invoiceeContactName1(담당자 성명) : <%=@Response["invoiceeContactName1"]%></li>
+      <li>invoiceeTEL1(담당자 연락처) : <%=@Response["invoiceeTEL1"]%></li>
+      <li>invoiceeEmail1(담당자 이메일) : <%=@Response["invoiceeEmail1"]%></li>
+
+      <% @Response["detailList"].each_with_index do |detailInfo, index| %>
+      <fieldset class="fieldset2">
+        <legend>품목 상세항목 [<%=(index+1)%>/<%=@Response["detailList"].length%>]</legend>
+        <ul>
+          <li>serialNum(일련번호) : <%=detailInfo["serialNum"]%></li>
+          <li>purchaseDT(거래일자) : <%=detailInfo["purchaseDT"]%></li>
+          <li>itemName(품명) : <%=detailInfo["itemName"]%></li>
+          <li>spec(규격) : <%=detailInfo["spec"]%></li>
+          <li>qty(수량) : <%=detailInfo["qty"]%></li>
+          <li>unitCost(단가) : <%=detailInfo["unitCost"]%></li>
+          <li>supplyCost(공급가액) : <%=detailInfo["supplyCost"]%></li>
+          <li>tax(세액) : <%=detailInfo["tax"]%></li>
+          <li>remark(비고) : <%=detailInfo["remark"]%></li>
+        </ul>
+      </fieldset>
+      <%end%>
+      </fieldset>
+
+    </ul>
+  </fieldset>
+ </div>

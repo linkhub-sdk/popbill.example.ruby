@@ -1,0 +1,23 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <% @Response.each_with_index do |contactInfo, index| %>
+    <fieldset class="fieldset2">
+      <legend>담당자정보 [<%=(index+1)%>/<%=@Response.length%>]</legend>
+      <ul>
+        <li>담당자 아이디(id) : <%=contactInfo["id"]%></li>
+        <li>담당자 성명(personName) : <%=contactInfo["personName"]%></li>
+        <li>담당자 이메일(email) : <%=contactInfo["email"]%></li>
+        <li>담당자 휴대폰번호(hp) : <%=contactInfo["hp"]%></li>
+        <li>담당자 팩스번호(fax) : <%=contactInfo["fax"]%></li>
+        <li>담당자 연락처(tel) :<%=contactInfo["tel"]%></li>
+        <li>등록일시(regDT) : <%=contactInfo["regDT"]%></li>
+        <li>담당자 회사조회 권한(searchAllAllowYN) : <%=contactInfo["searchAllAllowYN"]%></li>
+        <li>관리자여부(mgrYN) : <%=contactInfo["mgrYN"]%></li>
+      </ul>
+    </fieldset>
+    <%end %>
+  </fieldset>
+ </div>

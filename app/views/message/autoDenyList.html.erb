@@ -1,0 +1,16 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <% @Response.each_with_index do |emailInfo, index| %>
+    <fieldset class="fieldset2">
+      <legend>080 수신거부 목록 확인 [<%=(index+1)%>/<%=@Response.length%>]</legend>
+      <ul>
+        <li>number(수신거부번호) : <%=emailInfo["number"]%></li>
+        <li>regDT(등록일시) : <%=emailInfo["regDT"]%></li>
+      </ul>
+    </fieldset>
+    <%end%>
+  </fieldset>
+ </div>

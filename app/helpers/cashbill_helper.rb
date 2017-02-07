@@ -1,0 +1,2 @@
+module CashbillHelper
+end

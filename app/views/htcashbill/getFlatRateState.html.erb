@@ -1,0 +1,18 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <ul>
+      <li>referenceID(사업자번호) : <%=@Response["referenceID"]%></li>
+      <li>contractDT(정액제 서비스 시작일) : <%=@Response["contractDT"]%></li>
+      <li>useEndDate(정액제 서비스 종료일) : <%=@Response["useEndDate"]%></li>
+      <li>baseDate(자동연장 결제일) : <%=@Response["baseDate"]%></li>
+      <li>state(정액제 서비스 상태) : <%=@Response["state"]%></li>
+      <li>closeRequestYN(정액제 서비스 해지신청 여부) : <%=@Response["closeRequestYN"]%></li>
+      <li>useRestrictYN(정액제 서비스 사용제한 여부) : <%=@Response["useRestrictYN"]%></li>
+      <li>closeOnExpired(정액제 서비스 만료시 해지여부) : <%=@Response["closeOnExpired"]%></li>
+      <li>unPaiedYN(미수굼 보유 여부) : <%=@Response["unPaiedYN"]%></li>
+    </ul>
+  </fieldset>
+ </div>

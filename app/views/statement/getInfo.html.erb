@@ -1,0 +1,31 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <ul>
+      <li>itemCode(문서종류코드) : <%=@Response["itemCode"]%></li>
+      <li>itemKey(팝빌 관리번호) : <%=@Response["itemKey"]%></li>
+      <li>invoiceNum(문서 고유번호) : <%=@Response["invoiceNum"]%></li>
+      <li>mgtKey(문서관리번호) : <%=@Response["mgtKey"]%></li>
+      <li>taxType(세금형태) : <%=@Response["taxType"]%></li>
+      <li>writeDate(작성일자) : <%=@Response["writeDate"]%></li>
+      <li>regDT(등록일시) : <%=@Response["regDT"]%></li>
+      <li>senderCorpName(발신자 상호) : <%=@Response["senderCorpName"]%></li>
+      <li>senderCorpNum(발신자 사업자등록번호) : <%=@Response["senderCorpNum"]%></li>
+      <li>snederPrintYN(발신자 인쇄여부) : <%=@Response["snederPrintYN"]%></li>
+      <li>receiverCorpName(수신자 상호) : <%=@Response["receiverCorpName"]%></li>
+      <li>recieverCorpNum(수신자 사업자등록번호) : <%=@Response["recieverCorpNum"]%></li>
+      <li>receiverPrintYN(수신자 인쇄여부) : <%=@Response["receiverPrintYN"]%></li>
+      <li>supplyCostTotal(공급가액 합계) : <%=@Response["supplyCostTotal"]%></li>
+      <li>taxTotal(세액 합계) : <%=@Response["taxTotal"]%></li>
+      <li>purposeType(영수/청구) : <%=@Response["purposeType"]%></li>
+      <li>issueDT(발행일시) : <%=@Response["issueDT"]%></li>
+      <li>stateCode(상태코드) : <%=@Response["stateCode"]%></li>
+      <li>stateDT(상태 변경일시) : <%=@Response["stateDT"]%></li>
+      <li>stateMemo(상태메모) : <%=@Response["stateMemo"]%></li>
+      <li>openYN(개봉 여부) : <%=@Response["openYN"]%></li>
+      <li>openDT(개봉 일시) : <%=@Response["openDT"]%></li>
+    </ul>
+  </fieldset>
+ </div>

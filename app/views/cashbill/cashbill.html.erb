@@ -1,0 +1,34 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <ul>
+      <li>mgtKey(관리번호) : <%=@Response["mgtKey"]%></li>
+      <li>orgConfirmNum(국세청 승인번호) : <%=@Response["orgConfirmNum"]%></li>
+      <li>tradeDate(거래일자) : <%=@Response["tradeDate"]%></li>
+      <li>tradeUsage(거래유형) : <%=@Response["tradeUsage"]%></li>
+      <li>tradeType(현금영수증 형태) : <%=@Response["tradeType"]%></li>
+      <li>taxationType(과세형태) : <%=@Response["taxationType"]%></li>
+      <li>supplyCost(공급가액) : <%=@Response["supplyCost"]%></li>
+      <li>tax(세액) : <%=@Response["tax"]%></li>
+      <li>serviceFee(봉사료) : <%=@Response["serviceFee"]%></li>
+      <li>totalAmount(거래금액) : <%=@Response["totalAmount"]%></li>
+
+      <li>franchiseCorpNum(발행자 사업자번호) : <%=@Response["franchiseCorpNum"]%></li>
+      <li>franchiseCorpName(발행자 상호) : <%=@Response["franchiseCorpName"]%></li>
+      <li>franchiseCEOName(발행자 대표자 성명) : <%=@Response["franchiseCEOName"]%></li>
+      <li>franchiseAddr(가맹점 주소) : <%=@Response["franchiseAddr"]%></li>
+      <li>franchiseTEL(가맹점 전화번호) : <%=@Response["franchiseTEL"]%></li>
+
+      <li>identityNum(거래처 식별번호) : <%=@Response["identityNum"]%></li>
+      <li>customerName(고객명) : <%=@Response["customerName"]%></li>
+      <li>itemName(상품명) : <%=@Response["itemName"]%></li>
+      <li>orderNumber(가맹점주문번호) : <%=@Response["orderNumber"]%></li>
+      <li>email(이메일) : <%=@Response["email"]%></li>
+      <li>hp(휴대폰) : <%=@Response["hp"]%></li>
+      <li>smssendYN(SMS전송여부) : <%=@Response["smssendYN"]%></li>
+
+    </ul>
+  </fieldset>
+ </div>

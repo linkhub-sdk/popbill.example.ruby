@@ -1,0 +1,22 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <% @Response.each_with_index do |taxinvoiceLog, index| %>
+    <fieldset class="fieldset2">
+      <legend>세금계산서 문서상태 변경이력 [<%=(index+1)%>/<%=@Response.length%>]</legend>
+      <ul>
+        <li>docLogType(로그타입) : <%=taxinvoiceLog["docLogType"]%></li>
+        <li>log(이력정보) : <%=taxinvoiceLog["log"]%></li>
+        <li>procType(처리형태) : <%=taxinvoiceLog["procType"]%></li>
+        <li>procCorpName(처리회사명) : <%=taxinvoiceLog["procCorpName"]%></li>
+        <li>procContactName(처리담당자명) : <%=taxinvoiceLog["procContactName"]%></li>
+        <li>procMemo(처리메모) : <%=taxinvoiceLog["procMemo"]%></li>
+        <li>regDT(등록일시) : <%=taxinvoiceLog["regDT"]%></li>
+        <li>ip(아이피) : <%=taxinvoiceLog["ip"]%></li>
+      </ul>
+    </fieldset>
+    <%end%>
+  </fieldset>
+ </div>
