@@ -466,6 +466,107 @@ class FaxController < ApplicationController
   end
 
   ##############################################################################
+  # 팩스를 재전송합니다.
+  # - 전송일 기준 180일이 경과되지 않은 전송건만 재전송할 수 있습니다.
+  ##############################################################################
+  def resendFax
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팩스 접수번호
+    receiptNum = "017022016484600001"
+
+    # 발신번호, 공백처리시 기존전송정보로 전송
+    sender = "07043042991"
+
+    # 발신자명, 공백처리시 기존전송정보로 전송
+    senderName = "John"
+
+    # 수신번호/수신자명 모두 공백처리시 기존전송정보로 전송
+    # 수신번호
+    receiver = ""
+
+    # 수신자명
+    receiverName = ""
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = ""
+
+    begin
+      @value = FaxController::FAXService.resendFax(
+          corpNum,
+          receiptNum,
+          sender,
+          senderName,
+          receiver,
+          receiverName,
+          reserveDT,
+        )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팩스를 재전송합니다.
+  # - 전송일 기준 180일이 경과되지 않은 전송건만 재전송할 수 있습니다.
+  ##############################################################################
+  def resendFax_Multi
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팩스 접수번호
+    receiptNum = "017022016484600001"
+
+    # 발신번호, 공백처리시 기존전송정보로 전송
+    sender = "07043042991"
+
+    # 발신자명, 공백처리시 기존전송정보로 전송
+    senderName = "John"
+
+    # 수신자 정보 배열, 기존전송정보와 재전송할 수신정보가 동일한 경우 nil 처리
+    receivers = nil
+
+
+    # 기존전송정보와 재전송할 수신정보가 다를 경우 아래의 코드 참조
+    # 수신자 정보 배열, 최대 1000건
+    # receivers = [
+    #   {
+    #     "rcv" => "010111222",   # 수신번호
+    #     "rcvnm" => "John",    # 수신자명
+    #   },
+    #   {
+    #     "rcv" => "010111222",   # 수신번호
+    #     "rcvnm" => "John2",   # 수신자명
+    #   },
+    # ]
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = ""
+
+    begin
+      @value = FaxController::FAXService.resendFax_multi(
+          corpNum,
+          receiptNum,
+          sender,
+          senderName,
+          receivers,
+          reserveDT,
+        )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 팩스 전송요청시 반환받은 접수번호(receiptNum)을 사용하여 팩스전송 결과를 확인합니다.
   ##############################################################################
   def getFaxDetail

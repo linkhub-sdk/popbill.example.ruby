@@ -186,6 +186,8 @@ RubyPopbillExample::Application.routes.draw do
   get "/FaxExample/updateCorpInfo" => 'fax#updateCorpInfo', via: [:get]
   get "/FaxExample/sendFAX" => 'fax#sendFax', via: [:get]
   get "/FaxExample/sendFAX_Multi" => 'fax#sendFax_Multi', via: [:get]
+  get "/FaxExample/resendFAX" => 'fax#resendFax', via: [:get]
+  get "/FaxExample/resendFAX_Multi" => 'fax#resendFax_Multi', via: [:get]
   get "/FaxExample/getFaxDetail" => 'fax#getFaxDetail', via: [:get]
   get "/FaxExample/search" => 'fax#search', via: [:get]
   get "/FaxExample/cancelReserve" => 'fax#cancelReserve', via: [:get]
