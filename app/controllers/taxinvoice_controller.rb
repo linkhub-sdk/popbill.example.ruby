@@ -1316,6 +1316,9 @@ class TaxinvoiceController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
     # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
     keyType = MgtKeyType::SELL
 
@@ -1361,6 +1364,9 @@ class TaxinvoiceController < ApplicationController
     # 거래처 조회, 거래처 상호 또는 거래처 사업자등록번호 조회, 공백처리시 전체조회
     queryString = ""
 
+    # 연동문서 조회여부, 공백-전체조회, 0-일반문서 조회, 1-연동문서 조회
+    interOPYN = ""
+
     begin
       @Response = TaxinvoiceController::TIService.search(
         corpNum,
@@ -1379,6 +1385,8 @@ class TaxinvoiceController < ApplicationController
         perPage,
         order,
         queryString,
+        userID,
+        interOPYN,
       )
       render "taxinvoice/search"
     rescue PopbillException => pe
