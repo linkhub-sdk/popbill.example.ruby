@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 팩스 API Ruby On Rails SDK Example
 #
-# 업테이트 일자 : 2017-02-07
+# 업테이트 일자 : 2017-05-24
 # 연동기술지원 연락처 : 1600-8539 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -287,25 +287,30 @@ class FaxController < ApplicationController
     # 팝빌회원 아이디
     userID = FaxController::TestUserID
 
+
     # 담당자 정보
     contactInfo = {
+
+      # 담당자 아이디
+      "id" => userID,
+
       # 담당자명
-     "personName" => "담당자명170131",
+      "personName" => "담당자명170131",
 
-     # 연락처
-     "tel" => "070-4304-2991",
+      # 연락처
+      "tel" => "070-4304-2991",
 
-     # 휴대폰버놓
-     "hp" => "010-1111-2222",
+      # 휴대폰버놓
+      "hp" => "010-1111-2222",
 
-     # 팩스번호
-     "fax" => "070-1111-2222",
+      # 팩스번호
+      "fax" => "070-1111-2222",
 
-     # 메일주소
-     "email" => "test@gmail.com",
+      # 메일주소
+      "email" => "test@gmail.com",
 
-     # 회사조회여부, true-회사조회, false-개인조회
-     "searchAllAllowYN" => true,
+      # 회사조회여부, true-회사조회, false-개인조회
+      "searchAllAllowYN" => true,
     }
 
     begin
