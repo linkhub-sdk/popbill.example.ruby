@@ -894,7 +894,7 @@ class MessageController < ApplicationController
   end
 
   ##############################################################################
-  # 문자메시지 전송내역 팝업 URL을 반환합니다.
+  # 문자 서비스 관련 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
   def getURL
@@ -902,8 +902,8 @@ class MessageController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
 
-    # 문자 전송내역 팝업
-    togo = "BOX"
+    # BOX-문자 전송내역 팝업 / SENDER-발신번호 관리 팝업
+    togo = "SENDER"
 
     begin
       @value = MessageController::MSGService.getURL(
@@ -955,6 +955,26 @@ class MessageController < ApplicationController
         corpNum,
       )
       render "message/autoDenyList"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
+  ##############################################################################
+  # 문자 발신번호 목록을 확인합니다.
+  ##############################################################################
+  def getSenderNumberList
+
+    # 팝빌회원 사업자번호
+    corpNum = MessageController::TestCorpNum
+
+    begin
+      @Response = MessageController::MSGService.getSenderNumberList(
+        corpNum,
+      )
+      render "message/getSenderNumberList"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"

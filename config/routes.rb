@@ -169,6 +169,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/MessageExample/getURL" => 'message#getURL', via: [:get]
   get "/MessageExample/getUnitCost" => 'message#getUnitCost', via: [:get]
   get "/MessageExample/autoDenyList" => 'message#getAutoDenyList', via: [:get]
+  get "/MessageExample/getSenderNumberList" => 'message#getSenderNumberList', via: [:get]
 
   # 팝빌 팩스 API Service route
   get "/FaxExample" => 'fax#index'
@@ -193,7 +194,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/FaxExample/cancelReserve" => 'fax#cancelReserve', via: [:get]
   get "/FaxExample/getURL" => 'fax#getURL', via: [:get]
   get "/FaxExample/getUnitCost" => 'fax#getUnitCost', via: [:get]
-
+  get "/FaxExample/getSenderNumberList" => 'fax#getSenderNumberList', via: [:get]
 
   # 팝빌 홈택스 전자세금계산서 연계 API Service route
   get "/HTTaxinvoiceExample" => 'httaxinvoice#index'
