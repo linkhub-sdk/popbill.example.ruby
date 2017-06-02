@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 팩스 API Ruby On Rails SDK Example
 #
-# 업테이트 일자 : 2017-05-24
+# 업테이트 일자 : 2017-06-02
 # 연동기술지원 연락처 : 1600-8539 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -387,8 +387,12 @@ class FaxController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+
     # 발신번호
-    sender = "07043042991"
+    sender = "07043042992"
 
     # 발신자명
     senderName = "John"
@@ -405,6 +409,10 @@ class FaxController < ApplicationController
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
 
+    # 광고팩스 전송여부
+    adsYN = false
+
+
     begin
       @value = FaxController::FAXService.sendFax(
           corpNum,
@@ -414,6 +422,8 @@ class FaxController < ApplicationController
           receiverName,
           filePath,
           reserveDT,
+          userID,
+          adsYN,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -429,6 +439,10 @@ class FaxController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+
     # 발신번호
     sender = "07043042991"
 
@@ -438,11 +452,11 @@ class FaxController < ApplicationController
     # 수신자 정보 배열, 최대 1000건
     receivers = [
       {
-        "rcv" => "010111222",   # 수신번호
+        "rcv" => "070111222",   # 수신번호
         "rcvnm" => "John",    # 수신자명
       },
       {
-        "rcv" => "010111222",   # 수신번호
+        "rcv" => "070111222",   # 수신번호
         "rcvnm" => "John2",   # 수신자명
       },
     ]
@@ -453,6 +467,9 @@ class FaxController < ApplicationController
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
 
+    # 광고팩스 전송여부
+    adsYN = false
+
     begin
       @value = FaxController::FAXService.sendFax_multi(
           corpNum,
@@ -461,6 +478,8 @@ class FaxController < ApplicationController
           receivers,
           filePath,
           reserveDT,
+          userID,
+          adsYN,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
