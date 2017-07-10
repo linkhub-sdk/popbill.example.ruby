@@ -830,6 +830,9 @@ class CashbillController < ApplicationController
       # [취소거래시 필수] 원본 현금영수증 국세청승인번호
       "orgConfirmNum" => "",
 
+      # [취소거래시 필수] 원본 현금영수증 거래일자
+      "orgTradeDate" => "",
+
       # [필수] 과세형태, [과세, 비과세] 중 기재
       "taxationType" => "과세",
 
