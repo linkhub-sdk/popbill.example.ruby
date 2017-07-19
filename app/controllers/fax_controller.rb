@@ -1,8 +1,8 @@
 ################################################################################
 # 팜빌 팩스 API Ruby On Rails SDK Example
 #
-# 업테이트 일자 : 2017-06-02
-# 연동기술지원 연락처 : 1600-8539 / 070-4304-2991~2
+# 업데이트 일자 : 2017-07-19
+# 연동기술지원 연락처 : 1600-9854 / 070-4304-2991
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
@@ -395,13 +395,13 @@ class FaxController < ApplicationController
     sender = "07043042992"
 
     # 발신자명
-    senderName = "John"
+    senderName = "발신자명"
 
     # 수신번호
     receiver = "070111222"
 
     # 수신자명
-    receiverName = "Receiver"
+    receiverName = "수신자명"
 
     # 파일경로 배열, 최대 전송 파일개수 5개
     filePath = ["/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.pdf"]
@@ -411,6 +411,9 @@ class FaxController < ApplicationController
 
     # 광고팩스 전송여부
     adsYN = false
+
+    # 팩스제목
+    title = "팩스전송 제목"
 
 
     begin
@@ -424,6 +427,7 @@ class FaxController < ApplicationController
           reserveDT,
           userID,
           adsYN,
+          title,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -447,17 +451,17 @@ class FaxController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "John"
+    senderName = "발신자명"
 
     # 수신자 정보 배열, 최대 1000건
     receivers = [
       {
         "rcv" => "070111222",   # 수신번호
-        "rcvnm" => "John",    # 수신자명
+        "rcvnm" => "수신자명",    # 수신자명
       },
       {
         "rcv" => "070111222",   # 수신번호
-        "rcvnm" => "John2",   # 수신자명
+        "rcvnm" => "수신자명",   # 수신자명
       },
     ]
 
@@ -470,6 +474,9 @@ class FaxController < ApplicationController
     # 광고팩스 전송여부
     adsYN = false
 
+    # 팩스제목
+    title = "팩스 동보전송 제목"
+
     begin
       @value = FaxController::FAXService.sendFax_multi(
           corpNum,
@@ -480,6 +487,7 @@ class FaxController < ApplicationController
           reserveDT,
           userID,
           adsYN,
+          title,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -498,14 +506,17 @@ class FaxController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
     # 팩스 접수번호
-    receiptNum = "017022016484600001"
+    receiptNum = "017071817015400001"
 
     # 발신번호, 공백처리시 기존전송정보로 전송
     sender = "07043042991"
 
     # 발신자명, 공백처리시 기존전송정보로 전송
-    senderName = "John"
+    senderName = "발신자명"
 
     # 수신번호/수신자명 모두 공백처리시 기존전송정보로 전송
     # 수신번호
@@ -517,6 +528,9 @@ class FaxController < ApplicationController
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
 
+    # 팩스제목
+    title = "팩스 재전송 제목"
+
     begin
       @value = FaxController::FAXService.resendFax(
           corpNum,
@@ -526,6 +540,8 @@ class FaxController < ApplicationController
           receiver,
           receiverName,
           reserveDT,
+          userID,
+          title,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -544,14 +560,17 @@ class FaxController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
     # 팩스 접수번호
-    receiptNum = "017022016484600001"
+    receiptNum = "017071817015400001"
 
     # 발신번호, 공백처리시 기존전송정보로 전송
     sender = "07043042991"
 
     # 발신자명, 공백처리시 기존전송정보로 전송
-    senderName = "John"
+    senderName = "발신자명"
 
     # 수신자 정보 배열, 기존전송정보와 재전송할 수신정보가 동일한 경우 nil 처리
     receivers = nil
@@ -562,16 +581,19 @@ class FaxController < ApplicationController
     # receivers = [
     #   {
     #     "rcv" => "010111222",   # 수신번호
-    #     "rcvnm" => "John",    # 수신자명
+    #     "rcvnm" => "수신자명",    # 수신자명
     #   },
     #   {
     #     "rcv" => "010111222",   # 수신번호
-    #     "rcvnm" => "John2",   # 수신자명
+    #     "rcvnm" => "수신자명",   # 수신자명
     #   },
     # ]
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
+
+    # 팩스제목
+    title = "팩스 동보 재전송제목"
 
     begin
       @value = FaxController::FAXService.resendFax_multi(
@@ -581,6 +603,8 @@ class FaxController < ApplicationController
           senderName,
           receivers,
           reserveDT,
+          userID,
+          title,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -599,7 +623,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팩스전송 접수번호
-    receiptNum = "017020711364600001"
+    receiptNum = "017071909120400004"
 
     begin
       @Response = FaxController::FAXService.getFaxDetail(corpNum, receiptNum)
@@ -619,10 +643,10 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20170118"
+    sDate = "20170701"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20170207"
+    eDate = "20170801"
 
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]

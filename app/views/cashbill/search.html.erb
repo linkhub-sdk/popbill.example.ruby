@@ -17,6 +17,7 @@
       <legend>현금영수증 상태/요약정보 대량 확인 [<%= (index+1)%>]</legend>
       <ul>
           <li>itemKey (팝빌 관리번호) : <%=cashbillInfo["itemKey"]%></li>
+          <li>confirmNum (국세청 승인번호) : <%=cashbillInfo["confirmNum"]%></li>
           <li>mgtKey (문서관리번호) : <%=cashbillInfo["mgtKey"]%></li>
           <li>tradeDate (거래일자) : <%=cashbillInfo["tradeDate"]%></li>
           <li>issueDT (발행일시) : <%=cashbillInfo["issueDT"]%></li>
@@ -32,7 +33,6 @@
           <li>itemName (상품명) : <%=cashbillInfo["itemName"]%></li>
           <li>customerName (고객명) : <%=cashbillInfo["customerName"]%></li>
 
-          <li>confirmNum (국세청 승인번호) : <%=cashbillInfo["confirmNum"]%></li>
           <li>orgConfirmNum (원본 현금영수증 국세청승인번호) : <%=cashbillInfo["orgConfirmNum"]%></li>
           <li>orgTradeDate (원본 현금영수증 거래일자) : <%=cashbillInfo["orgTradeDate"]%></li>
           <li>ntssendDT (국세청 전송일시) : <%=cashbillInfo["ntssendDT"]%></li>

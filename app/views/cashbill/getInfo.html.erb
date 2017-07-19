@@ -5,6 +5,7 @@
     <legend><%=request.env['PATH_INFO']%></legend>
     <ul>
       <li>itemKey (팝빌 관리번호) : <%=@Response["itemKey"]%></li>
+      <li>confirmNum (국세청 승인번호) : <%=@Response["confirmNum"]%></li>
       <li>mgtKey (문서관리번호) : <%=@Response["mgtKey"]%></li>
       <li>tradeDate (거래일자) : <%=@Response["tradeDate"]%></li>
       <li>issueDT (발행일시) : <%=@Response["issueDT"]%></li>
@@ -20,7 +21,6 @@
       <li>itemName (상품명) : <%=@Response["itemName"]%></li>
       <li>customerName (고객명) : <%=@Response["customerName"]%></li>
 
-      <li>confirmNum (국세청 승인번호) : <%=@Response["confirmNum"]%></li>
       <li>orgConfirmNum (원본 현금영수증 국세청승인번호) : <%=@Response["orgConfirmNum"]%></li>
       <li>orgTradeDate (원본 현금영수증 거래일자) : <%=@Response["orgTradeDate"]%></li>
       <li>ntssendDT (국세청 전송일시) : <%=@Response["ntssendDT"]%></li>

@@ -1,8 +1,8 @@
 ################################################################################
 # 팜빌 현금영수증 API Ruby On Rails SDK Example
 #
-# 업테이트 일자 : 2017-05-24
-# 연동기술지원 연락처 : 1600-8539 / 070-4304-2991~2
+# 업데이트 일자 : 2017-07-19
+# 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
@@ -436,6 +436,15 @@ class CashbillController < ApplicationController
       # [필수] 문서관리번호
       "mgtKey" => mgtKey,
 
+      # [필수] ]현금영수증 형태, [승인거래, 취소거래] 중 기재
+      "tradeType" => "승인거래",
+
+      # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+      "orgConfirmNum" => "",
+
+      # [취소거래시 필수] 원본 현금영수증 거래일자
+      "orgTradeDate" => "",
+
       # [필수] 거래유형, [소득공제용, 지출증빙용] 중 기재
       "tradeUsage" => "소득공제용",
 
@@ -443,9 +452,6 @@ class CashbillController < ApplicationController
       # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
       # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
       "identityNum" => "01043042991",
-
-      # [필수] ]현금영수증 형태, [승인거래, 취소거래] 중 기재
-      "tradeType" => "승인거래",
 
       # [취소거래시 필수] 원본 현금영수증 국세청승인번호
       "orgConfirmNum" => "",
@@ -618,7 +624,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20170207-01"
+    mgtKey = "20170711-09"
 
     begin
       @Response = CashbillController::CBService.getInfo(
@@ -671,10 +677,10 @@ class CashbillController < ApplicationController
     dType = "R"
 
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20160601"
+    sDate = "20170701"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20170207"
+    eDate = "20170801"
 
     # 전송상태코드 배열, 미기재시 전체조회, 2,3번째 자리 와일드카드(*) 가능
     # [참조] 현금영수증 API 연동매뉴열 "5.1. 현금영수증 상태코드"
@@ -730,7 +736,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20170207-01"
+    mgtKey = "20170711-09"
 
     begin
       @Response = CashbillController::CBService.getDetailInfo(
@@ -808,21 +814,13 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20170207-02"
+    mgtKey = "20170719-06"
 
     # 현금영수증 정보
     cashbill = {
 
       # [필수] 문서관리번호
       "mgtKey" => mgtKey,
-
-      # [필수] 거래유형, [소득공제용, 지출증빙용] 중 기재
-      "tradeUsage" => "소득공제용",
-
-      # [필수] 거래처 식별번호, 거래유형에 따라 작성
-      # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
-      # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
-      "identityNum" => "01043042991",
 
       # [필수] ]현금영수증 형태, [승인거래, 취소거래] 중 기재
       "tradeType" => "승인거래",
@@ -833,20 +831,28 @@ class CashbillController < ApplicationController
       # [취소거래시 필수] 원본 현금영수증 거래일자
       "orgTradeDate" => "",
 
+      # [필수] 거래유형, [소득공제용, 지출증빙용] 중 기재
+      "tradeUsage" => "소득공제용",
+
+      # [필수] 거래처 식별번호, 거래유형에 따라 작성
+      # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
+      # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
+      "identityNum" => "0101112222",
+
       # [필수] 과세형태, [과세, 비과세] 중 기재
       "taxationType" => "과세",
 
       # [필수] 공급가액
-      "supplyCost" => "20000",
+      "supplyCost" => "10000",
 
       # [필수] 세액
-      "tax" => "2000",
+      "tax" => "1000",
 
       # [필수] 봉사료
       "serviceFee" => "0",
 
       # [필수] 거래금액
-      "totalAmount" => "22000",
+      "totalAmount" => "11000",
 
       # [필수] 발행자 사업자번호
       "franchiseCorpNum" => corpNum,
