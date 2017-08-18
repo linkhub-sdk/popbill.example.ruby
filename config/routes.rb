@@ -139,6 +139,8 @@ RubyPopbillExample::Application.routes.draw do
   get "/CashbillExample/getEPrintURL" => 'cashbill#getEPrintURL', via: [:get]
   get "/CashbillExample/getMailURL" => 'cashbill#getMailURL', via: [:get]
   get "/CashbillExample/getUnitCost" => 'cashbill#getUnitCost', via: [:get]
+  get "/CashbillExample/revokeRegistIssue" => 'cashbill#revokeRegistIssue', via: [:get]
+  get "/CashbillExample/revokeRegister" => 'cashbill#revokeRegister', via: [:get]
 
 
   # 팝빌 문자 API Service route

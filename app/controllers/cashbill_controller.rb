@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 현금영수증 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2017-07-19
+# 업데이트 일자 : 2017-08-18
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -900,6 +900,7 @@ class CashbillController < ApplicationController
     end
   end
 
+
   ##############################################################################
   # 1건의 임시저장 현금영수증을 발행처리합니다.
   # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청
@@ -919,6 +920,79 @@ class CashbillController < ApplicationController
       @Response = CashbillController::CBService.issue(
         corpNum,
         mgtKey,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 1건의 취소현금영수증을 즉시발행합니다.
+  # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
+  #   확인할 수 있습니다.
+  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
+  #   > 1.4. 국세청 전송정책"을 참조하시기 바랍니다.
+  # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
+  ##############################################################################
+  def revokeRegistIssue
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 현금영수증 문서관리번호
+    mgtKey = "20170818-40"
+
+    # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+    orgConfirmNum = "820116333"
+
+    # [취소거래시 필수] 원본 현금영수증 거래일자
+    orgTradeDate = "20170711"
+
+    begin
+      @Response = CashbillController::CBService.revokeRegistIssue(
+        corpNum,
+        mgtKey,
+        orgConfirmNum,
+        orgTradeDate,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 1건의 취소현금영수증을 임시저장 합니다.
+  # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
+  # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를 확인할 수 있습니다.
+  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
+  #   > 1.4. 국세청 전송정책"을 참조하시기 바랍니다.
+  # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
+  ##############################################################################
+
+  def revokeRegister
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 현금영수증 문서관리번호
+    mgtKey = "20170818-41"
+
+    # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+    orgConfirmNum = "820116333"
+
+    # [취소거래시 필수] 원본 현금영수증 거래일자
+    orgTradeDate = "20170711"
+
+    begin
+      @Response = CashbillController::CBService.revokeRegister(
+        corpNum,
+        mgtKey,
+        orgConfirmNum,
+        orgTradeDate,
       )
       render "home/response"
     rescue PopbillException => pe
