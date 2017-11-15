@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 현금영수증 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2017-08-29
+# 업데이트 일자 : 2017-11-15
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -761,7 +761,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20170711-09"
+    mgtKey = "20171115-11"
 
     begin
       @Response = CashbillController::CBService.getDetailInfo(
@@ -989,6 +989,80 @@ class CashbillController < ApplicationController
     end
   end
 
+    ##############################################################################
+    # 1건의 (부분) 취소현금영수증을 즉시발행합니다.
+    # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
+    #   확인할 수 있습니다.
+    # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
+    #   > 1.4. 국세청 전송정책"을 참조하시기 바랍니다.
+    # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
+    ##############################################################################
+    def revokeRegistIssue_part
+
+      # 팝빌회원 사업자번호
+      corpNum = CashbillController::TestCorpNum
+
+      # 팝빌회원 아이디
+      userID = CashbillController::TestUserID
+
+      # 현금영수증 문서관리번호
+      mgtKey = "20171115-11"
+
+      # 원본 현금영수증 국세청승인번호
+      orgConfirmNum = "820116333"
+
+      # 원본 현금영수증 거래일자
+      orgTradeDate = "20170711"
+
+      # 안내문자 전송여부
+      smssendYN = false
+
+      # 메모
+      memo = "부분 취소현금영수증 메모"
+
+
+      # 부분취소 여부, true-부분취소, false-전체취소
+      isPartCancel = true
+
+      # 취소사유, 1-거래취소, 2-오류발급취소, 3-기타
+      cancelType = 1
+
+      # [취소] 공급가액
+      supplyCost = "9000"
+
+      # [취소] 세액
+      tax = "900"
+
+      # [취소] 봉사료
+      serviceFee = "0"
+
+      # [취소] 합계금액
+      totalAmount = "9900"
+
+      begin
+        @Response = CashbillController::CBService.revokeRegistIssue(
+          corpNum,
+          mgtKey,
+          orgConfirmNum,
+          orgTradeDate,
+          smssendYN,
+          memo,
+          userID,
+          isPartCancel,
+          cancelType,
+          supplyCost,
+          tax,
+          serviceFee,
+          totalAmount,
+        )
+        render "home/response"
+      rescue PopbillException => pe
+        @Response = pe
+        render "home/exception"
+      end
+    end
+
+
   ##############################################################################
   # 1건의 취소현금영수증을 임시저장 합니다.
   # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
@@ -1018,6 +1092,75 @@ class CashbillController < ApplicationController
         mgtKey,
         orgConfirmNum,
         orgTradeDate,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 1건의 (부분)취소현금영수증을 임시저장 합니다.
+  # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
+  # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를 확인할 수 있습니다.
+  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
+  #   > 1.4. 국세청 전송정책"을 참조하시기 바랍니다.
+  # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
+  ##############################################################################
+
+  def revokeRegister_part
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
+
+    # 현금영수증 문서관리번호
+    mgtKey = "20171115-10"
+
+    # 원본 현금영수증 국세청승인번호
+    orgConfirmNum = "820116333"
+
+    # 원본 현금영수증 거래일자
+    orgTradeDate = "20170711"
+
+    # 안내문자 전송여부
+    smssendYN = false
+
+    # 부분취소 여부, true-부분취소, false-전체취소
+    isPartCancel = true
+
+    # 취소사유, 1-거래취소, 2-오류발급취소, 3-기타
+    cancelType = 1
+
+    # [취소] 공급가액
+    supplyCost = "9000"
+
+    # [취소] 세액
+    tax = "900"
+
+    # [취소] 봉사료
+    serviceFee = "0"
+
+    # [취소] 합계금액
+    totalAmount = "9900"
+
+    begin
+      @Response = CashbillController::CBService.revokeRegister(
+        corpNum,
+        mgtKey,
+        orgConfirmNum,
+        orgTradeDate,
+        smssendYN,
+        userID,
+        isPartCancel,
+        cancelType,
+        supplyCost,
+        tax,
+        serviceFee,
+        totalAmount,
       )
       render "home/response"
     rescue PopbillException => pe

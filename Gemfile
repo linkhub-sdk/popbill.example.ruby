@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # 팝빌 API Service
-gem 'popbill', '1.4.0'
+gem 'popbill', '1.5.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
