@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 전자세금계산서 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2017-11-15
+# 업데이트 일자 : 2017-12-05
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -1355,10 +1355,10 @@ class TaxinvoiceController < ApplicationController
     dType = "W"
 
     # [필수] 시작일자, yyyyMMdd
-    sDate = "20170101"
+    sDate = "20171101"
 
     # [필수] 종료일자, yyyyMMdd
-    eDate = "20170228"
+    eDate = "20171231"
 
     # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성, 2,3번째 와일드카드 가능
     state = ["3**", "6**"]
@@ -1368,6 +1368,9 @@ class TaxinvoiceController < ApplicationController
 
     # 과세형태 배열, T-과세, N-면세 Z-영세 중 선택, 미기재시 전체조회
     taxType = ["T", "N", "Z"]
+
+    # 발행형태 배열, N-정발행, R-역발행, T-위수탁
+    issueType = ["N", "R", "T"]
 
     # 지연발행 여부, 0-정상발행분만 조회 1-지연발행분만조회, 공백처리시 전체조회
     lateOnly = ''
@@ -1396,6 +1399,8 @@ class TaxinvoiceController < ApplicationController
     # 연동문서 조회여부, 공백-전체조회, 0-일반문서 조회, 1-연동문서 조회
     interOPYN = ""
 
+
+
     begin
       @Response = TaxinvoiceController::TIService.search(
         corpNum,
@@ -1416,6 +1421,7 @@ class TaxinvoiceController < ApplicationController
         queryString,
         userID,
         interOPYN,
+        issueType,
       )
       render "taxinvoice/search"
     rescue PopbillException => pe
