@@ -428,7 +428,7 @@ class FaxController < ApplicationController
     # 수신자명
     receiverName = "수신자명"
 
-    # 파일경로 배열, 최대 전송 파일개수 5개
+    # 파일경로 배열, 최대 전송 파일개수 20개
     filePath = ["/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.pdf"]
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
@@ -490,7 +490,7 @@ class FaxController < ApplicationController
       },
     ]
 
-    # 파일경로 배열, 최대 전송 파일개수 5개
+    # 파일경로 배열, 최대 전송 파일개수 20개
     filePath = ["/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.pdf"]
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
