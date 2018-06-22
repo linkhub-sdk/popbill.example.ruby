@@ -1,0 +1,17 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <% @Response.each_with_index do |plusFriendInfo, index| %>
+      <fieldset class="fieldset2">
+        <legend>플러스친구 목록 확인 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
+        <ul>
+          <li>plusFriendID (플러스친구 아이디) : <%= plusFriendInfo["plusFriendID"] %></li>
+          <li>plusFriendName (플러스친구 이름) : <%= plusFriendInfo["plusFriendName"] %></li>
+          <li>regDT (등록일시) : <%= plusFriendInfo["regDT"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
+  </fieldset>
+</div>

@@ -1,0 +1,33 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <% @Response.each_with_index do |atsTemplateInfo, index| %>
+      <fieldset class="fieldset2">
+        <legend>알림톡 템플릿 목록 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
+        <ul>
+          <%#= atsTemplateInfo %>
+          <li>templateCode (템플릿 코드) : <%= atsTemplateInfo["templateCode"] %></li>
+          <li>templateName (템플릿 제목) : <%= atsTemplateInfo["templateName"] %></li>
+          <li>template (템플릿 내용) : <%= atsTemplateInfo["template"] %></li>
+          <li>plusFriendID (플러스친구 아이디) : <%= atsTemplateInfo["plusFriendID"] %></li>
+
+          <% if atsTemplateInfo["btns"] %>
+            <% atsTemplateInfo["btns"].each_with_index do |btnInfo, index| %>
+              <fieldset>
+                <legend>버튼 목록 [<%= (index + 1) %>/<%= atsTemplateInfo["btns"].length %>]</legend>
+                <ul>
+                  <li>n (버튼명) : <%= btnInfo["n"] %></li>
+                  <li>t (버튼유형) : <%= btnInfo["t"] %></li>
+                  <li>u1 (버튼링크1) : <%= btnInfo["u1"] %></li>
+                  <li>u2 (버튼링크2) : <%= btnInfo["u2"] %></li>
+                </ul>
+              </fieldset>
+            <% end %>
+          <% end %>
+        </ul>
+      </fieldset>
+    <% end %>
+  </fieldset>
+</div>

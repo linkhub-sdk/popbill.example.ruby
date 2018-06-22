@@ -147,7 +147,6 @@ RubyPopbillExample::Application.routes.draw do
   get "/CashbillExample/revokeRegister" => 'cashbill#revokeRegister', via: [:get]
   get "/CashbillExample/revokeRegister_part" => 'cashbill#revokeRegister_part', via: [:get]
 
-
   # 팝빌 문자 API Service route
   get "/MessageExample" => 'message#index'
   get "/MessageExample/checkIsMember" => 'message#checkIsMember', via: [:get]
@@ -204,6 +203,45 @@ RubyPopbillExample::Application.routes.draw do
   get "/FaxExample/getURL" => 'fax#getURL', via: [:get]
   get "/FaxExample/getUnitCost" => 'fax#getUnitCost', via: [:get]
   get "/FaxExample/getSenderNumberList" => 'fax#getSenderNumberList', via: [:get]
+
+  # 카카오톡 API Service route
+  get "/KakaoExample" => 'kakao#index'
+  get "/KakaoExample/getURL_PLUSFRIEND" => 'kakao#getURL_PLUSFRIEND' , via:[:get]
+  get "/KakaoExample/listPlusFriendID" => 'kakao#listPlusFriendID' , via:[:get]
+  get "/KakaoExample/getURL_SENDER" => 'kakao#getURL_SENDER' , via:[:get]
+  get "/KakaoExample/getSenderNumberList" => 'kakao#getSenderNumberList' , via:[:get]
+  get "/KakaoExample/getURL_TEMPLATE" => 'kakao#getURL_TEMPLATE' , via:[:get]
+  get "/KakaoExample/listATSTemplate" => 'kakao#listATSTemplate' , via:[:get]
+  get "/KakaoExample/sendATS_one" => 'kakao#sendATS_one' , via:[:get]
+  get "/KakaoExample/sendATS_same" => 'kakao#sendATS_same' , via:[:get]
+  get "/KakaoExample/sendATS_multi" => 'kakao#sendATS_multi' , via:[:get]
+  get "/KakaoExample/sendFTS_one" => 'kakao#sendFTS_one' , via:[:get]
+  get "/KakaoExample/sendFTS_same" => 'kakao#sendFTS_same' , via:[:get]
+  get "/KakaoExample/sendFTS_multi" => 'kakao#sendFTS_multi' , via:[:get]
+  get "/KakaoExample/sendFMS_one" => 'kakao#sendFMS_one' , via:[:get]
+  get "/KakaoExample/sendFMS_same" => 'kakao#sendFMS_same' , via:[:get]
+  get "/KakaoExample/sendFMS_multi" => 'kakao#sendFMS_multi' , via:[:get]
+  get "/KakaoExample/cancelReserve" => 'kakao#cancelReserve' , via:[:get]
+  get "/KakaoExample/cancelReserveRN" => 'kakao#cancelReserveRN' , via:[:get]
+  get "/KakaoExample/getMessages" => 'kakao#getMessages' , via:[:get]
+  get "/KakaoExample/getMessagesRN" => 'kakao#getMessagesRN' , via:[:get]
+  get "/KakaoExample/search" => 'kakao#search' , via:[:get]
+  get "/KakaoExample/getURL_BOX" => 'kakao#getURL_BOX' , via:[:get]
+  get "/KakaoExample/getUnitCost" => 'kakao#getUnitCost' , via:[:get]
+  get "/KakaoExample/getChargeInfo" => 'kakao#getChargeInfo' , via:[:get]
+  get "/KakaoExample/getBalance" => 'kakao#getBalance' , via:[:get]
+  get "/KakaoExample/getPopbillURL_CHRG" => 'kakao#getPopbillURL_CHRG' , via:[:get]
+  get "/KakaoExample/getPartnerBalance" => 'kakao#getPartnerBalance' , via:[:get]
+  get "/KakaoExample/getPartnerURL" => 'kakao#getPartnerURL' , via:[:get]
+  get "/KakaoExample/checkIsMember" => 'kakao#checkIsMember' , via:[:get]
+  get "/KakaoExample/checkID" => 'kakao#checkID' , via:[:get]
+  get "/KakaoExample/joinMember" => 'kakao#joinMember' , via:[:get]
+  get "/KakaoExample/getPopbillURL_LOGIN" => 'kakao#getPopbillURL_LOGIN' , via:[:get]
+  get "/KakaoExample/registContact" => 'kakao#registContact' , via:[:get]
+  get "/KakaoExample/listContact" => 'kakao#listContact' , via:[:get]
+  get "/KakaoExample/updateContact" => 'kakao#updateContact' , via:[:get]
+  get "/KakaoExample/getCorpInfo" => 'kakao#getCorpInfo' , via:[:get]
+  get "/KakaoExample/updateCorpInfo" => 'kakao#updateCorpInfo' , via:[:get]
 
   # 팝빌 홈택스 전자세금계산서 연계 API Service route
   get "/HTTaxinvoiceExample" => 'httaxinvoice#index'
