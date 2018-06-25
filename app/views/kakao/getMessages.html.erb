@@ -1,0 +1,59 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%=request.env['PATH_INFO']%></legend>
+    <fieldset class="fieldset2">
+      <legend>카카오톡 전송상태 확인</legend>
+      <ul>
+        <li> contentType (카카오톡 유형) : <%=@Response["contentType"]%></li>
+        <li> templateCode (템플릿 코드) : <%=@Response["templateCode"]%></li>
+        <li> plusFriendID (플러스친구 아이디) : <%=@Response["plusFriendID"]%></li>
+        <li> sendNum (발신번호) : <%=@Response["sendNum"]%></li>
+        <li> altContent ([동보]대체문자 내용) : <%=@Response["altContent"]%></li>
+        <li> altSendType (대체문자 유형) : <%=@Response["altSendType"]%></li>
+        <li> reserveDT (예약일시) : <%=@Response["reserveDT"]%></li>
+        <li> adsYN (광고전송 여부) : <%=@Response["adsYN"]%></li>
+        <li> imageURL (친구톡 이미지 URL) : <%=@Response["imageURL"]%></li>
+        <li> sendCnt (전송건수) : <%=@Response["sendCnt"]%></li>
+        <li> successCnt (성공건수) : <%=@Response["successCnt"]%></li>
+        <li> failCnt (실패건수) : <%=@Response["failCnt"]%></li>
+        <li> altCnt (대체문자 건수) : <%=@Response["altCnt"]%></li>
+        <li> cancelCnt (취소건수) : <%=@Response["cancelCnt"]%></li>
+
+        <% @Response["btns"].each_with_index do |btnsInfo, index| %>
+          <fieldset class="fieldset2">
+            <legend>버튼 목록[<%=(index+1)%> / <%=@Response["btns"].length%>]</legend>
+            <ul>
+              <li>n (버튼명) : <%=btnsInfo["n"]%></li>
+              <li>t (버튼유형) : <%=btnsInfo["t"]%></li>
+              <li>u1 (버튼링크1) : <%=btnsInfo["u1"]%></li>
+              <li>u2 (버튼링크2) : <%=btnsInfo["u2"]%></li>
+            </ul>
+          </fieldset>
+        <% end %>
+
+        <% @Response["msgs"].each_with_index do |msgsInfo, index| %>
+          <fieldset class="fieldset2">
+            <legend>개별 전송내역[<%=(index+1)%> / <%=@Response["msgs"].length%>]</legend>
+            <ul>
+              <li> state (전송상태 코드) : <%=msgsInfo["state"]%></li>
+              <li> sendDT (전송일시) : <%=msgsInfo["sendDT"]%></li>
+              <li> recveiveNum (수신번호) : <%=msgsInfo["recveiveNum"]%></li>
+              <li> recveiveName (수신자명) : <%=msgsInfo["recveiveName"]%></li>
+              <li> content (알림톡/친구톡 내용) : <%=msgsInfo["content"]%></li>
+              <li> result (알림톡/친구톡 전송결과 코드) : <%=msgsInfo["result"]%></li>
+              <li> resultDT (알림톡/친구톡 전송결과 수신일시) : <%=msgsInfo["resultDT"]%></li>
+              <li> altContent (대체문자 내용) : <%=msgsInfo["altContent"]%></li>
+              <li> altContentType (대체문자 전송유형) : <%=msgsInfo["altContentType"]%></li>
+              <li> altSendDT (대체문자 전송일시) : <%=msgsInfo["altSendDT"]%></li>
+              <li> altResult (대체문자 전송결과 코드) : <%=msgsInfo["altResult"]%></li>
+              <li> altResultDT (대체문자 전송결과 수신일시) : <%=msgsInfo["altResultDT"]%></li>
+            </ul>
+          </fieldset>
+        <% end %>
+
+      </ul>
+    </fieldset>
+  </fieldset>
+</div>
