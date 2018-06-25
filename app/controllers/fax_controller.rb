@@ -407,6 +407,9 @@ class FaxController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 팩스를 전송합니다.
+  ##############################################################################
   def sendFax
 
     # 팝빌회원 사업자번호
@@ -429,7 +432,7 @@ class FaxController < ApplicationController
     receiverName = "수신자명"
 
     # 파일경로 배열, 최대 전송 파일개수 20개
-    filePath = ["/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.pdf"]
+    filePath = ["/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"]
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
@@ -440,6 +443,8 @@ class FaxController < ApplicationController
     # 팩스제목
     title = "팩스전송 제목"
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
 
     begin
       @value = FaxController::FAXService.sendFax(
@@ -453,66 +458,7 @@ class FaxController < ApplicationController
           userID,
           adsYN,
           title,
-        )
-      @name = "receiptNum(접수번호)"
-      render "home/result"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-
-  def sendFax_Multi
-
-    # 팝빌회원 사업자번호
-    corpNum = FaxController::TestCorpNum
-
-    # 팝빌회원 아이디
-    userID = FaxController::TestUserID
-
-
-    # 발신번호
-    sender = "07043042991"
-
-    # 발신자명
-    senderName = "발신자명"
-
-    # 수신자 정보 배열, 최대 1000건
-    receivers = [
-      {
-        "rcv" => "070111222",   # 수신번호
-        "rcvnm" => "수신자명",    # 수신자명
-      },
-      {
-        "rcv" => "070111222",   # 수신번호
-        "rcvnm" => "수신자명",   # 수신자명
-      },
-    ]
-
-    # 파일경로 배열, 최대 전송 파일개수 20개
-    filePath = ["/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.pdf"]
-
-    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
-    reserveDT = ""
-
-    # 광고팩스 전송여부
-    adsYN = false
-
-    # 팩스제목
-    title = "팩스 동보전송 제목"
-
-    begin
-      @value = FaxController::FAXService.sendFax_multi(
-          corpNum,
-          sender,
-          senderName,
-          receivers,
-          filePath,
-          reserveDT,
-          userID,
-          adsYN,
-          title,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -535,7 +481,7 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # 팩스 접수번호
-    receiptNum = "017071817015400001"
+    receiptNum = "018062517381000001"
 
     # 발신번호, 공백처리시 기존전송정보로 전송
     sender = "07043042991"
@@ -556,6 +502,9 @@ class FaxController < ApplicationController
     # 팩스제목
     title = "팩스 재전송 제목"
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = FaxController::FAXService.resendFax(
           corpNum,
@@ -567,6 +516,7 @@ class FaxController < ApplicationController
           reserveDT,
           userID,
           title,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -577,7 +527,131 @@ class FaxController < ApplicationController
   end
 
   ##############################################################################
-  # 팩스를 재전송합니다.
+  # 전송요청번호를 할당한 팩스를 재전송 합니다.
+  # - 전송일 기준 180일이 경과되지 않은 전송건만 재전송할 수 있습니다.
+  ##############################################################################
+  def resendFAXRN
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+    # 원본 팩스 전송요청번호
+    orgRequestNum = "20180625fax-002"
+
+    # 발신번호, 공백처리시 기존전송정보로 전송
+    sender = "07043042991"
+
+    # 발신자명, 공백처리시 기존전송정보로 전송
+    senderName = "발신자명"
+
+    # 수신번호/수신자명 모두 공백처리시 기존전송정보로 전송
+    # 수신번호
+    receiver = ""
+
+    # 수신자명
+    receiverName = ""
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = "20180725175528"
+
+    # 팩스제목
+    title = "팩스 재전송 제목"
+
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
+    begin
+      @value = FaxController::FAXService.resendFAXRN(
+          corpNum,
+          orgRequestNum,
+          sender,
+          senderName,
+          receiver,
+          receiverName,
+          reserveDT,
+          userID,
+          title,
+          requestNum,
+          )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팩스를 동보 전송합니다.
+  ##############################################################################
+  def sendFax_Multi
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+
+    # 발신번호
+    sender = "07043042991"
+
+    # 발신자명
+    senderName = "발신자명"
+
+    # 수신자 정보 배열, 최대 1000건
+    receivers = [
+        {
+            "rcv" => "070111222",   # 수신번호
+            "rcvnm" => "수신자명",    # 수신자명
+        },
+        {
+            "rcv" => "070111222",   # 수신번호
+            "rcvnm" => "수신자명",   # 수신자명
+        },
+    ]
+
+    # 파일경로 배열, 최대 전송 파일개수 20개
+    filePath = ["/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"]
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = ""
+
+    # 광고팩스 전송여부
+    adsYN = false
+
+    # 팩스제목
+    title = "팩스 동보전송 제목"
+
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
+    begin
+      @value = FaxController::FAXService.sendFax_multi(
+          corpNum,
+          sender,
+          senderName,
+          receivers,
+          filePath,
+          reserveDT,
+          userID,
+          adsYN,
+          title,
+          requestNum,
+          )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팩스를 동보 재전송합니다.
   # - 전송일 기준 180일이 경과되지 않은 전송건만 재전송할 수 있습니다.
   ##############################################################################
   def resendFax_Multi
@@ -589,7 +663,7 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # 팩스 접수번호
-    receiptNum = "017071817015400001"
+    receiptNum = "018062517503000001"
 
     # 발신번호, 공백처리시 기존전송정보로 전송
     sender = "07043042991"
@@ -620,6 +694,9 @@ class FaxController < ApplicationController
     # 팩스제목
     title = "팩스 동보 재전송제목"
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = FaxController::FAXService.resendFax_multi(
           corpNum,
@@ -630,7 +707,8 @@ class FaxController < ApplicationController
           reserveDT,
           userID,
           title,
-        )
+          requestNum,
+          )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -638,6 +716,73 @@ class FaxController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 전송요청번호를 할당한 팩스를 동보 재전송 합니다.
+  # - 전송일 기준 180일이 경과되지 않은 전송건만 재전송할 수 있습니다.
+  ##############################################################################
+  def resendFAXRN_multi
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+    # 원본 팩스 전송요청번호
+    orgReceiptNum = "20180625fax-003"
+
+    # 발신번호, 공백처리시 기존전송정보로 전송
+    sender = "07043042991"
+
+    # 발신자명, 공백처리시 기존전송정보로 전송
+    senderName = "발신자명"
+
+    # 수신자 정보 배열, 기존전송정보와 재전송할 수신정보가 동일한 경우 nil 처리
+    receivers = nil
+
+    # 기존전송정보와 재전송할 수신정보가 다를 경우 아래의 코드 참조
+    # 수신자 정보 배열, 최대 1000건
+    # receivers = [
+    #   {
+    #     "rcv" => "010111222",   # 수신번호
+    #     "rcvnm" => "수신자명",    # 수신자명
+    #   },
+    #   {
+    #     "rcv" => "010111222",   # 수신번호
+    #     "rcvnm" => "수신자명",   # 수신자명
+    #   },
+    # ]
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = ""
+
+    # 팩스제목
+    title = "팩스 재전송 제목"
+
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
+    begin
+      @value = FaxController::FAXService.resendFAXRN_multi(
+          corpNum,
+          orgReceiptNum,
+          sender,
+          senderName,
+          receivers,
+          reserveDT,
+          userID,
+          title,
+          requestNum,
+          )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
   ##############################################################################
   # 팩스 전송요청시 반환받은 접수번호(receiptNum)을 사용하여 팩스전송 결과를 확인합니다.
@@ -658,6 +803,27 @@ class FaxController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 전송요청번호를 할당한 팩스전송 결과를 확인합니다.
+  ##############################################################################
+  def getFaxDetailRN
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팩스전송 접수번호
+    requestNum = "20180625fax"
+
+    begin
+      @Response = FaxController::FAXService.getFaxDetailRN(corpNum, requestNum)
+      render "fax/getFaxDetail"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
   ##############################################################################
   # 검색조건을 사용하여 팩스전송 내역을 조회합니다.
@@ -724,6 +890,27 @@ class FaxController < ApplicationController
 
     begin
       @Response = FaxController::FAXService.cancelReserve(corpNum, receiptNum)
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 전송요청번호를 할당한 예약전송 팩스요청건을 취소합니다.
+  # - 예약전송 취소는 예약전송시간 10분전까지 가능합니다.
+  ##############################################################################
+  def cancelReserveRN
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팩스전송 전송요청번호
+    requestNum = "20180625fax-004"
+
+    begin
+      @Response = FaxController::FAXService.cancelReserveRN(corpNum, requestNum)
       render "home/response"
     rescue PopbillException => pe
       @Response = pe
