@@ -173,6 +173,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/MessageExample/sendMMS_Multi" => 'message#sendMMS_Multi', via: [:get]
   get "/MessageExample/getMessages" => 'message#getMessages', via: [:get]
   get "/MessageExample/getMessagesRN" => 'message#getMessagesRN', via: [:get]
+  get "/MessageExample/getStates" => 'message#getStates', via: [:get]
   get "/MessageExample/search" => 'message#search', via: [:get]
   get "/MessageExample/cancelReserve" => 'message#cancelReserve', via: [:get]
   get "/MessageExample/cancelReserveRN" => 'message#cancelReserveRN', via: [:get]

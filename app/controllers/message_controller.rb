@@ -928,6 +928,25 @@ class MessageController < ApplicationController
   end
 
   ##############################################################################
+  # 문자 전송내역 요약정보를 확인합니다.
+  ##############################################################################
+  def getStates
+    # 팝빌회원 사업자번호
+    corpNum = MessageController::TestCorpNum
+
+    # 문자전송 접수번호 배열
+    reciptNumList = %w(018062518000000016 018061814000000039 018062518000000017)
+
+    begin
+      @Response = MessageController::MSGService.getStates(corpNum, reciptNumList)
+      render "message/getStates"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 검색조건을 사용하여 문자전송 내역을 조회합니다.
   ##############################################################################
   def search
