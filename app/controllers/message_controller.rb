@@ -416,6 +416,9 @@ class MessageController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
+
     # 발신번호
     sender = "07043042991"
 
@@ -437,6 +440,9 @@ class MessageController < ApplicationController
     # 광고문자 전송여부
     adsYN = false
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = MessageController::MSGService.sendSMS(
           corpNum,
@@ -447,6 +453,8 @@ class MessageController < ApplicationController
           contents,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -461,6 +469,9 @@ class MessageController < ApplicationController
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -489,6 +500,9 @@ class MessageController < ApplicationController
     # 광고문자 전송여부
     adsYN = false
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = MessageController::MSGService.sendSMS_multi(
           corpNum,
@@ -498,6 +512,8 @@ class MessageController < ApplicationController
           receivers,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -511,6 +527,9 @@ class MessageController < ApplicationController
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -536,6 +555,9 @@ class MessageController < ApplicationController
     # 광고문자 전송여부
     adsYN = false
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = MessageController::MSGService.sendLMS(
           corpNum,
@@ -547,6 +569,9 @@ class MessageController < ApplicationController
           contents,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
+
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -560,6 +585,9 @@ class MessageController < ApplicationController
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -590,6 +618,9 @@ class MessageController < ApplicationController
     # 광고문자 전송여부
     adsYN = false
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = MessageController::MSGService.sendLMS_multi(
           corpNum,
@@ -600,6 +631,8 @@ class MessageController < ApplicationController
           receivers,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -613,6 +646,9 @@ class MessageController < ApplicationController
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -638,6 +674,9 @@ class MessageController < ApplicationController
     # 광고문자 전송여부
     adsYN = false
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = MessageController::MSGService.sendXMS(
           corpNum,
@@ -649,6 +688,8 @@ class MessageController < ApplicationController
           contents,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -662,6 +703,9 @@ class MessageController < ApplicationController
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -693,6 +737,9 @@ class MessageController < ApplicationController
     # 광고문자 전송여부
     adsYN = false
 
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
+
     begin
       @value = MessageController::MSGService.sendXMS_multi(
           corpNum,
@@ -703,6 +750,8 @@ class MessageController < ApplicationController
           receivers,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -716,6 +765,9 @@ class MessageController < ApplicationController
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -736,13 +788,16 @@ class MessageController < ApplicationController
     contents = "message send XMS Test"
 
     # 첨부파일 경로
-    filePath = "/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.jpg"
+    filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg"
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
 
     # 광고문자 전송여부
     adsYN = false
+
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
 
     begin
       @value = MessageController::MSGService.sendMMS(
@@ -756,6 +811,8 @@ class MessageController < ApplicationController
           filePath,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -768,6 +825,9 @@ class MessageController < ApplicationController
   def sendMMS_Multi
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     # 발신번호
     sender = "07043042991"
@@ -794,13 +854,16 @@ class MessageController < ApplicationController
     ]
 
     # 첨부파일 경로
-    filePath = "/Users/John/Documents/WorkSpace/ruby project/ruby_popbill_example/test.jpg"
+    filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg"
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
 
     # 광고문자 전송여부
     adsYN = false
+
+    # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
+    requestNum = ''
 
     begin
       @value = MessageController::MSGService.sendMMS_multi(
@@ -813,6 +876,8 @@ class MessageController < ApplicationController
           filePath,
           reserveDT,
           adsYN,
+          userID,
+          requestNum,
         )
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -831,10 +896,30 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 문자전송 접수번호
-    receiptNum = "017020711000000011"
+    receiptNum = "018062517000000031"
 
     begin
       @Response = MessageController::MSGService.getMessages(corpNum, receiptNum)
+      render "message/getMessages"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 전송요청번호를 할당한 문자 전송결과를 확인합니다.
+  ##############################################################################
+  def getMessagesRN
+
+    # 팝빌회원 사업자번호
+    corpNum = MessageController::TestCorpNum
+
+    # 전송요청시 할당한 전송요청 관리번호
+    requestNum = "20180625171035"
+
+    begin
+      @Response = MessageController::MSGService.getMessagesRN(corpNum, requestNum)
       render "message/getMessages"
     rescue PopbillException => pe
       @Response = pe
@@ -917,6 +1002,29 @@ class MessageController < ApplicationController
       render "home/exception"
     end
   end
+
+
+  ##############################################################################
+  # 전송요청번호를 할당한 예약문자전송을 취소합니다.
+  # - 예약취소는 예약전송시간 10분전까지만 가능합니다.
+  ##############################################################################
+  def cancelReserveRN
+
+    # 팝빌회원 사업자번호
+    corpNum = MessageController::TestCorpNum
+
+    # 전송요청시 할당한 전송요청 관리번호
+    requestNum = '20180625-sms001'
+
+    begin
+      @Response = MessageController::MSGService.cancelReserveRN(corpNum, requestNum)
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
   ##############################################################################
   # 문자 서비스 관련 팝업 URL을 반환합니다.
