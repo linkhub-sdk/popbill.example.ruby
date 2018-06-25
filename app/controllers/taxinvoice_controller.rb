@@ -2273,4 +2273,38 @@ class TaxinvoiceController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 팝빌 사이트에서 작성한 세금계산서에 파트너의 문서관리번호를 할당합니다.
+  ##############################################################################
+  def assignMgtKey
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 세금계산서 유형 SELL-매출, BUY-매입, TRUSTEE-위수탁
+    keyType = MgtKeyType::SELL
+
+    # 세금계산서 아이템키, 목록조회(Search) API의 반환항목중 ItemKey 참조
+    itemKey = "018062516505300001"
+
+    # 할당할 문서관리번호, 숫자, 영문, '-', '_' 조합으로
+    # 1~24자리까지 사업자번호별 중복없는 고유번호 할당
+    mgtKey = "20180625165253"
+
+    begin
+      @Response = TaxinvoiceController::TIService.assignMgtKey(
+          corpNum,
+          keyType,
+          itemKey,
+          mgtKey,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+
+  end
+
 end

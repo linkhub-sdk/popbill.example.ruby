@@ -59,6 +59,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/TaxinvoiceExample/getUnitCost" => 'taxinvoice#getUnitCost', via: [:get]
   get "/TaxinvoiceExample/getCertificateExpireDate" => 'taxinvoice#getCertificateExpireDate', via: [:get]
   get "/TaxinvoiceExample/getEmailPublicKeys" => 'taxinvoice#getEmailPublicKeys', via: [:get]
+  get "/TaxinvoiceExample/assignMgtKey" => 'taxinvoice#assignMgtKey', via: [:get]
 
 
   # 팝빌 전자명세서 API Service route
