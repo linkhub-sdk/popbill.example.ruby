@@ -2307,4 +2307,61 @@ class TaxinvoiceController < ApplicationController
 
   end
 
+  ##############################################################################
+  # 전자세금계산서 메일전송 항목에 대한 전송여부를 목록으로 반환한다.
+  ##############################################################################
+  def listEmailConfig
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
+    begin
+      @Response = TaxinvoiceController::TIService.listEmailConfig(
+          corpNum,
+          userID,
+          )
+      render "taxinvoice/listEmailConfig"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+
+  end
+
+
+  ##############################################################################
+  # 전자세금계산서 메일전송 항목에 대한 전송여부를 수정한다.
+  ##############################################################################
+  def updateEmailConfig
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
+    # 메일 전송 유형
+    emailType = "TAX_TRUST_ISSUE"
+
+    # 메일 전송 여부 (true-전송, false-미전송)
+    sendYN = false
+
+    begin
+      @Response = TaxinvoiceController::TIService.updateEmailConfig(
+          corpNum,
+          emailType,
+          sendYN,
+          userID,
+          )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+
+  end
+
 end

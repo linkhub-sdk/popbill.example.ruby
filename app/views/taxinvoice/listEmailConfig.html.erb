@@ -1,0 +1,15 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <fieldset class="fieldset2">
+      <legend>알림메일 전송목록 조회</legend>
+      <ul>
+        <% @Response.each_with_index do |emailConfig, index| %>
+          <li><%= emailConfig["emailType"] %> : <%= emailConfig["sendYN"] %></li>
+        <% end %>
+      </ul>
+    </fieldset>
+  </fieldset>
+</div>

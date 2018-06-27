@@ -60,7 +60,8 @@ RubyPopbillExample::Application.routes.draw do
   get "/TaxinvoiceExample/getCertificateExpireDate" => 'taxinvoice#getCertificateExpireDate', via: [:get]
   get "/TaxinvoiceExample/getEmailPublicKeys" => 'taxinvoice#getEmailPublicKeys', via: [:get]
   get "/TaxinvoiceExample/assignMgtKey" => 'taxinvoice#assignMgtKey', via: [:get]
-
+  get "/TaxinvoiceExample/listEmailConfig" => 'taxinvoice#listEmailConfig', via: [:get]
+  get "/TaxinvoiceExample/updateEmailConfig" => 'taxinvoice#updateEmailConfig', via: [:get]
 
   # 팝빌 전자명세서 API Service route
   get "/StatementExample" => 'statement#index'
@@ -105,6 +106,8 @@ RubyPopbillExample::Application.routes.draw do
   get "/StatementExample/getEPrintURL" => 'statement#getEPrintURL', via: [:get]
   get "/StatementExample/getMailURL" => 'statement#getMailURL', via: [:get]
   get "/StatementExample/getUnitCost" => 'statement#getUnitCost', via: [:get]
+  get "/StatementExample/listEmailConfig" => 'statement#listEmailConfig', via: [:get]
+  get "/StatementExample/updateEmailConfig" => 'statement#updateEmailConfig', via: [:get]
 
   # 팝빌 현금영수증 API Service route
   get "/CashbillExample" => 'cashbill#index'
@@ -147,6 +150,9 @@ RubyPopbillExample::Application.routes.draw do
   get "/CashbillExample/revokeRegistIssue_part" => 'cashbill#revokeRegistIssue_part', via: [:get]
   get "/CashbillExample/revokeRegister" => 'cashbill#revokeRegister', via: [:get]
   get "/CashbillExample/revokeRegister_part" => 'cashbill#revokeRegister_part', via: [:get]
+  get "/CashbillExample/listEmailConfig" => 'cashbill#listEmailConfig', via: [:get]
+  get "/CashbillExample/updateEmailConfig" => 'cashbill#updateEmailConfig', via: [:get]
+
 
   # 팝빌 문자 API Service route
   get "/MessageExample" => 'message#index'

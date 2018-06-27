@@ -1463,4 +1463,61 @@ class CashbillController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 현금영수증 메일전송 항목에 대한 전송여부를 목록으로 반환한다.
+  ##############################################################################
+  def listEmailConfig
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
+
+    begin
+      @Response = CashbillController::CBService.listEmailConfig(
+          corpNum,
+          userID,
+          )
+      render "cashbill/listEmailConfig"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+
+  end
+
+
+  ##############################################################################
+  # 현금영수증 메일전송 항목에 대한 전송여부를 수정한다.
+  ##############################################################################
+  def updateEmailConfig
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
+
+    # 메일 전송 유형
+    emailType = "CSH_ISSUE"
+
+    # 메일 전송 여부 (true-전송, false-미전송)
+    sendYN = true
+
+    begin
+      @Response = CashbillController::CBService.updateEmailConfig(
+          corpNum,
+          emailType,
+          sendYN,
+          userID,
+          )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+
+  end
+  
 end
