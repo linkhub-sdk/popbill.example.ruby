@@ -835,7 +835,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팝빌회원 사업자번호
-    userID = MessageController::TestUserID
+    userID = FaxController::TestUserID
 
     # [필수] 시작일자, 형식(yyyyMMdd)
     sDate = "20180301"
@@ -990,4 +990,5 @@ class FaxController < ApplicationController
       render "home/exception"
     end
   end
+
 end

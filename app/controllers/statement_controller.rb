@@ -1928,12 +1928,6 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서 메일전송 항목에 대한 전송여부를 목록으로 반환한다.
-  # 메일전송유형
-  # SMT_ISSUE : 공급받는자에게 전자명세서가 발행 되었음을 알려주는 메일입니다.
-  # SMT_ACCEPT : 공급자에게 전자명세서가 승인 되었음을 알려주는 메일입니다.
-  # SMT_DENY : 공급자게에 전자명세서가 거부 되었음을 알려주는 메일입니다.
-  # SMT_CANCEL : 공급받는자게에 전자명세서가 취소 되었음을 알려주는 메일입니다.
-  # SMT_CANCEL_ISSUE : 공급받는자에게 전자명세서가 발행취소 되었음을 알려주는 메일입니다.
   ##############################################################################
   def listEmailConfig
 
@@ -1953,12 +1947,16 @@ class StatementController < ApplicationController
       @Response = pe
       render "home/exception"
     end
-
   end
-
 
   ##############################################################################
   # 전자명세서 메일전송 항목에 대한 전송여부를 수정한다.
+  # 메일전송유형
+  # SMT_ISSUE : 공급받는자에게 전자명세서가 발행 되었음을 알려주는 메일입니다.
+  # SMT_ACCEPT : 공급자에게 전자명세서가 승인 되었음을 알려주는 메일입니다.
+  # SMT_DENY : 공급자게에 전자명세서가 거부 되었음을 알려주는 메일입니다.
+  # SMT_CANCEL : 공급받는자게에 전자명세서가 취소 되었음을 알려주는 메일입니다.
+  # SMT_CANCEL_ISSUE : 공급받는자에게 전자명세서가 발행취소 되었음을 알려주는 메일입니다.
   ##############################################################################
   def updateEmailConfig
 
@@ -1986,7 +1984,6 @@ class StatementController < ApplicationController
       @Response = pe
       render "home/exception"
     end
-
   end
 
 end

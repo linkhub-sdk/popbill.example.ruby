@@ -980,7 +980,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 사업자번호
-    userID = MessageController::TestUserID
+    userID = KakaoController::TestUserID
 
     # [필수] 시작일자, 날자형식(yyyyMMdd)
     sDate = "20180601"
@@ -992,7 +992,7 @@ class KakaoController < ApplicationController
     state = [0, 1, 2, 3, 4, 5]
 
     # 검색대상 배열 [ATS-알림톡, FTS-친구톡, FMS-친구톡이미지]
-    item = ["FTS"]
+    item = ["ATS", "FTS", "FMS"]
 
     # 예약여부 1(예약전송조회), 0(즉시전송조회), 공백(전체조회)
     reserveYN = ''

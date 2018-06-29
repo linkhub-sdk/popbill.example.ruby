@@ -6,8 +6,24 @@
     <fieldset class="fieldset2">
       <legend>알림메일 전송목록 조회</legend>
       <ul>
-        <% @Response.each_with_index do |emailConfig, index| %>
-          <li><%= emailConfig["emailType"] %> : <%= emailConfig["sendYN"] %></li>
+        <% @Response.each_with_index do |emailConfig| %>
+          <li>
+            <% if emailConfig["emailType"] == "SMT_ISSUE" %>
+              SMT_ISSUE (공급받는자에게 전자명세서가 발행 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
+            <% end %>
+            <% if emailConfig["emailType"] == "SMT_ACCEPT" %>
+              SMT_ACCEPT (공급자에게 전자명세서가 승인 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
+            <% end %>
+            <% if emailConfig["emailType"] == "SMT_DENY" %>
+              SMT_DENY (공급자게에 전자명세서가 거부 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
+            <% end %>
+            <% if emailConfig["emailType"] == "SMT_CANCEL" %>
+              SMT_CANCEL (공급받는자게에 전자명세서가 취소 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
+            <% end %>
+            <% if emailConfig["emailType"] == "SMT_CANCEL_ISSUE" %>
+              SMT_CANCEL_ISSUE (공급받는자에게 전자명세서가 발행취소 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </fieldset>
