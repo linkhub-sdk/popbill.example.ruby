@@ -896,7 +896,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 문자전송 접수번호
-    receiptNum = "018062517000000031"
+    receiptNum = "018062818000000011"
 
     begin
       @Response = MessageController::MSGService.getMessages(corpNum, receiptNum)
@@ -948,17 +948,21 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 검색조건을 사용하여 문자전송 내역을 조회합니다.
+  # 최대 검색기간 : 6개월 이내
   ##############################################################################
   def search
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
+
     # [필수] 시작일자, 날자형식(yyyyMMdd)
-    sDate = "20170118"
+    sDate = "20180628"
 
     # [필수] 종료일자, 날자형식(yyyyMMdd)
-    eDate = "20170301"
+    eDate = "20180628"
 
     # 전송상태값 배열, 1-대기, 2-성공, 3-실패, 4-취소
     state = [1, 2, 3, 4]
@@ -981,6 +985,9 @@ class MessageController < ApplicationController
     # 정렬방향, D-내림차순, A-오름차순
     order = "D"
 
+    # 조회 검색어, 문자 전송시 기재한 수신자명 또는 발신자명 기재
+    qString = ""
+
     begin
       @Response = MessageController::MSGService.search(
         corpNum,
@@ -992,7 +999,9 @@ class MessageController < ApplicationController
         senderYN,
         page,
         perPage,
-        order
+        order,
+        userID,
+        qString,
       )
       render "message/search"
     rescue PopbillException => pe

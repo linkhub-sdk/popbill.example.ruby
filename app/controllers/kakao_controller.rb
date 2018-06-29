@@ -198,7 +198,7 @@ class KakaoController < ApplicationController
     receiverName = '루비'
 
     # [필수] 수신번호
-    receiver = '01083490706'
+    receiver = '010111222'
 
     # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
     requestNum = ''
@@ -380,7 +380,7 @@ class KakaoController < ApplicationController
     receiverName = '루비'
 
     # [필수] 수신번호
-    receiver = '01083490706'
+    receiver = '010111222'
 
     # 광고 전송여부
     adsYN = false
@@ -626,7 +626,7 @@ class KakaoController < ApplicationController
     receiverName = '루비'
 
     # [필수] 수신번호
-    receiver = '01083490706'
+    receiver = '010111222'
 
     # 친구톡 이미지 링크 URL (수신자가 친구톡 상단 이미지 선택시 호출되는 URL)
     imageURL = 'https://www.popbill.com'
@@ -702,7 +702,7 @@ class KakaoController < ApplicationController
     altSendType = 'A'
 
     # 예약일시 (작성형식: 20180622140517 yyyyMMddHHmmss)
-    sndDT = '20180725143059'
+    sndDT = ''
 
     # 친구톡 이미지 링크 URL (수신자가 친구톡 상단 이미지 선택시 호출되는 URL)
     imageURL = 'https://www.popbill.com'
@@ -746,7 +746,7 @@ class KakaoController < ApplicationController
     ]
 
     # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
-    requestNum = '20180725143406'
+    requestNum = ''
 
     begin
       @value = KakaoController::KakaoService.sendFMS_multi(
@@ -837,7 +837,7 @@ class KakaoController < ApplicationController
     ]
 
     # 전송요청번호 (팝빌회원별 비중복 번호 할당 - 영문,숫자,'-','_' 조합, 최대 36자)
-    requestNum = '20180625'
+    requestNum = ''
 
     begin
       @value = KakaoController::KakaoService.sendFMS_same(
@@ -929,7 +929,7 @@ class KakaoController < ApplicationController
     userID = 'testkorea'
 
     # [필수] 예약전송 요청시 발급 받은 접수번호
-    receiptNum = '018062516235600001'
+    receiptNum = '018062817583800001'
 
     begin
       @Response = KakaoController::KakaoService.getMessages(
@@ -973,16 +973,20 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 카카오톡 전송내역 목록을 조회한다.
   # - 버튼정보를 확인하는 경우는 GetMessages API 사용
+  # 최대 검색기간 : 6개월 이내
   ##############################################################################
   def search
     # [필수] 팝빌회원 사업자번호
     corpNum = KakaoController::TestCorpNum
 
+    # 팝빌회원 사업자번호
+    userID = MessageController::TestUserID
+
     # [필수] 시작일자, 날자형식(yyyyMMdd)
-    sDate = "20180625"
+    sDate = "20180601"
 
     # [필수] 종료일자, 날자형식(yyyyMMdd)
-    eDate = "20180625"
+    eDate = "20180630"
 
     # 전송상태값 배열 [0-대기, 1-전송중, 2-성공, 3-대체, 4-실패, 5-취소]
     state = [0, 1, 2, 3, 4, 5]
@@ -1005,6 +1009,9 @@ class KakaoController < ApplicationController
     # 정렬방향, D-내림차순, A-오름차순 기본값 'D'
     order = "D"
 
+    # 조회 검색어, 카카오톡 전송시 기재한 수신자명 입력
+    qString = ""
+
     begin
       @Response = KakaoController::KakaoService.search(
           corpNum,
@@ -1016,7 +1023,9 @@ class KakaoController < ApplicationController
           senderYN,
           page,
           perPage,
-          order
+          order,
+          userID,
+          qString,
       )
       render "kakao/search"
     rescue PopbillException => pe

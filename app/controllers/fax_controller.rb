@@ -827,17 +827,21 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 검색조건을 사용하여 팩스전송 내역을 조회합니다.
+  # 최대 검색기간 : 6개월 이내
   ##############################################################################
   def search
 
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
+    # 팝빌회원 사업자번호
+    userID = MessageController::TestUserID
+
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20170701"
+    sDate = "20180301"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20170801"
+    eDate = "20180630"
 
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]
@@ -857,6 +861,9 @@ class FaxController < ApplicationController
     # 정렬방향, D-내림차순, A-오름차순
     order = "D"
 
+    # 조회 검색어, 팩스 전송시 기재한 수신자명 또는 발신자명 기재
+    qString = ""
+
     begin
       @Response = FaxController::FAXService.search(
         corpNum,
@@ -868,6 +875,8 @@ class FaxController < ApplicationController
         page,
         perPage,
         order,
+        userID,
+        qString,
       )
       render "fax/search"
     rescue PopbillException => pe
