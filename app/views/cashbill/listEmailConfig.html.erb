@@ -11,8 +11,8 @@
             <% if emailConfig["emailType"] == "CSH_ISSUE" %>
               CSH_ISSUE (고객에게 현금영수증이 발행 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
             <% end %>
-            <% if emailConfig["emailType"] == "CSH_CANCELISSUE" %>
-              CSH_CANCELISSUE (고객에게 현금영수증이 발행취소 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
+            <% if emailConfig["emailType"] == "CSH_CANCEL" %>
+              CSH_CANCEL (고객에게 현금영수증이 발행취소 되었음을 알려주는 메일) : <%= emailConfig["sendYN"] %>
             <% end %>
           </li>
         <% end %>
