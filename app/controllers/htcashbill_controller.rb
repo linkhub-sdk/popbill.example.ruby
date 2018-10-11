@@ -32,8 +32,8 @@ class HtcashbillController < ApplicationController
 
   # 팝빌 홈택스 현금영수증 연계 API Service 초기화
   HTCBService = HTCashbillService.instance(
-    HtcashbillController::LinkID,
-    HtcashbillController::SecretKey
+      HtcashbillController::LinkID,
+      HtcashbillController::SecretKey
   )
 
   # 연동환경 설정, true-개발용, false-상업용
@@ -52,8 +52,8 @@ class HtcashbillController < ApplicationController
 
     begin
       @Response = HtcashbillController::HTCBService.checkIsMember(
-        corpNum,
-        linkID,
+          corpNum,
+          linkID,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -87,41 +87,41 @@ class HtcashbillController < ApplicationController
     # 연동회원 가입정보
     joinInfo = {
 
-      # 링크아이디
-      "LinkID" => "TESTER",
+        # 링크아이디
+        "LinkID" => "TESTER",
 
-      # 아이디, 6자이상 20자미만
-      "ID" => "testkorea20170131",
+        # 아이디, 6자이상 20자미만
+        "ID" => "testkorea20170131",
 
-      # 비밀번호, 6자이상 20자 미만
-      "PWD" => "thisispassword",
+        # 비밀번호, 6자이상 20자 미만
+        "PWD" => "thisispassword",
 
-      # 사업자번호, '-' 제외 10자리
-      "CorpNum" => "8888888888",
+        # 사업자번호, '-' 제외 10자리
+        "CorpNum" => "8888888888",
 
-      # 대표자명
-      "CEOName" => "대표자성명",
+        # 대표자명
+        "CEOName" => "대표자성명",
 
-      # 상호명
-      "CorpName" => "상호명",
+        # 상호명
+        "CorpName" => "상호명",
 
-      # 주소
-      "Addr" => "주소",
+        # 주소
+        "Addr" => "주소",
 
-      # 업태
-      "BizType" => "업태",
+        # 업태
+        "BizType" => "업태",
 
-      # 종목
-      "BizClass" => "종목",
+        # 종목
+        "BizClass" => "종목",
 
-      # 담당자명
-      "ContactName" => "담당자 성명",
+        # 담당자명
+        "ContactName" => "담당자 성명",
 
-      # 담당자 메일
-      "ContactEmail" => "test@test.com",
+        # 담당자 메일
+        "ContactEmail" => "test@test.com",
 
-      # 담당자 연락처
-      "ContactTEL" => "담당자 연락처",
+        # 담당자 연락처
+        "ContactTEL" => "담당자 연락처",
     }
 
     begin
@@ -203,8 +203,8 @@ class HtcashbillController < ApplicationController
 
     begin
       @value = HtcashbillController::HTCBService.getPartnerURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -228,8 +228,8 @@ class HtcashbillController < ApplicationController
 
     begin
       @value = HtcashbillController::HTCBService.getPopbillURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -249,35 +249,35 @@ class HtcashbillController < ApplicationController
 
     # 담당자 정보
     contactInfo = {
-      # 아이디
-      "id" => "testkorea1701313",
+        # 아이디
+        "id" => "testkorea1701313",
 
-      # 비밀번호
-      "pwd" => "test05028342",
+        # 비밀번호
+        "pwd" => "test05028342",
 
-      # 담당자명
-      "personName" => "담당자명170116",
+        # 담당자명
+        "personName" => "담당자명170116",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰번호
-      "hp" => "010-1111-2222",
+        # 휴대폰번호
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회 권한여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회 권한여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = HtcashbillController::HTCBService.registContact(
-        corpNum,
-        contactInfo,
+          corpNum,
+          contactInfo,
       )
 
       render "home/response"
@@ -319,33 +319,33 @@ class HtcashbillController < ApplicationController
     # 담당자 정보
     contactInfo = {
 
-      # 담당자 아이디
-      "id" => userID,
+        # 담당자 아이디
+        "id" => userID,
 
-      # 담당자명
-      "personName" => "담당자명170131",
+        # 담당자명
+        "personName" => "담당자명170131",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰버놓
-      "hp" => "010-1111-2222",
+        # 휴대폰버놓
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = HtcashbillController::HTCBService.updateContact(
-        corpNum,
-        contactInfo,
-        userID
+          corpNum,
+          contactInfo,
+          userID
       )
       render "home/response"
     rescue PopbillException => pe
@@ -382,26 +382,26 @@ class HtcashbillController < ApplicationController
     # 회사정보
     corpInfo = {
 
-      # 대표자명
-      "ceoname" => "대표자명170116",
+        # 대표자명
+        "ceoname" => "대표자명170116",
 
-      # 상호명
-      "corpName" => "상호170116",
+        # 상호명
+        "corpName" => "상호170116",
 
-      # 주소
-      "addr" => "주소170116",
+        # 주소
+        "addr" => "주소170116",
 
-      # 업태
-      "bizType" => "업태170116",
+        # 업태
+        "bizType" => "업태170116",
 
-      # 업종
-      "bizClass" => "종목170116",
+        # 업종
+        "bizClass" => "종목170116",
     }
 
     begin
       @Response = HtcashbillController::HTCBService.updateCorpInfo(
-        corpNum,
-        corpInfo,
+          corpNum,
+          corpInfo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -432,10 +432,10 @@ class HtcashbillController < ApplicationController
 
     begin
       @value = HtcashbillController::HTCBService.requestJob(
-        corpNum,
-        keyType,
-        sDate,
-        eDate,
+          corpNum,
+          keyType,
+          sDate,
+          eDate,
       )
       @name = "jobID(접수번호)"
       render "home/result"
@@ -498,7 +498,7 @@ class HtcashbillController < ApplicationController
     corpNum = HtcashbillController::TestCorpNum
 
     # 작업아이디
-    jobID = "017020711000000001"
+    jobID = "017020711000000002"
 
     # 현금영수증 형태 배열, N-일반현금영수증, C-취소현금영수증
     tradeType = ["N", "M"]
@@ -517,13 +517,13 @@ class HtcashbillController < ApplicationController
 
     begin
       @Response = HtcashbillController::HTCBService.search(
-        corpNum,
-        jobID,
-        tradeType,
-        tradeUsage,
-        page,
-        perPage,
-        order,
+          corpNum,
+          jobID,
+          tradeType,
+          tradeUsage,
+          page,
+          perPage,
+          order,
       )
       render "htcashbill/search"
     rescue PopbillException => pe
@@ -553,10 +553,10 @@ class HtcashbillController < ApplicationController
 
     begin
       @Response = HtcashbillController::HTCBService.summary(
-        corpNum,
-        jobID,
-        tradeType,
-        tradeUsage,
+          corpNum,
+          jobID,
+          tradeType,
+          tradeUsage,
       )
       render "htcashbill/summary"
     rescue PopbillException => pe
@@ -576,7 +576,7 @@ class HtcashbillController < ApplicationController
 
     begin
       @value = HtcashbillController::HTCBService.getFlatRatePopUpURL(
-        corpNum,
+          corpNum,
       )
       @name = "URL"
       render "home/result"
@@ -614,7 +614,7 @@ class HtcashbillController < ApplicationController
 
     begin
       @value = HtcashbillController::HTCBService.getCertificatePopUpURL(
-        corpNum,
+          corpNum,
       )
       @name = "URL"
       render "home/result"
@@ -634,7 +634,7 @@ class HtcashbillController < ApplicationController
 
     begin
       @value = HtcashbillController::HTCBService.getCertificateExpireDate(
-        corpNum,
+          corpNum,
       )
       @name = "ExpireDate(홈택스 공인인증서 만료일시)"
       render "home/result"
@@ -643,4 +643,108 @@ class HtcashbillController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 팝빌에 등록된 공인인증서의 홈택스 로그인을 테스트합니다.
+  ##############################################################################
+  def checkCertValidation
+
+    # 팝빌회원 사업자번호
+    corpNum = HtcashbillController::TestCorpNum
+
+    begin
+      @Response = HtcashbillController::HTCBService.checkCertValidation(
+          corpNum,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 홈택스 전자세금계산서 부서사용자 계정을 등록합니다.
+  ##############################################################################
+  def registDeptUser
+
+    # 팝빌회원 사업자번호
+    corpNum = HtcashbillController::TestCorpNum
+
+    # 홈택스 부서사용자 계정아이디
+    deptUserID = "deptuserid"
+
+    # 홈택스 부서사용자 계정비밀번호
+    deptUserPWD = "deptuserpwd"
+
+    begin
+      @Response = HtcashbillController::HTCBService.registDeptUser(
+          corpNum,
+          deptUserID,
+          deptUserPWD
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팝빌에 등록된 공인인증서 부서사용자 아이디를 확인합니다.
+  ##############################################################################
+  def checkDeptUser
+
+    # 팝빌회원 사업자번호
+    corpNum = HtcashbillController::TestCorpNum
+
+    begin
+      @Response = HtcashbillController::HTCBService.checkDeptUser(
+          corpNum,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팝빌에 등록된 공인인증서 부서사용자 계정정보를 이용하여 홈택스 로그인을 테스트합니다.
+  ##############################################################################
+  def checkLoginDeptUser
+
+    # 팝빌회원 사업자번호
+    corpNum = HtcashbillController::TestCorpNum
+
+    begin
+      @Response = HtcashbillController::HTCBService.checkLoginDeptUser(
+          corpNum,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팝빌에 등록된 공인인증서 부서사용자 계정정보를 삭제합니다.
+  ##############################################################################
+  def deleteDeptUser
+
+    # 팝빌회원 사업자번호
+    corpNum = HtcashbillController::TestCorpNum
+
+    begin
+      @Response = HtcashbillController::HTCBService.deleteDeptUser(
+          corpNum,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 end

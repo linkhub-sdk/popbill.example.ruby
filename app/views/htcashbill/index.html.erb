@@ -1,62 +1,65 @@
 <body>
-  <div id="content">
-    <p class="heading1">팝빌 홈택스 현금영수증 연계 SDK Ruby On Rails Example.</p>
-    <br/>
-    <fieldset class="fieldset1">
-      <legend>팝빌 기본 API</legend>
-
-      <fieldset class="fieldset2">
-        <legend>회원사 정보</legend>
-        <ul>
-          <li><a href="HTCashbillExample/checkIsMember">checkIsMember</a> - 연동회원 가입 여부 확인</li>
-          <li><a href="HTCashbillExample/joinMember">joinMember</a> - 연동회원 가입 요청</li>
-          <li><a href="HTCashbillExample/getChargeInfo">getChargeInfo</a> - 파트너 잔여포인트 확인</li>
-          <li><a href="HTCashbillExample/getBalance">getBalance</a> - 연동회원 잔여포인트 확인</li>
-          <li><a href="HTCashbillExample/getPopbillURL">getPopbillURL</a> - 팝빌 SSO URL 요청(로그인, 포인트충전)</li>
-          <li><a href="HTCashbillExample/getPartnerBalance">getPartnerBalance</a> - 파트너 잔여포인트 확인</li>
-          <li><a href="HTCashbillExample/getPartnerURL">getPartnerURL</a> - 파트너 포인트충전 URL 확인</li>
-          <li><a href="HTCashbillExample/listContact">listContact</a> - 담당자 목록 확인 </li>
-          <li><a href="HTCashbillExample/updateContact">updateContact</a> - 담당자 정보 수정 </li>
-          <li><a href="HTCashbillExample/registContact">registContact</a> - 담당자 추가 </li>
-          <li><a href="HTCashbillExample/checkID">checkID</a> - 연동회원 아이디 중복확인 </li>
-          <li><a href="HTCashbillExample/getCorpInfo">getCorpInfo</a> - 회사정보 확인 </li>
-          <li><a href="HTCashbillExample/updateCorpInfo">updateCorpInfo</a> - 회사정보 수정 </li>
-        </ul>
-      </fieldset>
-
+<div id="content">
+  <p class="heading1">팝빌 홈택스 현금영수증 연계 SDK Ruby On Rails Example.</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend>팝빌 기본 API</legend>
+    <fieldset class="fieldset2">
+      <legend>회원사 정보</legend>
+      <ul>
+        <li><a href="HTCashbillExample/checkIsMember">checkIsMember</a> - 연동회원 가입 여부 확인</li>
+        <li><a href="HTCashbillExample/joinMember">joinMember</a> - 연동회원 가입 요청</li>
+        <li><a href="HTCashbillExample/getChargeInfo">getChargeInfo</a> - 파트너 잔여포인트 확인</li>
+        <li><a href="HTCashbillExample/listContact">listContact</a> - 담당자 목록 확인</li>
+        <li><a href="HTCashbillExample/updateContact">updateContact</a> - 담당자 정보 수정</li>
+        <li><a href="HTCashbillExample/registContact">registContact</a> - 담당자 추가</li>
+        <li><a href="HTCashbillExample/checkID">checkID</a> - 연동회원 아이디 중복확인</li>
+        <li><a href="HTCashbillExample/getCorpInfo">getCorpInfo</a> - 회사정보 확인</li>
+        <li><a href="HTCashbillExample/updateCorpInfo">updateCorpInfo</a> - 회사정보 수정</li>
+      </ul>
     </fieldset>
-
-    <br />
-
-    <fieldset class="fieldset1">
-      <legend>홈택스연계 관련 API</legend>
-
-      <fieldset class="fieldset2">
-        <legend>매출/매입 내역 수집</legend>
-        <ul>
-          <li><a href="HTCashbillExample/requestJob">requestJob</a> - 수집 요청</li>
-          <li><a href="HTCashbillExample/getJobState">getJobState</a> - 수집 상태 확인</li>
-          <li><a href="HTCashbillExample/listActiveJob">listActiveJob</a> -  수집 상태 목록 확인</li>
-        </ul>
-      </fieldset>
-
-      <fieldset class="fieldset2">
-        <legend>매출/매입 내역 수집 결과 조회</legend>
-        <ul>
-          <li><a href="HTCashbillExample/search">search</a> - 수집 결과 조회</li>
-          <li><a href="HTCashbillExample/summary">summary</a> - 수집 결과 요약정보 조회</li>
-        </ul>
-      </fieldset>
-
-      <fieldset class="fieldset2">
-        <legend>부가 기능</legend>
-        <ul>
-          <li><a href="HTCashbillExample/getFlatRatePopUpURL">getFlatRatePopUpURL</a> - 정액제 서비스 신청 URL</li>
-          <li><a href="HTCashbillExample/getFlatRateState">getFlatRateState</a> - 정액제 서비스 상태 확인</li>
-          <li><a href="HTCashbillExample/getCertificatePopUpURL">getCertificatePopUpURL</a> - 홈택스연동 인증관리 팝업 URL</li>
-          <li><a href="HTCashbillExample/getCertificateExpireDate">getCertificateExpireDate</a> - 홈택스연동 공인인증서 만료일자 확인</li>
-        </ul>
-      </fieldset>
+  </fieldset>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend>홈택스연계 관련 API</legend>
+    <fieldset class="fieldset2">
+      <legend>매출/매입 내역 수집</legend>
+      <ul>
+        <li><a href="HTCashbillExample/requestJob">requestJob</a> - 수집 요청</li>
+        <li><a href="HTCashbillExample/getJobState">getJobState</a> - 수집 상태 확인</li>
+        <li><a href="HTCashbillExample/listActiveJob">listActiveJob</a> - 수집 상태 목록 확인</li>
+      </ul>
     </fieldset>
-   </div>
+    <fieldset class="fieldset2">
+      <legend>매출/매입 내역 수집 결과 조회</legend>
+      <ul>
+        <li><a href="HTCashbillExample/search">search</a> - 수집 결과 조회</li>
+        <li><a href="HTCashbillExample/summary">summary</a> - 수집 결과 요약정보 조회</li>
+      </ul>
+    </fieldset>
+    <fieldset class="fieldset2">
+      <legend>포인트 관리 / 정액제 신청</legend>
+      <ul>
+        <li><a href="HTCashbillExample/getFlatRatePopUpURL">getFlatRatePopUpURL</a> - 정액제 서비스 신청 URL</li>
+        <li><a href="HTCashbillExample/getFlatRateState">getFlatRateState</a> - 정액제 서비스 상태 확인</li>
+        <li><a href="HTCashbillExample/getBalance">getBalance</a> - 연동회원 잔여포인트 확인</li>
+        <li><a href="HTCashbillExample/getPopbillURL">getPopbillURL</a> - 팝빌 SSO URL 요청(로그인, 포인트충전)</li>
+        <li><a href="HTCashbillExample/getPartnerBalance">getPartnerBalance</a> - 파트너 잔여포인트 확인</li>
+        <li><a href="HTCashbillExample/getPartnerURL">getPartnerURL</a> - 파트너 포인트충전 URL 확인</li>
+      </ul>
+    </fieldset>
+    <fieldset class="fieldset2">
+      <legend>포인트 관리 / 정액제 신청</legend>
+      <ul>
+        <li><a href="HTCashbillExample/getCertificatePopUpURL">getCertificatePopUpURL</a> - 홈택스연동 인증관리 팝업 URL</li>
+        <li><a href="HTCashbillExample/getCertificateExpireDate">getCertificateExpireDate</a> - 홈택스연동 공인인증서 만료일자 확인</li>
+        <li><a href="HTCashbillExample/checkCertValidation">checkCertValidation</a> - 홈택스 공인인증서 로그인 테스트</li>
+        <li><a href="HTCashbillExample/registDeptUser">registDeptUser</a> - 부서사용자 계정 등록</li>
+        <li><a href="HTCashbillExample/checkDeptUser">checkDeptUser</a> - 부서사용자 등록정보 확인</li>
+        <li><a href="HTCashbillExample/checkLoginDeptUser">checkLoginDeptUser</a> - 부서사용자 로그인 테스트</li>
+        <li><a href="HTCashbillExample/deleteDeptUser">deleteDeptUser</a> - 부서사용자 등록정보 삭제</li>
+      </ul>
+    </fieldset>
+  </fieldset>
+</div>
 </body>
