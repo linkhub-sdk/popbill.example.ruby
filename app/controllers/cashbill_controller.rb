@@ -461,17 +461,20 @@ class CashbillController < ApplicationController
       # [필수] 문서관리번호
       "mgtKey" => mgtKey,
 
-      # [필수] ]현금영수증 형태, [승인거래, 취소거래] 중 기재
+      # [필수] 문서형태, [승인거래, 취소거래] 중 기재
       "tradeType" => "승인거래",
+
+      # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+      "tradeUsage" => "소득공제용",
+
+      # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+      "tradeOpt" => "일반",
 
       # [취소거래시 필수] 원본 현금영수증 국세청승인번호
       "orgConfirmNum" => "",
 
       # [취소거래시 필수] 원본 현금영수증 거래일자
       "orgTradeDate" => "",
-
-      # [필수] 거래유형, [소득공제용, 지출증빙용] 중 기재
-      "tradeUsage" => "소득공제용",
 
       # [필수] 거래처 식별번호, 거래유형에 따라 작성
       # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
@@ -487,7 +490,7 @@ class CashbillController < ApplicationController
       # [필수] 공급가액
       "supplyCost" => "20000",
 
-      # [필수] 세액
+      # [필수] 부가세
       "tax" => "2000",
 
       # [필수] 봉사료
@@ -562,16 +565,19 @@ class CashbillController < ApplicationController
       # [필수] 문서관리번호
       "mgtKey" => mgtKey,
 
-      # [필수] 거래유형, [소득공제용, 지출증빙용] 중 기재
+      # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+      "tradeType" => "승인거래",
+
+      # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
       "tradeUsage" => "소득공제용",
+
+      # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+      "tradeOpt" => "일반",
 
       # [필수] 거래처 식별번호, 거래유형에 따라 작성
       # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
       # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
       "identityNum" => "01043042991",
-
-      # [필수] ]현금영수증 형태, [승인거래, 취소거래] 중 기재
-      "tradeType" => "승인거래",
 
       # [취소거래시 필수] 원본 현금영수증 국세청승인번호
       "orgConfirmNum" => "",
@@ -582,7 +588,7 @@ class CashbillController < ApplicationController
       # [필수] 공급가액
       "supplyCost" => "20000",
 
-      # [필수] 세액
+      # [필수] 부가세
       "tax" => "2000",
 
       # [필수] 봉사료
@@ -711,10 +717,10 @@ class CashbillController < ApplicationController
     # [참조] 현금영수증 API 연동매뉴열 "5.1. 현금영수증 상태코드"
     state = ["1**", "3**"]
 
-    # 현금영수증 형태 배열, N-일반 현금영수증, C-취소 현금영수증
+    # 문서형태 배열, N-일반 현금영수증, C-취소 현금영수증
     tradeType = ["N", "C"]
 
-    # 거래유형 배열, P-소득공제, C-제출증빙
+    # 거래구분 배열, P-소득공제, C-제출증빙
     tradeUsage = ["P", "C"]
 
     # 과세형태 배열, T-과세, N-비과세
@@ -729,6 +735,9 @@ class CashbillController < ApplicationController
     # 정렬방향 D-내림차순(기본값), A-오름차순
     order = "D"
 
+    # 거래유형 배열, N-일반, B-도서공연, T-대중교통
+    tradeOpt = ["N", "B", "T"]
+
     begin
       @Response = CashbillController::CBService.search(
         corpNum,
@@ -742,6 +751,7 @@ class CashbillController < ApplicationController
         page,
         perPage,
         order,
+        tradeOpt
       )
       render "cashbill/search"
     rescue PopbillException => pe
@@ -847,17 +857,20 @@ class CashbillController < ApplicationController
       # [필수] 문서관리번호
       "mgtKey" => mgtKey,
 
-      # [필수] ]현금영수증 형태, [승인거래, 취소거래] 중 기재
+      # [필수] 문서형태, [승인거래, 취소거래] 중 기재
       "tradeType" => "승인거래",
+
+      # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+      "tradeUsage" => "소득공제용",
+
+      # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+      "tradeOpt" => "일반",
 
       # [취소거래시 필수] 원본 현금영수증 국세청승인번호
       "orgConfirmNum" => "",
 
       # [취소거래시 필수] 원본 현금영수증 거래일자
       "orgTradeDate" => "",
-
-      # [필수] 거래유형, [소득공제용, 지출증빙용] 중 기재
-      "tradeUsage" => "소득공제용",
 
       # [필수] 거래처 식별번호, 거래유형에 따라 작성
       # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
@@ -870,7 +883,7 @@ class CashbillController < ApplicationController
       # [필수] 공급가액
       "supplyCost" => "10000",
 
-      # [필수] 세액
+      # [필수] 부가세
       "tax" => "1000",
 
       # [필수] 봉사료
@@ -1020,7 +1033,6 @@ class CashbillController < ApplicationController
       # 메모
       memo = "부분 취소현금영수증 메모"
 
-
       # 부분취소 여부, true-부분취소, false-전체취소
       isPartCancel = true
 
@@ -1030,7 +1042,7 @@ class CashbillController < ApplicationController
       # [취소] 공급가액
       supplyCost = "9000"
 
-      # [취소] 세액
+      # [취소] 부가세
       tax = "900"
 
       # [취소] 봉사료
@@ -1138,7 +1150,7 @@ class CashbillController < ApplicationController
     # [취소] 공급가액
     supplyCost = "9000"
 
-    # [취소] 세액
+    # [취소] 부가세
     tax = "900"
 
     # [취소] 봉사료
