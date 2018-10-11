@@ -2,32 +2,35 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <% @Response.each_with_index do |faxInfo, index| %>
-    <fieldset class="fieldset2">
-      <legend>팩스 전송상태 확인 [<%=(index+1)%>/<%=@Response.length%>]</legend>
-      <ul>
-        <li>state(전송상태 코드) : <%=faxInfo["state"]%></li>
-        <li>result(전송결과 코드) : <%=faxInfo["result"]%></li>
-        <li>sendNum(발신번호) : <%=faxInfo["sendNum"]%></li>
-        <li>senderName(발신자명) : <%=faxInfo["senderName"]%></li>
-        <li>receiveNum(수신번호) : <%=faxInfo["receiveNum"]%></li>
-        <li>receiveName(수신자명) : <%=faxInfo["receiveName"]%></li>
-        <li>title(팩스제목) : <%=faxInfo["title"]%></li>
-        <li>sendPageCnt(전체 페이지수) : <%=faxInfo["sendPageCnt"]%></li>
-        <li>successPageCnt(성공 페이지수) : <%=faxInfo["successPageCnt"]%></li>
-        <li>failPageCnt(실패 페이지수) : <%=faxInfo["failPageCnt"]%></li>
-        <li>refundPageCnt(환불 페이지수) : <%=faxInfo["refundPageCnt"]%></li>
-        <li>cancelPageCnt(취소 페이지수) : <%=faxInfo["cancelPageCnt"]%></li>
-        <li>reserveDT(예약시간) : <%=faxInfo["reserveDT"]%></li>
-        <li>receiptDT(접수시간) : <%=faxInfo["receiptDT"]%></li>
-        <li>sendDT(전송시간) : <%=faxInfo["sendDT"]%></li>
-        <li>resultDT(전송결과 수신시간) : <%=faxInfo["resultDT"]%></li>
-        <li>fileNames(전송 파일명 리스트) : <%=faxInfo["fileNames"]%></li>
-        <li>receiptNum(접수번호) : <%=faxInfo["receiptNum"]%></li>
-        <li>requestNum(요청번호) : <%=faxInfo["requestNum"]%></li>
-      </ul>
-    </fieldset>
-    <%end%>
+      <fieldset class="fieldset2">
+        <legend>팩스 전송상태 확인 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
+        <ul>
+          <li>state(전송상태 코드) : <%= faxInfo["state"] %></li>
+          <li>result(전송결과 코드) : <%= faxInfo["result"] %></li>
+          <li>sendNum(발신번호) : <%= faxInfo["sendNum"] %></li>
+          <li>senderName(발신자명) : <%= faxInfo["senderName"] %></li>
+          <li>receiveNum(수신번호) : <%= faxInfo["receiveNum"] %></li>
+          <li>receiveName(수신자명) : <%= faxInfo["receiveName"] %></li>
+          <li>title(팩스제목) : <%= faxInfo["title"] %></li>
+          <li>sendPageCnt(전체 페이지수) : <%= faxInfo["sendPageCnt"] %></li>
+          <li>successPageCnt(성공 페이지수) : <%= faxInfo["successPageCnt"] %></li>
+          <li>failPageCnt(실패 페이지수) : <%= faxInfo["failPageCnt"] %></li>
+          <li>refundPageCnt(환불 페이지수) : <%= faxInfo["refundPageCnt"] %></li>
+          <li>cancelPageCnt(취소 페이지수) : <%= faxInfo["cancelPageCnt"] %></li>
+          <li>reserveDT(예약시간) : <%= faxInfo["reserveDT"] %></li>
+          <li>receiptDT(접수시간) : <%= faxInfo["receiptDT"] %></li>
+          <li>sendDT(전송시간) : <%= faxInfo["sendDT"] %></li>
+          <li>resultDT(전송결과 수신시간) : <%= faxInfo["resultDT"] %></li>
+          <li>fileNames(전송 파일명 리스트) : <%= faxInfo["fileNames"] %></li>
+          <li>receiptNum(접수번호) : <%= faxInfo["receiptNum"] %></li>
+          <li>requestNum(요청번호) : <%= faxInfo["requestNum"] %></li>
+          <li>requestNum(요청번호) : <%= faxInfo["requestNum"] %></li>
+          <li>chargePageCnt(과금 페이지수) : <%= faxInfo["chargePageCnt"] %></li>
+          <li>tiffFileSize(변환파일용랑) : <%= faxInfo["tiffFileSize"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
   </fieldset>
- </div>
+</div>
