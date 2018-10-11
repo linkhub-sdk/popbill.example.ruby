@@ -32,8 +32,8 @@ class TaxinvoiceController < ApplicationController
 
   # 팝빌 전자세금계산서 API Service 초기화
   TIService = TaxinvoiceService.instance(
-    TaxinvoiceController::LinkID,
-    TaxinvoiceController::SecretKey
+      TaxinvoiceController::LinkID,
+      TaxinvoiceController::SecretKey
   )
 
   # 연동환경 설정, true-개발용, false-상업용
@@ -53,8 +53,8 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.checkIsMember(
-        corpNum,
-        linkID,
+          corpNum,
+          linkID,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -90,41 +90,41 @@ class TaxinvoiceController < ApplicationController
     # 연동회원 가입정보
     joinInfo = {
 
-      # 링크아이디
-      "LinkID" => "TESTER",
+        # 링크아이디
+        "LinkID" => "TESTER",
 
-      # 아이디, 6자이상 20자미만
-      "ID" => "testkorea20170131",
+        # 아이디, 6자이상 20자미만
+        "ID" => "testkorea20170131",
 
-      # 비밀번호, 6자이상 20자 미만
-      "PWD" => "thisispassword",
+        # 비밀번호, 6자이상 20자 미만
+        "PWD" => "thisispassword",
 
-      # 사업자번호, '-' 제외 10자리
-      "CorpNum" => "8888888888",
+        # 사업자번호, '-' 제외 10자리
+        "CorpNum" => "8888888888",
 
-      # 대표자명
-      "CEOName" => "대표자성명",
+        # 대표자명
+        "CEOName" => "대표자성명",
 
-      # 상호명
-      "CorpName" => "상호명",
+        # 상호명
+        "CorpName" => "상호명",
 
-      # 주소
-      "Addr" => "주소",
+        # 주소
+        "Addr" => "주소",
 
-      # 업태
-      "BizType" => "업태",
+        # 업태
+        "BizType" => "업태",
 
-      # 종목
-      "BizClass" => "종목",
+        # 종목
+        "BizClass" => "종목",
 
-      # 담당자명
-      "ContactName" => "담당자 성명",
+        # 담당자명
+        "ContactName" => "담당자 성명",
 
-      # 담당자 메일
-      "ContactEmail" => "test@test.com",
+        # 담당자 메일
+        "ContactEmail" => "test@test.com",
 
-      # 담당자 연락처
-      "ContactTEL" => "담당자 연락처",
+        # 담당자 연락처
+        "ContactTEL" => "담당자 연락처",
     }
 
     begin
@@ -209,8 +209,8 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getPartnerURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -234,8 +234,8 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getPopbillURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -256,35 +256,35 @@ class TaxinvoiceController < ApplicationController
 
     # 담당자 정보
     contactInfo = {
-      # 아이디
-      "id" => "testkorea1701313",
+        # 아이디
+        "id" => "testkorea1701313",
 
-      # 비밀번호
-      "pwd" => "test05028342",
+        # 비밀번호
+        "pwd" => "test05028342",
 
-      # 담당자명
-      "personName" => "담당자명170116",
+        # 담당자명
+        "personName" => "담당자명170116",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰번호
-      "hp" => "010-1111-2222",
+        # 휴대폰번호
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회 권한여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회 권한여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = TaxinvoiceController::TIService.registContact(
-        corpNum,
-        contactInfo,
+          corpNum,
+          contactInfo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -327,33 +327,33 @@ class TaxinvoiceController < ApplicationController
     # 담당자 정보
     contactInfo = {
 
-      # 담당자 아이디
-      "id" => userID,
+        # 담당자 아이디
+        "id" => userID,
 
-      # 담당자명
-      "personName" => "담당자명170131",
+        # 담당자명
+        "personName" => "담당자명170131",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰번호
-      "hp" => "010-1111-2222",
+        # 휴대폰번호
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = TaxinvoiceController::TIService.updateContact(
-        corpNum,
-        contactInfo,
-        userID
+          corpNum,
+          contactInfo,
+          userID
       )
       render "home/response"
     rescue PopbillException => pe
@@ -392,26 +392,26 @@ class TaxinvoiceController < ApplicationController
     # 회사정보
     corpInfo = {
 
-      # 대표자명
-      "ceoname" => "대표자명170116",
+        # 대표자명
+        "ceoname" => "대표자명170116",
 
-      # 상호명
-      "corpName" => "상호170116",
+        # 상호명
+        "corpName" => "상호170116",
 
-      # 주소
-      "addr" => "주소170116",
+        # 주소
+        "addr" => "주소170116",
 
-      # 업태
-      "bizType" => "업태170116",
+        # 업태
+        "bizType" => "업태170116",
 
-      # 업종
-      "bizClass" => "종목170116",
+        # 업종
+        "bizClass" => "종목170116",
     }
 
     begin
       @Response = TaxinvoiceController::TIService.updateCorpInfo(
-        corpNum,
-        corpInfo,
+          corpNum,
+          corpInfo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -438,9 +438,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @response = TaxinvoiceController::TIService.checkMgtKeyInUse(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
 
       if @response
@@ -492,223 +492,223 @@ class TaxinvoiceController < ApplicationController
     # 세금계산서 정보
     taxinvoice = {
 
-      # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20170203
-      "writeDate" => "20170203",
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20170203
+        "writeDate" => "20170203",
 
-      # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
-      "issueType" => "정발행",
+        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
+        "issueType" => "정발행",
 
-      # [필수] 과세형태, [과세, 영세, 면세] 중 기재
-      "taxType" => "과세",
+        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
+        "taxType" => "과세",
 
-      # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-      # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
-      "issueTiming" => "직접발행",
+        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
+        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        "issueTiming" => "직접발행",
 
-      # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-      # - 정과금(공급자 과금), 역과금(공급받는자 과금)
-      "chargeDirection" => "정과금",
+        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        "chargeDirection" => "정과금",
 
-      # [필수] 영수/청구, [영수, 청구] 중 기재
-      "purposeType" => "영수",
+        # [필수] 영수/청구, [영수, 청구] 중 기재
+        "purposeType" => "영수",
 
-      # [필수] 공급가액 합계
-      "supplyCostTotal" => "20000",
+        # [필수] 공급가액 합계
+        "supplyCostTotal" => "20000",
 
-      # [필수] 세액 합계
-      "taxTotal" => "2000",
+        # [필수] 세액 합계
+        "taxTotal" => "2000",
 
-      # [필수] 합계금액, 공급가액 합계 + 세액합계
-      "totalAmount" => "22000",
+        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        "totalAmount" => "22000",
 
-      # 기재 상 '일련번호' 항목
-      "serialNum" => "",
+        # 기재 상 '일련번호' 항목
+        "serialNum" => "",
 
-      # 기재 상 '권' 항목, 숫자만 입력(0~32767)
-      "kwon" => nil,
+        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        "kwon" => nil,
 
-      # 기재 상 '호' 항목, 숫자만 입력(0~32767)
-      "ho" => nil,
+        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        "ho" => nil,
 
-      # 기재 상 '현금' 항목
-      "cash" => "",
+        # 기재 상 '현금' 항목
+        "cash" => "",
 
-      # 기재 상 '수표' 항목
-      "chkBill" => "",
+        # 기재 상 '수표' 항목
+        "chkBill" => "",
 
-      # 기재 상 '어음' 항목
-      "note" => "",
+        # 기재 상 '어음' 항목
+        "note" => "",
 
-      # 기재 상 '외상미수금' 항목
-      "credit" => "",
+        # 기재 상 '외상미수금' 항목
+        "credit" => "",
 
-      # 기재 상 '비고' 항목
-      "remark1" => "비고1",
-      "remark2" => "비고2",
-      "remark3" => "비고3",
+        # 기재 상 '비고' 항목
+        "remark1" => "비고1",
+        "remark2" => "비고2",
+        "remark3" => "비고3",
 
-      # 사업자등록증 이미지 첨부여부
-      "businessLicenseYN" => false,
+        # 사업자등록증 이미지 첨부여부
+        "businessLicenseYN" => false,
 
-      # 통장사본 이미지 첨부여부
-      "bankBookYN" => false,
-
-
-      ######################### 수정세금계산서 정보 ##########################
-      # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-      # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
-
-      # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
-      "modifyCode" => nil,
-
-      # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
-      "originalTaxinvoiceKey" => "",
+        # 통장사본 이미지 첨부여부
+        "bankBookYN" => false,
 
 
-      ######################### 공급자정보 #########################
+        ######################### 수정세금계산서 정보 ##########################
+        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
+        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
 
-      # [필수] 공급자 사업자번호, '-' 제외 10자리
-      "invoicerCorpNum" => corpNum,
+        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+        "modifyCode" => nil,
 
-      # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
-      "invoicerTaxRegID" => "",
-
-      # [필수] 공급자 상호
-      "invoicerCorpName" => "상호명",
-
-      # [필수] 공급자 대표자 성명
-      "invoicerCEOName" => "대표자명",
-
-      # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-      # 사업자 별로 중복되지 않도록 구성
-      "invoicerMgtKey" => mgtKey,
-
-      # 공급자 주소
-      "invoicerAddr" => "공급자 주소",
-
-      # 공급자 업태
-      "invoicerBizType" => "공급자 업태",
-
-      # 공급자 종목
-      "invoicerBizClass" => "공급자 종목",
-
-      # 공급자 담당자명
-      "invoicerContactName" => "공급자 담당자명",
-
-      # 공급자 담당자 메일주소
-      "invoicerEmail" => "test@test.com",
-
-      # 공급자 담당자 휴대폰번호
-      "invoicerHP" => "010-111-222",
-
-      # 공급자 담당자 연락처
-      "invoicerTEL" => "070-4304-2991",
-
-      # 발행안내문자 전송여부
-      "invoicerSMSSendYN" => false,
+        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        "originalTaxinvoiceKey" => "",
 
 
-      ######################### 공급받는자정보 #########################
+        ######################### 공급자정보 #########################
 
-      # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
-      "invoiceeType" => "사업자",
+        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        "invoicerCorpNum" => corpNum,
 
-      # [필수] 공급받는자 사업자번호, '-' 제외 10자리
-      "invoiceeCorpNum" => "8888888888",
+        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoicerTaxRegID" => "",
 
-      # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
-      "invoiceeTaxRegId" => "",
+        # [필수] 공급자 상호
+        "invoicerCorpName" => "상호명",
 
-      # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
-      "invoiceeCorpName" => "공급받는자 상호",
+        # [필수] 공급자 대표자 성명
+        "invoicerCEOName" => "대표자명",
 
-      # [필수] 공급받는자 대표자 성명
-      "invoiceeCEOName" => "대표자 성명",
+        # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+        # 사업자 별로 중복되지 않도록 구성
+        "invoicerMgtKey" => mgtKey,
 
-      # 공급받는자 문서관리번호
-      "invoiceeMgtKey" => "",
+        # 공급자 주소
+        "invoicerAddr" => "공급자 주소",
 
-      # 공급받는자 주소
-      "invoiceeAddr" => "공급받는자 주소",
+        # 공급자 업태
+        "invoicerBizType" => "공급자 업태",
 
-      # 공급받는자 종목
-      "invoiceeBizClass" => "공급받는자 종목",
+        # 공급자 종목
+        "invoicerBizClass" => "공급자 종목",
 
-      # 공급받는자 업태
-      "invoiceeBizType" => "공급받는자 업태",
+        # 공급자 담당자명
+        "invoicerContactName" => "공급자 담당자명",
 
-      # 공급받는자 담당자명
-      "invoiceeContactName1" => "공급받는자담당자명",
+        # 공급자 담당자 메일주소
+        "invoicerEmail" => "test@test.com",
 
-      # 공급받는자 담당자 메일주소
-      "invoiceeEmail1" => "test@test.com",
+        # 공급자 담당자 휴대폰번호
+        "invoicerHP" => "010-111-222",
 
-      # 공급받는자 담당자 연락처
-      "invoiceeTEL1" => "070-1234-1234",
+        # 공급자 담당자 연락처
+        "invoicerTEL" => "070-4304-2991",
 
-      # 공급받는자 담당자 휴대폰번호
-      "invoiceeHP1" => "010-123-1234",
-
-      # 역발행시 발행안내문자 전송여부
-      "invoiceeSMSSendYN" => false,
+        # 발행안내문자 전송여부
+        "invoicerSMSSendYN" => false,
 
 
-      ######################### 상세항목(품목) 정보 #########################
+        ######################### 공급받는자정보 #########################
 
-      "detailList" => [
-        {
-          "serialNum" => 1,         # 일련번호, 1부터 순차기재
-          "purchaseDT" => "20170203",   # 거래일자, yyyyMMdd
-          "itemName" => "테스트1",    # 품목명
-          "spec" => "규격",     # 규격
-          "qty" => "1",    # 수량
-          "unitCost" => "10000",  # 단가
-          "supplyCost" => "10000",  # 공급가액
-          "tax" => "1000",  # 세액
-          "remark" => "비고",   # 비고
-        },
-        {
-          "serialNum" => 2,         # 일련번호, 1부터 순차기재
-          "purchaseDT" => "20170203",   # 거래일자, yyyyMMdd
-          "itemName" => "테스트2",    # 품목명
-          "spec" => "규격",     # 규격
-          "qty" => "1",    # 수량
-          "unitCost" => "10000",  # 단가
-          "supplyCost" => "10000",  # 공급가액
-          "tax" => "1000",  # 세액
-          "remark" => "비고",   # 비고
-        },
-      ],
+        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
+        "invoiceeType" => "사업자",
+
+        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        "invoiceeCorpNum" => "8888888888",
+
+        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoiceeTaxRegId" => "",
+
+        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        "invoiceeCorpName" => "공급받는자 상호",
+
+        # [필수] 공급받는자 대표자 성명
+        "invoiceeCEOName" => "대표자 성명",
+
+        # 공급받는자 문서관리번호
+        "invoiceeMgtKey" => "",
+
+        # 공급받는자 주소
+        "invoiceeAddr" => "공급받는자 주소",
+
+        # 공급받는자 종목
+        "invoiceeBizClass" => "공급받는자 종목",
+
+        # 공급받는자 업태
+        "invoiceeBizType" => "공급받는자 업태",
+
+        # 공급받는자 담당자명
+        "invoiceeContactName1" => "공급받는자담당자명",
+
+        # 공급받는자 담당자 메일주소
+        "invoiceeEmail1" => "test@test.com",
+
+        # 공급받는자 담당자 연락처
+        "invoiceeTEL1" => "070-1234-1234",
+
+        # 공급받는자 담당자 휴대폰번호
+        "invoiceeHP1" => "010-123-1234",
+
+        # 역발행시 발행안내문자 전송여부
+        "invoiceeSMSSendYN" => false,
 
 
-      ######################### 추가담당자정보 #########################
-      # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-      # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
-      ##############################################################
+        ######################### 상세항목(품목) 정보 #########################
 
-      "addContactList" => [
-        {
-          "serialNum" => 1,   # 일련번호, 1부터 순차기재
-          "contactName" => "담당자01",   # 담당자명
-          "email" => "test@test.com",  # 담당자 메일주소
-        },
-        {
-          "serialNum" => 2,   # 일련번호, 1부터 순차기재
-          "contactName" => "담당자02",   # 담당자명
-          "email" => "test@test.com",  # 담당자 메일주소
-        }
-      ],
+        "detailList" => [
+            {
+                "serialNum" => 1, # 일련번호, 1부터 순차기재
+                "purchaseDT" => "20170203", # 거래일자, yyyyMMdd
+                "itemName" => "테스트1", # 품목명
+                "spec" => "규격", # 규격
+                "qty" => "1", # 수량
+                "unitCost" => "10000", # 단가
+                "supplyCost" => "10000", # 공급가액
+                "tax" => "1000", # 세액
+                "remark" => "비고", # 비고
+            },
+            {
+                "serialNum" => 2, # 일련번호, 1부터 순차기재
+                "purchaseDT" => "20170203", # 거래일자, yyyyMMdd
+                "itemName" => "테스트2", # 품목명
+                "spec" => "규격", # 규격
+                "qty" => "1", # 수량
+                "unitCost" => "10000", # 단가
+                "supplyCost" => "10000", # 공급가액
+                "tax" => "1000", # 세액
+                "remark" => "비고", # 비고
+            },
+        ],
+
+
+        ######################### 추가담당자정보 #########################
+        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
+        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
+        ##############################################################
+
+        "addContactList" => [
+            {
+                "serialNum" => 1, # 일련번호, 1부터 순차기재
+                "contactName" => "담당자01", # 담당자명
+                "email" => "test@test.com", # 담당자 메일주소
+            },
+            {
+                "serialNum" => 2, # 일련번호, 1부터 순차기재
+                "contactName" => "담당자02", # 담당자명
+                "email" => "test@test.com", # 담당자 메일주소
+            }
+        ],
     }
 
     begin
       @Response = TaxinvoiceController::TIService.registIssue(
-        corpNum,
-        taxinvoice,
-        writeSpecification,
-        forceIssue,
-        dealInvoiceMgtKey,
-        memo,
-        emailSubject,
+          corpNum,
+          taxinvoice,
+          writeSpecification,
+          forceIssue,
+          dealInvoiceMgtKey,
+          memo,
+          emailSubject,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -739,218 +739,218 @@ class TaxinvoiceController < ApplicationController
     # 세금계산서 정보
     taxinvoice = {
 
-      # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20170203
-      "writeDate" => "20170207",
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20170203
+        "writeDate" => "20170207",
 
-      # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
-      "issueType" => "정발행",
+        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
+        "issueType" => "정발행",
 
-      # [필수] 과세형태, [과세, 영세, 면세] 중 기재
-      "taxType" => "과세",
+        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
+        "taxType" => "과세",
 
-      # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-      # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
-      "issueTiming" => "직접발행",
+        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
+        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        "issueTiming" => "직접발행",
 
-      # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-      # - 정과금(공급자 과금), 역과금(공급받는자 과금)
-      "chargeDirection" => "정과금",
+        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        "chargeDirection" => "정과금",
 
-      # [필수] 영수/청구, [영수, 청구] 중 기재
-      "purposeType" => "영수",
+        # [필수] 영수/청구, [영수, 청구] 중 기재
+        "purposeType" => "영수",
 
-      # [필수] 공급가액 합계
-      "supplyCostTotal" => "20000",
+        # [필수] 공급가액 합계
+        "supplyCostTotal" => "20000",
 
-      # [필수] 세액 합계
-      "taxTotal" => "2000",
+        # [필수] 세액 합계
+        "taxTotal" => "2000",
 
-      # [필수] 합계금액, 공급가액 합계 + 세액합계
-      "totalAmount" => "22000",
+        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        "totalAmount" => "22000",
 
-      # 기재 상 '일련번호' 항목
-      "serialNum" => "",
+        # 기재 상 '일련번호' 항목
+        "serialNum" => "",
 
-      # 기재 상 '권' 항목, 숫자만 입력(0~32767)
-      "kwon" => nil,
+        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        "kwon" => nil,
 
-      # 기재 상 '호' 항목, 숫자만 입력(0~32767)
-      "ho" => nil,
+        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        "ho" => nil,
 
-      # 기재 상 '현금' 항목
-      "cash" => "",
+        # 기재 상 '현금' 항목
+        "cash" => "",
 
-      # 기재 상 '수표' 항목
-      "chkBill" => "",
+        # 기재 상 '수표' 항목
+        "chkBill" => "",
 
-      # 기재 상 '어음' 항목
-      "note" => "",
+        # 기재 상 '어음' 항목
+        "note" => "",
 
-      # 기재 상 '외상미수금' 항목
-      "credit" => "",
+        # 기재 상 '외상미수금' 항목
+        "credit" => "",
 
-      # 기재 상 '비고' 항목
-      "remark1" => "비고1",
-      "remark2" => "비고2",
-      "remark3" => "비고3",
+        # 기재 상 '비고' 항목
+        "remark1" => "비고1",
+        "remark2" => "비고2",
+        "remark3" => "비고3",
 
-      # 사업자등록증 이미지 첨부여부
-      "businessLicenseYN" => false,
+        # 사업자등록증 이미지 첨부여부
+        "businessLicenseYN" => false,
 
-      # 통장사본 이미지 첨부여부
-      "bankBookYN" => false,
+        # 통장사본 이미지 첨부여부
+        "bankBookYN" => false,
 
-      ######################### 수정세금계산서 정보 ##########################
-      # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-      # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        ######################### 수정세금계산서 정보 ##########################
+        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
+        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
 
-      # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
-      "modifyCode" => nil,
+        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+        "modifyCode" => nil,
 
-      # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
-      "originalTaxinvoiceKey" => "",
-
-
-      ######################### 공급자정보 #########################
-
-      # [필수] 공급자 사업자번호, '-' 제외 10자리
-      "invoicerCorpNum" => corpNum,
-
-      # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
-      "invoicerTaxRegID" => "",
-
-      # [필수] 공급자 상호
-      "invoicerCorpName" => "상호명",
-
-      # [필수] 공급자 대표자 성명
-      "invoicerCEOName" => "대표자명",
-
-      # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-      # 사업자 별로 중복되지 않도록 구성
-      "invoicerMgtKey" => mgtKey,
-
-      # 공급자 주소
-      "invoicerAddr" => "공급자 주소",
-
-      # 공급자 업태
-      "invoicerBizType" => "공급자 업태",
-
-      # 공급자 종목
-      "invoicerBizClass" => "공급자 종목",
-
-      # 공급자 담당자명
-      "invoicerContactName" => "공급자 담당자명",
-
-      # 공급자 담당자 메일주소
-      "invoicerEmail" => "test@test.com",
-
-      # 공급자 담당자 휴대폰번호
-      "invoicerHP" => "010-111-222",
-
-      # 공급자 담당자 연락처
-      "invoicerTEL" => "070-4304-2991",
-
-      # 발행안내문자 전송여부
-      "invoicerSMSSendYN" => false,
+        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        "originalTaxinvoiceKey" => "",
 
 
-      ######################### 공급받는자정보 #########################
+        ######################### 공급자정보 #########################
 
-      # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
-      "invoiceeType" => "사업자",
+        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        "invoicerCorpNum" => corpNum,
 
-      # [필수] 공급받는자 사업자번호, '-' 제외 10자리
-      "invoiceeCorpNum" => "8888888888",
+        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoicerTaxRegID" => "",
 
-      # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
-      "invoiceeTaxRegId" => "",
+        # [필수] 공급자 상호
+        "invoicerCorpName" => "상호명",
 
-      # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
-      "invoiceeCorpName" => "공급받는자 상호",
+        # [필수] 공급자 대표자 성명
+        "invoicerCEOName" => "대표자명",
 
-      # [필수] 공급받는자 대표자 성명
-      "invoiceeCEOName" => "대표자 성명",
+        # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+        # 사업자 별로 중복되지 않도록 구성
+        "invoicerMgtKey" => mgtKey,
 
-      # 공급받는자 문서관리번호
-      "invoiceeMgtKey" => "",
+        # 공급자 주소
+        "invoicerAddr" => "공급자 주소",
 
-      # 공급받는자 주소
-      "invoiceeAddr" => "공급받는자 주소",
+        # 공급자 업태
+        "invoicerBizType" => "공급자 업태",
 
-      # 공급받는자 종목
-      "invoiceeBizClass" => "공급받는자 종목",
+        # 공급자 종목
+        "invoicerBizClass" => "공급자 종목",
 
-      # 공급받는자 업태
-      "invoiceeBizType" => "공급받는자 업태",
+        # 공급자 담당자명
+        "invoicerContactName" => "공급자 담당자명",
 
-      # 공급받는자 담당자명
-      "invoiceeContactName1" => "공급받는자담당자명",
+        # 공급자 담당자 메일주소
+        "invoicerEmail" => "test@test.com",
 
-      # 공급받는자 담당자 메일주소
-      "invoiceeEmail1" => "test@test.com",
+        # 공급자 담당자 휴대폰번호
+        "invoicerHP" => "010-111-222",
 
-      # 공급받는자 담당자 연락처
-      "invoiceeTEL1" => "070-1234-1234",
+        # 공급자 담당자 연락처
+        "invoicerTEL" => "070-4304-2991",
 
-      # 공급받는자 담당자 휴대폰번호
-      "invoiceeHP1" => "010-123-1234",
-
-      # 역발행시 발행안내문자 전송여부
-      "invoiceeSMSSendYN" => false,
+        # 발행안내문자 전송여부
+        "invoicerSMSSendYN" => false,
 
 
-      ######################### 상세항목(품목) 정보 #########################
+        ######################### 공급받는자정보 #########################
 
-      "detailList" => [
-        {
-          "serialNum" => 1,         # 일련번호, 1부터 순차기재
-          "purchaseDT" => "20170203",   # 거래일자, yyyyMMdd
-          "itemName" => "테스트1",    # 품목명
-          "spec" => "규격",     # 규격
-          "qty" => "1",    # 수량
-          "unitCost" => "10000",  # 단가
-          "supplyCost" => "10000",  # 공급가액
-          "tax" => "1000",  # 세액
-          "remark" => "비고",   # 비고
-        },
-        {
-          "serialNum" => 2,         # 일련번호, 1부터 순차기재
-          "purchaseDT" => "20170203",   # 거래일자, yyyyMMdd
-          "itemName" => "테스트2",    # 품목명
-          "spec" => "규격",     # 규격
-          "qty" => "1",    # 수량
-          "unitCost" => "10000",  # 단가
-          "supplyCost" => "10000",  # 공급가액
-          "tax" => "1000",  # 세액
-          "remark" => "비고",   # 비고
-        },
-      ],
+        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
+        "invoiceeType" => "사업자",
+
+        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        "invoiceeCorpNum" => "8888888888",
+
+        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoiceeTaxRegId" => "",
+
+        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        "invoiceeCorpName" => "공급받는자 상호",
+
+        # [필수] 공급받는자 대표자 성명
+        "invoiceeCEOName" => "대표자 성명",
+
+        # 공급받는자 문서관리번호
+        "invoiceeMgtKey" => "",
+
+        # 공급받는자 주소
+        "invoiceeAddr" => "공급받는자 주소",
+
+        # 공급받는자 종목
+        "invoiceeBizClass" => "공급받는자 종목",
+
+        # 공급받는자 업태
+        "invoiceeBizType" => "공급받는자 업태",
+
+        # 공급받는자 담당자명
+        "invoiceeContactName1" => "공급받는자담당자명",
+
+        # 공급받는자 담당자 메일주소
+        "invoiceeEmail1" => "test@test.com",
+
+        # 공급받는자 담당자 연락처
+        "invoiceeTEL1" => "070-1234-1234",
+
+        # 공급받는자 담당자 휴대폰번호
+        "invoiceeHP1" => "010-123-1234",
+
+        # 역발행시 발행안내문자 전송여부
+        "invoiceeSMSSendYN" => false,
 
 
-      ######################### 추가담당자정보 #########################
-      # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-      # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
-      ##############################################################
+        ######################### 상세항목(품목) 정보 #########################
 
-      "addContactList" => [
-        {
-          "serialNum" => 1,   # 일련번호, 1부터 순차기재
-          "contactName" => "담당자01",   # 담당자명
-          "email" => "test@test.com",  # 담당자 메일주소
-        },
-        {
-          "serialNum" => 2,   # 일련번호, 1부터 순차기재
-          "contactName" => "담당자02",   # 담당자명
-          "email" => "test@test.com",  # 담당자 메일주소
-        }
-      ],
+        "detailList" => [
+            {
+                "serialNum" => 1, # 일련번호, 1부터 순차기재
+                "purchaseDT" => "20170203", # 거래일자, yyyyMMdd
+                "itemName" => "테스트1", # 품목명
+                "spec" => "규격", # 규격
+                "qty" => "1", # 수량
+                "unitCost" => "10000", # 단가
+                "supplyCost" => "10000", # 공급가액
+                "tax" => "1000", # 세액
+                "remark" => "비고", # 비고
+            },
+            {
+                "serialNum" => 2, # 일련번호, 1부터 순차기재
+                "purchaseDT" => "20170203", # 거래일자, yyyyMMdd
+                "itemName" => "테스트2", # 품목명
+                "spec" => "규격", # 규격
+                "qty" => "1", # 수량
+                "unitCost" => "10000", # 단가
+                "supplyCost" => "10000", # 공급가액
+                "tax" => "1000", # 세액
+                "remark" => "비고", # 비고
+            },
+        ],
+
+
+        ######################### 추가담당자정보 #########################
+        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
+        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
+        ##############################################################
+
+        "addContactList" => [
+            {
+                "serialNum" => 1, # 일련번호, 1부터 순차기재
+                "contactName" => "담당자01", # 담당자명
+                "email" => "test@test.com", # 담당자 메일주소
+            },
+            {
+                "serialNum" => 2, # 일련번호, 1부터 순차기재
+                "contactName" => "담당자02", # 담당자명
+                "email" => "test@test.com", # 담당자 메일주소
+            }
+        ],
     }
 
     begin
       @Response = TaxinvoiceController::TIService.register(
-        corpNum,
-        taxinvoice,
-        writeSpecification,
+          corpNum,
+          taxinvoice,
+          writeSpecification,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -978,209 +978,209 @@ class TaxinvoiceController < ApplicationController
     # 세금계산서 정보
     taxinvoice = {
 
-      # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20170203
-      "writeDate" => "20170203",
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20170203
+        "writeDate" => "20170203",
 
-      # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
-      "issueType" => "정발행",
+        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
+        "issueType" => "정발행",
 
-      # [필수] 과세형태, [과세, 영세, 면세] 중 기재
-      "taxType" => "과세",
+        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
+        "taxType" => "과세",
 
-      # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-      # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
-      "issueTiming" => "직접발행",
+        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
+        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        "issueTiming" => "직접발행",
 
-      # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-      # - 정과금(공급자 과금), 역과금(공급받는자 과금)
-      "chargeDirection" => "정과금",
+        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        "chargeDirection" => "정과금",
 
-      # [필수] 영수/청구, [영수, 청구] 중 기재
-      "purposeType" => "영수",
+        # [필수] 영수/청구, [영수, 청구] 중 기재
+        "purposeType" => "영수",
 
-      # [필수] 공급가액 합계
-      "supplyCostTotal" => "20000",
+        # [필수] 공급가액 합계
+        "supplyCostTotal" => "20000",
 
-      # [필수] 세액 합계
-      "taxTotal" => "2000",
+        # [필수] 세액 합계
+        "taxTotal" => "2000",
 
-      # [필수] 합계금액, 공급가액 합계 + 세액합계
-      "totalAmount" => "22000",
+        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        "totalAmount" => "22000",
 
-      # 기재 상 '일련번호' 항목
-      "serialNum" => "",
+        # 기재 상 '일련번호' 항목
+        "serialNum" => "",
 
-      # 기재 상 '권' 항목, 숫자만 입력(0~32767)
-      "kwon" => nil,
+        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        "kwon" => nil,
 
-      # 기재 상 '호' 항목, 숫자만 입력(0~32767)
-      "ho" => nil,
+        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        "ho" => nil,
 
-      # 기재 상 '현금' 항목
-      "cash" => "",
+        # 기재 상 '현금' 항목
+        "cash" => "",
 
-      # 기재 상 '수표' 항목
-      "chkBill" => "",
+        # 기재 상 '수표' 항목
+        "chkBill" => "",
 
-      # 기재 상 '어음' 항목
-      "note" => "",
+        # 기재 상 '어음' 항목
+        "note" => "",
 
-      # 기재 상 '외상미수금' 항목
-      "credit" => "",
+        # 기재 상 '외상미수금' 항목
+        "credit" => "",
 
-      # 기재 상 '비고' 항목
-      "remark1" => "비고1",
-      "remark2" => "비고2",
-      "remark3" => "비고3",
+        # 기재 상 '비고' 항목
+        "remark1" => "비고1",
+        "remark2" => "비고2",
+        "remark3" => "비고3",
 
-      # 사업자등록증 이미지 첨부여부
-      "businessLicenseYN" => false,
+        # 사업자등록증 이미지 첨부여부
+        "businessLicenseYN" => false,
 
-      # 통장사본 이미지 첨부여부
-      "bankBookYN" => false,
-
-
-      ######################### 공급자정보 #########################
-
-      # [필수] 공급자 사업자번호, '-' 제외 10자리
-      "invoicerCorpNum" => corpNum,
-
-      # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
-      "invoicerTaxRegID" => "",
-
-      # [필수] 공급자 상호
-      "invoicerCorpName" => "상호명_수정",
-
-      # [필수] 공급자 대표자 성명
-      "invoicerCEOName" => "대표자명_수정",
-
-      # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-      # 사업자 별로 중복되지 않도록 구성
-      "invoicerMgtKey" => mgtKey,
-
-      # 공급자 주소
-      "invoicerAddr" => "공급자 주소",
-
-      # 공급자 업태
-      "invoicerBizType" => "공급자 업태",
-
-      # 공급자 종목
-      "invoicerBizClass" => "공급자 종목",
-
-      # 공급자 담당자명
-      "invoicerContactName" => "공급자 담당자명",
-
-      # 공급자 담당자 메일주소
-      "invoicerEmail" => "test@test.com",
-
-      # 공급자 담당자 휴대폰번호
-      "invoicerHP" => "010-111-222",
-
-      # 공급자 담당자 연락처
-      "invoicerTEL" => "070-4304-2991",
-
-      # 발행안내문자 전송여부
-      "invoicerSMSSendYN" => false,
+        # 통장사본 이미지 첨부여부
+        "bankBookYN" => false,
 
 
-      ######################### 공급받는자정보 #########################
+        ######################### 공급자정보 #########################
 
-      # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
-      "invoiceeType" => "사업자",
+        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        "invoicerCorpNum" => corpNum,
 
-      # [필수] 공급받는자 사업자번호, '-' 제외 10자리
-      "invoiceeCorpNum" => "8888888888",
+        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoicerTaxRegID" => "",
 
-      # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
-      "invoiceeTaxRegId" => "",
+        # [필수] 공급자 상호
+        "invoicerCorpName" => "상호명_수정",
 
-      # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
-      "invoiceeCorpName" => "공급받는자 상호",
+        # [필수] 공급자 대표자 성명
+        "invoicerCEOName" => "대표자명_수정",
 
-      # [필수] 공급받는자 대표자 성명
-      "invoiceeCEOName" => "대표자 성명",
+        # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+        # 사업자 별로 중복되지 않도록 구성
+        "invoicerMgtKey" => mgtKey,
 
-      # 공급받는자 문서관리번호
-      "invoiceeMgtKey" => "",
+        # 공급자 주소
+        "invoicerAddr" => "공급자 주소",
 
-      # 공급받는자 주소
-      "invoiceeAddr" => "공급받는자 주소",
+        # 공급자 업태
+        "invoicerBizType" => "공급자 업태",
 
-      # 공급받는자 종목
-      "invoiceeBizClass" => "공급받는자 종목",
+        # 공급자 종목
+        "invoicerBizClass" => "공급자 종목",
 
-      # 공급받는자 업태
-      "invoiceeBizType" => "공급받는자 업태",
+        # 공급자 담당자명
+        "invoicerContactName" => "공급자 담당자명",
 
-      # 공급받는자 담당자명
-      "invoiceeContactName1" => "공급받는자담당자명",
+        # 공급자 담당자 메일주소
+        "invoicerEmail" => "test@test.com",
 
-      # 공급받는자 담당자 메일주소
-      "invoiceeEmail1" => "test@test.com",
+        # 공급자 담당자 휴대폰번호
+        "invoicerHP" => "010-111-222",
 
-      # 공급받는자 담당자 연락처
-      "invoiceeTEL1" => "070-1234-1234",
+        # 공급자 담당자 연락처
+        "invoicerTEL" => "070-4304-2991",
 
-      # 공급받는자 담당자 휴대폰번호
-      "invoiceeHP1" => "010-123-1234",
-
-      # 역발행시 발행안내문자 전송여부
-      "invoiceeSMSSendYN" => false,
+        # 발행안내문자 전송여부
+        "invoicerSMSSendYN" => false,
 
 
-      ######################### 상세항목(품목) 정보 #########################
+        ######################### 공급받는자정보 #########################
 
-      "detailList" => [
-        {
-          "serialNum" => 1,         # 일련번호, 1부터 순차기재
-          "purchaseDT" => "20170203",   # 거래일자, yyyyMMdd
-          "itemName" => "테스트1",    # 품목명
-          "spec" => "규격",     # 규격
-          "qty" => "1",    # 수량
-          "unitCost" => "10000",  # 단가
-          "supplyCost" => "10000",  # 공급가액
-          "tax" => "1000",  # 세액
-          "remark" => "비고",   # 비고
-        },
-        {
-          "serialNum" => 2,         # 일련번호, 1부터 순차기재
-          "purchaseDT" => "20170203",   # 거래일자, yyyyMMdd
-          "itemName" => "테스트2",    # 품목명
-          "spec" => "규격",     # 규격
-          "qty" => "1",    # 수량
-          "unitCost" => "10000",  # 단가
-          "supplyCost" => "10000",  # 공급가액
-          "tax" => "1000",  # 세액
-          "remark" => "비고",   # 비고
-        },
-      ],
+        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
+        "invoiceeType" => "사업자",
+
+        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        "invoiceeCorpNum" => "8888888888",
+
+        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoiceeTaxRegId" => "",
+
+        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        "invoiceeCorpName" => "공급받는자 상호",
+
+        # [필수] 공급받는자 대표자 성명
+        "invoiceeCEOName" => "대표자 성명",
+
+        # 공급받는자 문서관리번호
+        "invoiceeMgtKey" => "",
+
+        # 공급받는자 주소
+        "invoiceeAddr" => "공급받는자 주소",
+
+        # 공급받는자 종목
+        "invoiceeBizClass" => "공급받는자 종목",
+
+        # 공급받는자 업태
+        "invoiceeBizType" => "공급받는자 업태",
+
+        # 공급받는자 담당자명
+        "invoiceeContactName1" => "공급받는자담당자명",
+
+        # 공급받는자 담당자 메일주소
+        "invoiceeEmail1" => "test@test.com",
+
+        # 공급받는자 담당자 연락처
+        "invoiceeTEL1" => "070-1234-1234",
+
+        # 공급받는자 담당자 휴대폰번호
+        "invoiceeHP1" => "010-123-1234",
+
+        # 역발행시 발행안내문자 전송여부
+        "invoiceeSMSSendYN" => false,
 
 
-      ######################### 추가담당자정보 #########################
-      # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-      # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
-      ##############################################################
+        ######################### 상세항목(품목) 정보 #########################
 
-      "addContactList" => [
-        {
-          "serialNum" => 1,   # 일련번호, 1부터 순차기재
-          "contactName" => "담당자01",   # 담당자명
-          "email" => "test@test.com",  # 담당자 메일주소
-        },
-        {
-          "serialNum" => 2,   # 일련번호, 1부터 순차기재
-          "contactName" => "담당자02",   # 담당자명
-          "email" => "test@test.com",  # 담당자 메일주소
-        }
-      ],
+        "detailList" => [
+            {
+                "serialNum" => 1, # 일련번호, 1부터 순차기재
+                "purchaseDT" => "20170203", # 거래일자, yyyyMMdd
+                "itemName" => "테스트1", # 품목명
+                "spec" => "규격", # 규격
+                "qty" => "1", # 수량
+                "unitCost" => "10000", # 단가
+                "supplyCost" => "10000", # 공급가액
+                "tax" => "1000", # 세액
+                "remark" => "비고", # 비고
+            },
+            {
+                "serialNum" => 2, # 일련번호, 1부터 순차기재
+                "purchaseDT" => "20170203", # 거래일자, yyyyMMdd
+                "itemName" => "테스트2", # 품목명
+                "spec" => "규격", # 규격
+                "qty" => "1", # 수량
+                "unitCost" => "10000", # 단가
+                "supplyCost" => "10000", # 공급가액
+                "tax" => "1000", # 세액
+                "remark" => "비고", # 비고
+            },
+        ],
+
+
+        ######################### 추가담당자정보 #########################
+        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
+        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
+        ##############################################################
+
+        "addContactList" => [
+            {
+                "serialNum" => 1, # 일련번호, 1부터 순차기재
+                "contactName" => "담당자01", # 담당자명
+                "email" => "test@test.com", # 담당자 메일주소
+            },
+            {
+                "serialNum" => 2, # 일련번호, 1부터 순차기재
+                "contactName" => "담당자02", # 담당자명
+                "email" => "test@test.com", # 담당자 메일주소
+            }
+        ],
     }
 
     begin
       @Response = TaxinvoiceController::TIService.update(
-        corpNum,
-        keyType,
-        mgtKey,
-        taxinvoice,
+          corpNum,
+          keyType,
+          mgtKey,
+          taxinvoice,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1207,9 +1207,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.getInfo(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "taxinvoice/getInfo"
     rescue PopbillException => pe
@@ -1236,9 +1236,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.getInfos(
-        corpNum,
-        keyType,
-        mgtKeyList,
+          corpNum,
+          keyType,
+          mgtKeyList,
       )
       render "taxinvoice/getInfos"
     rescue PopbillException => pe
@@ -1265,9 +1265,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.getDetailInfo(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "taxinvoice/taxinvoice"
     rescue PopbillException => pe
@@ -1294,9 +1294,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.delete(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1323,9 +1323,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.getLogs(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "taxinvoice/taxinvoiceLogs"
     rescue PopbillException => pe
@@ -1400,28 +1400,27 @@ class TaxinvoiceController < ApplicationController
     interOPYN = ""
 
 
-
     begin
       @Response = TaxinvoiceController::TIService.search(
-        corpNum,
-        keyType,
-        dType,
-        sDate,
-        eDate,
-        state,
-        type,
-        taxType,
-        lateOnly,
-        taxRegIDYN,
-        taxRegIDType,
-        taxRegID,
-        page,
-        perPage,
-        order,
-        queryString,
-        userID,
-        interOPYN,
-        issueType,
+          corpNum,
+          keyType,
+          dType,
+          sDate,
+          eDate,
+          state,
+          type,
+          taxType,
+          lateOnly,
+          taxRegIDYN,
+          taxRegIDType,
+          taxRegID,
+          page,
+          perPage,
+          order,
+          queryString,
+          userID,
+          interOPYN,
+          issueType,
       )
       render "taxinvoice/search"
     rescue PopbillException => pe
@@ -1451,10 +1450,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.attachFile(
-        corpNum,
-        keyType,
-        mgtKey,
-        filePath,
+          corpNum,
+          keyType,
+          mgtKey,
+          filePath,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1480,9 +1479,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.getFiles(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "taxinvoice/getFiles"
     rescue PopbillException => pe
@@ -1512,10 +1511,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.deleteFile(
-        corpNum,
-        keyType,
-        mgtKey,
-        fileID,
+          corpNum,
+          keyType,
+          mgtKey,
+          fileID,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1549,11 +1548,11 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.send(
-        corpNum,
-        keyType,
-        mgtKey,
-        memo,
-        emailSubject,
+          corpNum,
+          keyType,
+          mgtKey,
+          memo,
+          emailSubject,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1582,10 +1581,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.cancelSend(
-        corpNum,
-        keyType,
-        mgtKey,
-        memo,
+          corpNum,
+          keyType,
+          mgtKey,
+          memo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1610,9 +1609,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.accept(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1639,9 +1638,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.deny(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1684,12 +1683,12 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.issue(
-        corpNum,
-        keyType,
-        mgtKey,
-        forceIssue,
-        memo,
-        emailSubject,
+          corpNum,
+          keyType,
+          mgtKey,
+          forceIssue,
+          memo,
+          emailSubject,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1721,10 +1720,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.cancelIssue(
-        corpNum,
-        keyType,
-        mgtKey,
-        memo,
+          corpNum,
+          keyType,
+          mgtKey,
+          memo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1756,10 +1755,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.request(
-        corpNum,
-        keyType,
-        mgtKey,
-        memo,
+          corpNum,
+          keyType,
+          mgtKey,
+          memo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1788,10 +1787,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.cancelRequest(
-        corpNum,
-        keyType,
-        mgtKey,
-        memo,
+          corpNum,
+          keyType,
+          mgtKey,
+          memo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1819,10 +1818,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.refuse(
-        corpNum,
-        keyType,
-        mgtKey,
-        memo,
+          corpNum,
+          keyType,
+          mgtKey,
+          memo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1852,9 +1851,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.sendToNTS(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1882,10 +1881,10 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.sendEmail(
-        corpNum,
-        keyType,
-        mgtKey,
-        emailAddr,
+          corpNum,
+          keyType,
+          mgtKey,
+          emailAddr,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1921,12 +1920,12 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.sendSMS(
-        corpNum,
-        keyType,
-        mgtKey,
-        sendNum,
-        receiveNum,
-        contents,
+          corpNum,
+          keyType,
+          mgtKey,
+          sendNum,
+          receiveNum,
+          contents,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1960,11 +1959,11 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.sendFax(
-        corpNum,
-        keyType,
-        mgtKey,
-        sendNum,
-        receiveNum,
+          corpNum,
+          keyType,
+          mgtKey,
+          sendNum,
+          receiveNum,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1995,11 +1994,11 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.attachStatement(
-        corpNum,
-        keyType,
-        mgtKey,
-        itemCode,
-        stmtMgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
+          itemCode,
+          stmtMgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -2030,11 +2029,11 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.detachStatement(
-        corpNum,
-        keyType,
-        mgtKey,
-        itemCode,
-        stmtMgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
+          itemCode,
+          stmtMgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -2057,8 +2056,8 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -2085,9 +2084,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getPopUpURL(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -2113,9 +2112,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getPrintURL(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -2142,9 +2141,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getEPrintURL(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -2172,9 +2171,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getMassPrintURL(
-        corpNum,
-        keyType,
-        mgtKeyList,
+          corpNum,
+          keyType,
+          mgtKeyList,
       )
       @name = "URL"
       render "home/result"
@@ -2201,9 +2200,9 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getMailURL(
-        corpNum,
-        keyType,
-        mgtKey,
+          corpNum,
+          keyType,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -2223,7 +2222,7 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getUnitCost(
-        corpNum,
+          corpNum,
       )
       @name = "unitCost(발행단가)"
       render "home/result"
@@ -2245,7 +2244,7 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getCertificateExpireDate(
-        corpNum,
+          corpNum,
       )
       @name = "expireDate(공인인증서 만료일시)"
       render "home/result"
@@ -2265,7 +2264,7 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @Response = TaxinvoiceController::TIService.getEmailPublicKeys(
-        corpNum,
+          corpNum,
       )
       render "taxinvoice/emailPublicKeys"
     rescue PopbillException => pe
@@ -2322,7 +2321,7 @@ class TaxinvoiceController < ApplicationController
       @Response = TaxinvoiceController::TIService.listEmailConfig(
           corpNum,
           userID,
-          )
+      )
       render "taxinvoice/listEmailConfig"
     rescue PopbillException => pe
       @Response = pe
@@ -2393,12 +2392,32 @@ class TaxinvoiceController < ApplicationController
           emailType,
           sendYN,
           userID,
-          )
+      )
       render "home/response"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 팝빌에 등록된 공인인증서의 유효성을 확인합니다.
+  ##############################################################################
+  def checkCertValidation
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    begin
+      @Response = TaxinvoiceController::TIService.checkCertValidation(
+          corpNum,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
 end
