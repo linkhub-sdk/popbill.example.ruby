@@ -29,8 +29,8 @@ class FaxController < ApplicationController
 
   # 팝빌 팩스 API Service 초기화
   FAXService = FaxService.instance(
-    FaxController::LinkID,
-    FaxController::SecretKey
+      FaxController::LinkID,
+      FaxController::SecretKey
   )
 
   # 연동환경 설정, true-개발용, false-상업용
@@ -49,8 +49,8 @@ class FaxController < ApplicationController
 
     begin
       @Response = FaxController::FAXService.checkIsMember(
-        corpNum,
-        linkID,
+          corpNum,
+          linkID,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -84,41 +84,41 @@ class FaxController < ApplicationController
     # 연동회원 가입정보
     joinInfo = {
 
-      # 링크아이디
-      "LinkID" => "TESTER",
+        # 링크아이디
+        "LinkID" => "TESTER",
 
-      # 아이디, 6자이상 20자미만
-      "ID" => "testkorea20170131",
+        # 아이디, 6자이상 20자미만
+        "ID" => "testkorea20170131",
 
-      # 비밀번호, 6자이상 20자 미만
-      "PWD" => "thisispassword",
+        # 비밀번호, 6자이상 20자 미만
+        "PWD" => "thisispassword",
 
-      # 사업자번호, '-' 제외 10자리
-      "CorpNum" => "8888888888",
+        # 사업자번호, '-' 제외 10자리
+        "CorpNum" => "8888888888",
 
-      # 대표자명
-      "CEOName" => "대표자성명",
+        # 대표자명
+        "CEOName" => "대표자성명",
 
-      # 상호명
-      "CorpName" => "상호명",
+        # 상호명
+        "CorpName" => "상호명",
 
-      # 주소
-      "Addr" => "주소",
+        # 주소
+        "Addr" => "주소",
 
-      # 업태
-      "BizType" => "업태",
+        # 업태
+        "BizType" => "업태",
 
-      # 종목
-      "BizClass" => "종목",
+        # 종목
+        "BizClass" => "종목",
 
-      # 담당자명
-      "ContactName" => "담당자 성명",
+        # 담당자명
+        "ContactName" => "담당자 성명",
 
-      # 담당자 메일
-      "ContactEmail" => "test@test.com",
+        # 담당자 메일
+        "ContactEmail" => "test@test.com",
 
-      # 담당자 연락처
-      "ContactTEL" => "담당자 연락처",
+        # 담당자 연락처
+        "ContactTEL" => "담당자 연락처",
     }
 
     begin
@@ -200,8 +200,8 @@ class FaxController < ApplicationController
 
     begin
       @value = FaxController::FAXService.getPartnerURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -215,18 +215,18 @@ class FaxController < ApplicationController
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getPopbillURL
+  def getAccessURL
 
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
-    # LOGIN-팝빌로그인, CHRG-포인트충전
-    togo = "CHRG"
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
 
     begin
-      @value = FaxController::FAXService.getPopbillURL(
-        corpNum,
-        togo,
+      @value = FaxController::FAXService.getAccessURL(
+          corpNum,
+          userID,
       )
       @name = "URL"
       render "home/result"
@@ -235,6 +235,32 @@ class FaxController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getChargeURL
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+    begin
+      @value = FaxController::FAXService.getChargeURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
@@ -246,35 +272,35 @@ class FaxController < ApplicationController
 
     # 담당자 정보
     contactInfo = {
-      # 아이디
-      "id" => "testkorea1701313",
+        # 아이디
+        "id" => "testkorea1701313",
 
-      # 비밀번호
-      "pwd" => "test05028342",
+        # 비밀번호
+        "pwd" => "test05028342",
 
-      # 담당자명
-      "personName" => "담당자명170116",
+        # 담당자명
+        "personName" => "담당자명170116",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰번호
-      "hp" => "010-1111-2222",
+        # 휴대폰번호
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회 권한여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회 권한여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = FaxController::FAXService.registContact(
-        corpNum,
-        contactInfo,
+          corpNum,
+          contactInfo,
       )
 
       render "home/response"
@@ -316,33 +342,33 @@ class FaxController < ApplicationController
     # 담당자 정보
     contactInfo = {
 
-      # 담당자 아이디
-      "id" => userID,
+        # 담당자 아이디
+        "id" => userID,
 
-      # 담당자명
-      "personName" => "담당자명170131",
+        # 담당자명
+        "personName" => "담당자명170131",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰버놓
-      "hp" => "010-1111-2222",
+        # 휴대폰버놓
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = FaxController::FAXService.updateContact(
-        corpNum,
-        contactInfo,
-        userID
+          corpNum,
+          contactInfo,
+          userID
       )
       render "home/response"
     rescue PopbillException => pe
@@ -379,26 +405,26 @@ class FaxController < ApplicationController
     # 회사정보
     corpInfo = {
 
-      # 대표자명
-      "ceoname" => "대표자명170116",
+        # 대표자명
+        "ceoname" => "대표자명170116",
 
-      # 상호명
-      "corpName" => "상호170116",
+        # 상호명
+        "corpName" => "상호170116",
 
-      # 주소
-      "addr" => "주소170116",
+        # 주소
+        "addr" => "주소170116",
 
-      # 업태
-      "bizType" => "업태170116",
+        # 업태
+        "bizType" => "업태170116",
 
-      # 업종
-      "bizClass" => "종목170116",
+        # 업종
+        "bizClass" => "종목170116",
     }
 
     begin
       @Response = FaxController::FAXService.updateCorpInfo(
-        corpNum,
-        corpInfo,
+          corpNum,
+          corpInfo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -459,7 +485,7 @@ class FaxController < ApplicationController
           adsYN,
           title,
           requestNum,
-        )
+      )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -517,7 +543,7 @@ class FaxController < ApplicationController
           userID,
           title,
           requestNum,
-        )
+      )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -575,7 +601,7 @@ class FaxController < ApplicationController
           userID,
           title,
           requestNum,
-          )
+      )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -605,12 +631,12 @@ class FaxController < ApplicationController
     # 수신자 정보 배열, 최대 1000건
     receivers = [
         {
-            "rcv" => "070111222",   # 수신번호
-            "rcvnm" => "수신자명",    # 수신자명
+            "rcv" => "070111222", # 수신번호
+            "rcvnm" => "수신자명", # 수신자명
         },
         {
-            "rcv" => "070111222",   # 수신번호
-            "rcvnm" => "수신자명",   # 수신자명
+            "rcv" => "070111222", # 수신번호
+            "rcvnm" => "수신자명", # 수신자명
         },
     ]
 
@@ -641,7 +667,7 @@ class FaxController < ApplicationController
           adsYN,
           title,
           requestNum,
-          )
+      )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -708,7 +734,7 @@ class FaxController < ApplicationController
           userID,
           title,
           requestNum,
-          )
+      )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -774,7 +800,7 @@ class FaxController < ApplicationController
           userID,
           title,
           requestNum,
-          )
+      )
       @name = "receiptNum(접수번호)"
       render "home/result"
     rescue PopbillException => pe
@@ -866,17 +892,17 @@ class FaxController < ApplicationController
 
     begin
       @Response = FaxController::FAXService.search(
-        corpNum,
-        sDate,
-        eDate,
-        state,
-        reserveYN,
-        senderYN,
-        page,
-        perPage,
-        order,
-        userID,
-        qString,
+          corpNum,
+          sDate,
+          eDate,
+          state,
+          reserveYN,
+          senderYN,
+          page,
+          perPage,
+          order,
+          userID,
+          qString,
       )
       render "fax/search"
     rescue PopbillException => pe
@@ -941,8 +967,8 @@ class FaxController < ApplicationController
 
     begin
       @value = FaxController::FAXService.getURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -962,7 +988,7 @@ class FaxController < ApplicationController
 
     begin
       @value = FaxController::FAXService.getUnitCost(
-        corpNum,
+          corpNum,
       )
       @name = "unitCost(전송단가)"
       render "home/result"
@@ -982,7 +1008,7 @@ class FaxController < ApplicationController
 
     begin
       @Response = FaxController::FAXService.getSenderNumberList(
-        corpNum,
+          corpNum,
       )
       render "fax/getSenderNumberList"
     rescue PopbillException => pe

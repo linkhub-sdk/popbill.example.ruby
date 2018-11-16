@@ -11,7 +11,7 @@
 # 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
 # 3) 전자세금계산서 발행을 위해 공인인증서를 등록합니다.
 #    - 팝빌사이트 로그인 > [전자세금계산서] > [환경설정] > [공인인증서 관리]
-#    - 공인인증서 등록 팝업 URL (GetPopbillURL API)을 이용하여 등록
+#    - 공인인증서 등록 팝업 URL (GetChargeURL API)을 이용하여 등록
 ################################################################################
 
 require 'popbill/taxinvoice'
@@ -224,18 +224,44 @@ class TaxinvoiceController < ApplicationController
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getPopbillURL
+  def getAccessURL
 
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # LOGIN-팝빌로그인, CHRG-포인트충전, CERT-공인인증서등록
-    togo = "CHRG"
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
 
     begin
-      @value = TaxinvoiceController::TIService.getPopbillURL(
+      @value = TaxinvoiceController::TIService.getAccessURL(
           corpNum,
-          togo,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
+  ##############################################################################
+  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getChargeURL
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
+    begin
+      @value = TaxinvoiceController::TIService.getChargeURL(
+          corpNum,
+          userID,
       )
       @name = "URL"
       render "home/result"

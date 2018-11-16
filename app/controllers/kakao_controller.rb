@@ -1121,20 +1121,21 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
-  # 연동회원 포인트 충전 팝빌 URL을 반환합니다.
+  # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getPopbillURL_CHRG
+  def getAccessURL
+
     # 팝빌회원 사업자번호
     corpNum = KakaoController::TestCorpNum
 
-    # LOGIN-팝빌로그인, CHRG-포인트충전
-    togo = "CHRG"
+    # 팝빌회원 아이디
+    userID = KakaoController::TestUserID
 
     begin
-      @value = KakaoController::KakaoService.getPopbillURL(
+      @value = KakaoController::KakaoService.getAccessURL(
           corpNum,
-          togo,
+          userID,
       )
       @name = "URL"
       render "home/result"
@@ -1143,6 +1144,33 @@ class KakaoController < ApplicationController
       render "home/exception"
     end
   end
+
+
+  ##############################################################################
+  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getChargeURL
+
+    # 팝빌회원 사업자번호
+    corpNum = KakaoController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = KakaoController::TestUserID
+
+    begin
+      @value = KakaoController::KakaoService.getChargeURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.

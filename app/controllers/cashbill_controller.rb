@@ -29,8 +29,8 @@ class CashbillController < ApplicationController
 
   # 팝빌 현금영수증 Service API 초기화
   CBService = CashbillService.instance(
-    CashbillController::LinkID,
-    CashbillController::SecretKey
+      CashbillController::LinkID,
+      CashbillController::SecretKey
   )
 
   # 연동환경 설정, true-개발용, false-상업용
@@ -49,8 +49,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.checkIsMember(
-        corpNum,
-        linkID,
+          corpNum,
+          linkID,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -84,41 +84,41 @@ class CashbillController < ApplicationController
     # 연동회원 가입정보
     joinInfo = {
 
-      # 링크아이디
-      "LinkID" => "TESTER",
+        # 링크아이디
+        "LinkID" => "TESTER",
 
-      # 아이디, 6자이상 20자미만
-      "ID" => "testkorea20170131",
+        # 아이디, 6자이상 20자미만
+        "ID" => "testkorea20170131",
 
-      # 비밀번호, 6자이상 20자 미만
-      "PWD" => "thisispassword",
+        # 비밀번호, 6자이상 20자 미만
+        "PWD" => "thisispassword",
 
-      # 사업자번호, '-' 제외 10자리
-      "CorpNum" => "8888888888",
+        # 사업자번호, '-' 제외 10자리
+        "CorpNum" => "8888888888",
 
-      # 대표자명
-      "CEOName" => "대표자성명",
+        # 대표자명
+        "CEOName" => "대표자성명",
 
-      # 상호명
-      "CorpName" => "상호명",
+        # 상호명
+        "CorpName" => "상호명",
 
-      # 주소
-      "Addr" => "주소",
+        # 주소
+        "Addr" => "주소",
 
-      # 업태
-      "BizType" => "업태",
+        # 업태
+        "BizType" => "업태",
 
-      # 종목
-      "BizClass" => "종목",
+        # 종목
+        "BizClass" => "종목",
 
-      # 담당자명
-      "ContactName" => "담당자 성명",
+        # 담당자명
+        "ContactName" => "담당자 성명",
 
-      # 담당자 메일
-      "ContactEmail" => "test@test.com",
+        # 담당자 메일
+        "ContactEmail" => "test@test.com",
 
-      # 담당자 연락처
-      "ContactTEL" => "담당자 연락처",
+        # 담당자 연락처
+        "ContactTEL" => "담당자 연락처",
     }
 
     begin
@@ -200,8 +200,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getPartnerURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -215,18 +215,18 @@ class CashbillController < ApplicationController
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getPopbillURL
+  def getAccessURL
 
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # LOGIN-팝빌로그인, CHRG-포인트충전
-    togo = "CHRG"
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
 
     begin
-      @value = CashbillController::CBService.getPopbillURL(
-        corpNum,
-        togo,
+      @value = CashbillController::CBService.getAccessURL(
+          corpNum,
+          userID,
       )
       @name = "URL"
       render "home/result"
@@ -235,6 +235,32 @@ class CashbillController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getChargeURL
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
+
+    begin
+      @value = CashbillController::CBService.getChargeURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
@@ -246,35 +272,35 @@ class CashbillController < ApplicationController
 
     # 담당자 정보
     contactInfo = {
-      # 아이디
-      "id" => "testkorea1701313",
+        # 아이디
+        "id" => "testkorea1701313",
 
-      # 비밀번호
-      "pwd" => "test05028342",
+        # 비밀번호
+        "pwd" => "test05028342",
 
-      # 담당자명
-      "personName" => "담당자명170116",
+        # 담당자명
+        "personName" => "담당자명170116",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰번호
-      "hp" => "010-1111-2222",
+        # 휴대폰번호
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회 권한여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회 권한여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = CashbillController::CBService.registContact(
-        corpNum,
-        contactInfo,
+          corpNum,
+          contactInfo,
       )
 
       render "home/response"
@@ -316,33 +342,33 @@ class CashbillController < ApplicationController
     # 담당자 정보
     contactInfo = {
 
-      # 담당자 아이디
-      "id" => userID,
+        # 담당자 아이디
+        "id" => userID,
 
-      # 담당자명
-      "personName" => "담당자명170131",
+        # 담당자명
+        "personName" => "담당자명170131",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 연락처
+        "tel" => "070-4304-2991",
 
-      # 휴대폰버놓
-      "hp" => "010-1111-2222",
+        # 휴대폰버놓
+        "hp" => "010-1111-2222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 팩스번호
+        "fax" => "070-1111-2222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 메일주소
+        "email" => "test@gmail.com",
 
-      # 회사조회여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회여부, true-회사조회, false-개인조회
+        "searchAllAllowYN" => true,
     }
 
     begin
       @Response = CashbillController::CBService.updateContact(
-        corpNum,
-        contactInfo,
-        userID
+          corpNum,
+          contactInfo,
+          userID
       )
       render "home/response"
     rescue PopbillException => pe
@@ -379,26 +405,26 @@ class CashbillController < ApplicationController
     # 회사정보
     corpInfo = {
 
-      # 대표자명
-      "ceoname" => "대표자명170116",
+        # 대표자명
+        "ceoname" => "대표자명170116",
 
-      # 상호명
-      "corpName" => "상호170116",
+        # 상호명
+        "corpName" => "상호170116",
 
-      # 주소
-      "addr" => "주소170116",
+        # 주소
+        "addr" => "주소170116",
 
-      # 업태
-      "bizType" => "업태170116",
+        # 업태
+        "bizType" => "업태170116",
 
-      # 업종
-      "bizClass" => "종목170116",
+        # 업종
+        "bizClass" => "종목170116",
     }
 
     begin
       @Response = CashbillController::CBService.updateCorpInfo(
-        corpNum,
-        corpInfo,
+          corpNum,
+          corpInfo,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -421,8 +447,8 @@ class CashbillController < ApplicationController
 
     begin
       @response = CashbillController::CBService.checkMgtKeyInUse(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
 
       if @response
@@ -458,85 +484,85 @@ class CashbillController < ApplicationController
     # 현금영수증 정보
     cashbill = {
 
-      # [필수] 문서관리번호
-      "mgtKey" => mgtKey,
+        # [필수] 문서관리번호
+        "mgtKey" => mgtKey,
 
-      # [필수] 문서형태, [승인거래, 취소거래] 중 기재
-      "tradeType" => "승인거래",
+        # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        "tradeType" => "승인거래",
 
-      # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
-      "tradeUsage" => "소득공제용",
+        # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+        "tradeUsage" => "소득공제용",
 
-      # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
-      "tradeOpt" => "일반",
+        # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        "tradeOpt" => "일반",
 
-      # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-      "orgConfirmNum" => "",
+        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+        "orgConfirmNum" => "",
 
-      # [취소거래시 필수] 원본 현금영수증 거래일자
-      "orgTradeDate" => "",
+        # [취소거래시 필수] 원본 현금영수증 거래일자
+        "orgTradeDate" => "",
 
-      # [필수] 거래처 식별번호, 거래유형에 따라 작성
-      # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
-      # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
-      "identityNum" => "01043042991",
+        # [필수] 거래처 식별번호, 거래유형에 따라 작성
+        # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
+        # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
+        "identityNum" => "01043042991",
 
-      # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-      "orgConfirmNum" => "",
+        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+        "orgConfirmNum" => "",
 
-      # [필수] 과세형태, [과세, 비과세] 중 기재
-      "taxationType" => "과세",
+        # [필수] 과세형태, [과세, 비과세] 중 기재
+        "taxationType" => "과세",
 
-      # [필수] 공급가액
-      "supplyCost" => "20000",
+        # [필수] 공급가액
+        "supplyCost" => "20000",
 
-      # [필수] 부가세
-      "tax" => "2000",
+        # [필수] 부가세
+        "tax" => "2000",
 
-      # [필수] 봉사료
-      "serviceFee" => "0",
+        # [필수] 봉사료
+        "serviceFee" => "0",
 
-      # [필수] 거래금액
-      "totalAmount" => "22000",
+        # [필수] 거래금액
+        "totalAmount" => "22000",
 
-      # [필수] 발행자 사업자번호
-      "franchiseCorpNum" => corpNum,
+        # [필수] 발행자 사업자번호
+        "franchiseCorpNum" => corpNum,
 
-      # 발행자 상호
-      "franchiseCorpName" => "가맹점 상호",
+        # 발행자 상호
+        "franchiseCorpName" => "가맹점 상호",
 
-      # 발행자 대표자 성명
-      "franchiseCEOName" => "가맹점 대표자 성명",
+        # 발행자 대표자 성명
+        "franchiseCEOName" => "가맹점 대표자 성명",
 
-      # 가맹점 주소
-      "franchiseAddr" => "가맹점 주소",
+        # 가맹점 주소
+        "franchiseAddr" => "가맹점 주소",
 
-      # 가맹점 연락처
-      "franchiseTEL" => "가맹점 연락처",
+        # 가맹점 연락처
+        "franchiseTEL" => "가맹점 연락처",
 
-      # 고객명
-      "customerName" => "고객명",
+        # 고객명
+        "customerName" => "고객명",
 
-      # 상품명
-      "itemName" => "상품명",
+        # 상품명
+        "itemName" => "상품명",
 
-      # 가맹점 주문번호
-      "orderNumber" => "가맹점 주문번호",
+        # 가맹점 주문번호
+        "orderNumber" => "가맹점 주문번호",
 
-      # 거래처 이메일
-      "email" => "test@test.com",
+        # 거래처 이메일
+        "email" => "test@test.com",
 
-      # 거래처 휴대폰
-      "hp" => "010-111-222",
+        # 거래처 휴대폰
+        "hp" => "010-111-222",
 
-      # 발행안내문자 전송여부
-      "smssendYN" => false,
+        # 발행안내문자 전송여부
+        "smssendYN" => false,
     } # end of cashbill hash
 
     begin
       @Response = CashbillController::CBService.register(
-        corpNum,
-        cashbill,
+          corpNum,
+          cashbill,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -562,80 +588,80 @@ class CashbillController < ApplicationController
     # 현금영수증 정보
     cashbill = {
 
-      # [필수] 문서관리번호
-      "mgtKey" => mgtKey,
+        # [필수] 문서관리번호
+        "mgtKey" => mgtKey,
 
-      # [필수] 문서형태, [승인거래, 취소거래] 중 기재
-      "tradeType" => "승인거래",
+        # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        "tradeType" => "승인거래",
 
-      # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
-      "tradeUsage" => "소득공제용",
+        # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+        "tradeUsage" => "소득공제용",
 
-      # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
-      "tradeOpt" => "일반",
+        # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        "tradeOpt" => "일반",
 
-      # [필수] 거래처 식별번호, 거래유형에 따라 작성
-      # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
-      # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
-      "identityNum" => "01043042991",
+        # [필수] 거래처 식별번호, 거래유형에 따라 작성
+        # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
+        # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
+        "identityNum" => "01043042991",
 
-      # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-      "orgConfirmNum" => "",
+        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+        "orgConfirmNum" => "",
 
-      # [필수] 과세형태, [과세, 비과세] 중 기재
-      "taxationType" => "과세",
+        # [필수] 과세형태, [과세, 비과세] 중 기재
+        "taxationType" => "과세",
 
-      # [필수] 공급가액
-      "supplyCost" => "20000",
+        # [필수] 공급가액
+        "supplyCost" => "20000",
 
-      # [필수] 부가세
-      "tax" => "2000",
+        # [필수] 부가세
+        "tax" => "2000",
 
-      # [필수] 봉사료
-      "serviceFee" => "0",
+        # [필수] 봉사료
+        "serviceFee" => "0",
 
-      # [필수] 거래금액
-      "totalAmount" => "22000",
+        # [필수] 거래금액
+        "totalAmount" => "22000",
 
-      # [필수] 발행자 사업자번호
-      "franchiseCorpNum" => corpNum,
+        # [필수] 발행자 사업자번호
+        "franchiseCorpNum" => corpNum,
 
-      # 발행자 상호
-      "franchiseCorpName" => "가맹점 상호",
+        # 발행자 상호
+        "franchiseCorpName" => "가맹점 상호",
 
-      # 발행자 대표자 성명
-      "franchiseCEOName" => "가맹점 대표자 성명",
+        # 발행자 대표자 성명
+        "franchiseCEOName" => "가맹점 대표자 성명",
 
-      # 가맹점 주소
-      "franchiseAddr" => "가맹점 주소",
+        # 가맹점 주소
+        "franchiseAddr" => "가맹점 주소",
 
-      # 가맹점 연락처
-      "franchiseTEL" => "가맹점 연락처",
+        # 가맹점 연락처
+        "franchiseTEL" => "가맹점 연락처",
 
-      # 고객명
-      "customerName" => "고객명",
+        # 고객명
+        "customerName" => "고객명",
 
-      # 상품명
-      "itemName" => "상품명",
+        # 상품명
+        "itemName" => "상품명",
 
-      # 가맹점 주문번호
-      "orderNumber" => "가맹점 주문번호",
+        # 가맹점 주문번호
+        "orderNumber" => "가맹점 주문번호",
 
-      # 거래처 이메일
-      "email" => "test@test.com",
+        # 거래처 이메일
+        "email" => "test@test.com",
 
-      # 거래처 휴대폰
-      "hp" => "010-111-222",
+        # 거래처 휴대폰
+        "hp" => "010-111-222",
 
-      # 발행안내문자 전송여부
-      "smssendYN" => false,
+        # 발행안내문자 전송여부
+        "smssendYN" => false,
     } # end of cashbill hash
 
     begin
       @Response = CashbillController::CBService.update(
-        corpNum,
-        mgtKey,
-        cashbill,
+          corpNum,
+          mgtKey,
+          cashbill,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -659,8 +685,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.getInfo(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       render "cashbill/getInfo"
     rescue PopbillException => pe
@@ -684,8 +710,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.getInfos(
-        corpNum,
-        mgtKeyList,
+          corpNum,
+          mgtKeyList,
       )
       render "cashbill/getInfos"
     rescue PopbillException => pe
@@ -740,18 +766,18 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.search(
-        corpNum,
-        dType,
-        sDate,
-        eDate,
-        state,
-        tradeType,
-        tradeUsage,
-        taxationType,
-        page,
-        perPage,
-        order,
-        tradeOpt
+          corpNum,
+          dType,
+          sDate,
+          eDate,
+          state,
+          tradeType,
+          tradeUsage,
+          taxationType,
+          page,
+          perPage,
+          order,
+          tradeOpt
       )
       render "cashbill/search"
     rescue PopbillException => pe
@@ -775,8 +801,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.getDetailInfo(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       render "cashbill/cashbill"
     rescue PopbillException => pe
@@ -800,8 +826,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.delete(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -825,8 +851,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.getLogs(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       render "cashbill/cashbillLogs"
     rescue PopbillException => pe
@@ -854,82 +880,82 @@ class CashbillController < ApplicationController
     # 현금영수증 정보
     cashbill = {
 
-      # [필수] 문서관리번호
-      "mgtKey" => mgtKey,
+        # [필수] 문서관리번호
+        "mgtKey" => mgtKey,
 
-      # [필수] 문서형태, [승인거래, 취소거래] 중 기재
-      "tradeType" => "승인거래",
+        # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        "tradeType" => "승인거래",
 
-      # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
-      "tradeUsage" => "소득공제용",
+        # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+        "tradeUsage" => "소득공제용",
 
-      # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
-      "tradeOpt" => "일반",
+        # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        "tradeOpt" => "일반",
 
-      # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-      "orgConfirmNum" => "",
+        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
+        "orgConfirmNum" => "",
 
-      # [취소거래시 필수] 원본 현금영수증 거래일자
-      "orgTradeDate" => "",
+        # [취소거래시 필수] 원본 현금영수증 거래일자
+        "orgTradeDate" => "",
 
-      # [필수] 거래처 식별번호, 거래유형에 따라 작성
-      # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
-      # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
-      "identityNum" => "0101112222",
+        # [필수] 거래처 식별번호, 거래유형에 따라 작성
+        # 소득공제용 - 주민등록/휴대폰/카드번호 기재가능
+        # 지출증빙용 - 사업자번호/주민등록/휴대폰/카드번호 기재가능
+        "identityNum" => "0101112222",
 
-      # [필수] 과세형태, [과세, 비과세] 중 기재
-      "taxationType" => "과세",
+        # [필수] 과세형태, [과세, 비과세] 중 기재
+        "taxationType" => "과세",
 
-      # [필수] 공급가액
-      "supplyCost" => "10000",
+        # [필수] 공급가액
+        "supplyCost" => "10000",
 
-      # [필수] 부가세
-      "tax" => "1000",
+        # [필수] 부가세
+        "tax" => "1000",
 
-      # [필수] 봉사료
-      "serviceFee" => "0",
+        # [필수] 봉사료
+        "serviceFee" => "0",
 
-      # [필수] 거래금액
-      "totalAmount" => "11000",
+        # [필수] 거래금액
+        "totalAmount" => "11000",
 
-      # [필수] 발행자 사업자번호
-      "franchiseCorpNum" => corpNum,
+        # [필수] 발행자 사업자번호
+        "franchiseCorpNum" => corpNum,
 
-      # 발행자 상호
-      "franchiseCorpName" => "가맹점 상호",
+        # 발행자 상호
+        "franchiseCorpName" => "가맹점 상호",
 
-      # 발행자 대표자 성명
-      "franchiseCEOName" => "가맹점 대표자 성명",
+        # 발행자 대표자 성명
+        "franchiseCEOName" => "가맹점 대표자 성명",
 
-      # 가맹점 주소
-      "franchiseAddr" => "가맹점 주소",
+        # 가맹점 주소
+        "franchiseAddr" => "가맹점 주소",
 
-      # 가맹점 연락처
-      "franchiseTEL" => "가맹점 연락처",
+        # 가맹점 연락처
+        "franchiseTEL" => "가맹점 연락처",
 
-      # 고객명
-      "customerName" => "고객명",
+        # 고객명
+        "customerName" => "고객명",
 
-      # 상품명
-      "itemName" => "상품명",
+        # 상품명
+        "itemName" => "상품명",
 
-      # 가맹점 주문번호
-      "orderNumber" => "가맹점 주문번호",
+        # 가맹점 주문번호
+        "orderNumber" => "가맹점 주문번호",
 
-      # 거래처 이메일
-      "email" => "test@test.com",
+        # 거래처 이메일
+        "email" => "test@test.com",
 
-      # 거래처 휴대폰
-      "hp" => "010-111-222",
+        # 거래처 휴대폰
+        "hp" => "010-111-222",
 
-      # 발행안내문자 전송여부
-      "smssendYN" => false,
+        # 발행안내문자 전송여부
+        "smssendYN" => false,
     } # end of cashbill hash
 
     begin
       @Response = CashbillController::CBService.registIssue(
-        corpNum,
-        cashbill,
+          corpNum,
+          cashbill,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -956,8 +982,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.issue(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -990,10 +1016,10 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.revokeRegistIssue(
-        corpNum,
-        mgtKey,
-        orgConfirmNum,
-        orgTradeDate,
+          corpNum,
+          mgtKey,
+          orgConfirmNum,
+          orgTradeDate,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1002,57 +1028,57 @@ class CashbillController < ApplicationController
     end
   end
 
-    ##############################################################################
-    # 1건의 (부분) 취소현금영수증을 즉시발행합니다.
-    # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
-    #   확인할 수 있습니다.
-    # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
-    #   > 1.4. 국세청 전송정책"을 참조하시기 바랍니다.
-    # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
-    ##############################################################################
-    def revokeRegistIssue_part
+  ##############################################################################
+  # 1건의 (부분) 취소현금영수증을 즉시발행합니다.
+  # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
+  #   확인할 수 있습니다.
+  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
+  #   > 1.4. 국세청 전송정책"을 참조하시기 바랍니다.
+  # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
+  ##############################################################################
+  def revokeRegistIssue_part
 
-      # 팝빌회원 사업자번호
-      corpNum = CashbillController::TestCorpNum
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
 
-      # 팝빌회원 아이디
-      userID = CashbillController::TestUserID
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
 
-      # 현금영수증 문서관리번호
-      mgtKey = "20171115-11"
+    # 현금영수증 문서관리번호
+    mgtKey = "20171115-11"
 
-      # 원본 현금영수증 국세청승인번호
-      orgConfirmNum = "820116333"
+    # 원본 현금영수증 국세청승인번호
+    orgConfirmNum = "820116333"
 
-      # 원본 현금영수증 거래일자
-      orgTradeDate = "20170711"
+    # 원본 현금영수증 거래일자
+    orgTradeDate = "20170711"
 
-      # 안내문자 전송여부
-      smssendYN = false
+    # 안내문자 전송여부
+    smssendYN = false
 
-      # 메모
-      memo = "부분 취소현금영수증 메모"
+    # 메모
+    memo = "부분 취소현금영수증 메모"
 
-      # 부분취소 여부, true-부분취소, false-전체취소
-      isPartCancel = true
+    # 부분취소 여부, true-부분취소, false-전체취소
+    isPartCancel = true
 
-      # 취소사유, 1-거래취소, 2-오류발급취소, 3-기타
-      cancelType = 1
+    # 취소사유, 1-거래취소, 2-오류발급취소, 3-기타
+    cancelType = 1
 
-      # [취소] 공급가액
-      supplyCost = "9000"
+    # [취소] 공급가액
+    supplyCost = "9000"
 
-      # [취소] 부가세
-      tax = "900"
+    # [취소] 부가세
+    tax = "900"
 
-      # [취소] 봉사료
-      serviceFee = "0"
+    # [취소] 봉사료
+    serviceFee = "0"
 
-      # [취소] 합계금액
-      totalAmount = "9900"
+    # [취소] 합계금액
+    totalAmount = "9900"
 
-      begin
-        @Response = CashbillController::CBService.revokeRegistIssue(
+    begin
+      @Response = CashbillController::CBService.revokeRegistIssue(
           corpNum,
           mgtKey,
           orgConfirmNum,
@@ -1066,13 +1092,13 @@ class CashbillController < ApplicationController
           tax,
           serviceFee,
           totalAmount,
-        )
-        render "home/response"
-      rescue PopbillException => pe
-        @Response = pe
-        render "home/exception"
-      end
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
     end
+  end
 
 
   ##############################################################################
@@ -1100,10 +1126,10 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.revokeRegister(
-        corpNum,
-        mgtKey,
-        orgConfirmNum,
-        orgTradeDate,
+          corpNum,
+          mgtKey,
+          orgConfirmNum,
+          orgTradeDate,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1161,18 +1187,18 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.revokeRegister(
-        corpNum,
-        mgtKey,
-        orgConfirmNum,
-        orgTradeDate,
-        smssendYN,
-        userID,
-        isPartCancel,
-        cancelType,
-        supplyCost,
-        tax,
-        serviceFee,
-        totalAmount,
+          corpNum,
+          mgtKey,
+          orgConfirmNum,
+          orgTradeDate,
+          smssendYN,
+          userID,
+          isPartCancel,
+          cancelType,
+          supplyCost,
+          tax,
+          serviceFee,
+          totalAmount,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1196,8 +1222,8 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.cancelIssue(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1222,9 +1248,9 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.sendEmail(
-        corpNum,
-        mgtKey,
-        emailAddr,
+          corpNum,
+          mgtKey,
+          emailAddr,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1257,11 +1283,11 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.sendSMS(
-        corpNum,
-        mgtKey,
-        sendNum,
-        receiveNum,
-        contents,
+          corpNum,
+          mgtKey,
+          sendNum,
+          receiveNum,
+          contents,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1292,10 +1318,10 @@ class CashbillController < ApplicationController
 
     begin
       @Response = CashbillController::CBService.sendFax(
-        corpNum,
-        mgtKey,
-        sendNum,
-        receiveNum,
+          corpNum,
+          mgtKey,
+          sendNum,
+          receiveNum,
       )
       render "home/response"
     rescue PopbillException => pe
@@ -1318,8 +1344,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
@@ -1343,8 +1369,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getPopUpURL(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -1368,8 +1394,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getPrintURL(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -1393,8 +1419,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getEPrintURL(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -1419,8 +1445,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getMassPrintURL(
-        corpNum,
-        mgtKeyList,
+          corpNum,
+          mgtKeyList,
       )
       @name = "URL"
       render "home/result"
@@ -1444,8 +1470,8 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getMailURL(
-        corpNum,
-        mgtKey,
+          corpNum,
+          mgtKey,
       )
       @name = "URL"
       render "home/result"
@@ -1465,7 +1491,7 @@ class CashbillController < ApplicationController
 
     begin
       @value = CashbillController::CBService.getUnitCost(
-        corpNum,
+          corpNum,
       )
       @name = "unitCost(발행단가)"
       render "home/result"
@@ -1490,7 +1516,7 @@ class CashbillController < ApplicationController
       @Response = CashbillController::CBService.listEmailConfig(
           corpNum,
           userID,
-          )
+      )
       render "cashbill/listEmailConfig"
     rescue PopbillException => pe
       @Response = pe
@@ -1524,12 +1550,12 @@ class CashbillController < ApplicationController
           emailType,
           sendYN,
           userID,
-          )
+      )
       render "home/response"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
     end
   end
-  
+
 end

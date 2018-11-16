@@ -218,19 +218,19 @@ class HttaxinvoiceController < ApplicationController
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getPopbillURL
+  def getAccessURL
 
     # 팝빌회원 사업자번호
     corpNum = HttaxinvoiceController::TestCorpNum
 
-    # LOGIN-팝빌로그인, CHRG-포인트충전
-    togo = "CHRG"
+    # 팝빌회원 아이디
+    userID = HttaxinvoiceController::TestUserID
 
     begin
-      @value = HttaxinvoiceController::HTTIService.getPopbillURL(
+      @value = HttaxinvoiceController::HTTIService.getAccessURL(
           corpNum,
-          togo,
-      )
+          userID,
+          )
       @name = "URL"
       render "home/result"
     rescue PopbillException => pe
@@ -238,6 +238,34 @@ class HttaxinvoiceController < ApplicationController
       render "home/exception"
     end
   end
+
+
+  ##############################################################################
+  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getChargeURL
+
+    # 팝빌회원 사업자번호
+    corpNum = HttaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = HttaxinvoiceController::TestUserID
+
+    begin
+      @value = HttaxinvoiceController::HTTIService.getChargeURL(
+          corpNum,
+          userID,
+          )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
