@@ -227,6 +227,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/FaxExample/getSenderNumberMgtURL" => 'fax#getSenderNumberMgtURL', via: [:get]
   get "/FaxExample/getUnitCost" => 'fax#getUnitCost', via: [:get]
   get "/FaxExample/getSenderNumberList" => 'fax#getSenderNumberList', via: [:get]
+  get "/FaxExample/getPreviewURL" => 'fax#getPreviewURL', via: [:get]
 
   # 카카오톡 API Service route
   get "/KakaoExample" => 'kakao#index'
