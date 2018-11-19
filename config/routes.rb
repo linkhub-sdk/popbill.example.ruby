@@ -44,6 +44,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/TaxinvoiceExample/deny" => 'taxinvoice#deny', via: [:get]
   get "/TaxinvoiceExample/issue" => 'taxinvoice#issue', via: [:get]
   get "/TaxinvoiceExample/cancelIssue" => 'taxinvoice#cancelIssue', via: [:get]
+  get "/TaxinvoiceExample/registRequest" => 'taxinvoice#registRequest', via: [:get]
   get "/TaxinvoiceExample/request" => 'taxinvoice#requestTI', via: [:get]
   get "/TaxinvoiceExample/cancelRequest" => 'taxinvoice#cancelRequest', via: [:get]
   get "/TaxinvoiceExample/refuse" => 'taxinvoice#refuse', via: [:get]
