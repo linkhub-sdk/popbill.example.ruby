@@ -271,6 +271,55 @@ class TaxinvoiceController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 팝빌 인감 및 첨부문서 등록 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getSealURL
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
+    begin
+      @value = TaxinvoiceController::TIService.getSealURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 공인인증서 등록 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getTaxCertURL
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
+    begin
+      @value = TaxinvoiceController::TIService.getTaxCertURL(
+          corpNum,
+          userID,
+          )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.

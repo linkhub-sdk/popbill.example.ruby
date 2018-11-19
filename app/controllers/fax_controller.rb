@@ -954,22 +954,22 @@ class FaxController < ApplicationController
   end
 
   ##############################################################################
-  # 팩스 관련 팝업 URL을 반환합니다.
-  # - 보안정책으로 인해 반환된 URL은 30초의 유효시간을 갖습니다.
+  # 팩스 전송내역 팝업 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getURL
+  def getSentListURL
 
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
-    # BOX-팩스전송내역 목록 / SENDER-발신번호 관리 팝업
-    togo = "SENDER"
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
 
     begin
-      @value = FaxController::FAXService.getURL(
+      @value = FaxController::FAXService.getSentListURL(
           corpNum,
-          togo,
-      )
+          userID,
+          )
       @name = "URL"
       render "home/result"
     rescue PopbillException => pe
@@ -978,6 +978,30 @@ class FaxController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 발신번호 관리 팝업 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getSenderNumberMgtURL
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+    begin
+      @value = FaxController::FAXService.getSenderNumberMgtURL(
+          corpNum,
+          userID,
+          )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
   ##############################################################################
   # 팩스 전송단가를 확인합니다.
   ##############################################################################

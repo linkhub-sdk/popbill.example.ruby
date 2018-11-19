@@ -40,17 +40,18 @@ class KakaoController < ApplicationController
   # 플러스친구 계정관리 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getURL_PLUSFRIEND
+  def getPlusFriendMgtURL
+
     # 펍빌회원 사업자번호
     corpNum = KakaoController::TestCorpNum
 
-    # PLUSFRIEND(플러스친구계정관리), SENDER(발신번호관리), TEMPLATE(알림톡템플릿관리), BOX(카카오톡전송내역)
-    togo = "PLUSFRIEND"
+    # 팝빌회원 아이디
+    userID = 'testkorea'
 
     begin
-      @value = KakaoController::KakaoService.getURL(
+      @value = KakaoController::KakaoService.getPlusFriendMgtURL(
           corpNum,
-          togo,
+          userID,
       )
       @name = "URL"
       render "home/result"
@@ -86,17 +87,17 @@ class KakaoController < ApplicationController
   # 발신번호 관리 팝업 URL을 반환 합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getURL_SENDER
+  def getSenderNumberMgtURL
     # 펍빌회원 사업자번호
     corpNum = KakaoController::TestCorpNum
 
-    # PLUSFRIEND(플러스친구계정관리), SENDER(발신번호관리), TEMPLATE(알림톡템플릿관리), BOX(카카오톡전송내역)
-    togo = "SENDER"
+    # 팝빌회원 아이디
+    userID = 'testkorea'
 
     begin
-      @value = KakaoController::KakaoService.getURL(
+      @value = KakaoController::KakaoService.getSenderNumberMgtURL(
           corpNum,
-          togo,
+          userID,
       )
       @name = "URL"
       render "home/result"
@@ -125,20 +126,20 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록된 플러스친구 목록을 반환합니다.
+  # 알림톡 템플릿관리 팝업 URL 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getURL_TEMPLATE
+  def getATSTemplateMgtURL
     # 펍빌회원 사업자번호
     corpNum = KakaoController::TestCorpNum
 
-    # PLUSFRIEND(플러스친구계정관리), SENDER(발신번호관리), TEMPLATE(알림톡템플릿관리), BOX(카카오톡전송내역)
-    togo = "TEMPLATE"
+    # 팝빌회원 아이디
+    userID = 'testkorea'
 
     begin
-      @value = KakaoController::KakaoService.getURL(
+      @value = KakaoController::KakaoService.getATSTemplateMgtURL(
           corpNum,
-          togo,
+          userID,
       )
       @name = "URL"
       render "home/result"
@@ -1038,17 +1039,17 @@ class KakaoController < ApplicationController
   # 카카오톡 전송내역 팝업 URL을 반환한다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getURL_BOX
+  def getSentListURL
     # 펍빌회원 사업자번호
     corpNum = KakaoController::TestCorpNum
 
-    # PLUSFRIEND(플러스친구계정관리), SENDER(발신번호관리), TEMPLATE(알림톡템플릿관리), BOX(카카오톡전송내역)
-    togo = "BOX"
+    # 팝빌회원 아이디
+    userID = 'testkorea'
 
     begin
-      @value = KakaoController::KakaoService.getURL(
+      @value = KakaoController::KakaoService.getSentListURL(
           corpNum,
-          togo,
+          userID,
       )
       @name = "URL"
       render "home/result"

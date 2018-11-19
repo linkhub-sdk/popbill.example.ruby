@@ -1082,22 +1082,47 @@ class MessageController < ApplicationController
 
 
   ##############################################################################
-  # 문자 서비스 관련 팝업 URL을 반환합니다.
+  # 문자 전송내역 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
-  def getURL
+  def getSentListURL
 
     # 팝빌회원 사업자번호
     corpNum = MessageController::TestCorpNum
 
-    # BOX-문자 전송내역 팝업 / SENDER-발신번호 관리 팝업
-    togo = "SENDER"
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
 
     begin
-      @value = MessageController::MSGService.getURL(
+      @value = MessageController::MSGService.getSentListURL(
           corpNum,
-          togo,
-      )
+          userID,
+          )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 발신번호 관리 팝업 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getSenderNumberMgtURL
+
+    # 팝빌회원 사업자번호
+    corpNum = MessageController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = MessageController::TestUserID
+
+    begin
+      @value = MessageController::MSGService.getSenderNumberMgtURL(
+          corpNum,
+          userID,
+          )
       @name = "URL"
       render "home/result"
     rescue PopbillException => pe
