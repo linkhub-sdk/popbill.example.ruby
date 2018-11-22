@@ -194,7 +194,7 @@ RubyPopbillExample::Application.routes.draw do
   get "/MessageExample/getSentListURL" => 'message#getSentListURL', via: [:get]
   get "/MessageExample/getSenderNumberMgtURL" => 'message#getSenderNumberMgtURL', via: [:get]
   get "/MessageExample/getUnitCost" => 'message#getUnitCost', via: [:get]
-  get "/MessageExample/autoDenyList" => 'message#getAutoDenyList', via: [:get]
+  get "/MessageExample/getAutoDenyList" => 'message#getAutoDenyList', via: [:get]
   get "/MessageExample/getSenderNumberList" => 'message#getSenderNumberList', via: [:get]
 
   # 팝빌 팩스 API Service route
