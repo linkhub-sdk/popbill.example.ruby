@@ -1452,7 +1452,7 @@ class CashbillController < ApplicationController
         "pwd" => "user_password",
 
         # 담당자명 (최대 100자)
-        "personName" => "코어담당자",
+        "personName" => "루비담당자",
 
         # 담당자 연락처 (최대 20자)
         "tel" => "070-4304-2992",
@@ -1464,7 +1464,7 @@ class CashbillController < ApplicationController
         "fax" => "02-111-222",
 
         # 담당자 이메일 (최대 100자)
-        "email" => "netcore@linkhub.co.kr",
+        "email" => "ruby@linkhub.co.kr",
 
         # 회사조회 권한여부, true(회사조회), false(개인조회)
         "searchAllAllowYN" => true,

@@ -618,7 +618,7 @@ class HttaxinvoiceController < ApplicationController
   def checkID
 
     #조회할 아이디
-    testID = "testkorea0131"
+    testID = "testkorea"
 
     begin
       @Response = HttaxinvoiceController::HTTIService.checkID(testID)
