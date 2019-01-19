@@ -2577,19 +2577,19 @@ class TaxinvoiceController < ApplicationController
     corpInfo = {
 
         # 대표자 성명 (최대 100자)
-        "ceoname" => "대표자명170116",
+        "ceoname" => "대표자명_수정",
 
         # 상호 (최대 200자)
-        "corpName" => "상호170116",
+        "corpName" => "상호_수정",
 
         # 주소 (최대 300자)
-        "addr" => "주소170116",
+        "addr" => "주소_수정",
 
         # 업태 (최대 100자)
-        "bizType" => "업태170116",
+        "bizType" => "업태_수정",
 
         # 종목 (최대 100자)
-        "bizClass" => "종목170116",
+        "bizClass" => "종목_수정",
     }
 
     begin
@@ -2705,7 +2705,7 @@ class TaxinvoiceController < ApplicationController
         "fax" => "070-111-222",
 
         # 담당자 이메일 (최대 100자)
-        "email" => "code@linkhub.cokr",
+        "email" => "code@linkhub.co.kr",
 
         # 회사조회 권한여부, true(회사조회), false(개인조회)
         "searchAllAllowYN" => true,
