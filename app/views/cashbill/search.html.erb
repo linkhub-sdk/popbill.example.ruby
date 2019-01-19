@@ -14,7 +14,7 @@
 
     <% @Response["list"].each_with_index do |cashbillInfo, index| %>
       <fieldset class="fieldset2">
-        <legend>현금영수증 상태/요약정보 대량 확인 [<%= (index + 1) %>]</legend>
+        <legend>현금영수증 상태정보 확인 [<%= (index + 1) %>]</legend>
         <ul>
           <li> itemKey (팝빌 관리번호) : <%= cashbillInfo["itemKey"] %></li>
           <li> mgtKey (문서관리번호) : <%= cashbillInfo["mgtKey"] %></li>

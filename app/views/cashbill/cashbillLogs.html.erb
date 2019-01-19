@@ -2,21 +2,21 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <% @Response.each_with_index do |cashbillLog, index| %>
-    <fieldset class="fieldset2">
-      <legend>현금영수증 문서상태 변경이력 [<%= (index+1)%>/<%=@Response.length%>]</legend>
-      <ul>
-        <li>docLogType (로그타입) : <%=cashbillLog["docLogType"]%></li>
-        <li>log (이력정보) : <%=cashbillLog["log"]%></li>
-        <li>procType (처리형태) : <%=cashbillLog["procType"]%></li>
-        <li>procCorpName (처리회사명) : <%=cashbillLog["procCorpName"]%></li>
-        <li>procContactName (처리담당자명) : <%=cashbillLog["procContactName"]%></li>
-        <li>procMemo (처리메모) : <%=cashbillLog["procMemo"]%></li>
-        <li>regDT (등록일시) : <%=cashbillLog["regDT"]%></li>
-        <li>ip (아이피) : <%=cashbillLog["ip"]%></li>
-      </ul>
-    </fieldset>
-    <%end%>
+      <fieldset class="fieldset2">
+        <legend>현금영수증 문서상태 변경이력 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
+        <ul>
+          <li>docLogType (로그타입) : <%= cashbillLog["docLogType"] %></li>
+          <li>log (이력정보) : <%= cashbillLog["log"] %></li>
+          <li>procType (처리형태) : <%= cashbillLog["procType"] %></li>
+          <li>procCorpName (처리회사명) : <%= cashbillLog["procCorpName"] %></li>
+          <li>procContactName (처리담당자명) : <%= cashbillLog["procContactName"] %></li>
+          <li>procMemo (처리메모) : <%= cashbillLog["procMemo"] %></li>
+          <li>regDT (등록일시) : <%= cashbillLog["regDT"] %></li>
+          <li>ip (아이피) : <%= cashbillLog["ip"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
   </fieldset>
- </div>
+</div>

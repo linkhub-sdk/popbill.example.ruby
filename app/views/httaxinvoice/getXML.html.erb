@@ -2,11 +2,11 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <ul>
-      <li>ResultCode(응답코드) : <%=@Response["ResultCode"]%></li>
-      <li>Message(전자세금계산서 국세청승인번호) : <%=@Response["Message"]%></li>
-      <li>retObject(전자세금계산서 XML문서) : <%=@Response["retObject"]%></li>
+      <li>ResultCode(요청에 대한 응답 상태코드) : <%= @Response["ResultCode"] %></li>
+      <li>Message(전자세금계산서 국세청승인번호) : <%= @Response["Message"] %></li>
+      <li>retObject(전자세금계산서 XML문서) : <%= @Response["retObject"] %></li>
     </ul>
   </fieldset>
- </div>
+</div>

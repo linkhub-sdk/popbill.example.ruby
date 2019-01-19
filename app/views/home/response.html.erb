@@ -2,10 +2,10 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <ul>
-      <li>Response Code : <%=@Response["code"]%></li>
-      <li>Response Message : <%=@Response["message"]%></li>
+      <li>code (응답코드) : <%= @Response.code %></li>
+      <li>message (응답메시지) : <%= @Response.message %></li>
     </ul>
   </fieldset>
- </div>
+</div>

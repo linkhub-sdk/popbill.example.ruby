@@ -2,20 +2,20 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <ul>
-      <li>jobID(작업아이디) : <%=@Response["jobID"]%></li>
-      <li>jobState(수집상태) : <%=@Response["jobState"]%></li>
-      <li>queryType(수집유형) : <%=@Response["queryType"]%></li>
-      <li>queryDateType(일자유형) : <%=@Response["queryDateType"]%></li>
-      <li>queryStDate(시작일자) : <%=@Response["queryStDate"]%></li>
-      <li>queryEnDate(종료일자) : <%=@Response["queryEnDate"]%></li>
-      <li>errorCode(오류코드) : <%=@Response["errorCode"]%></li>
-      <li>errorReason(오류메시지) : <%=@Response["errorReason"]%></li>
-      <li>jobStartDT(작업 시작일시) : <%=@Response["jobStartDT"]%></li>
-      <li>jobEndDT(작업 종료일시) : <%=@Response["jobEndDT"]%></li>
-      <li>collectCount(수집개수) : <%=@Response["collectCount"]%></li>
-      <li>regDT(수집 요청일시) : <%=@Response["regDT"]%></li>
+      <li>jobID(작업아이디) : <%= @Response["jobID"] %></li>
+      <li>jobState(수집상태) : <%= @Response["jobState"] %></li>
+      <li>queryType(수집유형) : <%= @Response["queryType"] %></li>
+      <li>queryDateType(일자유형) : <%= @Response["queryDateType"] %></li>
+      <li>queryStDate(시작일자) : <%= @Response["queryStDate"] %></li>
+      <li>queryEnDate(종료일자) : <%= @Response["queryEnDate"] %></li>
+      <li>errorCode(오류코드) : <%= @Response["errorCode"] %></li>
+      <li>errorReason(오류메시지) : <%= @Response["errorReason"] %></li>
+      <li>jobStartDT(작업 시작일시) : <%= @Response["jobStartDT"] %></li>
+      <li>jobEndDT(작업 종료일시) : <%= @Response["jobEndDT"] %></li>
+      <li>collectCount(수집개수) : <%= @Response["collectCount"] %></li>
+      <li>regDT(수집 요청일시) : <%= @Response["regDT"] %></li>
     </ul>
   </fieldset>
- </div>
+</div>

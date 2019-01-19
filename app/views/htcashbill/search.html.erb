@@ -14,7 +14,7 @@
 
     <% @Response["list"].each_with_index do |cashbillInfo, index| %>
       <fieldset class="fieldset2">
-        <legend>현금영수증 상태/요약정보 확인 [<%= (index + 1) %>]</legend>
+        <legend>홈택스 현금영수증 수집 결과 조회 확인 [<%= (index + 1) %>]</legend>
         <ul>
           <li>ntsconfirmNum(국세청승인번호) : <%= cashbillInfo["ntsconfirmNum"] %></li>
           <li>tradeDate(거래일자) : <%= cashbillInfo["tradeDate"] %></li>

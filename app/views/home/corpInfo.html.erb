@@ -2,13 +2,13 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <ul>
-      <li>ceoname(대표자성명) : <%=@Response["ceoname"]%></li>
-      <li>corpName(상호) : <%=@Response["corpName"]%></li>
-      <li>addr(주소) : <%=@Response["addr"]%></li>
-      <li>bizType(업태) : <%=@Response["bizType"]%></li>
-      <li>bizClass(종목) : <%=@Response["bizClass"]%></li>
+      <li>ceoname(대표자성명) : <%= @Response["ceoname"] %></li>
+      <li>corpName(상호) : <%= @Response["corpName"] %></li>
+      <li>addr(주소) : <%= @Response["addr"] %></li>
+      <li>bizType(업태) : <%= @Response["bizType"] %></li>
+      <li>bizClass(종목) : <%= @Response["bizClass"] %></li>
     </ul>
   </fieldset>
- </div>
+</div>

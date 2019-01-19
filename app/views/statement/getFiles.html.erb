@@ -2,17 +2,17 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <% @Response.each_with_index do |fileInfo, index| %>
-    <fieldset class="fieldset2">
-      <legend>전자명세서 첨부파일 목록확인 [<%=(index+1)%>/<%=@Response.length%>]</legend>
-      <ul>
-        <li>serialNum(일련번호) : <%=fileInfo["serialNum"]%></li>
-        <li>attachedFile(파일아이디) : <%=fileInfo["attachedFile"]%></li>
-        <li>displayName(첨부파일명) : <%=fileInfo["displayName"]%></li>
-        <li>regDT(첨부파일 등록일시) : <%=fileInfo["regDT"]%></li>
-      </ul>
-    </fieldset>
-    <%end%>
+      <fieldset class="fieldset2">
+        <legend>전자명세서 첨부파일 목록확인 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
+        <ul>
+          <li>serialNum(일련번호) : <%= fileInfo["serialNum"] %></li>
+          <li>attachedFile(파일아이디) : <%= fileInfo["attachedFile"] %></li>
+          <li>displayName(첨부파일명) : <%= fileInfo["displayName"] %></li>
+          <li>regDT(첨부파일 등록일시) : <%= fileInfo["regDT"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
   </fieldset>
- </div>
+</div>

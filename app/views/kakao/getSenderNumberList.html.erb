@@ -2,16 +2,16 @@
   <p class="heading1">Response</p>
   <br/>
   <fieldset class="fieldset1">
-    <legend><%=request.env['PATH_INFO']%></legend>
+    <legend><%= request.env['PATH_INFO'] %></legend>
     <% @Response.each_with_index do |senderInfo, index| %>
       <fieldset class="fieldset2">
-        <legend>발신번호 목록 확인 [<%=(index+1)%>/<%=@Response.length%>]</legend>
+        <legend>발신번호 목록 확인 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
         <ul>
-          <li>number (발신번호) : <%=senderInfo["number"]%></li>
-          <li>representYN (대표번호 지정여부) : <%=senderInfo["representYN"]%></li>
-          <li>state (발신번호) : <%=senderInfo["state"]%></li>
+          <li>number (발신번호) : <%= senderInfo["number"] %></li>
+          <li>representYN (대표번호 지정여부) : <%= senderInfo["representYN"] %></li>
+          <li>state (발신번호) : <%= senderInfo["state"] %></li>
         </ul>
       </fieldset>
-    <%end%>
+    <% end %>
   </fieldset>
 </div>
