@@ -29,30 +29,28 @@ class ClosedownController < ApplicationController
 
   # 팝빌 휴폐업조회 API Service 초기화
   CDService = ClosedownService.instance(
-    ClosedownController::LinkID,
-    ClosedownController::SecretKey
+      ClosedownController::LinkID,
+      ClosedownController::SecretKey
   )
 
   # 연동환경 설정, true-개발용, false-상업용
   CDService.setIsTest(true)
 
   ##############################################################################
-  # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # 1건의 사업자에 대한 휴폐업여부를 조회합니다.
   ##############################################################################
-  def checkIsMember
+  def checkCorpNum
 
     # 팝빌회원 사업자번호
     corpNum = ClosedownController::TestCorpNum
 
-    # 파트너 링크아이디
-    linkID = ClosedownController::LinkID
+    # 조회할 사업자번호
+    targetCorpNum = "6798700433"
 
     begin
-      @Response = ClosedownController::CDService.checkIsMember(
-        corpNum,
-        linkID,
-      )
-      render "home/response"
+      @Response = ClosedownController::CDService.checkCorpNum(corpNum, targetCorpNum)
+      puts @Response
+      render "closedown/checkCorpNum"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
@@ -60,92 +58,26 @@ class ClosedownController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌 회원아이디 중복여부를 확인합니다.
+  # 다수의 사업자에 대한 휴폐업여부를 조회합니다.
   ##############################################################################
-  def checkID
-
-    #조회할 아이디
-    testID = "testkorea0131"
-
-    begin
-      @Response = ClosedownController::CDService.checkID(testID)
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/except"
-    end
-  end
-
-  ##############################################################################
-  # 파트너의 연동회원으로 회원가입을 요청합니다.
-  ##############################################################################
-  def joinMember
-
-    # 연동회원 가입정보
-    joinInfo = {
-
-      # 링크아이디
-      "LinkID" => "TESTER",
-
-      # 아이디, 6자이상 20자미만
-      "ID" => "testkorea20170131",
-
-      # 비밀번호, 6자이상 20자 미만
-      "PWD" => "thisispassword",
-
-      # 사업자번호, '-' 제외 10자리
-      "CorpNum" => "8888888888",
-
-      # 대표자명
-      "CEOName" => "대표자성명",
-
-      # 상호명
-      "CorpName" => "상호명",
-
-      # 주소
-      "Addr" => "주소",
-
-      # 업태
-      "BizType" => "업태",
-
-      # 종목
-      "BizClass" => "종목",
-
-      # 담당자명
-      "ContactName" => "담당자 성명",
-
-      # 담당자 메일
-      "ContactEmail" => "test@test.com",
-
-      # 담당자 연락처
-      "ContactTEL" => "담당자 연락처",
-    }
-
-    begin
-      @Response = ClosedownController::CDService.joinMember(joinInfo)
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 연동회원의 휴폐업조회 API 서비스 과금정보를 확인합니다.
-  ##############################################################################
-  def getChargeInfo
+  def checkCorpNums
 
     # 팝빌회원 사업자번호
     corpNum = ClosedownController::TestCorpNum
 
+    # 조회할 사업자번호 배열, 최대 1000건
+    targetCorpNumList = ["1234567890", "6798700433"]
+
     begin
-      @Response = ClosedownController::CDService.getChargeInfo(corpNum)
-      render "home/chargeInfo"
+      @Response = ClosedownController::CDService.checkCorpNums(corpNum, targetCorpNumList)
+      puts @Response
+      render "closedown/checkCorpNums"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
     end
   end
+
 
   ##############################################################################
   # 연동회원의 잔여포인트를 확인합니다.
@@ -160,6 +92,31 @@ class ClosedownController < ApplicationController
     begin
       @value = ClosedownController::CDService.getBalance(corpNum)
       @name = "remainPoint(연동회원 잔여포인트)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getChargeURL
+
+    # 팝빌회원 사업자번호
+    corpNum = ClosedownController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = ClosedownController::TestUserID
+
+    begin
+      @value = ClosedownController::CDService.getChargeURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -200,11 +157,148 @@ class ClosedownController < ApplicationController
 
     begin
       @value = ClosedownController::CDService.getPartnerURL(
-        corpNum,
-        togo,
+          corpNum,
+          togo,
       )
       @name = "URL"
       render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 휴폐업 조회단가를 확인합니다.
+  ##############################################################################
+  def getUnitCost
+
+    # 팝빌회원 사업자번호
+    corpNum = ClosedownController::TestCorpNum
+
+    begin
+      @value = ClosedownController::CDService.getUnitCost(
+          corpNum,
+      )
+      @name = "unitCost(조회단가)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 연동회원의 휴폐업조회 API 서비스 과금정보를 확인합니다.
+  ##############################################################################
+  def getChargeInfo
+
+    # 팝빌회원 사업자번호
+    corpNum = ClosedownController::TestCorpNum
+
+    begin
+      @Response = ClosedownController::CDService.getChargeInfo(corpNum)
+      render "home/chargeInfo"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  ##############################################################################
+  def checkIsMember
+
+    # 팝빌회원 사업자번호
+    corpNum = ClosedownController::TestCorpNum
+
+    # 파트너 링크아이디
+    linkID = ClosedownController::LinkID
+
+    begin
+      @Response = ClosedownController::CDService.checkIsMember(
+          corpNum,
+          linkID,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팝빌 회원아이디 중복여부를 확인합니다.
+  ##############################################################################
+  def checkID
+
+    #조회할 아이디
+    testID = "testkorea"
+
+    begin
+      @Response = ClosedownController::CDService.checkID(testID)
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/except"
+    end
+  end
+
+  ##############################################################################
+  # 파트너의 연동회원으로 회원가입을 요청합니다.
+  ##############################################################################
+  def joinMember
+
+    # 연동회원 가입정보
+    joinInfo = {
+
+        # 링크아이디
+        "LinkID" => "TESTER",
+
+        # 아이디, 6자이상 50자미만
+        "ID" => "testkorea",
+
+        # 비밀번호, 6자이상 20자 미만
+        "PWD" => "thisispassword",
+
+        # 사업자번호, '-' 제외 10자리
+        "CorpNum" => "8888888888",
+
+        # 대표자 성명 (최대 100자)
+        "CEOName" => "대표자성명",
+
+        # 상호명 (최대 200자)
+        "CorpName" => "상호명",
+
+        # 주소 (최대 300자)
+        "Addr" => "주소",
+
+        # 업태 (최대 100자)
+        "BizType" => "업태",
+
+        # 종목 (최대 100자)
+        "BizClass" => "종목",
+
+        # 담당자 성명 (최대 100자)
+        "ContactName" => "담당자 성명",
+
+        # 담당자 메일 (최대 100자)
+        "ContactEmail" => "test@test.com",
+
+        # 담당자 연락처 (최대 20자)
+        "ContactTEL" => "010-111-222",
+
+        # 담당자 휴대폰번호 (최대 20자)
+        "ContactHP" => "010-111-222",
+
+        # 담당자 팩스번호 (최대 20자)
+        "ContactFAX" => "02-111-222",
+    }
+
+    begin
+      @Response = ClosedownController::CDService.joinMember(joinInfo)
+      render "home/response"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
@@ -227,7 +321,7 @@ class ClosedownController < ApplicationController
       @value = ClosedownController::CDService.getAccessURL(
           corpNum,
           userID,
-          )
+      )
       @name = "URL"
       render "home/result"
     rescue PopbillException => pe
@@ -236,26 +330,56 @@ class ClosedownController < ApplicationController
     end
   end
 
-
   ##############################################################################
-  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # 연동회원의 회사정보를 확인합니다.
   ##############################################################################
-  def getChargeURL
+  def getCorpInfo
 
     # 팝빌회원 사업자번호
     corpNum = ClosedownController::TestCorpNum
 
-    # 팝빌회원 아이디
-    userID = ClosedownController::TestUserID
+    begin
+      @Response = ClosedownController::CDService.getCorpInfo(corpNum)
+      render "home/corpInfo"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 연동회원의 회사정보를 수정합니다.
+  ##############################################################################
+  def updateCorpInfo
+
+    # 팝빌회원 사업자번호
+    corpNum = ClosedownController::TestCorpNum
+
+    # 회사정보
+    corpInfo = {
+
+        # 대표자 성명 (최대 100자)
+        "ceoname" => "대표자명_수정",
+
+        # 상호 (최대 200자)
+        "corpName" => "상호_수정",
+
+        # 주소 (최대 300자)
+        "addr" => "주소_수정",
+
+        # 업태 (최대 100자)
+        "bizType" => "업태_수정",
+
+        # 종목 (최대 100자)
+        "bizClass" => "종목_수정",
+    }
 
     begin
-      @value = ClosedownController::CDService.getChargeURL(
+      @Response = ClosedownController::CDService.updateCorpInfo(
           corpNum,
-          userID,
-          )
-      @name = "URL"
-      render "home/result"
+          corpInfo,
+      )
+      render "home/response"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
@@ -272,35 +396,39 @@ class ClosedownController < ApplicationController
 
     # 담당자 정보
     contactInfo = {
-      # 아이디
-      "id" => "testkorea1701313",
 
-      # 비밀번호
-      "pwd" => "test05028342",
+        # 담당자 아이디, 6자 이상 50자 미만
+        "id" => "testkorea20190121",
 
-      # 담당자명
-      "personName" => "담당자명170116",
+        # 비밀번호, 6자 이상 20자 미만
+        "pwd" => "user_password",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 담당자명 (최대 100자)
+        "personName" => "루비담당자",
 
-      # 휴대폰번호
-      "hp" => "010-1111-2222",
+        # 담당자 연락처 (최대 20자)
+        "tel" => "070-4304-2992",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 담당자 휴대폰번호 (최대 20자)
+        "hp" => "010-111-222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 담당자 팩스번호 (최대 20자)
+        "fax" => "02-111-222",
 
-      # 회사조회 권한여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 담당자 이메일 (최대 100자)
+        "email" => "ruby@linkhub.co.kr",
+
+        # 회사조회 권한여부, true(회사조회), false(개인조회)
+        "searchAllAllowYN" => true,
+
+        # 관리자 권한여부, true(관리자), false(사용자)
+        "mgrYN" => false,
     }
 
     begin
       @Response = ClosedownController::CDService.registContact(
-        corpNum,
-        contactInfo,
+          corpNum,
+          contactInfo,
       )
 
       render "home/response"
@@ -338,137 +466,41 @@ class ClosedownController < ApplicationController
     # 팝빌회원 아이디
     userID = ClosedownController::TestUserID
 
-
     # 담당자 정보
     contactInfo = {
 
-      # 담당자 아이디
-      "id" => userID,
+        # 담당자 아이디
+        "id" => userID,
 
-      # 담당자명
-      "personName" => "담당자명170131",
+        # 담당자명 (최대 100자)
+        "personName" => "Ruby(담당자)",
 
-      # 연락처
-      "tel" => "070-4304-2991",
+        # 담당자 연락처 (최대 20자)
+        "tel" => "070-4304-2992",
 
-      # 휴대폰버놓
-      "hp" => "010-1111-2222",
+        # 담당자 휴대폰번호 (최대 20자)
+        "hp" => "010-111-222",
 
-      # 팩스번호
-      "fax" => "070-1111-2222",
+        # 담당자 팩스번호 (최대 20자)
+        "fax" => "070-111-222",
 
-      # 메일주소
-      "email" => "test@gmail.com",
+        # 담당자 이메일 (최대 100자)
+        "email" => "code@linkhub.co.kr",
 
-      # 회사조회여부, true-회사조회, false-개인조회
-      "searchAllAllowYN" => true,
+        # 회사조회 권한여부, true(회사조회), false(개인조회)
+        "searchAllAllowYN" => true,
+
+        # 관리자 권한여부, true(관리자), false(사용자)
+        "mgrYN" => false,
     }
 
     begin
       @Response = ClosedownController::CDService.updateContact(
-        corpNum,
-        contactInfo,
-        userID
+          corpNum,
+          contactInfo,
+          userID
       )
       render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 연동회원의 회사정보를 확인합니다.
-  ##############################################################################
-  def getCorpInfo
-
-    # 팝빌회원 사업자번호
-    corpNum = ClosedownController::TestCorpNum
-
-    begin
-      @Response = ClosedownController::CDService.getCorpInfo(corpNum)
-      render "home/corpInfo"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 연동회원의 회사정보를 수정합니다
-  ##############################################################################
-  def updateCorpInfo
-
-    # 팝빌회원 사업자번호
-    corpNum = ClosedownController::TestCorpNum
-
-    # 회사정보
-    corpInfo = {
-
-      # 대표자명
-      "ceoname" => "대표자명170116",
-
-      # 상호명
-      "corpName" => "상호170116",
-
-      # 주소
-      "addr" => "주소170116",
-
-      # 업태
-      "bizType" => "업태170116",
-
-      # 업종
-      "bizClass" => "종목170116",
-    }
-
-    begin
-      @Response = ClosedownController::CDService.updateCorpInfo(
-        corpNum,
-        corpInfo,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 1건의 사업자에 대한 휴폐업여부를 조회합니다.
-  ##############################################################################
-  def checkCorpNum
-
-    # 팝빌회원 사업자번호
-    corpNum = ClosedownController::TestCorpNum
-
-    # 조회할 사업자번호
-    targetCorpNum = "6798700433"
-
-    begin
-      @Response = ClosedownController::CDService.checkCorpNum(corpNum, targetCorpNum)
-      puts @Response
-      render "closedown/checkCorpNum"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 다수의 사업자에 대한 휴폐업여부를 조회합니다.
-  ##############################################################################
-  def checkCorpNums
-
-    # 팝빌회원 사업자번호
-    corpNum = ClosedownController::TestCorpNum
-
-    # 조회할 사업자번호 배열, 최대 1000건
-    targetCorpNumList = ["1234567890", "6798700433"]
-
-    begin
-      @Response = ClosedownController::CDService.checkCorpNums(corpNum, targetCorpNumList)
-      puts @Response
-      render "closedown/checkCorpNums"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
