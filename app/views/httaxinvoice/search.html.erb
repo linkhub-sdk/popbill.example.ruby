@@ -8,7 +8,7 @@
       <li>message(응답메시지) : <%= @Response["message"] %></li>
       <li>total(총 검색결과 건수) : <%= @Response["total"] %></li>
       <li>perPage(페이지당 검색개수) : <%= @Response["perPage"] %></li>
-      <li>pageNum(페이지당 번호) : <%= @Response["pageNum"] %></li>
+      <li>pageNum(페이지 번호) : <%= @Response["pageNum"] %></li>
       <li>pageCount(페이지 개수) : <%= @Response["pageCount"] %></li>
     </ul>
 
@@ -28,7 +28,7 @@
           <li>totalAmount(합계금액) : <%= taxinvoiceInfo["totalAmount"] %></li>
           <li>remark1(비고) : <%= taxinvoiceInfo["remark1"] %></li>
           <li>modifyYN(수정 전자세금계산서 여부) : <%= taxinvoiceInfo["modifyYN"] %></li>
-          <li>purchaseDate(원본 전자세금계산서 국세청 승인번호) : <%= taxinvoiceInfo["purchaseDate"] %></li>
+          <li>purchaseDate(거래일자) : <%= taxinvoiceInfo["purchaseDate"] %></li>
           <li>invoicerCorpNum(공급자 사업자번호) : <%= taxinvoiceInfo["invoicerCorpNum"] %></li>
           <li>invoicerTaxRegID(공급자 종사업장번호) : <%= taxinvoiceInfo["invoicerTaxRegID"] %></li>
           <li>invoicerCorpName(공급자 상호) : <%= taxinvoiceInfo["invoicerCorpName"] %></li>

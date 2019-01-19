@@ -45,7 +45,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-01"
 
     begin
@@ -78,7 +78,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-01"
 
     # 현금영수증 정보
@@ -178,7 +178,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호, 1~24자리 영문,숫자조합으로 사업자별로 중복되지 않도록 구성
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-02"
 
     # 현금영수증 정보
@@ -459,7 +459,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-100"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
@@ -497,7 +497,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 아이디
     userID = CashbillController::TestUserID
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-101"
 
     # 원본 현금영수증 국세청승인번호
@@ -566,7 +566,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-102"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
@@ -604,7 +604,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 아이디
     userID = CashbillController::TestUserID
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-103"
 
     # 원본 현금영수증 국세청승인번호
@@ -741,6 +741,9 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
+
     # [필수] 일자유형, R-등록일자, T-거래일자 I-발행일자
     dType = "R"
 
@@ -772,6 +775,9 @@ class CashbillController < ApplicationController
     # 정렬방향 D-내림차순(기본값), A-오름차순
     order = "D"
 
+    # 거래처 조회, 거래처 상호 또는 거래처 사업자등록번호 조회, 공백처리시 전체조회
+    queryString = ""
+
     # 거래유형 배열, N-일반, B-도서공연, T-대중교통
     tradeOpt = ["N", "B", "T"]
 
@@ -788,6 +794,8 @@ class CashbillController < ApplicationController
           page,
           perPage,
           order,
+          queryString,
+          userID,
           tradeOpt
       )
       render "cashbill/search"

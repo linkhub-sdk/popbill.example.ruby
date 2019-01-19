@@ -8,8 +8,8 @@
         <legend>발신번호 목록 확인 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
         <ul>
           <li>number (발신번호) : <%= senderInfo["number"] %></li>
+          <li>state (등록상태) : <%= senderInfo["state"] %></li>
           <li>representYN (대표번호 지정여부) : <%= senderInfo["representYN"] %></li>
-          <li>state (발신번호) : <%= senderInfo["state"] %></li>
         </ul>
       </fieldset>
     <% end %>

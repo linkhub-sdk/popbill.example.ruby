@@ -345,7 +345,7 @@ class TaxinvoiceController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 문서관리번호
+    # 세금계산서 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-02"
 
     # 세금계산서 정보
@@ -587,7 +587,7 @@ class TaxinvoiceController < ApplicationController
     # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서관리번호
+    # 세금계산서 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190121-02"
 
     # 세금계산서 정보
@@ -1019,6 +1019,9 @@ class TaxinvoiceController < ApplicationController
     # 팝빌회원 아이디
     userID = TaxinvoiceController::TestUserID
 
+    # 문서관리번호
+    mgtKey = "20190121-10"
+
     # 세금계산서 정보
     taxinvoice = {
 
@@ -1158,7 +1161,7 @@ class TaxinvoiceController < ApplicationController
 
         # [역발행시 필수] 공급받는자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
         # 사업자 별로 중복되지 않도록 구성
-        "invoiceeMgtKey" => "20190121-100",
+        "invoiceeMgtKey" => mgtKey,
 
         # 공급받는자 주소
         "invoiceeAddr" => "공급받는자 주소",
@@ -2002,7 +2005,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 전자세금계산서를 팩스전송합니다.
+  # 전자세금계산서를 팩스로 전송합니다.
   # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역] 메뉴에서 전송결과를
   #   확인할 수 있습니다.
