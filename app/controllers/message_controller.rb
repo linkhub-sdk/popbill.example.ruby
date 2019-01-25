@@ -637,7 +637,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20180625-sms001'
+    requestNum = '20190125-001'
 
     begin
       @Response = MessageController::MSGService.cancelReserveRN(corpNum, requestNum)

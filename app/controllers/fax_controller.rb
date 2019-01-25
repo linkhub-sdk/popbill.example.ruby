@@ -538,7 +538,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팩스전송 접수번호
-    requestNum = "20180625fax"
+    requestNum = "20190125-001"
 
     begin
       @Response = FaxController::FAXService.getFaxDetailRN(corpNum, requestNum)
