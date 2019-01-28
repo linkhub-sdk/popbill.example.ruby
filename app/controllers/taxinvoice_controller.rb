@@ -100,8 +100,7 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, [과세, 영세, 면세] 중 기재
         "taxType" => "과세",
 
-        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        # [필수] 발행시점
         "issueTiming" => "직접발행",
 
         # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
@@ -360,8 +359,7 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, [과세, 영세, 면세] 중 기재
         "taxType" => "과세",
 
-        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        # [필수] 발행시점
         "issueTiming" => "직접발행",
 
         # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
@@ -602,8 +600,7 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, [과세, 영세, 면세] 중 기재
         "taxType" => "과세",
 
-        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        # [필수] 발행시점
         "issueTiming" => "직접발행",
 
         # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
@@ -881,130 +878,6 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # [임시저장] 상태의 세금계산서를 [공급자]가 [발행예정]합니다.
-  # - 발행예정이란 공급자와 공급받는자 사이에 세금계산서 확인 후 발행하는 방법입니다.
-  # - "[전자세금계산서 API 연동매뉴얼] > 1.2.1. 정발행 > 다. 임시저장 발행예정" 의 프로세스를 참조하시기 바랍니다.
-  ##############################################################################
-  def sendTI
-
-    # 팝빌회원 사업자번호
-    corpNum = TaxinvoiceController::TestCorpNum
-
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
-    keyType = MgtKeyType::SELL
-
-    # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
-
-    # 메모
-    memo = "발행예정 메모"
-
-    # 발행예정 안내메일 제목, 미기재시 기본양식으로 전송됨.
-    emailSubject = ""
-
-    begin
-      @Response = TaxinvoiceController::TIService.send(
-          corpNum,
-          keyType,
-          mgtKey,
-          memo,
-          emailSubject,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # [승대기] 상태의 세금계산서를 [공급자]가 [취소]합니다.
-  # - [취소]된 세금계산서를 삭제(Delete API)하면 등록된 문서관리번호를 재사용할 수 있습니다.
-  ##############################################################################
-  def cancelSend
-
-    # 팝빌회원 사업자번호
-    corpNum = TaxinvoiceController::TestCorpNum
-
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
-    keyType = MgtKeyType::SELL
-
-    # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
-
-    # 메모
-    memo = "발행예정 취소 메모"
-
-    begin
-      @Response = TaxinvoiceController::TIService.cancelSend(
-          corpNum,
-          keyType,
-          mgtKey,
-          memo,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # [승인대기] 상태의 세금계산서를 [공급받는자]가 [승인]합니다.
-  ##############################################################################
-  def accept
-
-    # 팝빌회원 사업자번호
-    corpNum = TaxinvoiceController::TestCorpNum
-
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
-    keyType = MgtKeyType::BUY
-
-    # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
-
-    begin
-      @Response = TaxinvoiceController::TIService.accept(
-          corpNum,
-          keyType,
-          mgtKey,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # [승인대기] 상태의 세금계산서를 [공급받는자]가 [거부]합니다.
-  #  - [거부]처리된 세금계산서를 삭제(Delete API)하면 등록된 문서관리번호를 재사용할 수 있습니다.
-  ##############################################################################
-  def deny
-
-    # 팝빌회원 사업자번호
-    corpNum = TaxinvoiceController::TestCorpNum
-
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
-    keyType = MgtKeyType::BUY
-
-    # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
-
-    begin
-      @Response = TaxinvoiceController::TIService.deny(
-          corpNum,
-          keyType,
-          mgtKey,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # [공급받는자]가 공급자에게 역발행 세금계산서를 [즉시 요청]합니다.
   # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서구성"을 참조하시기 바랍니다.
   # - 역발행 세금계산서 프로세스를 구현하기 위해서는 공급자/공급받는자가 모두 팝빌에 회원이여야 합니다.
@@ -1034,8 +907,7 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, [과세, 영세, 면세] 중 기재
         "taxType" => "과세",
 
-        # [필수] 발행시점, [직접발행, 승인시자동발행] 중 기재
-        # - 발행예정(Send API) 프로세스를 구현하지 않는경우 '직접발행' 기재
+        # [필수] 발행시점
         "issueTiming" => "직접발행",
 
         # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
@@ -1351,7 +1223,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 1건의 전자세금계산서를 삭제합니다.
   # - 세금계산서를 삭제해야만 문서관리번호(mgtKey)를 재사용할 수 있습니다.
-  # - 삭제가능한 문서 상태 : [임시저장], [발행취소], [발행예정 취소], [발행예정 거부]
+  # - 삭제가능한 문서 상태 : 임시저장, 발행취소, 역)발행 거부/취소
   ##############################################################################
   def delete
 
