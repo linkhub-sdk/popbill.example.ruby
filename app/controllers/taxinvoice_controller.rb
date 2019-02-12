@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 전자세금계산서 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-01-21
+# 업데이트 일자 : 2019-02-12
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -202,7 +202,9 @@ class TaxinvoiceController < ApplicationController
         # 공급자 담당자 연락처
         "invoicerTEL" => "070-4304-2991",
 
-        # 발행안내문자 전송여부
+        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
+        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoicerSMSSendYN" => false,
 
 
@@ -246,9 +248,6 @@ class TaxinvoiceController < ApplicationController
 
         # 공급받는자 담당자 휴대폰번호
         "invoiceeHP1" => "010-123-1234",
-
-        # 역발행시 발행안내문자 전송여부
-        "invoiceeSMSSendYN" => false,
 
 
         ######################### 상세항목(품목) 정보 #########################
@@ -460,7 +459,9 @@ class TaxinvoiceController < ApplicationController
         # 공급자 담당자 연락처
         "invoicerTEL" => "070-4304-2991",
 
-        # 발행안내문자 전송여부
+        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
+        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoicerSMSSendYN" => false,
 
 
@@ -505,7 +506,9 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 담당자 휴대폰번호
         "invoiceeHP1" => "010-123-1234",
 
-        # 역발행시 발행안내문자 전송여부
+        # 역발행 요청시 알림문자 전송여부 (역발행에서만 사용가능)
+        # - 공급자 담당자 휴대폰번호(invoicerHP)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
 
@@ -690,7 +693,9 @@ class TaxinvoiceController < ApplicationController
         # 공급자 담당자 연락처
         "invoicerTEL" => "070-4304-2991",
 
-        # 발행안내문자 전송여부
+        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
+        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoicerSMSSendYN" => false,
 
 
@@ -735,7 +740,9 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 담당자 휴대폰번호
         "invoiceeHP1" => "010-123-1234",
 
-        # 역발행시 발행안내문자 전송여부
+        # 역발행 요청시 알림문자 전송여부 (역발행에서만 사용가능)
+        # - 공급자 담당자 휴대폰번호(invoicerHP)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
 
@@ -1009,10 +1016,6 @@ class TaxinvoiceController < ApplicationController
         # 공급자 담당자 연락처
         "invoicerTEL" => "070-4304-2991",
 
-        # 정발행시 공급받는자 담당자에게 알림문자 전송여부
-        # 안내문자 전송시 포인트가 차감되며 전송실패시 환불처리 됩니다.
-        "invoicerSMSSendYN" => false,
-
 
         ######################### 공급받는자정보 #########################
 
@@ -1056,8 +1059,9 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 담당자 휴대폰번호
         "invoiceeHP1" => "010-123-1234",
 
-        # 역발행요청시 공급자 담당자에게 알림문자 전송여부
-        # - 문자전송지 포인트가 차감되며, 전송실패시 포인트 환불처리됩니다.
+        # 역발행 요청시 알림문자 전송여부 (역발행에서만 사용가능)
+        # - 공급자 담당자 휴대폰번호(invoicerHP)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
         ######################### 상세항목(품목) 정보 #########################
@@ -1085,24 +1089,6 @@ class TaxinvoiceController < ApplicationController
                 "tax" => "1000", # 세액
                 "remark" => "비고", # 비고
             },
-        ],
-
-        ######################### 추가담당자정보 #########################
-        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다.
-        ##############################################################
-
-        "addContactList" => [
-            {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자01", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
-            },
-            {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자02", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
-            }
         ],
     }
 
