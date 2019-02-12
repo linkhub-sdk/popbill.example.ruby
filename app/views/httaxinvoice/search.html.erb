@@ -4,52 +4,52 @@
   <fieldset class="fieldset1">
     <legend><%= request.env['PATH_INFO'] %></legend>
     <ul>
-      <li>code(응답코드) : <%= @Response["code"] %></li>
-      <li>message(응답메시지) : <%= @Response["message"] %></li>
-      <li>total(총 검색결과 건수) : <%= @Response["total"] %></li>
-      <li>perPage(페이지당 검색개수) : <%= @Response["perPage"] %></li>
-      <li>pageNum(페이지 번호) : <%= @Response["pageNum"] %></li>
-      <li>pageCount(페이지 개수) : <%= @Response["pageCount"] %></li>
+      <li>code (응답코드) : <%= @Response["code"] %></li>
+      <li>message (응답메시지) : <%= @Response["message"] %></li>
+      <li>total (총 검색결과 건수) : <%= @Response["total"] %></li>
+      <li>perPage (페이지당 검색개수) : <%= @Response["perPage"] %></li>
+      <li>pageNum (페이지 번호) : <%= @Response["pageNum"] %></li>
+      <li>pageCount (페이지 개수) : <%= @Response["pageCount"] %></li>
     </ul>
 
     <% @Response["list"].each_with_index do |taxinvoiceInfo, index| %>
       <fieldset class="fieldset2">
         <legend>홈택스 세금계산서 수집 결과 조회 확인 [<%= (index + 1) %>]</legend>
         <ul>
-          <li>ntsconfirmNum(국세청승인번호) : <%= taxinvoiceInfo["ntsconfirmNum"] %></li>
-          <li>writeDate(작성일자) : <%= taxinvoiceInfo["writeDate"] %></li>
-          <li>issueDate(발행일자) : <%= taxinvoiceInfo["issueDate"] %></li>
-          <li>sendDate(전송일자) : <%= taxinvoiceInfo["sendDate"] %></li>
-          <li>taxType(과세형태) : <%= taxinvoiceInfo["taxType"] %></li>
-          <li>invoiceType(매입/매출) : <%= taxinvoiceInfo["invoiceType"] %></li>
-          <li>purposeType(영수/청구) : <%= taxinvoiceInfo["purposeType"] %></li>
-          <li>supplyCostTotal(공급가액 합계) : <%= taxinvoiceInfo["supplyCostTotal"] %></li>
-          <li>taxTotal(세액 합계) : <%= taxinvoiceInfo["taxTotal"] %></li>
-          <li>totalAmount(합계금액) : <%= taxinvoiceInfo["totalAmount"] %></li>
-          <li>remark1(비고) : <%= taxinvoiceInfo["remark1"] %></li>
-          <li>modifyYN(수정 전자세금계산서 여부) : <%= taxinvoiceInfo["modifyYN"] %></li>
-          <li>purchaseDate(거래일자) : <%= taxinvoiceInfo["purchaseDate"] %></li>
-          <li>invoicerCorpNum(공급자 사업자번호) : <%= taxinvoiceInfo["invoicerCorpNum"] %></li>
-          <li>invoicerTaxRegID(공급자 종사업장번호) : <%= taxinvoiceInfo["invoicerTaxRegID"] %></li>
-          <li>invoicerCorpName(공급자 상호) : <%= taxinvoiceInfo["invoicerCorpName"] %></li>
-          <li>invoicerCEOName(공급자 대표자성명) : <%= taxinvoiceInfo["invoicerCEOName"] %></li>
-          <li>invoicerEmail(공급자 담당자 이메일) : <%= taxinvoiceInfo["invoicerEmail"] %></li>
-          <li>invoiceeCorpNum(공급받는자 사업자번호) : <%= taxinvoiceInfo["invoiceeCorpNum"] %></li>
-          <li>invoiceeType(공급받는자 구분) : <%= taxinvoiceInfo["invoiceeType"] %></li>
-          <li>invoiceeTaxRegID(공급받는자 종사업장번호) : <%= taxinvoiceInfo["invoiceeTaxRegID"] %></li>
-          <li>invoiceeCorpName(공급받는자 상호) : <%= taxinvoiceInfo["invoiceeCorpName"] %></li>
-          <li>invoiceeCEOName(공급받는자 대표자 성명) : <%= taxinvoiceInfo["invoiceeCEOName"] %></li>
-          <li>invoiceeEmail1(공급받는자 담당자 이메일) : <%= taxinvoiceInfo["invoiceeEmail1"] %></li>
+          <li>ntsconfirmNum (국세청승인번호) : <%= taxinvoiceInfo["ntsconfirmNum"] %></li>
+          <li>writeDate (작성일자) : <%= taxinvoiceInfo["writeDate"] %></li>
+          <li>issueDate (발행일자) : <%= taxinvoiceInfo["issueDate"] %></li>
+          <li>sendDate (전송일자) : <%= taxinvoiceInfo["sendDate"] %></li>
+          <li>taxType (과세형태) : <%= taxinvoiceInfo["taxType"] %></li>
+          <li>invoiceType (매입/매출) : <%= taxinvoiceInfo["invoiceType"] %></li>
+          <li>purposeType (영수/청구) : <%= taxinvoiceInfo["purposeType"] %></li>
+          <li>supplyCostTotal (공급가액 합계) : <%= taxinvoiceInfo["supplyCostTotal"] %></li>
+          <li>taxTotal (세액 합계) : <%= taxinvoiceInfo["taxTotal"] %></li>
+          <li>totalAmount (합계금액) : <%= taxinvoiceInfo["totalAmount"] %></li>
+          <li>remark1 (비고) : <%= taxinvoiceInfo["remark1"] %></li>
+          <li>modifyYN (수정 전자세금계산서 여부) : <%= taxinvoiceInfo["modifyYN"] %></li>
+          <li>purchaseDate (거래일자) : <%= taxinvoiceInfo["purchaseDate"] %></li>
+          <li>invoicerCorpNum (공급자 사업자번호) : <%= taxinvoiceInfo["invoicerCorpNum"] %></li>
+          <li>invoicerTaxRegID (공급자 종사업장번호) : <%= taxinvoiceInfo["invoicerTaxRegID"] %></li>
+          <li>invoicerCorpName (공급자 상호) : <%= taxinvoiceInfo["invoicerCorpName"] %></li>
+          <li>invoicerCEOName (공급자 대표자성명) : <%= taxinvoiceInfo["invoicerCEOName"] %></li>
+          <li>invoicerEmail (공급자 담당자 이메일) : <%= taxinvoiceInfo["invoicerEmail"] %></li>
+          <li>invoiceeCorpNum (공급받는자 사업자번호) : <%= taxinvoiceInfo["invoiceeCorpNum"] %></li>
+          <li>invoiceeType (공급받는자 구분) : <%= taxinvoiceInfo["invoiceeType"] %></li>
+          <li>invoiceeTaxRegID (공급받는자 종사업장번호) : <%= taxinvoiceInfo["invoiceeTaxRegID"] %></li>
+          <li>invoiceeCorpName (공급받는자 상호) : <%= taxinvoiceInfo["invoiceeCorpName"] %></li>
+          <li>invoiceeCEOName (공급받는자 대표자 성명) : <%= taxinvoiceInfo["invoiceeCEOName"] %></li>
+          <li>invoiceeEmail1 (공급받는자 담당자 이메일) : <%= taxinvoiceInfo["invoiceeEmail1"] %></li>
           <fieldset class="fieldset3">
             <legend>상세품목정보</legend>
             <ul>
-              <li>itemName(거래일자) : <%= taxinvoiceInfo["itemName"] %></li>
-              <li>spec(품명) : <%= taxinvoiceInfo["spec"] %></li>
-              <li>qty(수량) : <%= taxinvoiceInfo["qty"] %></li>
-              <li>unitCost(단가) : <%= taxinvoiceInfo["unitCost"] %></li>
-              <li>supplyCost(공급가액) : <%= taxinvoiceInfo["supplyCost"] %></li>
-              <li>tax(세액) : <%= taxinvoiceInfo["tax"] %></li>
-              <li>remark(비고) : <%= taxinvoiceInfo["remark"] %></li>
+              <li>itemName (거래일자) : <%= taxinvoiceInfo["itemName"] %></li>
+              <li>spec (품명) : <%= taxinvoiceInfo["spec"] %></li>
+              <li>qty (수량) : <%= taxinvoiceInfo["qty"] %></li>
+              <li>unitCost (단가) : <%= taxinvoiceInfo["unitCost"] %></li>
+              <li>supplyCost (공급가액) : <%= taxinvoiceInfo["supplyCost"] %></li>
+              <li>tax (세액) : <%= taxinvoiceInfo["tax"] %></li>
+              <li>remark (비고) : <%= taxinvoiceInfo["remark"] %></li>
             </ul>
           </fieldset>
         </ul>
