@@ -70,8 +70,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 1건의 현금영수증을 즉시발행합니다.
-  # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
-  #   확인할 수 있습니다.
+  # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를 확인할 수 있습니다.
   ##############################################################################
   def registIssue
 
@@ -257,7 +256,7 @@ class CashbillController < ApplicationController
 
         # 발행안내문자 전송여부
         "smssendYN" => false,
-    } # end of cashbill hash
+    }
 
     begin
       @Response = CashbillController::CBService.register(
@@ -354,7 +353,7 @@ class CashbillController < ApplicationController
 
         # 발행안내문자 전송여부
         "smssendYN" => false,
-    } # end of cashbill hash
+    }
 
     begin
       @Response = CashbillController::CBService.update(
@@ -692,7 +691,10 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 배열, 최대 1000건
-    mgtKeyList = ["20190121-01", "20190121-02", "20190121-03"]
+    mgtKeyList = Array.new(3)
+    mgtKeyList[0] = ["20190121-01"]
+    mgtKeyList[1] = ["20190121-02"]
+    mgtKeyList[2] = ["20190121-03"]
 
     begin
       @Response = CashbillController::CBService.getInfos(
@@ -744,7 +746,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 아이디
     userID = CashbillController::TestUserID
 
-    # [필수] 일자유형, R-등록일자, T-거래일자 I-발행일자
+    # [필수] 일자유형, R-등록일자, T-거래일자 I-발행일시
     dType = "R"
 
     # [필수] 시작일자, 형식(yyyyMMdd)
@@ -770,7 +772,7 @@ class CashbillController < ApplicationController
     page = 1
 
     # 페이지당 목록갯수, 기본값 500
-    perPage = 15
+    perPage = 10
 
     # 정렬방향 D-내림차순(기본값), A-오름차순
     order = "D"
@@ -839,7 +841,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # TBOX(임시문서함), PBOX(발행문서함), WRITE(현금영수증 작성)
+    # TBOX(임시문서함), PBOX(발행문서함), WRITE(현금영수증 신규작성)
     togo = "TBOX"
 
     begin
@@ -931,8 +933,8 @@ class CashbillController < ApplicationController
   end
 
   ##############################################################################
-  # 다수건의 현금영수증 인쇄팝업 URL을 반환합니다.
-  # 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # 다수건의 현금영수증 인쇄팝업 URL을 반환합니다. (최대 100건)
+  # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
   def getMassPrintURL
 
@@ -940,7 +942,10 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 배열, 최대 100건
-    mgtKeyList = ["20190121-01", "20190121-02", "20190121-03", "20190121-04"]
+    mgtKeyList = Array.new(3)
+    mgtKeyList[0] = ["20190121-01"]
+    mgtKeyList[1] = ["20190121-02"]
+    mgtKeyList[2] = ["20190121-03"]
 
     begin
       @value = CashbillController::CBService.getMassPrintURL(
@@ -956,8 +961,8 @@ class CashbillController < ApplicationController
   end
 
   ##############################################################################
-  # 공급받는자 메일링크 URL을 반환합니다.
-  # - 메일링크 URL은 유효시간이 존재하지 않습니다.
+  # 현금영수증 수신메일 링크주소 URL을 반환합니다.
+  # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
   def getMailURL
 
