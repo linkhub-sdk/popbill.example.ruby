@@ -219,7 +219,7 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        # [필수] 공급받는자 상호
         "invoiceeCorpName" => "공급받는자 상호",
 
         # [필수] 공급받는자 대표자 성명
@@ -478,7 +478,7 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        # [필수] 공급받는자 상호
         "invoiceeCorpName" => "공급받는자 상호",
 
         # [필수] 공급받는자 대표자 성명
@@ -710,7 +710,7 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        # [필수] 공급받는자 상호
         "invoiceeCorpName" => "공급받는자 상호",
 
         # [필수] 공급받는자 대표자 성명
@@ -1029,7 +1029,7 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 종사업자 식별번호. 필요시 숫자 4자리 기재
+        # [필수] 공급받는자 상호
         "invoiceeCorpName" => "공급받는자 상호",
 
         # [필수] 공급받는자 대표자 성명
