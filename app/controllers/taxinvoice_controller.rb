@@ -1,15 +1,15 @@
 ################################################################################
 # 팜빌 전자세금계산서 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-02
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
 # 1) 22, 25번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-# 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
-# 3) 전자세금계산서 발행을 위해 공인인증서를 등록합니다.
+#
+# 2) 전자세금계산서 발행을 위해 공인인증서를 등록합니다.
 #    - 팝빌사이트 로그인 > [전자세금계산서] > [환경설정] > [공인인증서 관리]
 #    - 공인인증서 등록 팝업 URL (GetTaxCertURL API)을 이용하여 등록
 ################################################################################
@@ -40,7 +40,7 @@ class TaxinvoiceController < ApplicationController
   TIService.setIsTest(true)
 
   ##############################################################################
-  # 세금계산서 문서관리번호 중복여부를 확인합니다.
+  # 세금계산서 문서관리번호 사용여부를 확인합니다.
   # - 관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
   ##############################################################################
   def checkMgtKeyInUse
@@ -49,7 +49,7 @@ class TaxinvoiceController < ApplicationController
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-01"
 
     # 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
     keyType = MgtKeyType::SELL
@@ -67,7 +67,7 @@ class TaxinvoiceController < ApplicationController
         @value = "미사용중"
       end
 
-      @name = "문서관리번호(mgtKey) 사용여부 확인"
+      @name = "문서관리번호 사용여부 확인"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -85,29 +85,116 @@ class TaxinvoiceController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 문서관리번호
-    mgtKey = "20190121-01"
+    # 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+    # 사업자 별로 중복되지 않도록 구성
+    mgtKey = "20190402-01"
 
     # 세금계산서 정보
     taxinvoice = {
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20190121",
+        ######################### 공급자정보 #########################
 
-        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
+        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        "invoicerCorpNum" => corpNum,
+
+        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoicerTaxRegID" => "",
+
+        # [필수] 공급자 상호
+        "invoicerCorpName" => "상호명",
+
+        # [필수] 공급자 대표자 성명
+        "invoicerCEOName" => "대표자명",
+
+        # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+        # 사업자 별로 중복되지 않도록 구성
+        "invoicerMgtKey" => mgtKey,
+
+        # 공급자 주소
+        "invoicerAddr" => "공급자 주소",
+
+        # 공급자 업태
+        "invoicerBizType" => "공급자 업태",
+
+        # 공급자 종목
+        "invoicerBizClass" => "공급자 종목",
+
+        # 공급자 담당자명
+        "invoicerContactName" => "공급자 담당자명",
+
+        # 공급자 담당자 메일주소
+        "invoicerEmail" => "test@test.com",
+
+        # 공급자 담당자 휴대폰번호
+        "invoicerHP" => "010-111-222",
+
+        # 공급자 담당자 연락처
+        "invoicerTEL" => "070-4304-2991",
+
+        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
+        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
+        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        "invoicerSMSSendYN" => false,
+
+
+        ######################### 공급받는자정보 #########################
+
+        # [필수] 공급받는자 구분, {사업자, 개인, 외국인} 중 기재
+        "invoiceeType" => "사업자",
+
+        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        "invoiceeCorpNum" => "8888888888",
+
+        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        "invoiceeTaxRegId" => "",
+
+        # [필수] 공급받는자 상호
+        "invoiceeCorpName" => "공급받는자 상호",
+
+        # [필수] 공급받는자 대표자 성명
+        "invoiceeCEOName" => "대표자 성명",
+
+        # 공급받는자 문서관리번호
+        "invoiceeMgtKey" => "",
+
+        # 공급받는자 주소
+        "invoiceeAddr" => "공급받는자 주소",
+
+        # 공급받는자 종목
+        "invoiceeBizClass" => "공급받는자 종목",
+
+        # 공급받는자 업태
+        "invoiceeBizType" => "공급받는자 업태",
+
+        # 공급받는자 담당자명
+        "invoiceeContactName1" => "공급받는자담당자명",
+
+        # 공급받는자 담당자 메일주소
+        "invoiceeEmail1" => "test@test.com",
+
+        # 공급받는자 담당자 연락처
+        "invoiceeTEL1" => "070-1234-1234",
+
+        # 공급받는자 담당자 휴대폰번호
+        "invoiceeHP1" => "010-123-1234",
+
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
+        "writeDate" => "20190402",
+
+        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",
 
-        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
+        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
         # [필수] 발행시점
         "issueTiming" => "직접발행",
 
-        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, [영수, 청구] 중 기재
+        # [필수] 영수/청구, {영수, 청구} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -159,95 +246,8 @@ class TaxinvoiceController < ApplicationController
         # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo) API의 응답필드 중 ItemKey 항목 기재
         "originalTaxinvoiceKey" => "",
-
-
-        ######################### 공급자정보 #########################
-
-        # [필수] 공급자 사업자번호, '-' 제외 10자리
-        "invoicerCorpNum" => corpNum,
-
-        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
-        "invoicerTaxRegID" => "",
-
-        # [필수] 공급자 상호
-        "invoicerCorpName" => "상호명",
-
-        # [필수] 공급자 대표자 성명
-        "invoicerCEOName" => "대표자명",
-
-        # [필수] 공급자 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-        # 사업자 별로 중복되지 않도록 구성
-        "invoicerMgtKey" => mgtKey,
-
-        # 공급자 주소
-        "invoicerAddr" => "공급자 주소",
-
-        # 공급자 업태
-        "invoicerBizType" => "공급자 업태",
-
-        # 공급자 종목
-        "invoicerBizClass" => "공급자 종목",
-
-        # 공급자 담당자명
-        "invoicerContactName" => "공급자 담당자명",
-
-        # 공급자 담당자 메일주소
-        "invoicerEmail" => "test@test.com",
-
-        # 공급자 담당자 휴대폰번호
-        "invoicerHP" => "010-111-222",
-
-        # 공급자 담당자 연락처
-        "invoicerTEL" => "070-4304-2991",
-
-        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
-        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
-        "invoicerSMSSendYN" => false,
-
-
-        ######################### 공급받는자정보 #########################
-
-        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
-        "invoiceeType" => "사업자",
-
-        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
-        "invoiceeCorpNum" => "8888888888",
-
-        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
-        "invoiceeTaxRegId" => "",
-
-        # [필수] 공급받는자 상호
-        "invoiceeCorpName" => "공급받는자 상호",
-
-        # [필수] 공급받는자 대표자 성명
-        "invoiceeCEOName" => "대표자 성명",
-
-        # 공급받는자 문서관리번호
-        "invoiceeMgtKey" => "",
-
-        # 공급받는자 주소
-        "invoiceeAddr" => "공급받는자 주소",
-
-        # 공급받는자 종목
-        "invoiceeBizClass" => "공급받는자 종목",
-
-        # 공급받는자 업태
-        "invoiceeBizType" => "공급받는자 업태",
-
-        # 공급받는자 담당자명
-        "invoiceeContactName1" => "공급받는자담당자명",
-
-        # 공급받는자 담당자 메일주소
-        "invoiceeEmail1" => "test@test.com",
-
-        # 공급받는자 담당자 연락처
-        "invoiceeTEL1" => "070-1234-1234",
-
-        # 공급받는자 담당자 휴대폰번호
-        "invoiceeHP1" => "010-123-1234",
 
 
         ######################### 상세항목(품목) 정보 #########################
@@ -257,7 +257,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -268,7 +268,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -333,10 +333,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   #################################################################################################################
-  # 1건의 세금계산서를 [임시저장]합니다.
-  #  - 세금계산서 임시저장(Register API) 호출후에는 발행(Issue API)을 호출해야만 국세청으로 전송됩니다.
-  #  - 정발행시 임시저장(Register)과 발행(Issue)을 한번의 호출로 처리하는 즉시발행(RegistIssue API) 프로세스 연동을 권장합니다.
-  #  - 역발행시 임시저장(Register)과 역발행요청(Request)을 한번의 호출로 처리하는 즉시요청(RegistRequest API) 프로세스 연동을 권장합니다.
+  # 1건의 세금계산서를 [임시저장] 합니다.
+  #  - 임시저장 후에는 발행(Issue) API를 호출해야만 국세청으로 전송됩니다.
   #  - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서구성"을 참조하시기 바랍니다.
   #################################################################################################################
   def register
@@ -344,83 +342,12 @@ class TaxinvoiceController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-02"
+    # 문서관리번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+    # 사업자 별로 중복되지 않도록 구성
+    mgtKey = "20190402-03"
 
     # 세금계산서 정보
     taxinvoice = {
-
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20190121",
-
-        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
-        "issueType" => "정발행",
-
-        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
-        "taxType" => "과세",
-
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
-
-        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
-        "chargeDirection" => "정과금",
-
-        # [필수] 영수/청구, [영수, 청구] 중 기재
-        "purposeType" => "영수",
-
-        # [필수] 공급가액 합계
-        "supplyCostTotal" => "20000",
-
-        # [필수] 세액 합계
-        "taxTotal" => "2000",
-
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
-        "totalAmount" => "22000",
-
-        # 기재 상 '일련번호' 항목
-        "serialNum" => "",
-
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
-        "kwon" => nil,
-
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
-        "ho" => nil,
-
-        # 기재 상 '현금' 항목
-        "cash" => "",
-
-        # 기재 상 '수표' 항목
-        "chkBill" => "",
-
-        # 기재 상 '어음' 항목
-        "note" => "",
-
-        # 기재 상 '외상미수금' 항목
-        "credit" => "",
-
-        # 기재 상 '비고' 항목
-        "remark1" => "비고1",
-        "remark2" => "비고2",
-        "remark3" => "비고3",
-
-        # 사업자등록증 이미지 첨부여부
-        "businessLicenseYN" => false,
-
-        # 통장사본 이미지 첨부여부
-        "bankBookYN" => false,
-
-        ######################### 수정세금계산서 정보 ##########################
-        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
-        ###################################################################
-
-        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
-        "modifyCode" => nil,
-
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
-        "originalTaxinvoiceKey" => "",
-
 
         ######################### 공급자정보 #########################
 
@@ -513,6 +440,79 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
+        # [필수] 작성일자, 날짜형식 (yyyyMMdd)
+        "writeDate" => "20190402",
+
+        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        "issueType" => "정발행",
+
+        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        "taxType" => "과세",
+
+        # [필수] 발행시점
+        "issueTiming" => "직접발행",
+
+        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        "chargeDirection" => "정과금",
+
+        # [필수] 영수/청구, {영수, 청구} 중 기재
+        "purposeType" => "영수",
+
+        # [필수] 공급가액 합계
+        "supplyCostTotal" => "20000",
+
+        # [필수] 세액 합계
+        "taxTotal" => "2000",
+
+        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        "totalAmount" => "22000",
+
+
+        # 기재 상 '일련번호' 항목
+        "serialNum" => "",
+
+        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        "kwon" => nil,
+
+        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        "ho" => nil,
+
+        # 기재 상 '현금' 항목
+        "cash" => "",
+
+        # 기재 상 '수표' 항목
+        "chkBill" => "",
+
+        # 기재 상 '어음' 항목
+        "note" => "",
+
+        # 기재 상 '외상미수금' 항목
+        "credit" => "",
+
+        # 기재 상 '비고' 항목
+        "remark1" => "비고1",
+        "remark2" => "비고2",
+        "remark3" => "비고3",
+
+        # 사업자등록증 이미지 첨부여부
+        "businessLicenseYN" => false,
+
+        # 통장사본 이미지 첨부여부
+        "bankBookYN" => false,
+
+        ######################### 수정세금계산서 정보 ##########################
+        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
+        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        ###################################################################
+
+        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+        "modifyCode" => nil,
+
+        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        "originalTaxinvoiceKey" => "",
+
+
         ######################### 상세항목(품목) 정보 #########################
         # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
         ##################################################################
@@ -579,6 +579,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # [임시저장] 상태의 세금계산서의 항목을 수정합니다.
+  # - [임시저장] 상태가 아닌 세금계산서는 수정할 수 없습니다.
   # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서 구성"을
   #   참조하시기 바랍니다.
   ##############################################################################
@@ -590,71 +591,11 @@ class TaxinvoiceController < ApplicationController
     # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-02"
+    # 수정할 세금계산서 문서관리번호
+    mgtKey = "20190402-02"
 
     # 세금계산서 정보
     taxinvoice = {
-
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20190121",
-
-        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
-        "issueType" => "정발행",
-
-        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
-        "taxType" => "과세",
-
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
-
-        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
-        "chargeDirection" => "정과금",
-
-        # [필수] 영수/청구, [영수, 청구] 중 기재
-        "purposeType" => "영수",
-
-        # [필수] 공급가액 합계
-        "supplyCostTotal" => "20000",
-
-        # [필수] 세액 합계
-        "taxTotal" => "2000",
-
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
-        "totalAmount" => "22000",
-
-        # 기재 상 '일련번호' 항목
-        "serialNum" => "",
-
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
-        "kwon" => nil,
-
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
-        "ho" => nil,
-
-        # 기재 상 '현금' 항목
-        "cash" => "",
-
-        # 기재 상 '수표' 항목
-        "chkBill" => "",
-
-        # 기재 상 '어음' 항목
-        "note" => "",
-
-        # 기재 상 '외상미수금' 항목
-        "credit" => "",
-
-        # 기재 상 '비고' 항목
-        "remark1" => "비고1",
-        "remark2" => "비고2",
-        "remark3" => "비고3",
-
-        # 사업자등록증 이미지 첨부여부
-        "businessLicenseYN" => false,
-
-        # 통장사본 이미지 첨부여부
-        "bankBookYN" => false,
 
         ######################### 공급자정보 #########################
 
@@ -745,6 +686,66 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
+        "writeDate" => "20190402",
+
+        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        "issueType" => "정발행",
+
+        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        "taxType" => "과세",
+
+        # [필수] 발행시점
+        "issueTiming" => "직접발행",
+
+        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        "chargeDirection" => "정과금",
+
+        # [필수] 영수/청구, {영수, 청구} 중 기재
+        "purposeType" => "영수",
+
+        # [필수] 공급가액 합계
+        "supplyCostTotal" => "20000",
+
+        # [필수] 세액 합계
+        "taxTotal" => "2000",
+
+        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        "totalAmount" => "22000",
+
+        # 기재 상 '일련번호' 항목
+        "serialNum" => "",
+
+        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        "kwon" => nil,
+
+        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        "ho" => nil,
+
+        # 기재 상 '현금' 항목
+        "cash" => "",
+
+        # 기재 상 '수표' 항목
+        "chkBill" => "",
+
+        # 기재 상 '어음' 항목
+        "note" => "",
+
+        # 기재 상 '외상미수금' 항목
+        "credit" => "",
+
+        # 기재 상 '비고' 항목
+        "remark1" => "비고1",
+        "remark2" => "비고2",
+        "remark3" => "비고3",
+
+        # 사업자등록증 이미지 첨부여부
+        "businessLicenseYN" => false,
+
+        # 통장사본 이미지 첨부여부
+        "bankBookYN" => false,
+
         ######################### 상세항목(품목) 정보 #########################
         # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
         ##################################################################
@@ -810,6 +811,7 @@ class TaxinvoiceController < ApplicationController
   ######################################################################################
   # [임시저장] 또는 [발행대기] 상태의 세금계산서를 [공급자]가 [발행]합니다.
   # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서구성"을 참조하시기 바랍니다.
+  # - 국세청 전송옵션을 변경하지 않은 경우 발행일을 기준으로 다음 영업일 오후3시에 국세청으로 일괄 전송됩니다.
   ######################################################################################
   def issue
 
@@ -820,7 +822,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 지연발행 강제여부
     # - 발행마감일이 지난 세금계산서를 발행하는 경우, 가산세가 부과될 수 있습니다.
@@ -850,12 +852,13 @@ class TaxinvoiceController < ApplicationController
     end
   end
 
-  ##########################################################################################################
+  ##############################################################################
   # [발행완료] 상태의 세금계산서를 [공급자]가 [발행취소]합니다.
   # - [발행취소]는 국세청 전송전에만 가능합니다.
   # - 발행취소된 세금계산서는 국세청에 전송되지 않습니다.
-  # - 발행취소 세금계산서에 사용된 문서관리번호를 재사용 하기 위해서는 삭제(Delete API)를 호출하여 해당세금계산서를 삭제해야 합니다.
-  ##########################################################################################################
+  # - 세금계산서에 할당된 문서관리번호를 재사용 하기 위해서는 삭제(Delete API)를 호출하여 세금계산서를
+  #   삭제해야 합니다.
+  ##############################################################################
   def cancelIssue
 
     # 팝빌회원 사업자번호
@@ -865,7 +868,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 메모
     memo = ''
@@ -900,83 +903,10 @@ class TaxinvoiceController < ApplicationController
     userID = TaxinvoiceController::TestUserID
 
     # 문서관리번호
-    mgtKey = "20190121-10"
+    mgtKey = "20190402-03"
 
     # 세금계산서 정보
     taxinvoice = {
-
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20190121",
-
-        # [필수] 발행형태, [정발행, 역발행, 위수탁] 중 기재
-        "issueType" => "역발행",
-
-        # [필수] 과세형태, [과세, 영세, 면세] 중 기재
-        "taxType" => "과세",
-
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
-
-        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
-        "chargeDirection" => "정과금",
-
-        # [필수] 영수/청구, [영수, 청구] 중 기재
-        "purposeType" => "영수",
-
-        # [필수] 공급가액 합계
-        "supplyCostTotal" => "20000",
-
-        # [필수] 세액 합계
-        "taxTotal" => "2000",
-
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
-        "totalAmount" => "22000",
-
-        # 기재 상 '일련번호' 항목
-        "serialNum" => "",
-
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
-        "kwon" => nil,
-
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
-        "ho" => nil,
-
-        # 기재 상 '현금' 항목
-        "cash" => "",
-
-        # 기재 상 '수표' 항목
-        "chkBill" => "",
-
-        # 기재 상 '어음' 항목
-        "note" => "",
-
-        # 기재 상 '외상미수금' 항목
-        "credit" => "",
-
-        # 기재 상 '비고' 항목
-        "remark1" => "비고1",
-        "remark2" => "비고2",
-        "remark3" => "비고3",
-
-        # 사업자등록증 이미지 첨부여부
-        "businessLicenseYN" => false,
-
-        # 통장사본 이미지 첨부여부
-        "bankBookYN" => false,
-
-
-        ######################### 수정세금계산서 정보 ##########################
-        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
-        ###################################################################
-
-        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
-        "modifyCode" => nil,
-
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
-        "originalTaxinvoiceKey" => "",
-
 
         ######################### 공급자정보 #########################
 
@@ -1065,6 +995,79 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
+        # [필수] 작성일자, 날짜형식 (yyyyMMdd)
+        "writeDate" => "20190402",
+
+        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        "issueType" => "역발행",
+
+        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        "taxType" => "과세",
+
+        # [필수] 발행시점
+        "issueTiming" => "직접발행",
+
+        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        "chargeDirection" => "정과금",
+
+        # [필수] 영수/청구, [영수, 청구] 중 기재
+        "purposeType" => "영수",
+
+        # [필수] 공급가액 합계
+        "supplyCostTotal" => "20000",
+
+        # [필수] 세액 합계
+        "taxTotal" => "2000",
+
+        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        "totalAmount" => "22000",
+
+        # 기재 상 '일련번호' 항목
+        "serialNum" => "",
+
+        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        "kwon" => nil,
+
+        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        "ho" => nil,
+
+        # 기재 상 '현금' 항목
+        "cash" => "",
+
+        # 기재 상 '수표' 항목
+        "chkBill" => "",
+
+        # 기재 상 '어음' 항목
+        "note" => "",
+
+        # 기재 상 '외상미수금' 항목
+        "credit" => "",
+
+        # 기재 상 '비고' 항목
+        "remark1" => "비고1",
+        "remark2" => "비고2",
+        "remark3" => "비고3",
+
+        # 사업자등록증 이미지 첨부여부
+        "businessLicenseYN" => false,
+
+        # 통장사본 이미지 첨부여부
+        "bankBookYN" => false,
+
+
+        ######################### 수정세금계산서 정보 ##########################
+        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
+        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        ###################################################################
+
+        # 수정사유코드, 수정사유에 따라 1~6 중 선택기재, 미기재시 nil 로 처리
+        "modifyCode" => nil,
+
+        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        "originalTaxinvoiceKey" => "",
+
+
         ######################### 상세항목(품목) 정보 #########################
         # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
         ##################################################################
@@ -1072,7 +1075,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1083,7 +1086,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1113,7 +1116,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # [공급받는자]가 임시저장 상태의 역발행 세금계산서를 공급자에게 [발행요청] 합니다.
+  # 공급받는자가 [임시저장] 상태의 역발행 세금계산서를 공급자에게 [발행요청] 합니다.
   # - 역발행 세금계산서 프로세스를 구현하기 위해서는 공급자/공급받는자가 모두 팝빌에 회원이여야 합니다.
   # - 역발행 요청후 공급자가 [발행] 처리시 포인트가 차감되며 역발행 세금계산서 항목중 과금방향(ChargeDirection)에 기재한 값에 따라
   #   정과금(공급자과금) 또는 역과금(공급받는자과금) 처리됩니다.
@@ -1124,10 +1127,10 @@ class TaxinvoiceController < ApplicationController
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
-    keyType = MgtKeyType::SELL
+    keyType = MgtKeyType::BUY
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-03"
 
     # 메모
     memo = ''
@@ -1148,7 +1151,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # [공급받는자]가 역)발행대기 상태의 세금계산서를 [취소]합니다.
-  # - [취소]한 세금계산서의 문서관리번호를 재사용하기 위해서는 삭제 (Delete API)를 호출해야 합니다.
+  # - [취소] 상태의 세금계산서에 할당된 문서관리번호를 재사용하기 위해서는 삭제 (Delete API)를 호출해야 합니다.
   ##############################################################################
   def cancelRequest
 
@@ -1156,13 +1159,13 @@ class TaxinvoiceController < ApplicationController
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
-    keyType = MgtKeyType::SELL
+    keyType = MgtKeyType::BUY
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-03"
 
     # 메모
-    memo = ''
+    memo = ""
 
     begin
       @Response = TaxinvoiceController::TIService.cancelRequest(
@@ -1179,10 +1182,11 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 공급받는자에게 요청받은 역)발행대기 상태의 세금계산서를 [공급자]가 [거부]합니다.
-  # - 세금계산서의 문서관리번호를 재사용하기 위해서는 삭제 (Delete API)를 호출하여 [삭제] 처리해야 합니다.
+  # 공급받는자로부터 발행을 요청받은 발행대기 상태의 역발행 세금계산서를 공급자가 [거부] 처리합니다.
+  # - 세금계산서에 할당된 문서관리번호를 재사용하기 위해서는 삭제 (Delete) API 를 호출해야 합니다.
   ##############################################################################
   def refuse
+
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
 
@@ -1190,7 +1194,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     # 메모
     memo = ''
@@ -1223,7 +1227,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-03"
 
     begin
       @Response = TaxinvoiceController::TIService.delete(
@@ -1241,9 +1245,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # [발행완료] 상태의 세금계산서를 국세청으로 [즉시전송]합니다.
-  # - 국세청 즉시전송을 호출하지 않은 세금계산서는 발행일 기준 익일 오후 3시에 팝빌 시스템에서 일괄적으로 국세청으로 전송합니다.
-  # - 익일전송시 전송일이 법정공휴일인 경우 다음 영업일에 전송됩니다.
-  # - 국세청 전송에 관한 사항은 "[전자세금계산서 API 연동매뉴얼] > 1.3 국세청 전송 정책" 을 참조하시기 바랍니다.
+  # - 즉시전송 호출이후 20~30분 경과후 전송결과 성공/실패 여부를 확인할 수 있습니다.
   ##############################################################################
   def sendToNTS
 
@@ -1254,7 +1256,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @Response = TaxinvoiceController::TIService.sendToNTS(
@@ -1283,7 +1285,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getInfo(
@@ -1311,8 +1313,8 @@ class TaxinvoiceController < ApplicationController
     # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서관리번호 배열
-    mgtKeyList = ["20190121-01", "20190121-02"]
+    # 세금계산서 문서관리번호 배열, 최대 1000건
+    mgtKeyList = ["20190402-01", "20190402-02"]
 
     begin
       @Response = TaxinvoiceController::TIService.getInfos(
@@ -1341,7 +1343,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getDetailInfo(
@@ -1375,11 +1377,11 @@ class TaxinvoiceController < ApplicationController
     # [필수] 일자유형, R-등록일시 W-작성일자 I-발행일시 중 택1
     dType = "W"
 
-    # [필수] 시작일자, yyyyMMdd
+    # [필수] 시작일자, 날짜형식(yyyyMMdd)
     sDate = "20190101"
 
-    # [필수] 종료일자, yyyyMMdd
-    eDate = "20190119"
+    # [필수] 종료일자, 날짜형식(yyyyMMdd)
+    eDate = "20190601"
 
     # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성, 2,3번째 와일드카드 가능
     #  - 상태코드에 대한 자세한 사항은 "[전자세금계산서 API 연동매뉴얼] > 5.1 세금계산서 상태코드" 를 참조하시기 바랍니다.
@@ -1394,7 +1396,7 @@ class TaxinvoiceController < ApplicationController
     # 발행형태 배열, N-정발행, R-역발행, T-위수탁
     issueType = ["N", "R", "T"]
 
-    # 지연발행 여부, 0-정상발행분만 조회 1-지연발행분만조회, 공백처리시 전체조회
+    # 지연발행 여부, 0-일반발행분 조회 1-지연발행분 조회, 공백-전체조회
     lateOnly = ''
 
     # 종사업장 유무, 공백-전체조회, 0-종사업장번호 없는경우만 조회, 1-종사업장번호 조건 조회
@@ -1464,7 +1466,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getLogs(
@@ -1489,7 +1491,7 @@ class TaxinvoiceController < ApplicationController
     corpNum = TaxinvoiceController::TestCorpNum
 
     # TBOX(임시문서함), SBOX(매출문서함), PBOX(매입문서함), WRITE(매출문서작성)
-    togo = "TBOX"
+    togo = "PBOX"
 
     begin
       @value = TaxinvoiceController::TIService.getURL(
@@ -1517,7 +1519,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-01"
 
     begin
       @value = TaxinvoiceController::TIService.getPopUpURL(
@@ -1545,7 +1547,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @value = TaxinvoiceController::TIService.getPrintURL(
@@ -1574,7 +1576,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     begin
       @value = TaxinvoiceController::TIService.getEPrintURL(
@@ -1591,7 +1593,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 다수건의 전자세금계산서 인쇄팝업 URL을 반환합니다.
+  # 다수건의 전자세금계산서 인쇄팝업 URL을 반환합니다. (최대 100건)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
   ##############################################################################
   def getMassPrintURL
@@ -1603,7 +1605,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호 배열, 최대 100건
-    mgtKeyList = ["20190121-01", "20190121-02"]
+    mgtKeyList = ["20190402-02", "20190402-01"]
 
     begin
       @value = TaxinvoiceController::TIService.getMassPrintURL(
@@ -1632,7 +1634,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @value = TaxinvoiceController::TIService.getMailURL(
@@ -1712,7 +1714,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 첨부파일경로
     filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"
@@ -1745,7 +1747,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 파일아이디, GetFiles API 응답항목 중 파일아이디 (AttachedFile) 값 기재
     fileID = "6F4E5AA1-0B61-4775-A837-20E0D87C3010.PBF"
@@ -1804,7 +1806,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 공급받는자 담당자 메일주소
     emailAddr = "test@test.com"
@@ -1838,7 +1840,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1880,7 +1882,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1915,7 +1917,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
@@ -1950,7 +1952,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
@@ -2004,11 +2006,11 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 아이템키, 목록조회(Search) API의 반환항목중 ItemKey 참조
-    itemKey = "018062516505300001"
+    itemKey = "019040209362600001"
 
     # 할당할 문서관리번호, 숫자, 영문, '-', '_' 조합으로
     # 1~24자리까지 사업자번호별 중복없는 고유번호 할당
-    mgtKey = "20190121-003"
+    mgtKey = "20190402-005"
 
     begin
       @Response = TaxinvoiceController::TIService.assignMgtKey(
@@ -2100,7 +2102,7 @@ class TaxinvoiceController < ApplicationController
     userID = TaxinvoiceController::TestUserID
 
     # 메일 전송 유형
-    emailType = "TAX_ISSUE"
+    emailType = "TAX_ISSUE_INVOICER"
 
     # 메일 전송 여부 (true-전송, false-미전송)
     sendYN = false
@@ -2167,7 +2169,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록된 공인인증서의 유효성을 확인합니다.
+  # 세금계산서 발행을 위해 등록한 공인인증서의 유효성을 확인합니다.
   ##############################################################################
   def checkCertValidation
 
