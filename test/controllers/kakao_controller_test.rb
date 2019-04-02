@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class KakaotalkControllerTest < ActionController::TestCase
+class KakaoControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

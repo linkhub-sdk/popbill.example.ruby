@@ -1,4 +1,4 @@
-RubyPopbillExample::Application.routes.draw do
+PopbillExampleRuby::Application.routes.draw do
   get "htcashbill/index"
   get "httaxinvoice/index"
   get "closedown/index"

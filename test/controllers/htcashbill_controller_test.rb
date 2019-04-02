@@ -1,9 +1,7 @@
 require 'test_helper'
 
-class HtcashbillControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
-
+class HtcashbillControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
 end

@@ -1,9 +1,7 @@
 require 'test_helper'
 
-class TaxinvoiceControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
-
+class TaxinvoiceControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
 end

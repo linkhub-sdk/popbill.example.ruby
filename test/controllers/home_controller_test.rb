@@ -1,9 +1,7 @@
 require 'test_helper'
 
-class HomeControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
-
+class HomeControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
 end

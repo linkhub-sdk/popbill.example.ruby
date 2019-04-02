@@ -62,3 +62,4 @@ bower.json
 
 Gemfile.lock
 .idea
+.DS_Store

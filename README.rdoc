@@ -1,4 +1,0 @@
-== 팝빌 Rails SDK Example
-팝빌 Rails SDK Exmaple
-* Rails >= V4.0.0
-* Ruby >= V2.0.0

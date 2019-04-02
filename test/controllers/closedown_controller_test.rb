@@ -1,9 +1,7 @@
 require 'test_helper'
 
-class ClosedownControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
-
+class ClosedownControllerTest < ActionDispatch::IntegrationTest
+  # test "the truth" do
+  #   assert true
+  # end
 end

@@ -584,19 +584,19 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20190301"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20190121"
+    eDate = "20190331"
 
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]
 
-    # 예약전송 검색여부, 1-예약전송건 조회, 0-예약전송 아닌건만 조회, 공백-전체조회
-    reserveYN = ''
+    # 예약전송 검색여부, "1"-예약전송건 조회, 0-예약전송 아닌건만 조회, 공백-전체조회
+    reserveYN = ""
 
-    # 개인조회 여부, true-개인조회, false-회사조회
-    senderYN = false
+    # 개인조회 여부, "1"-개인조회, "0"-회사조회, 공백-전체조회
+    senderYN = ""
 
     # 페이지 번호
     page = 1
