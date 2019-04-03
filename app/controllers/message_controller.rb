@@ -1,17 +1,17 @@
 ###################################################################################
 # 팜빌 문자 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-03
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
 # 1) 22, 25번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-# 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
-# 3) 문자를 전송을 위한 발신번호 사전등록을 합니다. (등록방법은 사이트/API 두가지 방식이 있습니다.)
+# 2) 문자를 전송을 위한 발신번호 사전등록을 합니다. (등록방법은 사이트/API 두가지 방식이 있습니다.)
 #    - 1. 팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 메뉴에서 등록
 #    - 2. getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+#
 ###################################################################################
 
 require 'popbill/message'
@@ -83,8 +83,8 @@ class MessageController < ApplicationController
     end
   end
 
-  ############################################################################## 
-  # SMS(단문)를 전송합니다. 
+  ##############################################################################
+  # SMS(단문)를 전송합니다.
   # - 메시지 길이가 90 byte 이상인 경우, 길이를 초과하는 메시지 내용은 자동으로 제거됩니다.
   # - 팝빌에 등록되지 않은 발신번호로 메시지를 전송하는 경우 발신번호 미등록 오류로 처리됩니다.
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
@@ -385,7 +385,7 @@ class MessageController < ApplicationController
     contents = "message send XMS Test"
 
     # 첨부파일 경로
-    filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg"
+    filePath = "/Users/John/Desktop/test.jpg"
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
@@ -461,7 +461,7 @@ class MessageController < ApplicationController
     ]
 
     # 첨부파일 경로
-    filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg"
+    filePath = "/Users/John/Desktop/test.jpg"
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
@@ -644,7 +644,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 예약문자 접수번호
-    receiptNum = "018112714000000020"
+    receiptNum = "019040317000000014"
 
     begin
       @Response = MessageController::MSGService.cancelReserve(corpNum, receiptNum)
@@ -666,7 +666,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190125-001'
+    requestNum = '019040317000000014-001'
 
     begin
       @Response = MessageController::MSGService.cancelReserveRN(corpNum, requestNum)
@@ -687,7 +687,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 문자전송 접수번호
-    receiptNum = "018062818000000011"
+    receiptNum = "019040317000000014"
 
     begin
       @Response = MessageController::MSGService.getMessages(corpNum, receiptNum)
@@ -708,7 +708,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = "20190120-01"
+    requestNum = "20190403-01"
 
     begin
       @Response = MessageController::MSGService.getMessagesRN(corpNum, requestNum)
@@ -727,7 +727,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 문자전송 접수번호 배열, 최대 1000건
-    reciptNumList = ["20190121-01", "20190121-02"]
+    reciptNumList = ["019040317000000015", "019040317000000014"]
 
     begin
       @Response = MessageController::MSGService.getStates(corpNum, reciptNumList)
@@ -750,11 +750,11 @@ class MessageController < ApplicationController
     # 팝빌회원 아이디
     userID = MessageController::TestUserID
 
-    # [필수] 시작일자, 날자형식(yyyyMMdd)
+    # [필수] 시작일자, 날짜형식(yyyyMMdd)
     sDate = "20190101"
 
-    # [필수] 종료일자, 날자형식(yyyyMMdd)
-    eDate = "20190121"
+    # [필수] 종료일자, 날짜형식(yyyyMMdd)
+    eDate = "20190430"
 
     # 전송상태값 배열, 1-대기, 2-성공, 3-실패, 4-취소
     state = [1, 2, 3, 4]
