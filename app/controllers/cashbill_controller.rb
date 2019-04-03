@@ -1,14 +1,14 @@
 ################################################################################
 # 팜빌 현금영수증 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-03
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
 # 1) 19, 22번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-# 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
+#
 ################################################################################
 
 require 'popbill/cashbill'
@@ -45,8 +45,8 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-01"
+    # 현금영수증 문서관리번호, 최대 24자리로 숫자, 영문 '-', '_' 조합하여 구성
+    mgtKey = "20190403-01"
 
     begin
       @response = CashbillController::CBService.checkMgtKeyInUse(
@@ -60,7 +60,7 @@ class CashbillController < ApplicationController
         @value = "미사용중"
       end
 
-      @name = "문서관리번호(mgtKey) 사용여부 확인"
+      @name = "문서관리번호 사용여부 확인"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -78,7 +78,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-02"
 
     # 현금영수증 정보
     cashbill = {
@@ -86,27 +86,21 @@ class CashbillController < ApplicationController
         # [필수] 문서관리번호
         "mgtKey" => mgtKey,
 
-        # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        # [필수] 문서형태
         "tradeType" => "승인거래",
 
-        # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+        # [필수] 거래구분, {소득공제용, 지출증빙용} 중 기재
         "tradeUsage" => "소득공제용",
 
-        # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        # [필수] 거래유형, {일반, 도서공연, 대중교통} 중 기재
         "tradeOpt" => "일반",
-
-        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-        "orgConfirmNum" => "",
-
-        # [취소거래시 필수] 원본 현금영수증 거래일자
-        "orgTradeDate" => "",
 
         # [필수] 식별번호
         # 거래구분(tradeUsage) - '소득공제용' 인 경우 주민등록/휴대폰/카드번호 기재 가능
         # 거래구분(tradeUsage) - '지출증빙용' 인 경우 사업자번호/주민등록/휴대폰/카드번호 기재 가능
-        "identityNum" => "0101112222",
+        "identityNum" => "0100001234",
 
-        # [필수] 과세형태, [과세, 비과세] 중 기재
+        # [필수] 과세형태, {과세, 비과세} 중 기재
         "taxationType" => "과세",
 
         # [필수] 공급가액
@@ -121,13 +115,13 @@ class CashbillController < ApplicationController
         # [필수] 거래금액
         "totalAmount" => "11000",
 
-        # [필수] 발행자 사업자번호
+        # [필수] 가맹점 사업자번호
         "franchiseCorpNum" => corpNum,
 
-        # 발행자 상호
+        # 가맹점 상호
         "franchiseCorpName" => "가맹점 상호",
 
-        # 발행자 대표자 성명
+        # 가맹점 대표자 성명
         "franchiseCEOName" => "가맹점 대표자 성명",
 
         # 가맹점 주소
@@ -178,7 +172,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-02"
+    mgtKey = "20190403-03"
 
     # 현금영수증 정보
     cashbill = {
@@ -186,30 +180,21 @@ class CashbillController < ApplicationController
         # [필수] 문서관리번호
         "mgtKey" => mgtKey,
 
-        # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        # [필수] 문서형태
         "tradeType" => "승인거래",
 
-        # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+        # [필수] 거래구분, {소득공제용, 지출증빙용} 중 기재
         "tradeUsage" => "소득공제용",
 
-        # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        # [필수] 거래유형, {일반, 도서공연, 대중교통} 중 기재
         "tradeOpt" => "일반",
-
-        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-        "orgConfirmNum" => "",
-
-        # [취소거래시 필수] 원본 현금영수증 거래일자
-        "orgTradeDate" => "",
 
         # [필수] 식별번호
         # 거래구분(tradeUsage) - '소득공제용' 인 경우 주민등록/휴대폰/카드번호 기재 가능
         # 거래구분(tradeUsage) - '지출증빙용' 인 경우 사업자번호/주민등록/휴대폰/카드번호 기재 가능
-        "identityNum" => "010111222",
+        "identityNum" => "0101112222",
 
-        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-        "orgConfirmNum" => "",
-
-        # [필수] 과세형태, [과세, 비과세] 중 기재
+        # [필수] 과세형태, {과세, 비과세} 중 기재
         "taxationType" => "과세",
 
         # [필수] 공급가액
@@ -224,13 +209,13 @@ class CashbillController < ApplicationController
         # [필수] 거래금액
         "totalAmount" => "22000",
 
-        # [필수] 발행자 사업자번호
+        # [필수] 가맹점 사업자번호
         "franchiseCorpNum" => corpNum,
 
-        # 발행자 상호
+        # 가맹점 상호
         "franchiseCorpName" => "가맹점 상호",
 
-        # 발행자 대표자 성명
+        # 가맹점 대표자 성명
         "franchiseCEOName" => "가맹점 대표자 성명",
 
         # 가맹점 주소
@@ -281,7 +266,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190403-03"
 
     # 현금영수증 정보
     cashbill = {
@@ -289,13 +274,13 @@ class CashbillController < ApplicationController
         # [필수] 문서관리번호
         "mgtKey" => mgtKey,
 
-        # [필수] 문서형태, [승인거래, 취소거래] 중 기재
+        # [필수] 문서형태
         "tradeType" => "승인거래",
 
-        # [필수] 거래구분, [소득공제용, 지출증빙용] 중 기재
+        # [필수] 거래구분, {소득공제용, 지출증빙용} 중 기재
         "tradeUsage" => "소득공제용",
 
-        # [필수] 거래유형, [일반, 도서공연, 대중교통] 중 기재
+        # [필수] 거래유형, {일반, 도서공연, 대중교통} 중 기재
         "tradeOpt" => "일반",
 
         # [필수] 식별번호
@@ -306,7 +291,7 @@ class CashbillController < ApplicationController
         # [취소거래시 필수] 원본 현금영수증 국세청승인번호
         "orgConfirmNum" => "",
 
-        # [필수] 과세형태, [과세, 비과세] 중 기재
+        # [필수] 과세형태, {과세, 비과세} 중 기재
         "taxationType" => "과세",
 
         # [필수] 공급가액
@@ -321,13 +306,13 @@ class CashbillController < ApplicationController
         # [필수] 거래금액
         "totalAmount" => "22000",
 
-        # [필수] 발행자 사업자번호
+        # [필수] 가맹점 사업자번호
         "franchiseCorpNum" => corpNum,
 
-        # 발행자 상호
+        # 가맹점 상호
         "franchiseCorpName" => "가맹점 상호",
 
-        # 발행자 대표자 성명
+        # 가맹점 대표자 성명
         "franchiseCEOName" => "가맹점 대표자 성명",
 
         # 가맹점 주소
@@ -372,8 +357,6 @@ class CashbillController < ApplicationController
   # 1건의 임시저장 현금영수증을 발행처리합니다.
   # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청
   #   전송결과를 확인할 수 있습니다.
-  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
-  #   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.
   ##############################################################################
   def issue
 
@@ -381,7 +364,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-03"
 
     begin
       @Response = CashbillController::CBService.issue(
@@ -406,7 +389,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-03"
 
     begin
       @Response = CashbillController::CBService.cancelIssue(
@@ -431,7 +414,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-03"
 
     begin
       @Response = CashbillController::CBService.delete(
@@ -449,9 +432,6 @@ class CashbillController < ApplicationController
   # 1건의 취소현금영수증을 즉시발행합니다.
   # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
   #   확인할 수 있습니다.
-  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
-  #   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.
-  # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
   ##############################################################################
   def revokeRegistIssue
 
@@ -459,13 +439,13 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-100"
+    mgtKey = "20190403-08"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "538588735"
+    orgConfirmNum = "569090041"
 
     # [취소거래시 필수] 원본 현금영수증 거래일자
-    orgTradeDate = "20190121"
+    orgTradeDate = "20190327"
 
     begin
       @Response = CashbillController::CBService.revokeRegistIssue(
@@ -485,8 +465,6 @@ class CashbillController < ApplicationController
   # 1건의 (부분) 취소현금영수증을 즉시발행합니다.
   # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를
   #   확인할 수 있습니다.
-  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
-  #   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.
   ##############################################################################
   def revokeRegistIssue_part
 
@@ -496,14 +474,14 @@ class CashbillController < ApplicationController
     # 팝빌회원 아이디
     userID = CashbillController::TestUserID
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-101"
+    # 현금영수증 문서관리번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
+    mgtKey = "20190403-09"
 
     # 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "538588735"
+    orgConfirmNum = "569090041"
 
     # 원본 현금영수증 거래일자
-    orgTradeDate = "20190121"
+    orgTradeDate = "20190327"
 
     # 안내문자 전송여부
     smssendYN = false
@@ -556,23 +534,20 @@ class CashbillController < ApplicationController
   # 1건의 취소현금영수증을 임시저장 합니다.
   # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
   # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를 확인할 수 있습니다.
-  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
-  #   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.
-  # - 취소현금영수증 작성방법 안내 - http://blog.linkhub.co.kr/702
   ##############################################################################
   def revokeRegister
 
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-102"
+    # 현금영수증 문서관리번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
+    mgtKey = "20190403-10"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "538588735"
+    orgConfirmNum = "569090041"
 
     # [취소거래시 필수] 원본 현금영수증 거래일자
-    orgTradeDate = "20190121"
+    orgTradeDate = "20190327"
 
     begin
       @Response = CashbillController::CBService.revokeRegister(
@@ -592,8 +567,6 @@ class CashbillController < ApplicationController
   # 1건의 (부분)취소현금영수증을 임시저장 합니다.
   # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
   # - 발행일 기준 오후 5시 이전에 발행된 현금영수증은 다음날 오후 2시에 국세청 전송결과를 확인할 수 있습니다.
-  # - 현금영수증 국세청 전송 정책에 대한 정보는 "[현금영수증 API 연동매뉴얼]
-  #   > 1.3. 국세청 전송정책"을 참조하시기 바랍니다.
   ##############################################################################
   def revokeRegister_part
 
@@ -604,13 +577,13 @@ class CashbillController < ApplicationController
     userID = CashbillController::TestUserID
 
     # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190121-103"
+    mgtKey = "20190403-11"
 
     # 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "538588735"
+    orgConfirmNum = "569090041"
 
     # 원본 현금영수증 거래일자
-    orgTradeDate = "20190121"
+    orgTradeDate = "20190327"
 
     # 안내문자 전송여부
     smssendYN = false
@@ -666,7 +639,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     begin
       @Response = CashbillController::CBService.getInfo(
@@ -691,10 +664,13 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 배열, 최대 1000건
-    mgtKeyList = Array.new(3)
-    mgtKeyList[0] = ["20190121-01"]
-    mgtKeyList[1] = ["20190121-02"]
-    mgtKeyList[2] = ["20190121-03"]
+    mgtKeyList = Array.new
+    mgtKeyList.push("20190403-01")
+    mgtKeyList.push("20190403-06")
+    mgtKeyList.push("20190403-07")
+    mgtKeyList.push("20190403-08")
+    mgtKeyList.push("20190403-09")
+    mgtKeyList.push("20190403-10")
 
     begin
       @Response = CashbillController::CBService.getInfos(
@@ -719,7 +695,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-06"
 
     begin
       @Response = CashbillController::CBService.getDetailInfo(
@@ -749,10 +725,10 @@ class CashbillController < ApplicationController
     # [필수] 일자유형, R-등록일자, T-거래일자 I-발행일시
     dType = "R"
 
-    # [필수] 시작일자, 형식(yyyyMMdd)
+    # [필수] 시작일자, 날짜형식(yyyyMMdd)
     sDate = "20190101"
 
-    # [필수] 종료일자, 형식(yyyyMMdd)
+    # [필수] 종료일자, 날짜형식(yyyyMMdd)
     eDate = "20190121"
 
     # 전송상태코드 배열, 미기재시 전체조회, 2,3번째 자리 와일드카드(*) 가능
@@ -818,7 +794,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-09"
 
     begin
       @Response = CashbillController::CBService.getLogs(
@@ -841,8 +817,8 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # TBOX(임시문서함), PBOX(발행문서함), WRITE(현금영수증 신규작성)
-    togo = "TBOX"
+    # TBOX(임시문서함), PBOX(발행문서함), WRITE(현금영수증 작성)
+    togo = "WRITE"
 
     begin
       @value = CashbillController::CBService.getURL(
@@ -867,7 +843,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     begin
       @value = CashbillController::CBService.getPopUpURL(
@@ -892,7 +868,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     begin
       @value = CashbillController::CBService.getPrintURL(
@@ -917,7 +893,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     begin
       @value = CashbillController::CBService.getEPrintURL(
@@ -942,10 +918,10 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호 배열, 최대 100건
-    mgtKeyList = Array.new(3)
-    mgtKeyList[0] = ["20190121-01"]
-    mgtKeyList[1] = ["20190121-02"]
-    mgtKeyList[2] = ["20190121-03"]
+    mgtKeyList = Array.new
+    mgtKeyList.push("20190403-06")
+    mgtKeyList.push("20190403-07")
+    mgtKeyList.push("20190403-08")
 
     begin
       @value = CashbillController::CBService.getMassPrintURL(
@@ -970,7 +946,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-06"
 
     begin
       @value = CashbillController::CBService.getMailURL(
@@ -1019,7 +995,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     # 이메일 주소
     emailAddr = "test@test.com"
@@ -1048,7 +1024,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1086,7 +1062,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190403-11"
 
     # 발신번호
     sendNum = "07043042991"
