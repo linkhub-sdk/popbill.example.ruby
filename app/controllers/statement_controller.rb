@@ -1,14 +1,14 @@
 ################################################################################
 # 팜빌 전자명세서 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-02
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
 # 1) 19, 22번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-# 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
+#
 ################################################################################
 
 require 'popbill/statement'
@@ -37,7 +37,7 @@ class StatementController < ApplicationController
   STMTService.setIsTest(true)
 
   ##############################################################################
-  # 전자명세서 관리번호 중복여부를 확인합니다.
+  # 전자명세서 관리번호 사용여부를 확인합니다.
   # - 관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
   ##############################################################################
   def checkMgtKeyInUse
@@ -49,7 +49,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-01"
 
     begin
       @response = StatementController::STMTService.checkMgtKeyInUse(
@@ -64,7 +64,7 @@ class StatementController < ApplicationController
         @value = "미사용중"
       end
 
-      @name = "문서관리번호(mgtKey) 사용여부 확인"
+      @name = "문서관리번호 사용여부 확인"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -84,7 +84,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     # 전자명세서 정보
     statement = {
@@ -99,7 +99,7 @@ class StatementController < ApplicationController
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190121",
+        "writeDate" => "20190402",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -170,36 +170,36 @@ class StatementController < ApplicationController
         "senderHP" => "010-1234-1234",
 
 
-        ######################### 발신자받는자 정보 #########################
+        ######################### 수신자 정보 #########################
 
         # 수신자 사업자번호
         "receiverCorpNum" => "8888888888",
 
         # 수신자 상호
-        "receiverCorpName" => "발신자 상호",
+        "receiverCorpName" => "수신자 상호",
 
-        # 발신자받는자 대표자 성명
-        "receiverCEOName" => "발신자 대표자 성명",
+        # 수신자 대표자 성명
+        "receiverCEOName" => "수신자 대표자 성명",
 
-        # 발신자받는자 주소
+        # 수신자 주소
         "receiverAddr" => "수신자 주소",
 
-        # 발신자받는자 종목
+        # 수신자 종목
         "receiverBizClass" => "종목",
 
-        # 발신자받는자 업태
+        # 수신자 업태
         "receiverBizType" => "업태",
 
-        # 발신자받는자 담당자 성명
+        # 수신자 담당자 성명
         "receiverContactName" => "수신자 담당자명",
 
-        # 발신자받는자 담당자 메일주소
+        # 수신자 담당자 메일주소
         "receiverEmail" => "test2@test.com",
 
-        # 발신자받는자 담당자 연락처
+        # 수신자 담당자 연락처
         "receiverTEL" => "070-4304-2999",
 
-        # 발신자받는자 담당자 휴대폰번호
+        # 수신자 담당자 휴대폰번호
         "receiverHP" => "010-4304-2991",
 
 
@@ -210,7 +210,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -222,7 +222,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -269,7 +269,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20910403-04"
 
     # 전자명세서 정보
     statement = {
@@ -284,7 +284,7 @@ class StatementController < ApplicationController
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190121",
+        "writeDate" => "20190402",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -355,36 +355,36 @@ class StatementController < ApplicationController
         "senderHP" => "010-1234-1234",
 
 
-        ######################### 발신자받는자 정보 #########################
+        ######################### 수신자 정보 #########################
 
         # 수신자 사업자번호
         "receiverCorpNum" => "8888888888",
 
         # 수신자 상호
-        "receiverCorpName" => "발신자 상호",
+        "receiverCorpName" => "수신자 상호",
 
-        # 발신자받는자 대표자 성명
-        "receiverCEOName" => "발신자 대표자 성명",
+        # 수신자 대표자 성명
+        "receiverCEOName" => "수신자 대표자 성명",
 
-        # 발신자받는자 주소
+        # 수신자 주소
         "receiverAddr" => "수신자 주소",
 
-        # 발신자받는자 종목
+        # 수신자 종목
         "receiverBizClass" => "종목",
 
-        # 발신자받는자 업태
+        # 수신자 업태
         "receiverBizType" => "업태",
 
-        # 발신자받는자 담당자 성명
+        # 수신자 담당자 성명
         "receiverContactName" => "수신자 담당자명",
 
-        # 발신자받는자 담당자 메일주소
+        # 수신자 담당자 메일주소
         "receiverEmail" => "test2@test.com",
 
-        # 발신자받는자 담당자 연락처
+        # 수신자 담당자 연락처
         "receiverTEL" => "070-4304-2999",
 
-        # 발신자받는자 담당자 휴대폰번호
+        # 수신자 담당자 휴대폰번호
         "receiverHP" => "010-4304-2991",
 
 
@@ -395,7 +395,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -407,7 +407,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -454,7 +454,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20910403-04"
 
     # 전자명세서 정보
     statement = {
@@ -469,7 +469,7 @@ class StatementController < ApplicationController
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190121",
+        "writeDate" => "20190402",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -507,7 +507,7 @@ class StatementController < ApplicationController
         ######################### 발신자 정보 #########################
 
         # 발신자 사업자번호
-        "senderCorpNum" => "1234567890",
+        "senderCorpNum" => corpNum,
 
         # 발신자 상호
         "senderCorpName" => "발신자 상호_수정",
@@ -540,36 +540,36 @@ class StatementController < ApplicationController
         "senderHP" => "010-1234-1234",
 
 
-        ######################### 발신자받는자 정보 #########################
+        ######################### 수신자 정보 #########################
 
         # 수신자 사업자번호
         "receiverCorpNum" => "8888888888",
 
         # 수신자 상호
-        "receiverCorpName" => "발신자 상호",
+        "receiverCorpName" => "수신자 상호",
 
-        # 발신자받는자 대표자 성명
-        "receiverCEOName" => "발신자 대표자 성명",
+        # 수신자 대표자 성명
+        "receiverCEOName" => "수신자 대표자 성명",
 
-        # 발신자받는자 주소
+        # 수신자 주소
         "receiverAddr" => "수신자 주소",
 
-        # 발신자받는자 종목
+        # 수신자 종목
         "receiverBizClass" => "종목",
 
-        # 발신자받는자 업태
+        # 수신자 업태
         "receiverBizType" => "업태",
 
-        # 발신자받는자 담당자 성명
+        # 수신자 담당자 성명
         "receiverContactName" => "수신자 담당자명",
 
-        # 발신자받는자 담당자 메일주소
+        # 수신자 담당자 메일주소
         "receiverEmail" => "test2@test.com",
 
-        # 발신자받는자 담당자 연락처
+        # 수신자 담당자 연락처
         "receiverTEL" => "070-4304-2999",
 
-        # 발신자받는자 담당자 휴대폰번호
+        # 수신자 담당자 휴대폰번호
         "receiverHP" => "010-4304-2991",
 
         ######################### 상세항목(품목) 정보 #########################
@@ -579,7 +579,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190403", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -591,7 +591,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190403", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -640,13 +640,13 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-01"
 
     # 메모
-    memo = ''
+    memo = ""
 
     # 발행 안내메일 제목, 미기재시 기본양식으로 전송됨
-    emailSubject = ''
+    emailSubject = ""
 
     begin
       @Response = StatementController::STMTService.issue(
@@ -675,10 +675,10 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 메모
-    memo = ''
+    memo = ""
 
     begin
       @Response = StatementController::STMTService.cancel(
@@ -696,8 +696,8 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 1건의 전자명세서를 삭제합니다.
-  # - 전자명세서를 삭제하면 사용된 문서관리번호(mgtKey)를 재사용할 수 있습니다.
-  # - 삭제가능한 문서 상태 : [임시저장], [발행취소]
+  # - 삭제시 해당 문서에 할단된 문서관리번호(mgtKey)를 재사용할 수 있습니다.
+  # - 삭제가능한 문서 상태 : [임시저장], [거부], [발행취소]
   ##############################################################################
   def delete
 
@@ -708,7 +708,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @Response = StatementController::STMTService.delete(
@@ -737,7 +737,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     begin
       @Response = StatementController::STMTService.getInfo(
@@ -766,7 +766,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호 배열, 최대 1000건
-    mgtKeyList = ["20190121-01", "20190121-02"]
+    mgtKeyList = ["20190402-01", "20190402-02"]
 
     begin
       @Response = StatementController::STMTService.getInfos(
@@ -795,7 +795,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-01"
 
     begin
       @Response = StatementController::STMTService.getDetailInfo(
@@ -824,10 +824,10 @@ class StatementController < ApplicationController
     # [필수] 일자유형, R-등록일시 W-작성일자 I-발행일시 중 택1
     dType = "W"
 
-    # [필수] 시작일자, yyyyMMdd
+    # [필수] 시작일자, 날짜형식(yyyyMMdd)
     sDate = "20190101"
 
-    # [필수] 종료일자, yyyyMMdd
+    # [필수] 종료일자, 날짜형식(yyyyMMdd)
     eDate = "20190119"
 
     # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성
@@ -884,7 +884,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     begin
       @Response = StatementController::STMTService.getLogs(
@@ -909,7 +909,7 @@ class StatementController < ApplicationController
     corpNum = StatementController::TestCorpNum
 
     # 임시문서함(TBOX), 발행문서함(SBOX)
-    togo = "TBOX"
+    togo = "SBOX"
 
     begin
       @value = StatementController::STMTService.getURL(
@@ -936,7 +936,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @value = StatementController::STMTService.getPopUpURL(
@@ -965,7 +965,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @value = StatementController::STMTService.getPrintURL(
@@ -994,7 +994,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @value = StatementController::STMTService.getEPrintURL(
@@ -1023,7 +1023,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호 배열, 최대 100건
-    mgtKeyList = ["20190121-01", "20190121-02", "20190121-03"]
+    mgtKeyList = ["20190402-01", "20190402-02", "20190403-03"]
 
     begin
       @value = StatementController::STMTService.getMassPrintURL(
@@ -1052,7 +1052,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-02"
 
     begin
       @value = StatementController::STMTService.getMailURL(
@@ -1200,7 +1200,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 이메일주소
     emailAddr = "test@test.com"
@@ -1234,7 +1234,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1276,7 +1276,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    mgtKey = "20190402-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1300,7 +1300,7 @@ class StatementController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록하지 않고 전자명세서를 팩스전송합니다.
+  # 팝빌에 전자명세서를 등록하지 않고 팩스로 해당문서를 전송합니다.
   # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역]
   #   메뉴에서 전송결과를 확인할 수 있습니다.
@@ -1314,7 +1314,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-03"
+    mgtKey = "20190402-04"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1444,7 +1444,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -1456,7 +1456,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190121", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -1505,13 +1505,13 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-01"
 
     # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     stmtItemCode = 121
 
     # 첨부할 전자명세서 문서관리번호
-    stmtMgtKey = "20190121-02"
+    stmtMgtKey = "20190402-02"
 
     begin
       @Response = StatementController::STMTService.attachStatement(
@@ -1540,13 +1540,13 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서관리번호
-    mgtKey = "20190121-01"
+    mgtKey = "20190402-01"
 
     # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     stmtItemCode = 121
 
     # 첨부해제할 전자명세서 문서관리번호
-    stmtMgtKey = "20190121-02"
+    stmtMgtKey = "20190402-02"
 
     begin
       @Response = StatementController::STMTService.detachStatement(
@@ -1592,7 +1592,7 @@ class StatementController < ApplicationController
   # SMT_ISSUE : 수신자에게 전자명세서가 발행 되었음을 알려주는 메일입니다.
   # SMT_ACCEPT : 발신자에게 전자명세서가 승인 되었음을 알려주는 메일입니다.
   # SMT_DENY : 발신자에게 전자명세서가 거부 되었음을 알려주는 메일입니다.
-  # SMT_CANCEL : 수신자게에 전자명세서가 취소 되었음을 알려주는 메일입니다.
+  # SMT_CANCEL : 수신자에게 전자명세서가 취소 되었음을 알려주는 메일입니다.
   # SMT_CANCEL_ISSUE : 수신자에게 전자명세서가 발행취소 되었음을 알려주는 메일입니다.
   ##############################################################################
   def updateEmailConfig
@@ -1803,16 +1803,16 @@ class StatementController < ApplicationController
     joinInfo = {
 
         # 링크아이디
-        "LinkID" => "TESTER",
+        "LinkID" => StatementController::LinkID,
 
         # 아이디, 6자이상 50자미만
-        "ID" => "testkorea",
+        "ID" => "testkorea20190403",
 
         # 비밀번호, 6자이상 20자 미만
         "PWD" => "thisispassword",
 
         # 사업자번호, '-' 제외 10자리
-        "CorpNum" => "8888888888",
+        "CorpNum" => "0000001511",
 
         # 대표자 성명 (최대 100자)
         "CEOName" => "대표자성명",
