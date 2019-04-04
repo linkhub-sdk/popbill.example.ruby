@@ -2,7 +2,7 @@
 #
 # 팝빌 홈택스 전자세금계산서 연동 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-04
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -28,10 +28,10 @@ class HttaxinvoiceController < ApplicationController
   SecretKey = "SwWxqU+0TErBXy/9TVjIPEnI0VTUMMSQZtJf3Ed8q3I="
 
   # 팝빌 연동회원 사업자번호
-  TestCorpNum = "1234567890"
+  TestCorpNum = "6798700433"
 
   # 팝빌 연동회원 아이디
-  TestUserID = "testkorea"
+  TestUserID = "testkorea_linkhub"
 
   # 팝빌 홈택스 전자세금계산서 연동 API Service 초기화
   HTTIService = HTTaxinvoiceService.instance(
@@ -60,10 +60,10 @@ class HttaxinvoiceController < ApplicationController
     dType = "W"
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20180601"
+    sDate = "20190101"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20190120"
+    eDate = "20190601"
 
     begin
       @value = HttaxinvoiceController::HTTIService.requestJob(
@@ -92,7 +92,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 수집 요청(RequestJob API) 호출시 반환반은 작업아이디(jobID)
-    jobID = "018120517000000006"
+    jobID = "019040411000000001"
 
     begin
       @Response = HttaxinvoiceController::HTTIService.getJobState(corpNum, jobID)
@@ -134,7 +134,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 작업아이디
-    jobID = "018120517000000006"
+    jobID = "019040411000000002"
 
     # 문서형태 배열, N-일반세금계산서, M-수정세금계산서
     type = ["N", "M"]
@@ -195,7 +195,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 작업아이디
-    jobID = "018120517000000006"
+    jobID = "019040411000000002"
 
     # 문서형태 배열, N-일반세금계산서, M-수정세금계산서
     type = ["N", "M"]
@@ -244,7 +244,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 전자세금계산서 국세청 승인번호
-    ntsConfirmNum = "201812044100020300000c0a"
+    ntsConfirmNum = "201904024100020300000cc6"
 
     begin
       @Response = HttaxinvoiceController::HTTIService.getTaxinvoice(corpNum, ntsConfirmNum)
@@ -256,7 +256,7 @@ class HttaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # XML 형식의 전자세금계산서 상세정보를 확인합니다.
+  # 전자세금계산서 XML 정보를 확인합니다.
   # - 응답항목에 관한 정보는 "[홈택스연동 (전자세금계산서계산서) API 연동매뉴얼] >
   #   3.2.4. GetXML(상세정보 확인 - XML)" 을 참고하시기 바랍니다.
   ##############################################################################
@@ -266,7 +266,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 전자세금계산서 국세청 승인번호
-    ntsConfirmNum = "201812044100020300000c0a"
+    ntsConfirmNum = "201904024100020300000cc6"
 
     begin
       @Response = HttaxinvoiceController::HTTIService.getXML(corpNum, ntsConfirmNum)
@@ -278,7 +278,7 @@ class HttaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 홈택스 전자세금계산서 보기 팝업 URL을 반환힙니다.
+  # 전자세금계산서 보기 팝업 URL을 반환힙니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
   def getPopUpURL
@@ -287,7 +287,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 국세청 승인번호
-    ntsConfirmNum = "201812044100020300000c0a"
+    ntsConfirmNum = "201904024100020300000cc6"
 
     begin
       @value = HttaxinvoiceController::HTTIService.getPopUpURL(
@@ -304,8 +304,8 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 홈택스연동 인증관리를 위한 URL을 반환합니다.
-  # 인증방식에는 부서사용자/공인인증서 인증 방식이 있습니다.
   # - 반환된 URL은 보안정책에 따라 30초의 유효시간을 갖습니다.
+  # - 부서사용자 또는 공인인증서 인증이 가능합니다.
   ##############################################################################
   def getCertificatePopUpURL
 
