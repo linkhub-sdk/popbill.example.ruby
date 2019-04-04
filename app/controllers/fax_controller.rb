@@ -1,7 +1,7 @@
 ################################################################################
 # 팜빌 팩스 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-03
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -83,9 +83,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 팩스를 전송합니다. (전송할 파일 개수는 최대 20개까지 가능)
   #  - 팩스전송 문서 파일포맷 안내 : http://blog.linkhub.co.kr/2561
-  #  - 팩스 과금 방식 안내 : https://partner.linkhub.co.kr/Customer/Notice/813
-  #  - 팝빌에 사전등록되지 않은 발신번호를 기재한 경우 팝빌 지정 발신번호로팩스가 전송 됩니다.
-  #  - [참고] "[팩스 API 연동매뉴얼] > 1.3. 팩스전송 제한 사유 안내"
+  #  - 팝빌에 사전등록되지 않은 발신번호를 기재한 경우 팝빌 지정 발신번호로 팩스가 전송 됩니다.
   ##############################################################################
   def sendFax
 
@@ -108,7 +106,7 @@ class FaxController < ApplicationController
     receiverName = "수신자명"
 
     # 파일경로 배열, 최대 전송 파일개수 20개
-    filePath = ["/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"]
+    filePath = ["/Users/John/Desktop/test.jpg"]
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
@@ -148,9 +146,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # [대량전송] 팩스를 전송합니다. (전송할 파일 개수는 최대 20개까지 가능)
   #  - 팩스전송 문서 파일포맷 안내 : http://blog.linkhub.co.kr/2561
-  #  - 팩스 과금 방식 안내 : https://partner.linkhub.co.kr/Customer/Notice/813
-  #  - 팝빌에 사전등록되지 않은 발신번호를 기재한 경우 팝빌 지정 발신번호로팩스가 전송 됩니다.
-  #  - [참고] "[팩스 API 연동매뉴얼] > 1.3. 팩스전송 제한 사유 안내"
+  #  - 팝빌에 사전등록되지 않은 발신번호를 기재한 경우 팝빌 지정 발신번호로 팩스가 전송 됩니다.
   ##############################################################################
   def sendFax_Multi
 
@@ -179,7 +175,7 @@ class FaxController < ApplicationController
     ]
 
     # 파일경로 배열, 최대 전송 파일개수 20개
-    filePath = ["/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"]
+    filePath = ["/Users/John/Desktop/test.jpg"]
 
     # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
     reserveDT = ""
@@ -517,7 +513,7 @@ class FaxController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
-    # 팩스전송 전송요청번호
+    # 팩스전송시 할당한 전송요청번호
     requestNum = "20190121-01"
 
     begin
@@ -539,7 +535,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팩스전송 접수번호
-    receiptNum = "018112714511700001"
+    receiptNum = "019040318211300001"
 
     begin
       @Response = FaxController::FAXService.getFaxDetail(corpNum, receiptNum)
@@ -551,7 +547,7 @@ class FaxController < ApplicationController
   end
 
   ##############################################################################
-  # 팩스전송요청시 할당한 전송요청번호(requestNum)으로 전송결과를 확인합니다
+  # 팩스전송요청시 할당한 요청번호(requestNum)로 전송결과를 확인합니다
   # - 응답항목에 대한 자세한 사항은 "[팩스 API 연동매뉴얼] >  3.3.2 GetFaxDetailRN (전송내역 및 전송상태 확인 - 요청번호 할당)을 참조하시기 바랍니다.
   ##############################################################################
   def getFaxDetailRN
@@ -559,8 +555,8 @@ class FaxController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = FaxController::TestCorpNum
 
-    # 팩스전송 접수번호
-    requestNum = "20190125-001"
+    # 팩스전송시 할당한 전송요청번호
+    requestNum = "20190403-01"
 
     begin
       @Response = FaxController::FAXService.getFaxDetailRN(corpNum, requestNum)
@@ -592,10 +588,10 @@ class FaxController < ApplicationController
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]
 
-    # 예약전송 검색여부, "1"-예약전송건 조회, 0-예약전송 아닌건만 조회, 공백-전체조회
+    # 예약전송 검색여부, "1"-예약전송건 조회, "0"-예약전송 아닌건만 조회, ""-전체조회
     reserveYN = ""
 
-    # 개인조회 여부, "1"-개인조회, "0"-회사조회, 공백-전체조회
+    # 개인조회 여부, "1"-개인조회, "0"-회사조회, ""-전체조회
     senderYN = ""
 
     # 페이지 번호
@@ -658,7 +654,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팩스 미리보기 팝업 URL을 반환합니다.
-  # - 팩스 미리보기는 팩변환 완료후 가능합니다
+  # - 팩스 미리보기는 변환완료후 가능합니다
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   ##############################################################################
   def getPreviewURL
