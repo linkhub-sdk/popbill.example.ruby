@@ -349,6 +349,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/ClosedownExample/checkIsMember" => 'closedown#checkIsMember', via: [:get]
   get "/ClosedownExample/checkID" => 'closedown#checkID', via: [:get]
   get "/ClosedownExample/joinMember" => 'closedown#joinMember', via: [:get]
+  get "/ClosedownExample/getCorpInfo" => 'closedown#getCorpInfo', via: [:get]
   get "/ClosedownExample/updateCorpInfo" => 'closedown#updateCorpInfo', via: [:get]
   get "/ClosedownExample/registContact" => 'closedown#registContact', via: [:get]
   get "/ClosedownExample/listContact" => 'closedown#listContact', via: [:get]

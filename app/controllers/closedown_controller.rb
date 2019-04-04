@@ -1,14 +1,15 @@
 ################################################################################
-# 팜빌 휴폐업조회 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 팝빌 휴폐업조회 API Ruby On Rails SDK Example
+#
+# 업데이트 일자 : 2019-04-04
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
-# 1) 19, 22번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
+# 1) 20, 23번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-# 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
+#
 ################################################################################
 
 require 'popbill/closedown'
@@ -66,7 +67,9 @@ class ClosedownController < ApplicationController
     corpNum = ClosedownController::TestCorpNum
 
     # 조회할 사업자번호 배열, 최대 1000건
-    targetCorpNumList = ["1234567890", "6798700433"]
+    targetCorpNumList = Array.new
+    targetCorpNumList.push("1234567890")
+    targetCorpNumList.push("6798700433")
 
     begin
       @Response = ClosedownController::CDService.checkCorpNums(corpNum, targetCorpNumList)
@@ -254,7 +257,7 @@ class ClosedownController < ApplicationController
     joinInfo = {
 
         # 링크아이디
-        "LinkID" => "TESTER",
+        "LinkID" => ClosedownController::LinkID,
 
         # 아이디, 6자이상 50자미만
         "ID" => "testkorea",
@@ -299,31 +302,6 @@ class ClosedownController < ApplicationController
     begin
       @Response = ClosedownController::CDService.joinMember(joinInfo)
       render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  ##############################################################################
-  def getAccessURL
-
-    # 팝빌회원 사업자번호
-    corpNum = ClosedownController::TestCorpNum
-
-    # 팝빌회원 아이디
-    userID = ClosedownController::TestUserID
-
-    begin
-      @value = ClosedownController::CDService.getAccessURL(
-          corpNum,
-          userID,
-      )
-      @name = "URL"
-      render "home/result"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
@@ -501,6 +479,31 @@ class ClosedownController < ApplicationController
           userID
       )
       render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getAccessURL
+
+    # 팝빌회원 사업자번호
+    corpNum = ClosedownController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = ClosedownController::TestUserID
+
+    begin
+      @value = ClosedownController::CDService.getAccessURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
     rescue PopbillException => pe
       @Response = pe
       render "home/exception"
