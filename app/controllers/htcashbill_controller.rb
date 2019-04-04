@@ -2,7 +2,7 @@
 #
 # 팝빌 홈택스 현금영수증 연동 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-03
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -28,10 +28,10 @@ class HtcashbillController < ApplicationController
   SecretKey = "SwWxqU+0TErBXy/9TVjIPEnI0VTUMMSQZtJf3Ed8q3I="
 
   # 팝빌 연동회원 사업자번호
-  TestCorpNum = "1234567890"
+  TestCorpNum = "6798700433"
 
   # 팝빌 연동회원 아이디
-  TestUserID = "testkorea"
+  TestUserID = "testkorea_linkhub"
 
   # 팝빌 홈택스 현금영수증 연동 API Service 초기화
   HTCBService = HTCashbillService.instance(
@@ -53,14 +53,14 @@ class HtcashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = HtcashbillController::TestCorpNum
 
-    # 현금영수증 유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 현금영수증 유형, SELL-매출, BUY-매입
     keyType = KeyType::BUY
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20180601"
+    sDate = "20190101"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20190120"
+    eDate = "20190601"
 
     begin
       @value = HtcashbillController::HTCBService.requestJob(
@@ -69,7 +69,7 @@ class HtcashbillController < ApplicationController
           sDate,
           eDate,
       )
-      @name = "jobID(접수번호)"
+      @name = "jobID(작업아이디)"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -88,7 +88,7 @@ class HtcashbillController < ApplicationController
     corpNum = HtcashbillController::TestCorpNum
 
     # 수집 요청(RequestJob API) 호출시 반환반은 작업아이디(jobID)
-    jobID = "018112709000000001"
+    jobID = "019040413000000006"
 
     begin
       @Response = HtcashbillController::HTCBService.getJobState(corpNum, jobID)
@@ -130,10 +130,10 @@ class HtcashbillController < ApplicationController
     corpNum = HtcashbillController::TestCorpNum
 
     # 작업아이디
-    jobID = "018112709000000001"
+    jobID = "019040413000000006"
 
     # 현금영수증 형태 배열, N-일반현금영수증, C-취소현금영수증
-    tradeType = ["N", "M"]
+    tradeType = ["N", "C"]
 
     # 거래용도 배열, P-소득공제용, C-지출증빙용
     tradeUsage = ["P", "C"]
@@ -165,7 +165,7 @@ class HtcashbillController < ApplicationController
   end
 
   ##############################################################################
-  # 현금영수증 매입/매출 내역의 수집 결과 요약정보를 조회합니다.
+  # 현금영수증 매입/매출 내역의 수집결과 요약정보를 조회합니다.
   # - 응답항목에 관한 정보는 "[홈택스연동 (현금영수증) API 연동매뉴얼] >
   #   3.2.2. Summary(수집 결과 요약정보 조회)" 을 참고하시기 바랍니다.
   ##############################################################################
@@ -175,10 +175,10 @@ class HtcashbillController < ApplicationController
     corpNum = HtcashbillController::TestCorpNum
 
     # 작업아이디
-    jobID = "018112709000000001"
+    jobID = "019040413000000006"
 
     # 현금영수증 형태 배열, N-일반현금영수증, C-취소현금영수증
-    tradeType = ["N", "M"]
+    tradeType = ["N", "C"]
 
     # 거래용도 배열, P-소득공제용, C-지출증빙용
     tradeUsage = ["P", "C"]
@@ -199,8 +199,8 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 홈택스연동 인증관리를 위한 URL을 반환합니다.
-  # 인증방식에는 부서사용자/공인인증서 인증 방식이 있습니다.
   # - 반환된 URL은 보안정책에 따라 30초의 유효시간을 갖습니다.
+  # - 부서사용자/공인인증서 인증 방식이 있습니다.
   ##############################################################################
   def getCertificatePopUpURL
 
@@ -535,7 +535,7 @@ class HtcashbillController < ApplicationController
     joinInfo = {
 
         # 링크아이디
-        "LinkID" => "TESTER",
+        "LinkID" => HtcashbillController::LinkID,
 
         # 아이디, 6자이상 50자미만
         "ID" => "testkorea",
