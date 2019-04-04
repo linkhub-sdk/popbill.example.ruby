@@ -1,24 +1,25 @@
 ################################################################################
 # 팜빌 카카오톡 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-02-12
+# 업데이트 일자 : 2019-04-04
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
 # <테스트 연동개발 준비사항>
 # 1) 32, 35번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-# 2) 팝빌 개발용 사이트(test.popbill.com)에 연동회원으로 가입합니다.
-# 3)친구톡/ 알림톡 전송하기 위해 발신번호 사전등록을 합니다.(등록방법은 사이트/API 두가지 방식이 있습니다.
-#     1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
-#     2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
-# 4) 플러스친구 등록 및 알림톡 템플릿을 신청합니다.
-#     1. 플러스 친구등록 (등록방법은 사이트/API 두가지 방식이 있습니다.)
-#      - 1. 팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > '플러스친구 계정관리' 메뉴에서 등록
-#      - 2. GetPlusFriendMgtURL API 를 통해 반환된 URL을 이용하여 등록
-#     2. 알림톡 템플릿 신청 (등록방법은 사이트/API 두가지 방식이 있습니다.)
-#      - 1. 팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > '알림톡 템플릿 관리' 메뉴에서 등록
-#      - 2. GetATSTemplateMgtURL API 를 통해 URL을 이용하여 등록
+
+# 2) 발신번호를 사전등록 합니다. (등록방법은 사이트/API 두가지 방식이 있습니다.
+#    (1) 팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
+#    (2) getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+
+# 3) 플러스친구 등록 및 알림톡 템플릿을 신청합니다.
+#    (1) 플러스 친구등록 (등록방법은 사이트/API 두가지 방식이 있습니다.)
+#       -  팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > '플러스친구 계정관리' 메뉴에서 등록
+#       -  GetPlusFriendMgtURL API 를 통해 반환된 URL을 이용하여 등록
+#    (2) 알림톡 템플릿 신청 (등록방법은 사이트/API 두가지 방식이 있습니다.)
+#       -  팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > '알림톡 템플릿 관리' 메뉴에서 등록
+#       -  GetATSTemplateMgtURL API 를 통해 URL을 이용하여 등록
 ################################################################################
 
 require 'popbill/kakaotalk'
@@ -56,7 +57,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     begin
       @value = KakaoController::KakaoService.getPlusFriendMgtURL(
@@ -80,7 +81,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     begin
       @Response = KakaoController::KakaoService.listPlusFriendID(
@@ -104,7 +105,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     begin
       @value = KakaoController::KakaoService.getSenderNumberMgtURL(
@@ -148,7 +149,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     begin
       @value = KakaoController::KakaoService.getATSTemplateMgtURL(
@@ -200,16 +201,16 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 알림톡 템플릿코드 (ListATSTemplate API의 반환 항목 중 templateCode 기재)
-    templateCode = '018110000047'
+    templateCode = '019020000163'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
     snd = '070-4304-2991'
 
     # 알림톡 내용 (최대 1000자)
-    content = '테스트 템플릿 입니다.'
+    content = '[ 팝빌 ] 신청하신 템플릿에 대한 심사가 완료되어 승인 처리되었습니다. 해당 템플릿으로 전송 가능합니다.'
 
     # 대체문자 내용 (최대 2000byte)
     altContent = '대체문자 내용 입니다'
@@ -221,7 +222,7 @@ class KakaoController < ApplicationController
     sndDT = ''
 
     # 수신자명
-    receiverName = '루비'
+    receiverName = '수신자명'
 
     # [필수] 수신번호
     receiver = '010111222'
@@ -253,76 +254,6 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
-  # [대량전송] 알림톡 전송을 요청합니다.
-  # - 사전에 승인된 템플릿의 내용과 알림톡 전송내용(msg)이 다를 경우 전송실패 처리된다.
-  # - 알림톡 템플릿 등록방법.  (사이트/API 등록방법 제공)
-  #     1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > 알림톡 템플릿 관리
-  #     2.getATSTemplateMgtURL API를 통해 반환된 URL을 이용하여 템플릿 관리
-  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신번호 미등록 오류로 처리된다.
-  # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
-  #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
-  #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
-  ##############################################################################
-  def sendATS_multi
-
-    # [필수] 팝빌회원 사업자번호
-    corpNum = KakaoController::TestCorpNum
-
-    # 팝빌회원 아이디
-    userID = 'testkorea'
-
-    # [필수] 알림톡 템플릿코드 (ListATSTemplate API의 반환 항목 중 templateCode 기재)
-    templateCode = '018110000047'
-
-    # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
-    snd = '070-4304-2991'
-
-    # 대체문자 유형 (공백-미전송 / C-알림톡내용 / A-대체문자내용)
-    altSendType = 'A'
-
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
-    sndDT = ''
-
-    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
-    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
-    requestNum = ''
-
-    # 알림톡 전송정보 (최대 1000 개)
-    msg = [
-        {
-            "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
-            "msg" => "테스트 템플릿 [루비님] 입니다.", # 알림톡 내용 (최대 1000자)
-            "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
-        },
-        {
-            "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
-            "msg" => "테스트 템플릿 [레일즈] 입니다.", # 알림톡 내용 (최대 1000자)
-            "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
-        },
-    ]
-
-    begin
-      @value = KakaoController::KakaoService.sendATS_multi(
-          corpNum,
-          templateCode,
-          snd,
-          altSendType,
-          sndDT,
-          msg,
-          requestNum,
-          userID,
-      )['receiptNum']
-      @name = "receiptNum(접수번호)"
-      render "home/result"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # [동보전송] 알림톡 전송을 요청합니다.
   # - 사전에 승인된 템플릿의 내용과 알림톡 전송내용(content)이 다를 경우 전송실패 처리된다.
   # - 알림톡 템플릿 등록방법.  (사이트/API 등록방법 제공)
@@ -339,10 +270,10 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 알림톡 템플릿코드 (ListATSTemplate API의 반환 항목 중 templateCode 기재)
-    templateCode = '018110000047'
+    templateCode = '019020000163'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
     snd = '070-4304-2991'
@@ -396,9 +327,79 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
+  # [대량전송] 알림톡 전송을 요청합니다.
+  # - 사전에 승인된 템플릿의 내용과 알림톡 전송내용(msg)이 다를 경우 전송실패 처리된다.
+  # - 알림톡 템플릿 등록방법.  (사이트/API 등록방법 제공)
+  #     1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > 알림톡 템플릿 관리
+  #     2.getATSTemplateMgtURL API를 통해 반환된 URL을 이용하여 템플릿 관리
+  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신번호 미등록 오류로 처리된다.
+  # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
+  #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
+  #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  ##############################################################################
+  def sendATS_multi
+
+    # [필수] 팝빌회원 사업자번호
+    corpNum = KakaoController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = KakaoController::TestUserID
+
+    # [필수] 알림톡 템플릿코드 (ListATSTemplate API의 반환 항목 중 templateCode 기재)
+    templateCode = '019020000163'
+
+    # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
+    snd = '070-4304-2991'
+
+    # 대체문자 유형 (공백-미전송 / C-알림톡내용 / A-대체문자내용)
+    altSendType = 'A'
+
+    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+    sndDT = ''
+
+    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
+    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
+    requestNum = ''
+
+    # 알림톡 전송정보 (최대 1000 개)
+    msg = [
+        {
+            "rcv" => "010123456", # [필수] 수신번호
+            "rcvnm" => "ruby", # 수신자명
+            "msg" => "테스트 템플릿 입니다.", # 알림톡 내용 (최대 1000자)
+            "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
+        },
+        {
+            "rcv" => "010890456", # [필수] 수신번호
+            "rcvnm" => "rails", # 수신자명
+            "msg" => "테스트 템플릿 입니다.", # 알림톡 내용 (최대 1000자)
+            "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
+        },
+    ]
+
+    begin
+      @value = KakaoController::KakaoService.sendATS_multi(
+          corpNum,
+          templateCode,
+          snd,
+          altSendType,
+          sndDT,
+          msg,
+          requestNum,
+          userID,
+      )['receiptNum']
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 친구톡(텍스트) 전송을 요청합니다.
   # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
-  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
+  # - 팝빌에 등록되지 않은 발신번호로 친구톡 메시지를 전송하는 경우 발신번호 미등록 오류로 처리됩니다.
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
@@ -409,7 +410,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 팝빌에 등록된 플러스 친구
     plusFriendID = '@팝빌'
@@ -483,97 +484,9 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
-  # [대량전송] 친구톡(텍스트) 전송을 요청합니다.
-  # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
-  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
-  # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
-  #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
-  #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
-  ##############################################################################
-  def sendFTS_multi
-
-    # [필수] 팝빌회원 사업자번호
-    corpNum = KakaoController::TestCorpNum
-
-    # 팝빌회원 아이디
-    userID = 'testkorea'
-
-    # [필수] 팝빌에 등록된 플러스 친구
-    plusFriendID = '@팝빌'
-
-    # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
-    snd = '070-4304-2991'
-
-    # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
-    altSendType = 'A'
-
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
-    sndDT = ''
-
-    # 광고 전송여부
-    adsYN = false
-
-    # 친구톡 전송정보 (최대 1000 개)
-    msg = [
-        {
-            "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
-            "msg" => "친구톡 대량전송 내용 입니다. [Ruby]", # 친구톡 내용 (최대 1000자)
-            "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
-        },
-        {
-            "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
-            "msg" => "친구톡 대량전송  내용 입니다. [Rails]", # 친구톡 내용 (최대 1000자)
-            "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
-        },
-    ]
-
-    # 버튼 목록 (최대 5개)
-    btns = [
-        {
-            "n" => "앱링크", #버튼
-            "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
-            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
-            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
-        },
-        {
-            "n" => "팝빌 바로가기",
-            "t" => "WL",
-            "u1" => "http://www.popbill.com",
-            "u2" => "http://www.popbill.com",
-        }
-    ]
-
-    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
-    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
-    requestNum = ''
-
-    begin
-      @value = KakaoController::KakaoService.sendFTS_multi(
-          corpNum,
-          plusFriendID,
-          snd,
-          altSendType,
-          sndDT,
-          msg,
-          btns,
-          adsYN,
-          requestNum,
-          userID,
-      )['receiptNum']
-      @name = "receiptNum(접수번호)"
-      render "home/result"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # [동보전송] 친구톡(텍스트) 전송을 요청합니다.
   # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
-  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
+  # - 팝빌에 등록되지 않은 발신번호로 친구톡 메시지를 전송하는 경우 발신번호 미등록 오류로 처리됩니다.
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
@@ -584,7 +497,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 팝빌에 등록된 플러스 친구
     plusFriendID = '@팝빌'
@@ -663,9 +576,99 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
+  # [대량전송] 친구톡(텍스트) 전송을 요청합니다.
+  # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
+  # - 팝빌에 등록되지 않은 발신번호로 친구톡 메시지를 전송하는 경우 발신번호 미등록 오류로 처리됩니다.
+  # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
+  #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
+  #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  ##############################################################################
+  def sendFTS_multi
+
+    # [필수] 팝빌회원 사업자번호
+    corpNum = KakaoController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = KakaoController::TestUserID
+
+    # [필수] 팝빌에 등록된 플러스 친구
+    plusFriendID = '@팝빌'
+
+    # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
+    snd = '070-4304-2991'
+
+    # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
+    altSendType = 'A'
+
+    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+    sndDT = ''
+
+    # 광고 전송여부
+    adsYN = false
+
+    # 친구톡 전송정보 (최대 1000 개)
+    msg = [
+        {
+            "rcv" => "010123456", # [필수] 수신번호
+            "rcvnm" => "ruby", # 수신자명
+            "msg" => "친구톡 대량전송 내용 입니다. 01", # 친구톡 내용 (최대 1000자)
+            "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
+        },
+        {
+            "rcv" => "010890456", # [필수] 수신번호
+            "rcvnm" => "rails", # 수신자명
+            "msg" => "친구톡 대량전송  내용 입니다. 02", # 친구톡 내용 (최대 1000자)
+            "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
+        },
+    ]
+
+    # 버튼 목록 (최대 5개)
+    btns = [
+        {
+            "n" => "앱링크", #버튼
+            "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
+            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
+        },
+        {
+            "n" => "팝빌 바로가기",
+            "t" => "WL",
+            "u1" => "http://www.popbill.com",
+            "u2" => "http://www.popbill.com",
+        }
+    ]
+
+    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
+    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
+    requestNum = ''
+
+    begin
+      @value = KakaoController::KakaoService.sendFTS_multi(
+          corpNum,
+          plusFriendID,
+          snd,
+          altSendType,
+          sndDT,
+          msg,
+          btns,
+          adsYN,
+          requestNum,
+          userID,
+      )['receiptNum']
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
+
+  ##############################################################################
   # 친구톡(이미지) 전송을 요청합니다.
   # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
-  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
+  # - 팝빌에 등록되지 않은 발신번호로 친구톡 메시지를 전송하는 경우 발신번호 미등록 오류로 처리됩니다.
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
@@ -677,7 +680,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 팝빌에 등록된 플러스 친구
     plusFriendID = '@팝빌'
@@ -707,7 +710,7 @@ class KakaoController < ApplicationController
     imageURL = 'https://www.popbill.com'
 
     # filePath (전송포맷:jpg파일 & 용량제한 최대:500Kbyte & 이미지 높이/너비 비율: 1.333이하, 1/2이상)
-    filePath = '/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg'
+    filePath = '/Users/John/Desktop/test01.jpg'
 
     # 광고 전송여부
     adsYN = false
@@ -759,6 +762,107 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
+  # [동보전송] 친구톡(이미지) 전송을 요청합니다.
+  # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
+  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
+  # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
+  #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
+  #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - 이미지 전송규격 / jpg 포맷, 용량 최대 500KByte, 이미지 높이/너비 비율 1.333 이하, 1/2 이상
+  ##############################################################################
+  def sendFMS_same
+
+    # [필수] 팝빌회원 사업자번호
+    corpNum = KakaoController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = KakaoController::TestUserID
+
+    # [필수] 팝빌에 등록된 플러스 친구
+    plusFriendID = '@팝빌'
+
+    # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
+    snd = '070-4304-2991'
+
+    # 친구톡 내용 (최대 400자)
+    content = '친구톡 동보 내용 입니다.'
+
+    # 대체문자 내용 (최대 2000byte)
+    altContent = '대체문자 내용 입니다'
+
+    # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
+    altSendType = 'A'
+
+    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+    sndDT = ''
+
+    # 친구톡 이미지 링크 URL (수신자가 친구톡 상단 이미지 선택시 호출되는 URL)
+    imageURL = 'https://www.popbill.com'
+
+    # filePath (전송포맷:jpg파일 & 용량제한 최대:500Kbyte & 이미지 높이/너비 비율: 1.333이하, 1/2이상)
+    filePath = '/Users/John/Desktop/test01.jpg'
+
+    # 광고 전송여부
+    adsYN = false
+
+    # 친구톡 전송정보 (최대 1000 개)
+    msg = [
+        {
+            "rcv" => "010123456", # [필수] 수신번호
+            "rcvnm" => "ruby", # 수신자명
+        },
+        {
+            "rcv" => "010890456", # [필수] 수신번호
+            "rcvnm" => "rails", # 수신자명
+        },
+    ]
+
+    # 버튼 목록 (최대 5개)
+    btns = [
+        {
+            "n" => "앱링크", #버튼
+            "t" => "AL", #버튼유형, (DS-배송조회 / WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
+            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
+        },
+        {
+            "n" => "팝빌 바로가기", #버튼
+            "t" => "WL", #버튼유형, (DS-배송조회 / WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
+            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
+        }
+    ]
+
+    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
+    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
+    requestNum = ''
+
+    begin
+      @value = KakaoController::KakaoService.sendFMS_same(
+          corpNum,
+          plusFriendID,
+          snd,
+          content,
+          altContent,
+          altSendType,
+          sndDT,
+          filePath,
+          imageURL,
+          msg,
+          btns,
+          adsYN,
+          requestNum,
+          userID,
+      )['receiptNum']
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # [대량전송] 친구톡(이미지) 전송을 요청합니다.
   # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
   # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
@@ -773,7 +877,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 팝빌에 등록된 플러스 친구
     plusFriendID = '@팝빌'
@@ -791,7 +895,7 @@ class KakaoController < ApplicationController
     imageURL = 'https://www.popbill.com'
 
     # filePath (전송포맷:jpg파일 & 용량제한 최대:500Kbyte & 이미지 높이/너비 비율: 1.333이하, 1/2이상)
-    filePath = '/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg'
+    filePath = '/Users/John/Desktop/test01.jpg'
 
     # 광고 전송여부
     adsYN = false
@@ -855,106 +959,6 @@ class KakaoController < ApplicationController
     end
   end
 
-  ##############################################################################
-  # [동보전송] 친구톡(이미지) 전송을 요청합니다.
-  # - 친구톡은 심야 전송(20:00~08:00)이 제한됩니다.
-  # - 팝빌에 등록되지 않은 발신번호로 알림톡 메시지를 전송하는 경우 발신 번호 미등록 오류로 처리된다.
-  # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
-  #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
-  #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
-  # - 이미지 전송규격 / jpg 포맷, 용량 최대 500KByte, 이미지 높이/너비 비율 1.333 이하, 1/2 이상
-  ##############################################################################
-  def sendFMS_same
-
-    # [필수] 팝빌회원 사업자번호
-    corpNum = KakaoController::TestCorpNum
-
-    # 팝빌회원 아이디
-    userID = 'testkorea'
-
-    # [필수] 팝빌에 등록된 플러스 친구
-    plusFriendID = '@팝빌'
-
-    # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
-    snd = '070-4304-2991'
-
-    # 친구톡 내용 (최대 400자)
-    content = '친구톡 동보 내용 입니다.'
-
-    # 대체문자 내용 (최대 2000byte)
-    altContent = '대체문자 내용 입니다'
-
-    # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
-    altSendType = 'A'
-
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
-    sndDT = ''
-
-    # 친구톡 이미지 링크 URL (수신자가 친구톡 상단 이미지 선택시 호출되는 URL)
-    imageURL = 'https://www.popbill.com'
-
-    # filePath (전송포맷:jpg파일 & 용량제한 최대:500Kbyte & 이미지 높이/너비 비율: 1.333이하, 1/2이상)
-    filePath = '/Users/kimhyunjin/SDK/popbill.example.ruby/test.jpg'
-
-    # 광고 전송여부
-    adsYN = false
-
-    # 친구톡 전송정보 (최대 1000 개)
-    msg = [
-        {
-            "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
-        },
-        {
-            "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
-        },
-    ]
-
-    # 버튼 목록 (최대 5개)
-    btns = [
-        {
-            "n" => "앱링크", #버튼
-            "t" => "AL", #버튼유형, (DS-배송조회 / WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
-            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
-            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
-        },
-        {
-            "n" => "팝빌 바로가기", #버튼
-            "t" => "WL", #버튼유형, (DS-배송조회 / WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
-            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
-            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
-        }
-    ]
-
-    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
-    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
-    requestNum = ''
-
-    begin
-      @value = KakaoController::KakaoService.sendFMS_same(
-          corpNum,
-          plusFriendID,
-          snd,
-          content,
-          altContent,
-          altSendType,
-          sndDT,
-          filePath,
-          imageURL,
-          msg,
-          btns,
-          adsYN,
-          requestNum,
-          userID,
-      )['receiptNum']
-      @name = "receiptNum(접수번호)"
-      render "home/result"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
 
   ##############################################################################
   # 알림톡/친구톡 전송요청시 발급받은 접수번호(receiptNum)로 예약전송건을 취소합니다.
@@ -966,10 +970,10 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 예약전송 요청시 발급 받은 접수번호
-    receiptNum = '018062514310600001'
+    receiptNum = '019040411012700001'
 
     begin
       @Response = KakaoController::KakaoService.cancelReserve(
@@ -994,10 +998,10 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20180725143406'
+    requestNum = '20190404-01'
 
     begin
       @Response = KakaoController::KakaoService.cancelReserveRN(
@@ -1021,10 +1025,10 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 예약전송 요청시 발급 받은 접수번호
-    receiptNum = '018062817583800001'
+    receiptNum = '019040411012700001'
 
     begin
       @Response = KakaoController::KakaoService.getMessages(
@@ -1048,10 +1052,10 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     # [필수] 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190120-001'
+    requestNum = '20190404-01'
 
     begin
       @Response = KakaoController::KakaoService.getMessagesRN(
@@ -1083,7 +1087,7 @@ class KakaoController < ApplicationController
     sDate = "20190101"
 
     # [필수] 종료일자, 날자형식(yyyyMMdd)
-    eDate = "20190121"
+    eDate = "20190601"
 
     # 전송상태값 배열 [0-대기, 1-전송중, 2-성공, 3-대체, 4-실패, 5-취소]
     state = [0, 1, 2, 3, 4, 5]
@@ -1141,7 +1145,7 @@ class KakaoController < ApplicationController
     corpNum = KakaoController::TestCorpNum
 
     # 팝빌회원 아이디
-    userID = 'testkorea'
+    userID = KakaoController::TestUserID
 
     begin
       @value = KakaoController::KakaoService.getSentListURL(
