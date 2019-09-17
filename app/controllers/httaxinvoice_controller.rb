@@ -57,13 +57,13 @@ class HttaxinvoiceController < ApplicationController
     keyType = KeyType::SELL
 
     # 일자유형, W-작성일자, I-발행일자, S-전송일자
-    dType = "W"
+    dType = "S"
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20190801"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20190601"
+    eDate = "20191231"
 
     begin
       @value = HttaxinvoiceController::HTTIService.requestJob(

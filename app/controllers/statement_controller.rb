@@ -2,7 +2,7 @@
 #
 # 팝빌 전자명세서 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-04-02
+# 업데이트 일자 : 2019-09-17
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -49,8 +49,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-01"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-01"
 
     begin
       @response = StatementController::STMTService.checkMgtKeyInUse(
@@ -65,7 +65,7 @@ class StatementController < ApplicationController
         @value = "미사용중"
       end
 
-      @name = "문서관리번호 사용여부 확인"
+      @name = "문서번호 사용여부 확인"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -84,8 +84,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 전자명세서 정보
     statement = {
@@ -96,11 +96,11 @@ class StatementController < ApplicationController
         # 맞춤양식코드, 공백처리시 기본양식으로 작성
         "formCode" => "",
 
-        # [필수] 문서관리번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
+        # [필수] 문서번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190402",
+        "writeDate" => "20190917",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -211,7 +211,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -223,7 +223,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -269,8 +269,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20910403-04"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-04"
 
     # 전자명세서 정보
     statement = {
@@ -281,11 +281,11 @@ class StatementController < ApplicationController
         # 맞춤양식코드, 공백처리시 기본양식으로 작성
         "formCode" => "",
 
-        # [필수] 문서관리번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
+        # [필수] 문서번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190402",
+        "writeDate" => "20190917",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -396,7 +396,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -408,7 +408,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190402", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -454,8 +454,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20910403-04"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-04"
 
     # 전자명세서 정보
     statement = {
@@ -466,11 +466,11 @@ class StatementController < ApplicationController
         # 맞춤양식코드, 공백처리시 기본양식으로 작성
         "formCode" => "",
 
-        # [필수] 문서관리번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
+        # [필수] 문서번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190402",
+        "writeDate" => "20190917",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -580,7 +580,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190403", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -592,7 +592,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190403", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -640,8 +640,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-01"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-01"
 
     # 메모
     memo = ""
@@ -675,8 +675,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 메모
     memo = ""
@@ -697,7 +697,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 1건의 전자명세서를 삭제합니다.
-  # - 삭제시 해당 문서에 할단된 문서관리번호(mgtKey)를 재사용할 수 있습니다.
+  # - 삭제시 해당 문서에 할단된 문서번호(mgtKey)를 재사용할 수 있습니다.
   # - 삭제가능한 문서 상태 : [임시저장], [거부], [발행취소]
   ##############################################################################
   def delete
@@ -708,8 +708,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @Response = StatementController::STMTService.delete(
@@ -737,8 +737,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @Response = StatementController::STMTService.getInfo(
@@ -766,8 +766,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호 배열, 최대 1000건
-    mgtKeyList = ["20190402-01", "20190402-02"]
+    # 전자명세서 문서번호 배열, 최대 1000건
+    mgtKeyList = ["20190917-01", "20190917-02"]
 
     begin
       @Response = StatementController::STMTService.getInfos(
@@ -795,8 +795,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-01"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-01"
 
     begin
       @Response = StatementController::STMTService.getDetailInfo(
@@ -826,10 +826,10 @@ class StatementController < ApplicationController
     dType = "W"
 
     # [필수] 시작일자, 날짜형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20190701"
 
     # [필수] 종료일자, 날짜형식(yyyyMMdd)
-    eDate = "20190119"
+    eDate = "20191231"
 
     # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성
     # 2,3번째 와일드카드 가능 ex) 1**, 2**
@@ -884,8 +884,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @Response = StatementController::STMTService.getLogs(
@@ -936,8 +936,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @value = StatementController::STMTService.getPopUpURL(
@@ -965,8 +965,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @value = StatementController::STMTService.getPrintURL(
@@ -994,8 +994,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @value = StatementController::STMTService.getEPrintURL(
@@ -1023,8 +1023,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호 배열, 최대 100건
-    mgtKeyList = ["20190402-01", "20190402-02", "20190403-03"]
+    # 전자명세서 문서번호 배열, 최대 100건
+    mgtKeyList = ["20190917-01", "20190917-02", "20190917-03"]
 
     begin
       @value = StatementController::STMTService.getMassPrintURL(
@@ -1052,8 +1052,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @value = StatementController::STMTService.getMailURL(
@@ -1107,8 +1107,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 첨부파일 경로
     filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"
@@ -1140,8 +1140,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 파일아이디, getFiles API 응답 항목중 AttachedFile 값 참조.
     fileID = "664ED8A5-7226-4BA5-84BD-514C56A014FE.PBF"
@@ -1173,8 +1173,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190121-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     begin
       @Response = StatementController::STMTService.getFiles(
@@ -1200,8 +1200,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 이메일주소
     emailAddr = "test@test.com"
@@ -1234,8 +1234,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1276,8 +1276,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-02"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1314,8 +1314,8 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-04"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-04"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1332,7 +1332,7 @@ class StatementController < ApplicationController
         # 맞춤양식코드, 공백처리시 기본양식으로 작성
         "formCode" => "",
 
-        # [필수] 문서관리번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
+        # [필수] 문서번호, 숫자, 영문, '-', '_' 조합 (최대24자리)으로 사업자별로 중복되지 않도록 구성
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
@@ -1505,13 +1505,13 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-01"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-01"
 
     # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     stmtItemCode = 121
 
-    # 첨부할 전자명세서 문서관리번호
+    # 첨부할 전자명세서 문서번호
     stmtMgtKey = "20190402-02"
 
     begin
@@ -1540,13 +1540,13 @@ class StatementController < ApplicationController
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 문서관리번호
-    mgtKey = "20190402-01"
+    # 전자명세서 문서번호
+    mgtKey = "20190917-01"
 
     # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     stmtItemCode = 121
 
-    # 첨부해제할 전자명세서 문서관리번호
+    # 첨부해제할 전자명세서 문서번호
     stmtMgtKey = "20190402-02"
 
     begin

@@ -2,7 +2,7 @@
 #
 # 팝빌 문자 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-04-03
+# 업데이트 일자 : 2019-09-16
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -104,13 +104,13 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 수신번호
     receiver = "010000111"
 
     # 수신자명
-    receiverName = "MyPhone"
+    receiverName = "수신자명"
 
     # 메시지내용, 90byte초과된 내용은 삭제되어 전송됨..
     contents = "message send Test"
@@ -166,7 +166,7 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 메시지 내용, 90byte 초과된 내용은 삭제되어 전송됨.
     contents = "message send Test"
@@ -175,11 +175,11 @@ class MessageController < ApplicationController
     receivers = [
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin2", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
 
@@ -233,13 +233,13 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 수신번호
     receiver = "010000111"
 
     # 수신자명
-    receiverName = "MyPhone"
+    receiverName = "수신자명"
 
     # 메시지 제목
     subject = "This is subject"
@@ -300,7 +300,7 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 메시지 제목
     subject = "This is subject"
@@ -311,11 +311,11 @@ class MessageController < ApplicationController
     receivers = [
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin2", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
 
@@ -371,13 +371,13 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 수신번호
     receiver = "010111222"
 
     # 수신자명
-    receiverName = "MyPhone"
+    receiverName = "수신자명"
 
     # 메시지 제목
     subject = "This is subject"
@@ -441,7 +441,7 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 메시지 제목
     subject = "This is subject"
@@ -453,11 +453,11 @@ class MessageController < ApplicationController
     receivers = [
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin2", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
 
@@ -517,13 +517,13 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 수신번호
     receiver = "010000111"
 
     # 수신자명
-    receiverName = "MyPhone"
+    receiverName = "수신자명"
 
     # 메시지 제목
     subject = "This is subject"
@@ -584,10 +584,10 @@ class MessageController < ApplicationController
     sender = "07043042991"
 
     # 발신자명
-    senderName = "Jin"
+    senderName = "발신자명"
 
     # 메시지 제목
-    subject = "This is subject"
+    subject = "메시지제목"
 
     # 메시지 내용, 메시지 내용의 길이(90byte)에 따라 SMS/LMS(단문/장문)를 자동인식하여 전송됨.
     contents = "message send Test XMS Multi"
@@ -596,11 +596,11 @@ class MessageController < ApplicationController
     receivers = [
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010000111", # 수신번호
-            "rcvnm" => "Jin2", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
 
@@ -667,7 +667,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = '019040317000000014-001'
+    requestNum = '20190917-001'
 
     begin
       @Response = MessageController::MSGService.cancelReserveRN(corpNum, requestNum)
@@ -709,7 +709,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = "20190403-01"
+    requestNum = "20190917-01"
 
     begin
       @Response = MessageController::MSGService.getMessagesRN(corpNum, requestNum)
@@ -752,10 +752,10 @@ class MessageController < ApplicationController
     userID = MessageController::TestUserID
 
     # [필수] 시작일자, 날짜형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20190701"
 
     # [필수] 종료일자, 날짜형식(yyyyMMdd)
-    eDate = "20190430"
+    eDate = "20191231"
 
     # 전송상태값 배열, 1-대기, 2-성공, 3-실패, 4-취소
     state = [1, 2, 3, 4]

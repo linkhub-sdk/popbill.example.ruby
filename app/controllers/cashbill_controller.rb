@@ -2,7 +2,7 @@
 #
 # 팝빌 현금영수증 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-04-03
+# 업데이트 일자 : 2019-09-17
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -38,15 +38,15 @@ class CashbillController < ApplicationController
   CBService.setIsTest(true)
 
   ##############################################################################
-  # 현금영수증 관리번호 중복여부를 확인합니다.
-  # - 관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
+  # 현금영수증 문서번호 중복여부를 확인합니다.
+  # - 문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
   ##############################################################################
   def checkMgtKeyInUse
 
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호, 최대 24자리로 숫자, 영문 '-', '_' 조합하여 구성
+    # 현금영수증 문서번호, 최대 24자리로 숫자, 영문 '-', '_' 조합하여 구성
     mgtKey = "20190403-01"
 
     begin
@@ -61,7 +61,7 @@ class CashbillController < ApplicationController
         @value = "미사용중"
       end
 
-      @name = "문서관리번호 사용여부 확인"
+      @name = "문서번호 사용여부 확인"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -78,13 +78,13 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
+    # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190403-02"
 
     # 현금영수증 정보
     cashbill = {
 
-        # [필수] 문서관리번호
+        # [필수] 문서번호
         "mgtKey" => mgtKey,
 
         # [필수] 문서형태
@@ -172,13 +172,13 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
+    # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190403-03"
 
     # 현금영수증 정보
     cashbill = {
 
-        # [필수] 문서관리번호
+        # [필수] 문서번호
         "mgtKey" => mgtKey,
 
         # [필수] 문서형태
@@ -266,13 +266,13 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-03"
 
     # 현금영수증 정보
     cashbill = {
 
-        # [필수] 문서관리번호
+        # [필수] 문서번호
         "mgtKey" => mgtKey,
 
         # [필수] 문서형태
@@ -364,7 +364,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-03"
 
     begin
@@ -389,7 +389,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-03"
 
     begin
@@ -406,7 +406,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 1건의 현금영수증을 삭제합니다.
-  # - 현금영수증을 삭제하면 사용된 문서관리번호(mgtKey)를 재사용할 수 있습니다.
+  # - 현금영수증을 삭제하면 사용된 문서번호(mgtKey)를 재사용할 수 있습니다.
   # - 삭제가능한 문서 상태 : [임시저장], [발행취소]
   ##############################################################################
   def delete
@@ -414,7 +414,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-03"
 
     begin
@@ -439,7 +439,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
+    # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190403-08"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
@@ -475,7 +475,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 아이디
     userID = CashbillController::TestUserID
 
-    # 현금영수증 문서관리번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
+    # 현금영수증 문서번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
     mgtKey = "20190403-09"
 
     # 원본 현금영수증 국세청승인번호
@@ -541,7 +541,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
+    # 현금영수증 문서번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
     mgtKey = "20190403-10"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
@@ -577,7 +577,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 아이디
     userID = CashbillController::TestUserID
 
-    # 현금영수증 문서관리번호 (관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
+    # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
     mgtKey = "20190403-11"
 
     # 원본 현금영수증 국세청승인번호
@@ -639,7 +639,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     begin
@@ -664,7 +664,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 배열, 최대 1000건
+    # 현금영수증 문서번호 배열, 최대 1000건
     mgtKeyList = Array.new
     mgtKeyList.push("20190403-01")
     mgtKeyList.push("20190403-06")
@@ -695,7 +695,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-06"
 
     begin
@@ -794,7 +794,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-09"
 
     begin
@@ -843,7 +843,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     begin
@@ -868,7 +868,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     begin
@@ -893,7 +893,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     begin
@@ -918,7 +918,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호 배열, 최대 100건
+    # 현금영수증 문서번호 배열, 최대 100건
     mgtKeyList = Array.new
     mgtKeyList.push("20190403-06")
     mgtKeyList.push("20190403-07")
@@ -946,7 +946,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-06"
 
     begin
@@ -995,7 +995,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     # 이메일 주소
@@ -1024,7 +1024,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     # 발신번호
@@ -1062,7 +1062,7 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
-    # 현금영수증 문서관리번호
+    # 현금영수증 문서번호
     mgtKey = "20190403-11"
 
     # 발신번호

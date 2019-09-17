@@ -2,7 +2,7 @@
 #
 # 팝빌 홈택스 현금영수증 연동 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-04-03
+# 업데이트 일자 : 2019-09-17
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -57,10 +57,10 @@ class HtcashbillController < ApplicationController
     keyType = KeyType::BUY
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20190801"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20190601"
+    eDate = "20191231"
 
     begin
       @value = HtcashbillController::HTCBService.requestJob(

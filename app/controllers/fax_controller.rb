@@ -2,7 +2,7 @@
 #
 # 팝빌 팩스 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-04-03
+# 업데이트 일자 : 2019-09-17
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -581,10 +581,10 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20190301"
+    sDate = "20190701"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20190331"
+    eDate = "20191001"
 
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]

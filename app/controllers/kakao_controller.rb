@@ -2,7 +2,7 @@
 #
 # 팝빌 카카오톡 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-04-04
+# 업데이트 일자 : 2019-09-17
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -300,11 +300,11 @@ class KakaoController < ApplicationController
     msg = [
         {
             "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "popbill", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010333999", # [필수] 수신번호
-            "rcvnm" => "linkhub", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
     begin
@@ -367,13 +367,13 @@ class KakaoController < ApplicationController
     msg = [
         {
             "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
             "msg" => "테스트 템플릿 입니다.", # 알림톡 내용 (최대 1000자)
             "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
         },
         {
             "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
             "msg" => "테스트 템플릿 입니다.", # 알림톡 내용 (최대 1000자)
             "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
         },
@@ -433,7 +433,7 @@ class KakaoController < ApplicationController
     sndDT = ''
 
     # 수신자명
-    receiverName = '루비'
+    receiverName = '수신자명01'
 
     # [필수] 수신번호
     receiver = '010111222'
@@ -526,11 +526,11 @@ class KakaoController < ApplicationController
     msg = [
         {
             "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
 
@@ -612,13 +612,13 @@ class KakaoController < ApplicationController
     msg = [
         {
             "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
             "msg" => "친구톡 대량전송 내용 입니다. 01", # 친구톡 내용 (최대 1000자)
             "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
         },
         {
             "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
             "msg" => "친구톡 대량전송  내용 입니다. 02", # 친구톡 내용 (최대 1000자)
             "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
         },
@@ -703,7 +703,7 @@ class KakaoController < ApplicationController
     sndDT = ''
 
     # 수신자명
-    receiverName = '루비'
+    receiverName = '수신자명01'
 
     # [필수] 수신번호
     receiver = '010111222'
@@ -811,11 +811,11 @@ class KakaoController < ApplicationController
     msg = [
         {
             "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
         },
         {
             "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
         },
     ]
 
@@ -906,13 +906,13 @@ class KakaoController < ApplicationController
     msg = [
         {
             "rcv" => "010123456", # [필수] 수신번호
-            "rcvnm" => "ruby", # 수신자명
+            "rcvnm" => "수신자명01", # 수신자명
             "msg" => "친구톡 다량 내용 입니다. [Ruby]", # 친구톡 내용 (최대 400자)
             "altmsg" => "대체문자1", # 대체문자 내용 (최대 2000byte)
         },
         {
             "rcv" => "010890456", # [필수] 수신번호
-            "rcvnm" => "rails", # 수신자명
+            "rcvnm" => "수신자명02", # 수신자명
             "msg" => "친구톡 다량 내용 입니다. [Rails]", # 친구톡 내용 (최대 400자)
             "altmsg" => "대체문자2", # 대체문자 내용 (최대 2000byte)
         },
@@ -1003,7 +1003,7 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190404-01'
+    requestNum = '20190917-01'
 
     begin
       @Response = KakaoController::KakaoService.cancelReserveRN(
@@ -1057,7 +1057,7 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190404-01'
+    requestNum = '20190917-01'
 
     begin
       @Response = KakaoController::KakaoService.getMessagesRN(
@@ -1086,10 +1086,10 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 시작일자, 날자형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20190801"
 
     # [필수] 종료일자, 날자형식(yyyyMMdd)
-    eDate = "20190601"
+    eDate = "20191231"
 
     # 전송상태값 배열 [0-대기, 1-전송중, 2-성공, 3-대체, 4-실패, 5-취소]
     state = [0, 1, 2, 3, 4, 5]
