@@ -1,18 +1,12 @@
 ################################################################################
 #
-# 팝빌 전자세금계산서 API Ruby On Rails SDK Example
+# POPBILL API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2019-09-17
-# 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
-# 연동기술지원 이메일 : code@linkhub.co.kr
+# Updated : 2019-09-20
+# Technical Support : 1600-9854 / 070-4304-2991~2 / code@linkhub.co.kr
 #
-# <테스트 연동개발 준비사항>
-# 1) 24, 27번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
-#    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-#
-# 2) 전자세금계산서 발행을 위해 공인인증서를 등록합니다.
-#    - 팝빌사이트 로그인 > [전자세금계산서] > [환경설정] > [공인인증서 관리]
-#    - 공인인증서 등록 팝업 URL (GetTaxCertURL API)을 이용하여 등록
+# <Requirement>
+# Change LinkID/SecretKey line 18, 21
 #
 ################################################################################
 
@@ -20,40 +14,38 @@ require 'popbill/taxinvoice'
 
 class TaxinvoiceController < ApplicationController
 
-  # 링크아이디
+  # LinkID
   LinkID = "TESTER"
 
-  # 비밀키
+  # SecretKey
   SecretKey = "SwWxqU+0TErBXy/9TVjIPEnI0VTUMMSQZtJf3Ed8q3I="
 
-  # 팝빌 연동회원 사업자번호
+  # Business registration number of POPBILL user (10 digits except ‘-’)
   TestCorpNum = "1234567890"
 
-  # 팝빌 연동회원 아이디
+  # POPBILL user ID
   TestUserID = "testkorea"
 
-  # 팝빌 전자세금계산서 API Service 초기화
+  # POPBILL e-Tax Invoice API Service Initialize
   TIService = TaxinvoiceService.instance(
       TaxinvoiceController::LinkID,
       TaxinvoiceController::SecretKey
   )
 
-  # 연동환경 설정, true-개발용, false-상업용
+  # Configuration API Target, true-(POPBILL Test-bed), false-(POPBILL Real)
   TIService.setIsTest(true)
 
   ##############################################################################
-  # 세금계산서 문서번호 사용여부를 확인합니다.
-  # - 관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
+  # Checking the availability of e-Tax invoice id
   ##############################################################################
   def checkMgtKeyInUse
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 문서번호
-    mgtKey = "20190917-01"
+    # Invoice id assigned by partner    mgtKey = "20190917-01"
 
-    # 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     begin
@@ -64,12 +56,12 @@ class TaxinvoiceController < ApplicationController
       )
 
       if @response
-        @value = "사용중"
+        @value = "in use"
       else
-        @value = "미사용중"
+        @value = "not use"
       end
 
-      @name = "문서번호 사용여부 확인"
+      @name = "checkMgtKeyInUse"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -78,38 +70,36 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 세금계산서를 즉시발행 처리합니다.
-  # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서 구성"을
-  # 참조하시기 바랍니다.
+  # Regist and issue the e-Tax invoice
   ##############################################################################
   def registIssue
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-    # 사업자 별로 중복되지 않도록 구성
+    # Seller invoice id (No redundancy)
+    # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
     mgtKey = "20190917-01"
 
-    # 세금계산서 정보
+    # e-Tax Invoice object
     taxinvoice = {
 
         ######################### 공급자정보 #########################
 
-        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => corpNum,
 
-        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Seller] Identification number for minor place of business
         "invoicerTaxRegID" => "",
 
-        # [필수] 공급자 상호
+        # [Seller] Company name	
         "invoicerCorpName" => "상호명",
 
         # [필수] 공급자 대표자 성명
         "invoicerCEOName" => "대표자명",
 
-        # [필수] 공급자 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-        # 사업자 별로 중복되지 않도록 구성
+        # Seller invoice id (No redundancy)
+        # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
         "invoicerMgtKey" => mgtKey,
 
         # 공급자 주소
@@ -341,32 +331,32 @@ class TaxinvoiceController < ApplicationController
   #################################################################################################################
   def register
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-    # 사업자 별로 중복되지 않도록 구성
+    # Seller invoice id (No redundancy)
+    # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
     mgtKey = "20190917-03"
 
-    # 세금계산서 정보
+    # e-Tax Invoice object
     taxinvoice = {
 
         ######################### 공급자정보 #########################
 
-        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => corpNum,
 
-        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Seller] Identification number for minor place of business
         "invoicerTaxRegID" => "",
 
-        # [필수] 공급자 상호
+        # [Seller] Company name
         "invoicerCorpName" => "상호명",
 
         # [필수] 공급자 대표자 성명
         "invoicerCEOName" => "대표자명",
 
-        # [필수] 공급자 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
-        # 사업자 별로 중복되지 않도록 구성
+        # Seller invoice id (No redundancy)
+        # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
         "invoicerMgtKey" => mgtKey,
 
         # 공급자 주소
@@ -587,33 +577,35 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def update
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 수정할 세금계산서 문서번호
+    # 수정할 Invoice id assigned by partner
+
     mgtKey = "20190917-02"
 
-    # 세금계산서 정보
+    # e-Tax Invoice object
     taxinvoice = {
 
         ######################### 공급자정보 #########################
 
-        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => corpNum,
 
-        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Seller] Identification number for minor place of business
         "invoicerTaxRegID" => "",
 
-        # [필수] 공급자 상호
+        # [Seller] Company name
         "invoicerCorpName" => "상호명_수정",
 
         # [필수] 공급자 대표자 성명
         "invoicerCEOName" => "대표자명_수정",
 
-        # [필수] 공급자 문서번호
+        # Seller invoice id (No redundancy)
+        # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
         "invoicerMgtKey" => mgtKey,
 
         # 공급자 주소
@@ -817,13 +809,13 @@ class TaxinvoiceController < ApplicationController
   ######################################################################################
   def issue
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190402-02"
 
     # 지연발행 강제여부
@@ -863,13 +855,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def cancelIssue
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 메모
@@ -898,27 +890,27 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def registRequest
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
-    # 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-03"
 
-    # 세금계산서 정보
+    # e-Tax Invoice object
     taxinvoice = {
 
         ######################### 공급자정보 #########################
 
-        # [필수] 공급자 사업자번호, '-' 제외 10자리
+        # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => "8888888888",
 
-        # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Seller] Identification number for minor place of business
         "invoicerTaxRegID" => "",
 
-        # [필수] 공급자 상호
+        # [Seller] Company name
         "invoicerCorpName" => "상호명",
 
         # [필수] 공급자 대표자 성명
@@ -1125,13 +1117,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def requestTI
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::BUY
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-03"
 
     # 메모
@@ -1157,13 +1149,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def cancelRequest
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::BUY
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-03"
 
     # 메모
@@ -1189,13 +1181,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def refuse
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 메모
@@ -1222,13 +1214,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def delete
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-03"
 
     begin
@@ -1251,13 +1243,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def sendToNTS
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1280,13 +1272,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getInfo
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1309,13 +1301,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getInfos
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호 배열, 최대 1000건
+    # Invoice id assigned by partner 배열, 최대 1000건
     mgtKeyList = ["20190917-01", "20190917-02"]
 
     begin
@@ -1338,13 +1330,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getDetailInfo
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1367,13 +1359,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def search
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # [필수] 일자유형, R-등록일시 W-작성일자 I-발행일시 중 택1
@@ -1461,13 +1453,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getLogs
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1489,7 +1481,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     # TBOX(임시문서함), SBOX(매출문서함), PBOX(매입문서함), WRITE(매출문서작성)
@@ -1514,13 +1506,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getPopUpURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-01"
 
     begin
@@ -1542,13 +1534,13 @@ class TaxinvoiceController < ApplicationController
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
   ##############################################################################
   def getPrintURL
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1571,13 +1563,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getEPrintURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1600,13 +1592,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getMassPrintURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호 배열, 최대 100건
+    # Invoice id assigned by partner 배열, 최대 100건
     mgtKeyList = ["20190917-02", "20190917-01"]
 
     begin
@@ -1629,13 +1621,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getMailURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1658,10 +1650,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getAccessURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     begin
@@ -1683,10 +1675,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getSealURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     begin
@@ -1709,13 +1701,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def attachFile
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 첨부파일경로
@@ -1742,13 +1734,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def deleteFile
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 파일아이디, GetFiles API 응답항목 중 파일아이디 (AttachedFile) 값 기재
@@ -1774,13 +1766,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getFiles
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     begin
@@ -1801,13 +1793,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def sendEmail
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 공급받는자 담당자 메일주소
@@ -1835,13 +1827,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def sendSMS
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 발신번호
@@ -1877,13 +1869,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def sendFax
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 발신번호
@@ -1912,13 +1904,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def attachStatement
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
@@ -1947,13 +1939,13 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def detachStatement
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 문서번호
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
@@ -1982,7 +1974,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getEmailPublicKeys
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2001,7 +1993,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def assignMgtKey
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 세금계산서 유형 SELL-매출, BUY-매입, TRUSTEE-위수탁
@@ -2034,10 +2026,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def listEmailConfig
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     begin
@@ -2097,10 +2089,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def updateEmailConfig
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     # 메일 전송 유형
@@ -2129,10 +2121,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getTaxCertURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     begin
@@ -2155,7 +2147,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getCertificateExpireDate
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2175,7 +2167,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def checkCertValidation
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2196,7 +2188,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getBalance
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2215,10 +2207,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getChargeURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     begin
@@ -2240,7 +2232,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getPartnerBalance
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2259,7 +2251,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getPartnerURL
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     # CHRG-포인트충전
@@ -2283,7 +2275,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getChargeInfo
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2300,7 +2292,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getUnitCost
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2321,7 +2313,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def checkIsMember
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 파트너 링크아이디
@@ -2421,7 +2413,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def getCorpInfo
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2438,7 +2430,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def updateCorpInfo
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 회사정보
@@ -2477,7 +2469,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def registContact
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 담당자 정보
@@ -2529,7 +2521,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def listContact
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
     begin
@@ -2547,10 +2539,10 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   def updateContact
 
-    # 팝빌회원 사업자번호
+    # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 팝빌회원 아이디
+    # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
     # 담당자 정보

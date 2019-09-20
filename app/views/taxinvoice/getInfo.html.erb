@@ -4,44 +4,44 @@
   <fieldset class="fieldset1">
     <legend><%= request.env['PATH_INFO'] %></legend>
     <ul>
-      <li>itemKey (팝빌 관리번호) : <%= @Response["itemKey"] %></li>
-      <li>taxType (과세형태) : <%= @Response["taxType"] %></li>
-      <li>writeDate (작성일자) : <%= @Response["writeDate"] %></li>
-      <li>regDT (임시저장 일자) : <%= @Response["regDT"] %></li>
-      <li>issueType (발행형태) : <%= @Response["issueType"] %></li>
-      <li>supplyCostTotal (공급가액 합계) : <%= @Response["supplyCostTotal"] %></li>
-      <li>taxTotal (세액 합계) : <%= @Response["taxTotal"] %></li>
-      <li>purposeType (영수/청구) : <%= @Response["purposeType"] %></li>
-      <li>issueDT (발행일시) : <%= @Response["issueDT"] %></li>
-      <li>lateIssueYN (지연발행 여부) : <%= @Response["lateIssueYN"] %></li>
-      <li>openYN (개봉 여부) : <%= @Response["openYN"] %></li>
-      <li>openDT (개봉 일시) : <%= @Response["openDT"] %></li>
-      <li>stateMemo (상태메모) : <%= @Response["stateMemo"] %></li>
-      <li>stateCode (상태코드) : <%= @Response["stateCode"] %></li>
-      <li>nstconfirmNum (국세청승인번호) : <%= @Response["ntsconfirmNum"] %></li>
-      <li>ntsresult (국세청 전송결과) : <%= @Response["ntsresult"] %></li>
-      <li>ntssendDT (국세청 전송일시) : <%= @Response["ntssendDT"] %></li>
-      <li>ntsresultDT (국세청 결과 수신일시) : <%= @Response["ntsresultDT"] %></li>
-      <li>ntssendErrCode (전송실패 사유코드) : <%= @Response["ntssendErrCode"] %></li>
-      <li>modifyCode (수정 사유코드) : <%= @Response["modifyCode"] %></li>
-      <li>interOPYN (연동문서 여부) : <%= @Response["interOPYN"] %></li>
+      <li>itemKey : <%= @Response["itemKey"] %></li>
+      <li>taxType : <%= @Response["taxType"] %></li>
+      <li>writeDate : <%= @Response["writeDate"] %></li>
+      <li>regDT  : <%= @Response["regDT"] %></li>
+      <li>issueType : <%= @Response["issueType"] %></li>
+      <li>supplyCostTotal  : <%= @Response["supplyCostTotal"] %></li>
+      <li>taxTotal : <%= @Response["taxTotal"] %></li>
+      <li>purposeType : <%= @Response["purposeType"] %></li>
+      <li>issueDT : <%= @Response["issueDT"] %></li>
+      <li>lateIssueYN  : <%= @Response["lateIssueYN"] %></li>
+      <li>openYN : <%= @Response["openYN"] %></li>
+      <li>openDT : <%= @Response["openDT"] %></li>
+      <li>stateMemo  : <%= @Response["stateMemo"] %></li>
+      <li>stateCode : <%= @Response["stateCode"] %></li>
+      <li>nstconfirmNum : <%= @Response["ntsconfirmNum"] %></li>
+      <li>ntsresult : <%= @Response["ntsresult"] %></li>
+      <li>ntssendDT : <%= @Response["ntssendDT"] %></li>
+      <li>ntsresultDT : <%= @Response["ntsresultDT"] %></li>
+      <li>ntssendErrCode : <%= @Response["ntssendErrCode"] %></li>
+      <li>modifyCode : <%= @Response["modifyCode"] %></li>
+      <li>interOPYN : <%= @Response["interOPYN"] %></li>
 
-      <li>invoicerCorpName (공급자 상호) : <%= @Response["invoicerCorpName"] %></li>
-      <li>invoicerCorpNum (공급자 사업자번호) : <%= @Response["invoicerCorpNum"] %></li>
-      <li>invoicerMgtKey (공급자 문서번호) : <%= @Response["invoicerMgtKey"] %></li>
-      <li>invoicerPrintYN (공급자 인쇄여부) : <%= @Response["invoicerPrintYN"] %></li>
+      <li>invoicerCorpName : <%= @Response["invoicerCorpName"] %></li>
+      <li>invoicerCorpNum : <%= @Response["invoicerCorpNum"] %></li>
+      <li>invoicerMgtKey : <%= @Response["invoicerMgtKey"] %></li>
+      <li>invoicerPrintYN : <%= @Response["invoicerPrintYN"] %></li>
 
-      <li>invoiceeCorpName (공급받는자 상호) : <%= @Response["invoiceeCorpName"] %></li>
-      <li>invoiceeCorpNum (공급받는자 사업자번호) : <%= @Response["invoiceeCorpNum"] %></li>
-      <li>invoiceeMgtKey (공급받는자 문서번호) : <%= @Response["invoiceeMgtKey"] %></li>
-      <li>invoiceePrintYN (공급받는자 인쇄여부) : <%= @Response["invoiceePrintYN"] %></li>
-      <li>closeDownState (공급받는자 휴폐업상태) : <%= @Response["closeDownState"] %></li>
-      <li>closeDownStateDate (공급받는자 휴폐업일자) : <%= @Response["closeDownStateDate"] %></li>
+      <li>invoiceeCorpName : <%= @Response["invoiceeCorpName"] %></li>
+      <li>invoiceeCorpNum : <%= @Response["invoiceeCorpNum"] %></li>
+      <li>invoiceeMgtKey : <%= @Response["invoiceeMgtKey"] %></li>
+      <li>invoiceePrintYN : <%= @Response["invoiceePrintYN"] %></li>
+      <li>closeDownState : <%= @Response["closeDownState"] %></li>
+      <li>closeDownStateDate : <%= @Response["closeDownStateDate"] %></li>
 
-      <li>trusteeCorpName (수탁자 상호) : <%= @Response["trusteeCorpName"] %></li>
-      <li>trusteeCorpNum (수탁자 사업자번호) : <%= @Response["trusteeCorpNum"] %></li>
-      <li>trusteeMgtKey (수탁자 문서번호) : <%= @Response["trusteeMgtKey"] %></li>
-      <li>trusteePrintYN (수탁자 인쇄여부) : <%= @Response["trusteePrintYN"] %></li>
+      <li>trusteeCorpName : <%= @Response["trusteeCorpName"] %></li>
+      <li>trusteeCorpNum : <%= @Response["trusteeCorpNum"] %></li>
+      <li>trusteeMgtKey : <%= @Response["trusteeMgtKey"] %></li>
+      <li>trusteePrintYN : <%= @Response["trusteePrintYN"] %></li>
     </ul>
   </fieldset>
 </div>
