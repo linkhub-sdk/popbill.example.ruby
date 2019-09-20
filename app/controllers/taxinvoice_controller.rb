@@ -84,7 +84,7 @@ class TaxinvoiceController < ApplicationController
     # e-Tax Invoice object
     taxinvoice = {
 
-        ######################### 공급자정보 #########################
+        ######################### Seller Info #########################
 
         # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => corpNum,
@@ -92,219 +92,214 @@ class TaxinvoiceController < ApplicationController
         # [Seller] Identification number for minor place of business
         "invoicerTaxRegID" => "",
 
-        # [Seller] Company name	
+        # [Seller] Company name
         "invoicerCorpName" => "상호명",
 
-        # [필수] 공급자 대표자 성명
+        # [Seller] CEO’s name
         "invoicerCEOName" => "대표자명",
 
         # Seller invoice id (No redundancy)
         # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
         "invoicerMgtKey" => mgtKey,
 
-        # 공급자 주소
+        # [Seller] Company address
         "invoicerAddr" => "공급자 주소",
 
-        # 공급자 업태
+        # [Seller] Business type
         "invoicerBizType" => "공급자 업태",
 
-        # 공급자 종목
+        # [Seller] Business item
         "invoicerBizClass" => "공급자 종목",
 
-        # 공급자 담당자명
+        # [Seller] Name of the person in charge
         "invoicerContactName" => "공급자 담당자명",
 
-        # 공급자 담당자 메일주소
+        # [Seller] Email address of the person in charge
         "invoicerEmail" => "test@test.com",
 
-        # 공급자 담당자 휴대폰번호
+        # [Seller] Mobile number of the person in charge
         "invoicerHP" => "010-111-222",
 
-        # 공급자 담당자 연락처
+        # [Seller] Telephone number of the person in charge
         "invoicerTEL" => "070-4304-2991",
 
-        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
-        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        # [Seller] Whether you send a notification SMS or not
         "invoicerSMSSendYN" => false,
 
 
-        ######################### 공급받는자정보 #########################
+        ######################### Buyer Info #########################
 
-        # [필수] 공급받는자 구분, {사업자, 개인, 외국인} 중 기재
+        # Put a KOREAN word [ “사업자(company)” or “개인(individual)” or “외국인(foreigner)” ]
         "invoiceeType" => "사업자",
 
-        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        # [Buyer] Business registration number
         "invoiceeCorpNum" => "8888888888",
 
-        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Buyer] Identification number for minor place of business
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 상호
+        # [Buyer] Company name
         "invoiceeCorpName" => "공급받는자 상호",
 
-        # [필수] 공급받는자 대표자 성명
+        # [Buyer] CEO’s name
         "invoiceeCEOName" => "대표자 성명",
 
-        # 공급받는자 문서번호
+        # [Buyer] Invoice id (No redundancy)
         "invoiceeMgtKey" => "",
 
-        # 공급받는자 주소
+        # [Buyer] Company address
         "invoiceeAddr" => "공급받는자 주소",
 
-        # 공급받는자 종목
+        # [Buyer] Business type
         "invoiceeBizClass" => "공급받는자 종목",
 
-        # 공급받는자 업태
+        # [Buyer] Business item
         "invoiceeBizType" => "공급받는자 업태",
 
-        # 공급받는자 담당자명
+        # [Buyer] Name of the person in charge
         "invoiceeContactName1" => "공급받는자담당자명",
 
-        # 공급받는자 담당자 메일주소
+        # [Buyer] Email address of the person in charge
         "invoiceeEmail1" => "test@test.com",
 
-        # 공급받는자 담당자 연락처
+        # [Buyer] Telephone number of the person in charge
         "invoiceeTEL1" => "070-1234-1234",
 
-        # 공급받는자 담당자 휴대폰번호
+        # [Buyer] Mobile number of the person in charge
         "invoiceeHP1" => "010-123-1234",
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
+        # Date of trading, Date format(yyyyMMdd) e.g. 20180509
         "writeDate" => "20190917",
 
-        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        # Issuance type, Put a KOREAN word [ “정발행”(e-Tax invoice) or “역발행” (Requested e-Tax invoice) or “위수탁”(Delegated e-Tax invoice) ]
         "issueType" => "정발행",
 
-        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        # Taxation type, Put a KOREAN word [ “과세” (Taxation) or “영세” (Zero-rate) or “면세” (Exemption) ]
         "taxType" => "과세",
 
-        # [필수] 발행시점
+        # Issuing Timing, Don't Change this field.
         "issueTiming" => "직접발행",
 
-        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        # Charging direction
+        # Put a KOREAN word[ “정과금(Charge to seller)” or “역과금(Charge to buyer” ]
+        # (*Charge to buyer is only available in requested e-Tax invoice issuance process)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, {영수, 청구} 중 기재
+        # Receipt/Charge, Put a KOREAN word [ “영수”(Receipt) or “청구”(Charge)
         "purposeType" => "영수",
 
-        # [필수] 공급가액 합계
+        # The sum of supply cost, Only numbers and – (hyphen) are acceptable
         "supplyCostTotal" => "20000",
 
-        # [필수] 세액 합계
+        # The sum of tax amount	, Only numbers and - (minus) are acceptable
         "taxTotal" => "2000",
 
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        # Total amount, Only numbers and – (hyphen) are acceptable
         "totalAmount" => "22000",
 
-        # 기재 상 '일련번호' 항목
+        # Serial number, One of e-Tax invoice’s items to manage document – ‘Serial number’
         "serialNum" => "",
 
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        # Volume, One of e-Tax invoice’s items to manage document – ‘Volume’ for a book
         "kwon" => nil,
 
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        # Number, One of e-Tax invoice’s items to manage document – ‘Number’ for a book
         "ho" => nil,
 
-        # 기재 상 '현금' 항목
+        # Cash, One of e-Tax invoice’s items – ‘cash’
         "cash" => "",
 
-        # 기재 상 '수표' 항목
+        # Check, One of e-Tax invoice’s items – ‘check’
         "chkBill" => "",
 
-        # 기재 상 '어음' 항목
+        # Note, One of e-Tax invoice’s items – ‘note’
         "note" => "",
 
-        # 기재 상 '외상미수금' 항목
+        # Credit, One of e-Tax invoice’s litems – ‘credit’
         "credit" => "",
 
-        # 기재 상 '비고' 항목
+        # Remark
         "remark1" => "비고1",
         "remark2" => "비고2",
         "remark3" => "비고3",
 
-        # 사업자등록증 이미지 첨부여부
+        # Attaching a business license, Prerequisite : Registration of a business license in advance
         "businessLicenseYN" => false,
 
-        # 통장사본 이미지 첨부여부
+        # Attaching a copy of bankbook, Prerequisite : Registration of a copy of bankbook in advance
         "bankBookYN" => false,
 
 
-        ######################### 수정세금계산서 정보 ##########################
-        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        ######################### for Modification ##########################
 
-        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+
+
+        # Modification code
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo) API의 응답필드 중 ItemKey 항목 기재
+        # Original POPILL invoice id of e-Tax invoice
         "originalTaxinvoiceKey" => "",
 
 
-        ######################### 상세항목(품목) 정보 #########################
-        # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
+        ######################### Detail List #########################
+
         ##################################################################
 
         "detailList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트1", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트1", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트2", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트2", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
         ],
 
-        ######################### 추가담당자정보 #########################
-        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다. (배열로 5까지 기재 가능)
-        ##############################################################
+        ######################### TaxinvoiceAdd Buyer Email #########################
 
         "addContactList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자01", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "contactName" => "담당자01", # Name of the person in charge
+                "email" => "test@test.com", # Email
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자02", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "contactName" => "담당자02", # Name of the person in charge
+                "email" => "test@test.com", # Email
             }
         ],
     }
 
-    # 거래명세서 동시작성여부
+    # Whether you want to write a transaction details or not [true-Yes / false-No]
     writeSpecification = false
 
-    # 지연발행 강제여부
-    # - 발행마감일이 지난 세금계산서를 발행하는 경우, 가산세가 부과될 수 있습니다.
-    # - 가산세가 부과되더라도 발행을 해야하는 경우에는 forceIssue의 값을 true로 선언하면 됩니다.
+    # Whether you force to issue an overdued e-Tax invoice or not [true-Yes / false-No]
     forceIssue = false
 
-    # 거래명세서 동시작성시 거래명세서 관리번호, 미기재시 세금계산서 관리번호로 자동작성
+    #	- writeSpecification’s value = true : invoice id of transaction details
+    # - writeSpecification’s value = false : invoice id of e-Tax invoice
     dealInvoiceMgtKey = ''
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = ''
 
-    # 발행안내메일 제목, 미기재시 기본양식으로 전송됨
+    # A notification mail’s title sent to a person in charge of Buyer (If, you write nothing, a title set by POPBILL will be assigned)
     emailSubject = ''
 
     begin
@@ -325,9 +320,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   #################################################################################################################
-  # 1건의 세금계산서를 [임시저장] 합니다.
-  #  - 임시저장 후에는 발행(Issue) API를 호출해야만 국세청으로 전송됩니다.
-  #  - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서구성"을 참조하시기 바랍니다.
+  # Save the e-Tax invoice
+  #  - Save the e-Tax invoice before issuing. Saved e-Tax invoice isn’t filed to NTS. Only after calling function ‘Issue API’, it would be filed.
   #################################################################################################################
   def register
 
@@ -341,7 +335,7 @@ class TaxinvoiceController < ApplicationController
     # e-Tax Invoice object
     taxinvoice = {
 
-        ######################### 공급자정보 #########################
+        ######################### Seller Info #########################
 
         # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => corpNum,
@@ -352,208 +346,196 @@ class TaxinvoiceController < ApplicationController
         # [Seller] Company name
         "invoicerCorpName" => "상호명",
 
-        # [필수] 공급자 대표자 성명
+        # [Seller] CEO’s name
         "invoicerCEOName" => "대표자명",
 
         # Seller invoice id (No redundancy)
         # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
         "invoicerMgtKey" => mgtKey,
 
-        # 공급자 주소
+        # [Seller] Company address
         "invoicerAddr" => "공급자 주소",
 
-        # 공급자 업태
+        # [Seller] Business type
         "invoicerBizType" => "공급자 업태",
 
-        # 공급자 종목
+        # [Seller] Business item
         "invoicerBizClass" => "공급자 종목",
 
-        # 공급자 담당자명
+        # [Seller] Name of the person in charge
         "invoicerContactName" => "공급자 담당자명",
 
-        # 공급자 담당자 메일주소
+        # [Seller] Email address of the person in charge
         "invoicerEmail" => "test@test.com",
 
-        # 공급자 담당자 휴대폰번호
+        # [Seller] Mobile number of the person in charge
         "invoicerHP" => "010-111-222",
 
-        # 공급자 담당자 연락처
+        # [Seller] Telephone number of the person in charge
         "invoicerTEL" => "070-4304-2991",
 
-        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
-        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        # [Seller] Whether you send a notification SMS or not
         "invoicerSMSSendYN" => false,
 
 
-        ######################### 공급받는자정보 #########################
+        ######################### Buyer Info #########################
 
-        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
+        # [Buyer] Buyer’s type, Put a KOREAN word [ “사업자(company)” or “개인(individual)” or “외국인(foreigner)” ]
         "invoiceeType" => "사업자",
 
-        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        # [Buyer] Business registration number
         "invoiceeCorpNum" => "8888888888",
 
-        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Buyer] Identification number for minor place of business
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 상호
+        # [Buyer] Company name
         "invoiceeCorpName" => "공급받는자 상호",
 
-        # [필수] 공급받는자 대표자 성명
+        # [Buyer] CEO’s name
         "invoiceeCEOName" => "대표자 성명",
 
-        # [역발행시 필수] 공급받는자 문서번호
+        # [Buyer] Invoice id
         "invoiceeMgtKey" => "",
 
-        # 공급받는자 주소
+        # [Buyer] Company address
         "invoiceeAddr" => "공급받는자 주소",
 
-        # 공급받는자 종목
+        # [Buyer] Business type
         "invoiceeBizClass" => "공급받는자 종목",
 
-        # 공급받는자 업태
+        # [Buyer] Business item
         "invoiceeBizType" => "공급받는자 업태",
 
-        # 공급받는자 담당자명
+        # [Buyer] Name of the person in charge
         "invoiceeContactName1" => "공급받는자담당자명",
 
-        # 공급받는자 담당자 메일주소
+        # [Buyer] Email address of the person in charge
         "invoiceeEmail1" => "test@test.com",
 
-        # 공급받는자 담당자 연락처
+        # [Buyer] Telephone number of the person in charge
         "invoiceeTEL1" => "070-1234-1234",
 
-        # 공급받는자 담당자 휴대폰번호
+        # [Buyer] Mobile number of the person in charge
         "invoiceeHP1" => "010-123-1234",
 
-        # 역발행 요청시 알림문자 전송여부 (역발행에서만 사용가능)
-        # - 공급자 담당자 휴대폰번호(invoicerHP)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        # [Buyer] Whether you send a notification SMS or not to Seller
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 날짜형식 (yyyyMMdd)
+        # Date of trading, Date format(yyyyMMdd) e.g. 20180509
         "writeDate" => "20190917",
 
-        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        # Issuance type, Put a KOREAN word [ “정발행”(e-Tax invoice) or “역발행” (Requested e-Tax invoice) or “위수탁”(Delegated e-Tax invoice) ]
         "issueType" => "정발행",
 
-        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        # Taxation type, Put a KOREAN word [ “과세” (Taxation) or “영세” (Zero-rate) or “면세” (Exemption) ]
         "taxType" => "과세",
 
-        # [필수] 발행시점
+        # Issuing Timing, Don't Change this field.
         "issueTiming" => "직접발행",
 
-        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        # Charging direction
+        # Put a KOREAN word[ “정과금(Charge to seller)” or “역과금(Charge to buyer” ]
+        # (*Charge to buyer is only available in requested e-Tax invoice issuance process)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, {영수, 청구} 중 기재
+        # Receipt/Charge, Put a KOREAN word [ “영수”(Receipt) or “청구”(Charge)
         "purposeType" => "영수",
 
-        # [필수] 공급가액 합계
+        # The sum of supply cost, Only numbers and - (minus) are acceptable
         "supplyCostTotal" => "20000",
 
-        # [필수] 세액 합계
+        # The sum of tax amount	, Only numbers and - (minus) are acceptable
         "taxTotal" => "2000",
 
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        # Total amount, Only numbers and – (minus) are acceptable
         "totalAmount" => "22000",
 
 
-        # 기재 상 '일련번호' 항목
+        # Serial number, One of e-Tax invoice’s items to manage document – ‘Serial number’
         "serialNum" => "",
 
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        # Volume, One of e-Tax invoice’s items to manage document – ‘Volume’ for a book
         "kwon" => nil,
 
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        # Number, One of e-Tax invoice’s items to manage document – ‘Number’ for a book
         "ho" => nil,
 
-        # 기재 상 '현금' 항목
+        # Cash, One of e-Tax invoice’s items – ‘cash’
         "cash" => "",
 
-        # 기재 상 '수표' 항목
+        # Check, One of e-Tax invoice’s items – ‘check’
         "chkBill" => "",
 
-        # 기재 상 '어음' 항목
+        # Note, One of e-Tax invoice’s items – ‘note’
         "note" => "",
 
-        # 기재 상 '외상미수금' 항목
+        # Credit, One of e-Tax invoice’s litems – ‘credit’
         "credit" => "",
 
-        # 기재 상 '비고' 항목
+        # Remark
         "remark1" => "비고1",
         "remark2" => "비고2",
         "remark3" => "비고3",
 
-        # 사업자등록증 이미지 첨부여부
+        # Attaching a business license, Prerequisite : Registration of a business license in advance
         "businessLicenseYN" => false,
 
-        # 통장사본 이미지 첨부여부
+        # Attaching a copy of bankbook, Prerequisite : Registration of a copy of bankbook in advance
         "bankBookYN" => false,
 
-        ######################### 수정세금계산서 정보 ##########################
-        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
-        ###################################################################
-
-        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+        ######################### for Modification ##########################
+        # Modification code
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        # Original POPILL invoice id of e-Tax invoice
         "originalTaxinvoiceKey" => "",
 
 
-        ######################### 상세항목(품목) 정보 #########################
-        # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
-        ##################################################################
+        ######################### Detail List #########################
 
         "detailList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트1", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트1", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트2", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트2", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
         ],
 
-        ######################### 추가담당자정보 #########################
-        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다. (배열로 5까지 기재 가능)
-        ##############################################################
+        ######################### TaxinvoiceAdd Buyer Email #########################
 
         "addContactList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자01", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 5)
+                "contactName" => "담당자01", # Name of the person in charge
+                "email" => "test@test.com", # Email
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자02", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "contactName" => "담당자02", # Name of the person in charge
+                "email" => "test@test.com", # Email
             }
         ],
     }
 
-    # 거래명세서 동시작성여부
+    # Whether you want to write a transaction details or not [true-Yes / false-No]
     writeSpecification = false
 
     begin
@@ -570,27 +552,23 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # [임시저장] 상태의 세금계산서의 항목을 수정합니다.
-  # - [임시저장] 상태가 아닌 세금계산서는 수정할 수 없습니다.
-  # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서 구성"을
-  #   참조하시기 바랍니다.
+  # Modify the e-Tax invoice. It is only available to saved e-Tax invoice.
   ##############################################################################
   def update
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 수정할 Invoice id assigned by partner
-
+    # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
     # e-Tax Invoice object
     taxinvoice = {
 
-        ######################### 공급자정보 #########################
+        ######################### Seller Info #########################
 
         # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => corpNum,
@@ -601,189 +579,182 @@ class TaxinvoiceController < ApplicationController
         # [Seller] Company name
         "invoicerCorpName" => "상호명_수정",
 
-        # [필수] 공급자 대표자 성명
+        # [Seller] CEO’s name
         "invoicerCEOName" => "대표자명_수정",
 
         # Seller invoice id (No redundancy)
         # - Combination of English letter, number, hyphen(‘-’) and underscore(‘_’)
         "invoicerMgtKey" => mgtKey,
 
-        # 공급자 주소
+        # [Seller] Company address
         "invoicerAddr" => "공급자 주소",
 
-        # 공급자 업태
+        # [Seller] Business type
         "invoicerBizType" => "공급자 업태",
 
-        # 공급자 종목
+        # [Seller] Business item
         "invoicerBizClass" => "공급자 종목",
 
-        # 공급자 담당자명
+        # [Seller] Name of the person in charge
         "invoicerContactName" => "공급자 담당자명",
 
-        # 공급자 담당자 메일주소
+        # [Seller] Email address of the person in charge
         "invoicerEmail" => "test@test.com",
 
-        # 공급자 담당자 휴대폰번호
+        # [Seller] Mobile number of the person in charge
         "invoicerHP" => "010-111-222",
 
-        # 공급자 담당자 연락처
+        # [Seller] Telephone number of the person in charge
         "invoicerTEL" => "070-4304-2991",
 
-        # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
-        # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        # [Seller] Whether you send a notification SMS or not
         "invoicerSMSSendYN" => false,
 
-        ######################### 공급받는자정보 #########################
 
-        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
+        ######################### Buyer Info #########################
+
+        # [Buyer] Buyer’s type, Put a KOREAN word [ “사업자(company)” or “개인(individual)” or “외국인(foreigner)” ]
         "invoiceeType" => "사업자",
 
-        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        # [Buyer] Business registration number
         "invoiceeCorpNum" => "8888888888",
 
-        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Buyer] Identification number for minor place of business
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 상호
+        # [Buyer] Company name
         "invoiceeCorpName" => "공급받는자 상호",
 
-        # [필수] 공급받는자 대표자 성명
+        # [Buyer] CEO’s name
         "invoiceeCEOName" => "대표자 성명",
 
-        # [역발행시 필수] 공급받는자 문서번호
+        # [Buyer] Invoice id
         "invoiceeMgtKey" => "",
 
-        # 공급받는자 주소
+        # [Buyer] Company address
         "invoiceeAddr" => "공급받는자 주소",
 
-        # 공급받는자 종목
+        # [Buyer] Business type
         "invoiceeBizClass" => "공급받는자 종목",
 
-        # 공급받는자 업태
+        # [Buyer] Business item
         "invoiceeBizType" => "공급받는자 업태",
 
-        # 공급받는자 담당자명
+        # [Buyer] Name of the person in charge
         "invoiceeContactName1" => "공급받는자담당자명",
 
-        # 공급받는자 담당자 메일주소
+        # [Buyer] Email address of the person in charge
         "invoiceeEmail1" => "test@test.com",
 
-        # 공급받는자 담당자 연락처
+        # [Buyer] Telephone number of the person in charge
         "invoiceeTEL1" => "070-1234-1234",
 
-        # 공급받는자 담당자 휴대폰번호
+        # [Buyer] Mobile number of the person in charge
         "invoiceeHP1" => "010-123-1234",
 
-        # 역발행 요청시 알림문자 전송여부 (역발행에서만 사용가능)
-        # - 공급자 담당자 휴대폰번호(invoicerHP)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        # [Buyer] Whether you send a notification SMS or not to Seller
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
+        # Date of trading, Date format(yyyyMMdd) e.g. 20180509
         "writeDate" => "20190917",
 
-        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        # Issuance type, Put a KOREAN word [ “정발행”(e-Tax invoice) or “역발행” (Requested e-Tax invoice) or “위수탁”(Delegated e-Tax invoice) ]
         "issueType" => "정발행",
 
-        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        # Taxation type, Put a KOREAN word [ “과세” (Taxation) or “영세” (Zero-rate) or “면세” (Exemption) ]
         "taxType" => "과세",
 
-        # [필수] 발행시점
+        # Issuing Timing, Don't Change this field.
         "issueTiming" => "직접발행",
 
-        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        # Charging direction
+        # Put a KOREAN word[ “정과금(Charge to seller)” or “역과금(Charge to buyer” ]
+        # (*Charge to buyer is only available in requested e-Tax invoice issuance process)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, {영수, 청구} 중 기재
+        # Receipt/Charge, Put a KOREAN word [ “영수”(Receipt) or “청구”(Charge)
         "purposeType" => "영수",
 
-        # [필수] 공급가액 합계
+        # The sum of supply cost, Only numbers and – (hyphen) are acceptable
         "supplyCostTotal" => "20000",
 
-        # [필수] 세액 합계
+        # The sum of tax amount	, Only numbers and - (minus) are acceptable
         "taxTotal" => "2000",
 
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        # Total amount, Only numbers and – (hyphen) are acceptable
         "totalAmount" => "22000",
 
-        # 기재 상 '일련번호' 항목
+        # Serial number, One of e-Tax invoice’s items to manage document – ‘Serial number’
         "serialNum" => "",
 
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        # Volume, One of e-Tax invoice’s items to manage document – ‘Volume’ for a book
         "kwon" => nil,
 
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        # Number, One of e-Tax invoice’s items to manage document – ‘Number’ for a book
         "ho" => nil,
 
-        # 기재 상 '현금' 항목
+        # Cash, One of e-Tax invoice’s items – ‘cash’
         "cash" => "",
 
-        # 기재 상 '수표' 항목
+        # Check, One of e-Tax invoice’s items – ‘check’
         "chkBill" => "",
 
-        # 기재 상 '어음' 항목
+        # Note, One of e-Tax invoice’s items – ‘note’
         "note" => "",
 
-        # 기재 상 '외상미수금' 항목
+        # Credit, One of e-Tax invoice’s litems – ‘credit’
         "credit" => "",
 
-        # 기재 상 '비고' 항목
+        # Remark
         "remark1" => "비고1",
         "remark2" => "비고2",
         "remark3" => "비고3",
 
-        # 사업자등록증 이미지 첨부여부
+        # Attaching a business license, Prerequisite : Registration of a business license in advance
         "businessLicenseYN" => false,
 
-        # 통장사본 이미지 첨부여부
+        # Attaching a copy of bankbook, Prerequisite : Registration of a copy of bankbook in advance
         "bankBookYN" => false,
 
-        ######################### 상세항목(품목) 정보 #########################
-        # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
-        ##################################################################
+        ######################### Detail List #########################
 
         "detailList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트1", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트1", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트2", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트2", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
         ],
 
-        ######################### 추가담당자정보 #########################
-        # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
-        # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다. (배열로 5까지 기재 가능)
-        ##############################################################
+        ######################### TaxinvoiceAdd Buyer Email #########################
 
         "addContactList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자01", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "contactName" => "담당자01", # Name of the person in charge
+                "email" => "test@test.com", # Email
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "contactName" => "담당자02", # 담당자명
-                "email" => "test@test.com", # 담당자 메일주소
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "contactName" => "담당자02", # Name of the person in charge
+                "email" => "test@test.com", # Email
             }
         ],
     }
@@ -803,31 +774,29 @@ class TaxinvoiceController < ApplicationController
   end
 
   ######################################################################################
-  # [임시저장] 또는 [발행대기] 상태의 세금계산서를 [공급자]가 [발행]합니다.
-  # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서구성"을 참조하시기 바랍니다.
-  # - 국세청 전송옵션을 변경하지 않은 경우 발행일을 기준으로 다음 영업일 오후3시에 국세청으로 일괄 전송됩니다.
+  # Issue saved e-Tax invoice or e-Tax invoice waiting for issuing by invoicer(seller) after invoicee(buyer)’s request.
+  # -  When it is called, points(fee) is deducted and notification mail will be sent to e-mail address of a person in charge of buyer (Variable: invoiceeEmail1) based on e-Tax invoice’s information.
   ######################################################################################
   def issue
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190402-02"
 
-    # 지연발행 강제여부
-    # - 발행마감일이 지난 세금계산서를 발행하는 경우, 가산세가 부과될 수 있습니다.
-    # - 지연발행 세금계산서를 신고해야 하는 경우 forceIssue 값을 true로 선언하여
-    #   발행(Issue API)을 호출할 수 있습니다.
+    # Whether you force to issue an overdued e-Tax invoice or not [true-Yes / false-No]
+
+    # Whether you force to issue an overdued e-Tax invoice or not [true-Yes / false-No]
     forceIssue = false
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = ''
 
-    # 발행안내메일 제목, 미기재시 기본양식으로 전송
+    # A notification mail’s title sent to a person in charge of Buyer (If, you write nothing, a title set by POPBILL will be assigned)
     emailSubject = ''
 
     begin
@@ -847,24 +816,23 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # [발행완료] 상태의 세금계산서를 [공급자]가 [발행취소]합니다.
-  # - [발행취소]는 국세청 전송전에만 가능합니다.
-  # - 발행취소된 세금계산서는 국세청에 전송되지 않습니다.
-  # - 세금계산서에 할당된 문서번호를 재사용 하기 위해서는 삭제(Delete API)를 호출하여 세금계산서를
-  #   삭제해야 합니다.
+  # Cancel the issuance of e-Tax invoice in the state of ‘Issuance complete’ waiting for filing to NTS.
+  # - Cancelled e-Tax invoice isn’t filed to NTS.
+  # - If you delete cancelled e-Tax invoice calling function ‘Delete API’, invoice id that have been assigned to manage e-Tax invoice is going to be re-usable.
+  # - An e-Tax invoice in the state of ‘filing’ or ‘Succeed’ isn’t available to cancel.
   ##############################################################################
   def cancelIssue
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = ''
 
     begin
@@ -882,11 +850,10 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # [공급받는자]가 공급자에게 역발행 세금계산서를 [즉시 요청]합니다.
-  # - 세금계산서 항목별 정보는 "[전자세금계산서 API 연동매뉴얼] > 4.1. (세금)계산서구성"을 참조하시기 바랍니다.
-  # - 역발행 세금계산서 프로세스를 구현하기 위해서는 공급자/공급받는자가 모두 팝빌에 회원이여야 합니다.
-  # - 역발행 즉시요청후 공급자가 [발행] 처리시 포인트가 차감되며 역발행 세금계산서 항목중 과금방향(ChargeDirection)에 기재한 값에 따라
-  #   정과금(공급자과금) 또는 역과금(공급받는자과금) 처리됩니다.
+  # Invoicee(Buyer) request for issuing e-Tax invoice to seller just after filling out it themselves
+  # - If buyer use it successfully, a status of e-Tax invoice is going to be changed to ‘waiting for issuing’. When seller check this e-Tax invoice and issue, points(fee) is deducted and the status is changed to ‘Issuance complete’.
+  # - An e-Tax invoice in the state of ‘waiting for issuing’ isn’t going to be filed to NTS. To complete the process, seller must issue it making an e-sign with certificate.
+  # - Depends on value of ‘ChargeDirection’ in a list of e-Tax invoice, a fee will be charged. If the value is ‘to seller’, points(fee) is deducted from seller’s. If the value is ‘to buyer’, points is deducted from buyer’s
   ##############################################################################
   def registRequest
 
@@ -902,7 +869,7 @@ class TaxinvoiceController < ApplicationController
     # e-Tax Invoice object
     taxinvoice = {
 
-        ######################### 공급자정보 #########################
+        ######################### Seller Info #########################
 
         # Seller’s business registration number ( 10 digits except ‘-’ )
         "invoicerCorpNum" => "8888888888",
@@ -913,186 +880,179 @@ class TaxinvoiceController < ApplicationController
         # [Seller] Company name
         "invoicerCorpName" => "상호명",
 
-        # [필수] 공급자 대표자 성명
+        # [Seller] CEO’s name
         "invoicerCEOName" => "대표자명",
 
         # 공급자 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
         # 사업자 별로 중복되지 않도록 구성
         "invoicerMgtKey" => "",
 
-        # 공급자 주소
+        # [Seller] Company address
         "invoicerAddr" => "공급자 주소",
 
-        # 공급자 업태
+        # [Seller] Business type
         "invoicerBizType" => "공급자 업태",
 
-        # 공급자 종목
+        # [Seller] Business item
         "invoicerBizClass" => "공급자 종목",
 
-        # 공급자 담당자명
+        # [Seller] Name of the person in charge
         "invoicerContactName" => "공급자 담당자명",
 
-        # 공급자 담당자 메일주소
+        # [Seller] Email address of the person in charge
         "invoicerEmail" => "test@test.com",
 
-        # 공급자 담당자 휴대폰번호
+        # [Seller] Mobile number of the person in charge
         "invoicerHP" => "010-111-222",
 
-        # 공급자 담당자 연락처
+        # [Seller] Telephone number of the person in charge
         "invoicerTEL" => "070-4304-2991",
 
 
-        ######################### 공급받는자정보 #########################
+        ######################### Buyer Info #########################
 
-        # [필수] 공급받는자 구분, [사업자, 개인, 외국인] 중 기재
+        # [Buyer] Buyer’s type, Put a KOREAN word [ “사업자(company)” or “개인(individual)” or “외국인(foreigner)” ]
         "invoiceeType" => "사업자",
 
-        # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+        # [Buyer] Business registration number
         "invoiceeCorpNum" => corpNum,
 
-        # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+        # [Buyer] Identification number for minor place of business
         "invoiceeTaxRegId" => "",
 
-        # [필수] 공급받는자 상호
+        # [Buyer] Company name
         "invoiceeCorpName" => "공급받는자 상호",
 
-        # [필수] 공급받는자 대표자 성명
+        # [Buyer] CEO’s name
         "invoiceeCEOName" => "대표자 성명",
 
-        # [역발행시 필수] 공급받는자 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+        # [Buyer] Invoice id	, 1~24자리 (숫자, 영문, '-', '_') 조합으로
         # 사업자 별로 중복되지 않도록 구성
         "invoiceeMgtKey" => mgtKey,
 
-        # 공급받는자 주소
+        # [Buyer] Company address
         "invoiceeAddr" => "공급받는자 주소",
 
-        # 공급받는자 종목
+        # [Buyer] Business type
         "invoiceeBizClass" => "공급받는자 종목",
 
-        # 공급받는자 업태
+        # [Buyer] Business item
         "invoiceeBizType" => "공급받는자 업태",
 
-        # 공급받는자 담당자명
+        # [Buyer] Name of the person in charge
         "invoiceeContactName1" => "공급받는자담당자명",
 
-        # 공급받는자 담당자 메일주소
+        # [Buyer] Email address of the person in charge
         "invoiceeEmail1" => "test@test.com",
 
-        # 공급받는자 담당자 연락처
+        # [Buyer] Telephone number of the person in charge
         "invoiceeTEL1" => "070-1234-1234",
 
-        # 공급받는자 담당자 휴대폰번호
+        # [Buyer] Mobile number of the person in charge
         "invoiceeHP1" => "010-123-1234",
 
-        # 역발행 요청시 알림문자 전송여부 (역발행에서만 사용가능)
-        # - 공급자 담당자 휴대폰번호(invoicerHP)로 전송
-        # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+        # [Buyer] Whether you send a notification SMS or not to Seller
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 날짜형식 (yyyyMMdd)
+        # Date of trading, Date format(yyyyMMdd) e.g. 20180509
         "writeDate" => "20190917",
 
-        # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+        # Issuance type, Put a KOREAN word [ “정발행”(e-Tax invoice) or “역발행” (Requested e-Tax invoice) or “위수탁”(Delegated e-Tax invoice) ]
         "issueType" => "역발행",
 
-        # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+        # Taxation type, Put a KOREAN word [ “과세” (Taxation) or “영세” (Zero-rate) or “면세” (Exemption) ]
         "taxType" => "과세",
 
-        # [필수] 발행시점
+        # Issuing Timing, Don't Change this field.
         "issueTiming" => "직접발행",
 
-        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
-        # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+        # Put a KOREAN word[ “정과금(Charge to seller)” or “역과금(Charge to buyer” ]
+        # (*Charge to buyer is only available in requested e-Tax invoice issuance process)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, [영수, 청구] 중 기재
+        # Receipt/Charge, Put a KOREAN word [ “영수”(Receipt) or “청구”(Charge) ]
         "purposeType" => "영수",
 
-        # [필수] 공급가액 합계
+        # The sum of supply cost, Only numbers and – (hyphen) are acceptable
         "supplyCostTotal" => "20000",
 
-        # [필수] 세액 합계
+        # The sum of tax amount	, Only numbers and - (minus) are acceptable
         "taxTotal" => "2000",
 
-        # [필수] 합계금액, 공급가액 합계 + 세액합계
+        # Total amount, Only numbers and – (hyphen) are acceptable
         "totalAmount" => "22000",
 
-        # 기재 상 '일련번호' 항목
+        # Serial number, One of e-Tax invoice’s items to manage document – ‘Serial number’
         "serialNum" => "",
 
-        # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+        # Volume, One of e-Tax invoice’s items to manage document – ‘Volume’ for a book
         "kwon" => nil,
 
-        # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+        # Number, One of e-Tax invoice’s items to manage document – ‘Number’ for a book
         "ho" => nil,
 
-        # 기재 상 '현금' 항목
+        # Cash, One of e-Tax invoice’s items – ‘cash’
         "cash" => "",
 
-        # 기재 상 '수표' 항목
+        # Check, One of e-Tax invoice’s items – ‘check’
         "chkBill" => "",
 
-        # 기재 상 '어음' 항목
+        # Note, One of e-Tax invoice’s items – ‘note’
         "note" => "",
 
-        # 기재 상 '외상미수금' 항목
+        # Credit, One of e-Tax invoice’s litems – ‘credit’
         "credit" => "",
 
-        # 기재 상 '비고' 항목
+        # Remark
         "remark1" => "비고1",
         "remark2" => "비고2",
         "remark3" => "비고3",
 
-        # 사업자등록증 이미지 첨부여부
+        # Attaching a business license, Prerequisite : Registration of a business license in advance
         "businessLicenseYN" => false,
 
-        # 통장사본 이미지 첨부여부
+        # Attaching a copy of bankbook, Prerequisite : Registration of a copy of bankbook in advance
         "bankBookYN" => false,
 
 
-        ######################### 수정세금계산서 정보 ##########################
-        # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
-        ###################################################################
+        ######################### for Modification ##########################
 
-        # 수정사유코드, 수정사유에 따라 1~6 중 선택기재, 미기재시 nil 로 처리
+        # Modification code
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
+        # Original POPILL invoice id of e-Tax invoice
         "originalTaxinvoiceKey" => "",
 
 
-        ######################### 상세항목(품목) 정보 #########################
-        # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
-        ##################################################################
+        ######################### Detail List #########################
 
         "detailList" => [
             {
-                "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트1", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 1, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트1", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
             {
-                "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
-                "itemName" => "테스트2", # 품목명
-                "spec" => "규격", # 규격
-                "qty" => "1", # 수량
-                "unitCost" => "10000", # 단가
-                "supplyCost" => "10000", # 공급가액
-                "tax" => "1000", # 세액
-                "remark" => "비고", # 비고
+                "serialNum" => 2, # Serial Number, Must write the number in a row starting from 1 (Maximum: 99)
+                "purchaseDT" => "20190917", # Date of trading, Date of trading (of an e-Tax invoice) [ Format : yyyyMMdd, except ‘-’ ]
+                "itemName" => "테스트2", # Item name
+                "spec" => "규격", # Specification
+                "qty" => "1", # Quantity
+                "unitCost" => "10000", # Unit cost
+                "supplyCost" => "10000", # Supply Cost
+                "tax" => "1000", # Tax amount
+                "remark" => "비고", # Remark
             },
         ],
     }
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = '즉시요청 메모'
 
     begin
@@ -1110,23 +1070,21 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 공급받는자가 [임시저장] 상태의 역발행 세금계산서를 공급자에게 [발행요청] 합니다.
-  # - 역발행 세금계산서 프로세스를 구현하기 위해서는 공급자/공급받는자가 모두 팝빌에 회원이여야 합니다.
-  # - 역발행 요청후 공급자가 [발행] 처리시 포인트가 차감되며 역발행 세금계산서 항목중 과금방향(ChargeDirection)에 기재한 값에 따라
-  #   정과금(공급자과금) 또는 역과금(공급받는자과금) 처리됩니다.
+  # Buyer request for issuing saved e-Tax invoice to Seller.
+  # - We recommend usage of function ‘RegistRequest API’ to make it available to process ‘Regist API’ and ‘Request API’ at once.
   ##############################################################################
   def requestTI
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::BUY
 
     # Invoice id assigned by partner
     mgtKey = "20190917-03"
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = ''
 
     begin
@@ -1144,21 +1102,20 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # [공급받는자]가 역)발행대기 상태의 세금계산서를 [취소]합니다.
-  # - [취소] 상태의 세금계산서에 할당된 문서번호를 재사용하기 위해서는 삭제 (Delete API)를 호출해야 합니다.
+  # Buyer cancel to request for issuing an e-Tax invoice to seller.
   ##############################################################################
   def cancelRequest
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::BUY
 
     # Invoice id assigned by partner
     mgtKey = "20190917-03"
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = ""
 
     begin
@@ -1176,21 +1133,20 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 공급받는자로부터 발행을 요청받은 발행대기 상태의 역발행 세금계산서를 공급자가 [거부] 처리합니다.
-  # - 세금계산서에 할당된 문서번호를 재사용하기 위해서는 삭제 (Delete) API 를 호출해야 합니다.
+  # Seller refuse to issue the e-Tax invoice requested by buyer.
   ##############################################################################
   def refuse
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 메모
+    # Memo, Available to check a value of parameters ‘stateMemo’ of GetInfo API
     memo = ''
 
     begin
@@ -1208,16 +1164,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 전자세금계산서를 삭제합니다.
-  # - 세금계산서를 삭제해야만 문서번호(mgtKey)를 재사용할 수 있습니다.
-  # - 삭제가능한 문서 상태 : 임시저장, 발행취소, 역)발행 거부/취소
+  # Delete the e-Tax invoice only in deletable status. An invoice id that have been assigned to it is going to be re-usable.
+  # - The deletable status: ‘Saved’, ‘Canceled the issuance’, ‘Refused the issuance(By seller)’, ‘Canceled the issuance request(By buyer)’, ‘Failed to file’
   ##############################################################################
   def delete
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1238,15 +1193,16 @@ class TaxinvoiceController < ApplicationController
 
 
   ##############################################################################
-  # [발행완료] 상태의 세금계산서를 국세청으로 [즉시전송]합니다.
-  # - 즉시전송 호출이후 20~30분 경과후 전송결과 성공/실패 여부를 확인할 수 있습니다.
+  # Seller files issued e-Tax invoice waiting for filing to NTS.
+  # ㆍ After calling function ‘SendToNTS’, you can check the file result withing 20-30 min.
+  #ㆍ In Test-bed, issued e-Tax invoice isn’t filed to NTS actually. Process ‘File to NTS’ is a kind of mock process so only file result is going to be changed to ‘Success’ after 5min from issuing.
   ##############################################################################
   def sendToNTS
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1266,16 +1222,14 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 세금계산서 상태/요약 정보를 확인합니다.
-  # - 세금계산서 상태정보(GetInfo API) 응답항목에 대한 자세한 정보는
-  #   "[전자세금계산서 API 연동매뉴얼] > 4.2. (세금)계산서 상태정보 구성" 을 참조하시기 바랍니다.
+  # Check the status of AN e-Tax invoice and summary of it.
   ##############################################################################
   def getInfo
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1295,19 +1249,17 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 대량의 세금계산서 상태/요약 정보를 확인합니다. (최대 1000건)
-  # - 세금계산서 상태정보(GetInfos API) 응답항목에 대한 자세한 정보는 "[전자세금계산서 API 연동매뉴얼]
-  # > 4.2. (세금)계산서 상태정보 구성" 을 참조하시기 바랍니다.
+  # Check the status of bulk e-Tax invoices and summary of it. (Maximum: 1000 counts)
   ##############################################################################
   def getInfos
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # Invoice id assigned by partner 배열, 최대 1000건
+    # The array of invoice id (Maximum: 1000 counts)
     mgtKeyList = ["20190917-01", "20190917-02"]
 
     begin
@@ -1324,16 +1276,14 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 세금계산서 상세항목을 확인합니다.
-  # - 응답항목에 대한 자세한 사항은 "[전자세금계산서 API 연동매뉴얼] > 4.1 (세금)계산서 구성" 을
-  # 참조하시기 바랍니다.
+  # Check the details of AN e-Tax invoice.
   ##############################################################################
   def getDetailInfo
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1353,9 +1303,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 검색조건을 사용하여 세금계산서 목록을 조회합니다.
-  # - 응답항목에 대한 자세한 사항은 "[전자세금계산서 API 연동매뉴얼] > 4.2. (세금)계산서 상태정보 구성"
-  #   을 참조하시기 바랍니다.
+  # Search the list of e-Tax invoices corresponding to the search criteria.
   ##############################################################################
   def search
 
@@ -1365,56 +1313,55 @@ class TaxinvoiceController < ApplicationController
     # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # [필수] 일자유형, R-등록일시 W-작성일자 I-발행일시 중 택1
+    # Date type [R-Date of registration, W-of trading, I-of issuance]
     dType = "W"
 
-    # [필수] 시작일자, 날짜형식(yyyyMMdd)
+    # Start date of search scope (Format : yyyyMMdd)
     sDate = "20190701"
 
-    # [필수] 종료일자, 날짜형식(yyyyMMdd)
+    # End date of search scope (Format : yyyyMMdd)
     eDate = "20191231"
 
-    # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성, 2,3번째 와일드카드 가능
-    #  - 상태코드에 대한 자세한 사항은 "[전자세금계산서 API 연동매뉴얼] > 5.1 세금계산서 상태코드" 를 참조하시기 바랍니다.
+    # [Array] Status code (Wild card(*) can be put on 2nd, 3rd letter – e.g. “3**”, “6**”)
     state = ["3**", "6**"]
 
-    # 문서유형 배열, N-일반 M-수정 중 선택, 미기재시 전체조회
+    # [Array] Document type [N-General/ M-For modification]
     type = ["N", "M"]
 
-    # 과세형태 배열, T-과세, N-면세 Z-영세 중 선택, 미기재시 전체조회
+    # [Array] Taxation Type [T-Taxation / N-Exemption / Z-Zero-rate]
     taxType = ["T", "N", "Z"]
 
-    # 발행형태 배열, N-정발행, R-역발행, T-위수탁
+    # [Array] Issuance type [N-e-Tax invoice/ R-Requested e-Tax invoice / T-Delegated e-Tax invoice]
     issueType = ["N", "R", "T"]
 
-    # 지연발행 여부, 0-일반발행분 조회 1-지연발행분 조회, 공백-전체조회
+    # Whether an issuing is delayed or not [CHOOSE 1 : null-Search all / false-Search the case issued within a due-date / true-the case issued after a due-date]
     lateOnly = ''
 
-    # 종사업장 유무, 공백-전체조회, 0-종사업장번호 없는경우만 조회, 1-종사업장번호 조건 조회
+    # Whether the business registration number of minor place is enrolled or not [CHOOSE 1 : blank-Search all / 0-None / 1-Enrolled]
     taxRegIDYN = ''
 
-    # 종사업장번호 유형 S-공급자, B-공급받는자, T-수탁자
+    # Type of the business registration number of minor place [CHOOSE 1 : S-Invoicer(Seller) / B-Invoicee(Buyer) / T-Trustee]
     taxRegIDType = ''
 
-    # 종사업장번호, 콤마(,)로 구분하여 구성 ex) 0001,0002
+    # The business registration number of minor place: several search criteria of it must be recognized by comma(“,”) (e.g. 1234, 1110)
     taxRegID = ''
 
-    # 페이지 번호
+    # Page number (Default:’1’)
     page = 1
 
-    # 페이지 목록개수, 최대 1000건
+    # Available search number per page (Default: 500 / Maximum: 1000)
     perPage = 10
 
-    # 정렬방향, D-내림차순(기본값), A-오름차순
+    # Sort direction (Default:’D’) [CHOOSE 1 : D-Descending / A-Ascending]
     order = "D"
 
-    # 거래처 조회, 거래처 상호 또는 거래처 사업자등록번호 조회, 공백처리시 전체조회
+    # Search for a company name or business registration number (Blank:Search all)
     queryString = ""
 
-    # 연동문서 조회여부, 공백-전체조회, 0-일반문서 조회, 1-연동문서 조회
+    # Whether a document registered by API is searched or not [CHOOSE 1 : blank-Search all / 0-Search for docu registered by Site UI / 1 – for docu registered by API]
     interOPYN = ""
 
     begin
@@ -1447,16 +1394,14 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서 상태 변경이력을 확인합니다.
-  # - 상태 변경이력 확인(GetLogs API) 응답항목에 대한 자세한 정보는
-  #   "[전자세금계산서 API 연동매뉴얼] > 3.5.5 상태 변경이력 확인"을 참조하시기 바랍니다.
+  # Check the log of e-Tax invoice’s status change.
   ##############################################################################
   def getLogs
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1476,15 +1421,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌 전자세금계산서 문서함 팝업 URL을 반환합니다.
-  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # Return the URL to access the menu ‘e-Tax invoice list’ on POPBILL website in login status.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getURL
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # TBOX(임시문서함), SBOX(매출문서함), PBOX(매입문서함), WRITE(매출문서작성)
+    # TBOX(Draft list), SBOX(Sales list), PBOX(Purchase list), WRITE(Register sales invoice)
     togo = "PBOX"
 
     begin
@@ -1501,15 +1446,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 전자세금계산서 보기 팝업 URL을 반환합니다.
-  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # Return popup URL to view AN e-Tax invoice on POPBILL website.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getPopUpURL
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1530,14 +1475,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 전자세금계산서 인쇄팝업 URL을 반환합니다.
-  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # Return popup URL to print AN e-Tax invoice.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getPrintURL
+
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1558,15 +1504,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서 인쇄(공급받는자) URL을 반환합니다.
-  # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # Return popup URL to print AN e-Tax invoice for buyer.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getEPrintURL
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1587,15 +1533,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 다수건의 전자세금계산서 인쇄팝업 URL을 반환합니다. (최대 100건)
-  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # Return popup URL to print bulk e-Tax invoices.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getMassPrintURL
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner 배열, 최대 100건
@@ -1616,15 +1562,15 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 공급받는자 메일링크 URL을 반환합니다.
-  # - 메일링크 URL은 유효시간이 존재하지 않습니다.
+  # Return URL of button located on bottom of a notification mail sent to buyer.
+  # - There is no valid time about the URL returned by function ‘GetMailURL’.
   ##############################################################################
   def getMailURL
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1645,8 +1591,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # Return popup URL to access POPBILL website in login status.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getAccessURL
 
@@ -1670,8 +1616,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 인감 및 첨부문서 등록 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  #  Return popup URL to register the seal, business license and copy of a bankbook to e-Tax invoice.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getSealURL
 
@@ -1695,22 +1641,21 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서에 첨부파일을 등록합니다.
-  # - [임시저장] 상태의 세금계산서만 파일을 첨부할수 있습니다.
-  # - 첨부파일은 최대 5개까지 등록할 수 있습니다.
+  # Attach the file to e-Tax invoice (Maximum: 5 files).
+  # - It is only available to saved e-Tax invoice.
   ##############################################################################
   def attachFile
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 첨부파일경로
+    # Path of attached file
     filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"
 
     begin
@@ -1728,22 +1673,21 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서에 첨부된 파일을 삭제합니다.
-  # - 파일을 식별하는 파일아이디는 첨부파일 목록(GetFiles API) 의 응답항목
-  #   중 파일아이디(AttachedFile) 값을 통해 확인할 수 있습니다.
+  # Delete a file attached to e-Tax invoice.
+  # - Check ‘FileID’ to recognize the attachment referring returned function GetFiles
   ##############################################################################
   def deleteFile
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 파일아이디, GetFiles API 응답항목 중 파일아이디 (AttachedFile) 값 기재
+    # File ID (*Refer field ‘attachedFile’ – one of returned values of GetFiles API
     fileID = "6F4E5AA1-0B61-4775-A837-20E0D87C3010.PBF"
 
     begin
@@ -1761,15 +1705,14 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서에 첨부된 파일의 목록을 확인합니다.
-  # - 응답항목 중 파일아이디(AttachedFile) 항목은 파일삭제(DeleteFile API) 호출시 이용할 수 있습니다.
+  # Check the file list attached to an e-Tax invoice.
   ##############################################################################
   def getFiles
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
@@ -1789,20 +1732,20 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 발행 안내메일을 재전송합니다.
+  # Re-send a mail to notify that an e-Tax invoice is issued.
   ##############################################################################
   def sendEmail
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 공급받는자 담당자 메일주소
+    # [Buyer] Email address of the person in charge
     emailAddr = "test@test.com"
 
     begin
@@ -1820,29 +1763,29 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 알림문자를 전송합니다. (단문/SMS- 한글 최대 45자)
-  # - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)
-  # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [문자] > [전송내역] 탭에서 전송결과를
-  #   확인할 수 있습니다.
+  #  Send a SMS(Short message).
+  # - Contents only within capacityare delivered. SMS’s capacity is 90byte and exceeded contents are deleted automatically when a SMS is delivered. (Maximum of Korean letters: 45)
+  # - Points(Fee) are deducted when user send a SMS. If sending is failed, points are going to be refunded.
+  # - Check sending result on POPBILL website [Messaging/FAX -> Messaging -> Sending log]
   ##############################################################################
   def sendSMS
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 발신번호
+    # Sender’s Number
     sendNum = "07043042991"
 
-    # 수신번호
+    # Receiver’s Number
     receiveNum = "010-111-222"
 
-    # 메시지 내용, 메시지 길이가 90 byte 이상인 경우, 길이를 초과하는 메시지 내용은 자동으로 제거됩니다.
+    # Contents of SMS (*Exceeded contents are deleted automatically when a SMS is delivered.)
     contents = "문자메시지 전송을 확인합니다."
 
     begin
@@ -1862,26 +1805,25 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 전자세금계산서를 팩스로 전송합니다.
-  # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
-  # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역] 메뉴에서 전송결과를
-  #   확인할 수 있습니다.
+  # Send an e-Tax invoice by fax.
+  # - Points(Fee) are deducted when user send a fax. If sending is failed, points are going to be refunded.
+  # - Check sending result on POPBILL website [Messaging/FAX -> FAX -> Sending log]
   ##############################################################################
   def sendFax
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 발신번호
+    # Sender’s Number
     sendNum = "07043042991"
 
-    # 수신 팩스번호
+    # Receiver’s Number
     receiveNum = "070111222"
 
     begin
@@ -1900,23 +1842,23 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 전자명세서를 세금계산서에 첨부합니다.
+  # Attach a statement to e-Tax invoice.
   ##############################################################################
   def attachStatement
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
+    # Statement’s type code, [121: Transaction details, 122: Bill, 123: Estimate, 124: Purchase order, 125: Deposit slip, 126: Receipt]
     itemCode = 121
 
-    # 전자명세서 관리번호
+    # Statement’s id required to be attached to e-Tax invoice
     stmtMgtKey = "20190121-01"
 
     begin
@@ -1935,23 +1877,23 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서에 첨부된 전자명세서 1건을 첨부해제합니다.
+  # Detach a statement from e-Tax invoice.
   ##############################################################################
   def detachStatement
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
     # Invoice id assigned by partner
     mgtKey = "20190917-02"
 
-    # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
+    # Statement’s type code, [121: Transaction details, 122: Bill, 123: Estimate, 124: Purchase order, 125: Deposit slip, 126: Receipt]
     itemCode = 121
 
-    # 전자명세서 관리번호
+    # Statement’s id required to be detached to e-Tax invoice
     stmtMgtKey = "20190121-01"
 
     begin
@@ -1970,7 +1912,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 대용량 연계사업자 메일주소 목록을 반환합니다.
+  # Check the email list of e-Tax invoice service provider.
   ##############################################################################
   def getEmailPublicKeys
 
@@ -1989,21 +1931,22 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌 사이트에서 작성한 세금계산서에 파트너의 문서번호를 할당합니다.
+  # Assign an invoice id to e-Tax invoice that was not assigned by partner.
+
+
   ##############################################################################
   def assignMgtKey
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 세금계산서 유형 SELL-매출, BUY-매입, TRUSTEE-위수탁
+    # Type of the e-Tax invoice [CHOOSE 1: SELL-e-Tax invoice/ BUY-Requested e-Tax invoice / TRUSTEE-Delegated e-Tax invoice]
     keyType = MgtKeyType::SELL
 
-    # 세금계산서 아이템키, 목록조회(Search) API의 반환항목중 ItemKey 참조
+    # POPBILL invoice id (*Refer ‘ItemKey’ – one of returned values of Search API)
     itemKey = "019040209362600001"
 
-    # 할당할 문서번호, 숫자, 영문, '-', '_' 조합으로
-    # 1~24자리까지 사업자번호별 중복없는 고유번호 할당
+    # Invoice id assigned by partner
     mgtKey = "20190402-005"
 
     begin
@@ -2022,7 +1965,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 전자세금계산서 메일전송 항목에 대한 전송여부를 목록으로 반환합니다.
+  # Return the outgoing mail list related to e-Tax invoice being sent to notify the issuance or cancellation etc..
   ##############################################################################
   def listEmailConfig
 
@@ -2045,47 +1988,46 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 전자세금계산서 메일전송 항목에 대한 전송여부를 수정합니다.
-  # 메일전송유형
-  # [정발행]
-  # TAX_ISSUE : 공급받는자에게 전자세금계산서 발행 메일 입니다.
-  # TAX_ISSUE_INVOICER : 공급자에게 전자세금계산서 발행 메일 입니다.
-  # TAX_CHECK : 공급자에게 전자세금계산서 수신확인 메일 입니다.
-  # TAX_CANCEL_ISSUE : 공급받는자에게 전자세금계산서 발행취소 메일 입니다.
-  #
-  # [발행예정]
-  # TAX_SEND : 공급받는자에게 [발행예정] 세금계산서 발송 메일 입니다.
-  # TAX_ACCEPT : 공급자에게 [발행예정] 세금계산서 승인 메일 입니다.
-  # TAX_ACCEPT_ISSUE : 공급자에게 [발행예정] 세금계산서 자동발행 메일 입니다.
-  # TAX_DENY : 공급자에게 [발행예정] 세금계산서 거부 메일 입니다.
-  # TAX_CANCEL_SEND : 공급받는자에게 [발행예정] 세금계산서 취소 메일 입니다.
-  #
-  # [역발행]
-  # TAX_REQUEST : 공급자에게 세금계산서를 발행요청 메일 입니다.
-  # TAX_CANCEL_REQUEST : 공급받는자에게 세금계산서 취소 메일 입니다.
-  # TAX_REFUSE : 공급받는자에게 세금계산서 거부 메일 입니다.
-  #
-  # [위수탁발행]
-  # TAX_TRUST_ISSUE : 공급받는자에게 전자세금계산서 발행 메일 입니다.
-  # TAX_TRUST_ISSUE_TRUSTEE : 수탁자에게 전자세금계산서 발행 메일 입니다.
-  # TAX_TRUST_ISSUE_INVOICER : 공급자에게 전자세금계산서 발행 메일 입니다.
-  # TAX_TRUST_CANCEL_ISSUE : 공급받는자에게 전자세금계산서 발행취소 메일 입니다.
-  # TAX_TRUST_CANCEL_ISSUE_INVOICER : 공급자에게 전자세금계산서 발행취소 메일 입니다.
-  #
-  # [위수탁 발행예정]
-  # TAX_TRUST_SEND : 공급받는자에게 [발행예정] 세금계산서 발송 메일 입니다.
-  # TAX_TRUST_ACCEPT : 수탁자에게 [발행예정] 세금계산서 승인 메일 입니다.
-  # TAX_TRUST_ACCEPT_ISSUE : 수탁자에게 [발행예정] 세금계산서 자동발행 메일 입니다.
-  # TAX_TRUST_DENY : 수탁자에게 [발행예정] 세금계산서 거부 메일 입니다.
-  # TAX_TRUST_CANCEL_SEND : 공급받는자에게 [발행예정] 세금계산서 취소 메일 입니다.
-  #
-  # [처리결과]
-  # TAX_CLOSEDOWN : 거래처의 휴폐업 여부 확인 메일 입니다.
-  # TAX_NTSFAIL_INVOICER : 전자세금계산서 국세청 전송실패 안내 메일 입니다.
-  #
-  # [정기발송]
-  # TAX_SEND_INFO : 전월 귀속분 [매출 발행 대기] 세금계산서 발행 메일 입니다.
-  # ETC_CERT_EXPIRATION : 팝빌에서 이용중인 공인인증서의 갱신 메일 입니다.
+  #[*Purpose of the outgoing mail]
+  # e-Tax invoice issuance process
+  # TAX_ISSUE : [to buyer] to notify the issuing an e-Tax invoice
+  # TAX_ISSUE_INVOICER : [to seller] to notify the issuing an e-Tax invoice
+  # TAX_CHECK : [to seller] to notify that buyer have checked an e-Tax invoice
+  # TAX_CANCEL_ISSUE : [to buyer] to notify that seller have cancelled the issuing an e-Tax invoice
+
+  # About e-tax invoice being ready to issue
+  # TAX_SEND : [to buyer] to notify that an e-Tax invoice being ready to issue is sent
+  # TAX_ACCEPT : [to seller] to notify that an e-Tax invoice being ready to issue is accepted
+  # TAX_ACCEPT_ISSUE : [to seller] to notify that an e-Tax invoice being ready to issue is issued automatically
+  # TAX_DENY : [to seller] to notify that an e-Tax invoice being ready to issue is refused
+  # TAX_CANCEL_SEND : [to buyer] to notify that an e-Tax invoice being ready to issue is cancelled
+
+  # Requested e-Tax invoice issuance process
+  # TAX_REQUEST : [to seller] to request the issuing an e-Tax invoice with e-signature
+  # TAX_CANCEL_REQUEST : [to buyer] to notify that the request for issuing an e-Tax invoice is cancelled
+  # TAX_REFUSE : [to buyer] to notify that an e-Tax invoice requested for issuing is refused
+
+  # Delegated e-Tax invoice issuance process
+  # TAX_TRUST_ISSUE : [to buyer] to notify the issuing an e-Tax invoice
+  # TAX_TRUST_ISSUE_TRUSTEE : [to trustee] to notify the issuing an e-Tax invoice
+  # TAX_TRUST_ISSUE_INVOICER : [to seller] to notify the issuing an e-Tax invoice
+  # TAX_TRUST_CANCEL_ISSUE : [to buyer] to notify that trustee have cancelled the issuing an e-Tax invoice
+  # TAX_TRUST_CANCEL_ISSUE_INVOICER : [to seller] to notify that trustee have cancelled the issuing an e-Tax invoice
+
+  # About delegated e-tax invoice being ready to issue [delegated e-Tax invoice issuance process]
+  # TAX_TRUST_SEND : [to buyer] to notify that an e-Tax invoice being ready to issue is sent
+  # TAX_TRUST_ACCEPT : [to trustee] to notify that an e-Tax invoice being ready to issue is accepted
+  # TAX_TRUST_ACCEPT_ISSUE : [to trustee] to notify that an e-Tax invoice being ready to issue is issued automatically
+  # TAX_TRUST_DENY : [to trustee] to notify that an e-Tax invoice being ready to issue is refused
+  # TAX_TRUST_CANCEL_SEND : [to buyer] to notify that an e-Tax invoice being ready to issue is cancelled
+
+  # About results
+  # TAX_CLOSEDOWN : to notify a result of NTS business status check
+  # TAX_NTSFAIL_INVOICER : to notify filing failure of e-Tax invoice
+
+  # About regular mailing
+  # TAX_SEND_INFO : to notify a e-Tax invoice belonged to last month is issued
+  # ETC_CERT_EXPIRATION : to notify that a registered certificate on POPBILL is required to renew
   ##############################################################################
   def updateEmailConfig
 
@@ -2095,10 +2037,10 @@ class TaxinvoiceController < ApplicationController
     # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
-    # 메일 전송 유형
+    # [*Purpose of the outgoing mail]
     emailType = "TAX_ISSUE_INVOICER"
 
-    # 메일 전송 여부 (true-전송, false-미전송)
+    # Whether a mail will be sent or not.
     sendYN = false
 
     begin
@@ -2116,8 +2058,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 공인인증서 등록 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # URL to register the certificate
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getTaxCertURL
 
@@ -2141,9 +2083,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록되어 있는 공인인증서의 만료일자를 확인합니다.
-  # - 공인인증서가 갱신/재발급/비밀번호 변경이 되는 경우 해당 인증서를
-  #   재등록 하셔야 정상적으로 API를 이용하실 수 있습니다.
+  # Return certificate’s expiration date of partner user registered in POPBILL website.
   ##############################################################################
   def getCertificateExpireDate
 
@@ -2163,8 +2103,9 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서 발행을 위해 등록한 공인인증서의 유효성을 확인합니다.
+  # Check certificate’s validity of partner user registered in POPBILL website.
   ##############################################################################
+
   def checkCertValidation
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
@@ -2182,9 +2123,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 연동회원의 잔여포인트를 확인합니다.
-  # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
-  #   를 통해 확인하시기 바랍니다.
+  # Check point’s balance of partner user.
+  # - Business registration number of POPBILL user (10 digits except ‘-’)
   ##############################################################################
   def getBalance
 
@@ -2202,8 +2142,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # Return popup URL to charge points of partner user.
+  # - Returned URL is valid only during 30 seconds following the security policy. So when you call the URL after the valid time, page will not be opened at all.
   ##############################################################################
   def getChargeURL
 
@@ -2227,8 +2167,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 파트너의 잔여포인트를 확인합니다.
-  # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
+  # Check point’s balance of partner.
   ##############################################################################
   def getPartnerBalance
 
@@ -2246,15 +2185,14 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 파트너 포인트충전 URL을 반환합니다.
-  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # Return popup URL to charge partner’s points.
   ##############################################################################
   def getPartnerURL
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # CHRG-포인트충전
+    # CHRG-Charging partner’s points
     togo = "CHRG"
 
     begin
@@ -2271,7 +2209,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 연동회원의 전자세금계산서 API 서비스 과금정보를 확인합니다.
+  # Check the charging information of POPBILL services.
   ##############################################################################
   def getChargeInfo
 
@@ -2288,7 +2226,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 전자세금계산서 발행단가를 확인합니다.
+  # Check the issuance unit cost per an e-Tax invoice.
   ##############################################################################
   def getUnitCost
 
@@ -2309,14 +2247,14 @@ class TaxinvoiceController < ApplicationController
 
 
   ##############################################################################
-  # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # Check whether a user is a partner user or not.
   ##############################################################################
   def checkIsMember
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 파트너 링크아이디
+    # LinkID
     linkID = TaxinvoiceController::LinkID
 
     begin
@@ -2332,11 +2270,11 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌 회원아이디 중복여부를 확인합니다.
+  # Check whether POPBILL member’s ID is in use or not.
   ##############################################################################
   def checkID
 
-    #조회할 아이디
+    # ID to be required to check the redundancy
     testID = "testkorea"
 
     begin
@@ -2349,53 +2287,53 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 파트너의 연동회원으로 회원가입을 요청합니다.
+  # Join the POPBILL as a partner user.
   ##############################################################################
   def joinMember
 
-    # 연동회원 가입정보
+    # Objects of partner user information
     joinInfo = {
 
-        # 링크아이디
+        # LinkID
         "LinkID" => "TESTER",
 
-        # 아이디, 6자이상 50자미만
+        # ID, From 6 to 50 letters
         "ID" => "testkorea",
 
-        # 비밀번호, 6자이상 20자 미만
+        # Password, From 6 to 20 letters
         "PWD" => "thisispassword",
 
-        # 사업자번호, '-' 제외 10자리
+        # Business registration number ( 10 digits except ‘-’ )
         "CorpNum" => "8888888888",
 
-        # 대표자 성명 (최대 100자)
+        # CEO’s name
         "CEOName" => "대표자성명",
 
-        # 상호명 (최대 200자)
+        # Company name
         "CorpName" => "상호명",
 
-        # 주소 (최대 300자)
+        # Company address
         "Addr" => "주소",
 
-        # 업태 (최대 100자)
+        # Business type
         "BizType" => "업태",
 
-        # 종목 (최대 100자)
+        # Business item
         "BizClass" => "종목",
 
-        # 담당자 성명 (최대 100자)
+        # Name of the person in charge
         "ContactName" => "담당자 성명",
 
-        # 담당자 메일 (최대 100자)
+        # Email address of the person in charge
         "ContactEmail" => "test@test.com",
 
-        # 담당자 연락처 (최대 20자)
+        # Telephone number of the person in charge
         "ContactTEL" => "010-111-222",
 
-        # 담당자 휴대폰번호 (최대 20자)
+        # Mobile number of the person in charge
         "ContactHP" => "010-111-222",
 
-        # 담당자 팩스번호 (최대 20자)
+        # Fax number of the person in charge
         "ContactFAX" => "02-111-222",
     }
 
@@ -2409,7 +2347,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 연동회원의 회사정보를 확인합니다.
+  # Check the company information of partner user.
   ##############################################################################
   def getCorpInfo
 
@@ -2426,29 +2364,29 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 연동회원의 회사정보를 수정합니다
+  # Modify the company information of partner user.
   ##############################################################################
   def updateCorpInfo
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 회사정보
+    # Objects of company information
     corpInfo = {
 
-        # 대표자 성명 (최대 100자)
+        # CEO’s name
         "ceoname" => "대표자명_수정",
 
-        # 상호 (최대 200자)
+        # Company name
         "corpName" => "상호_수정",
 
-        # 주소 (최대 300자)
+        # Company address
         "addr" => "주소_수정",
 
-        # 업태 (최대 100자)
+        # Business type
         "bizType" => "업태_수정",
 
-        # 종목 (최대 100자)
+        # Business item
         "bizClass" => "종목_수정",
     }
 
@@ -2465,41 +2403,41 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 연동회원의 담당자를 신규로 등록합니다.
+  # Add a contact of the person in charge(POPBILL account) of partner user.
   ##############################################################################
   def registContact
 
     # Business registration number of POPBILL user (10 digits except ‘-’)
     corpNum = TaxinvoiceController::TestCorpNum
 
-    # 담당자 정보
+    # Objects of contact information
     contactInfo = {
 
-        # 담당자 아이디, 6자 이상 50자 미만
+        # ID, From 6 to 50 letters
         "id" => "testkorea20190121",
 
-        # 비밀번호, 6자 이상 20자 미만
+        # Password, From 6 to 20 letters
         "pwd" => "user_password",
 
-        # 담당자명 (최대 100자)
+        # Name of the person in charge
         "personName" => "루비담당자",
 
-        # 담당자 연락처 (최대 20자)
+        # Telephone number of the person in charge
         "tel" => "070-4304-2992",
 
-        # 담당자 휴대폰번호 (최대 20자)
+        # Mobile number of the person in charge
         "hp" => "010-111-222",
 
-        # 담당자 팩스번호 (최대 20자)
+        # Fax number of the person in charge
         "fax" => "02-111-222",
 
-        # 담당자 이메일 (최대 100자)
+        # Email address of the person in charge
         "email" => "ruby@linkhub.co.kr",
 
-        # 회사조회 권한여부, true(회사조회), false(개인조회)
+        # Configuration for search authorization
         "searchAllAllowYN" => true,
 
-        # 관리자 권한여부, true(관리자), false(사용자)
+        # Whether an user is a administrator or not
         "mgrYN" => false,
     }
 
@@ -2517,7 +2455,7 @@ class TaxinvoiceController < ApplicationController
 
 
   ##############################################################################
-  # 연동회원의 담당자 목록을 확인합니다.
+  # 연Check the list of persons in charge of partner user.
   ##############################################################################
   def listContact
 
@@ -2535,7 +2473,7 @@ class TaxinvoiceController < ApplicationController
 
 
   ##############################################################################
-  # 연동회원의 담당자 정보를 수정합니다.
+  # Modify the contact information of partner user.
   ##############################################################################
   def updateContact
 
@@ -2545,31 +2483,31 @@ class TaxinvoiceController < ApplicationController
     # POPBILL user ID
     userID = TaxinvoiceController::TestUserID
 
-    # 담당자 정보
+    # Objects of contact information
     contactInfo = {
 
-        # 담당자 아이디
+        # ID, From 6 to 50 letters
         "id" => userID,
 
-        # 담당자명 (최대 100자)
+        # Name of the person in charge
         "personName" => "Ruby(담당자)",
 
-        # 담당자 연락처 (최대 20자)
+        # Telephone number of the person in charge
         "tel" => "070-4304-2992",
 
-        # 담당자 휴대폰번호 (최대 20자)
+        # Mobile number of the person in charge
         "hp" => "010-111-222",
 
-        # 담당자 팩스번호 (최대 20자)
+        # Fax number of the person in charge
         "fax" => "070-111-222",
 
-        # 담당자 이메일 (최대 100자)
+        # Email address of the person in charge
         "email" => "code@linkhub.co.kr",
 
-        # 회사조회 권한여부, true(회사조회), false(개인조회)
+        # Configuration for search authorization
         "searchAllAllowYN" => true,
 
-        # 관리자 권한여부, true(관리자), false(사용자)
+        # Whether an user is a administrator or not
         "mgrYN" => false,
     }
 
