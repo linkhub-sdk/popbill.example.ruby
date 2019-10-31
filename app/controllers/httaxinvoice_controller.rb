@@ -28,10 +28,10 @@ class HttaxinvoiceController < ApplicationController
   SecretKey = "SwWxqU+0TErBXy/9TVjIPEnI0VTUMMSQZtJf3Ed8q3I="
 
   # 팝빌 연동회원 사업자번호
-  TestCorpNum = "6798700433"
+  TestCorpNum = "1234567890"
 
   # 팝빌 연동회원 아이디
-  TestUserID = "testkorea_linkhub"
+  TestUserID = "testkorea"
 
   # 팝빌 홈택스 전자세금계산서 연동 API Service 초기화
   HTTIService = HTTaxinvoiceService.instance(
@@ -304,6 +304,33 @@ class HttaxinvoiceController < ApplicationController
       render "home/exception"
     end
   end
+
+  ##############################################################################
+  # 전자세금계산서 인쇄 팝업 URL을 반환힙니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  ##############################################################################
+  def getPrintURL
+
+    # 팝빌회원 사업자번호
+    corpNum = HttaxinvoiceController::TestCorpNum
+
+    # 국세청 승인번호
+    ntsConfirmNum = "201904024100020300000cc6"
+
+    begin
+      @value = HttaxinvoiceController::HTTIService.getPrintURL(
+          corpNum,
+          ntsConfirmNum
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
 
   ##############################################################################
   # 홈택스연동 인증관리를 위한 URL을 반환합니다.

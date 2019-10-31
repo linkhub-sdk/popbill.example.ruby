@@ -280,6 +280,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/HTTaxinvoiceExample/getTaxinvoice" => 'httaxinvoice#getTaxinvoice', via: [:get]
   get "/HTTaxinvoiceExample/getXML" => 'httaxinvoice#getXML', via: [:get]
   get "/HTTaxinvoiceExample/getPopUpURL" => 'httaxinvoice#getPopUpURL', via: [:get]
+  get "/HTTaxinvoiceExample/getPrintURL" => 'httaxinvoice#getPrintURL', via: [:get]
   get "/HTTaxinvoiceExample/getCertificatePopUpURL" => 'httaxinvoice#getCertificatePopUpURL', via: [:get]
   get "/HTTaxinvoiceExample/getCertificateExpireDate" => 'httaxinvoice#getCertificateExpireDate', via: [:get]
   get "/HTTaxinvoiceExample/checkCertValidation" => 'httaxinvoice#checkCertValidation', via: [:get]
