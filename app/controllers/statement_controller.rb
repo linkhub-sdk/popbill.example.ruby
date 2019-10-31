@@ -84,11 +84,20 @@ class StatementController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = StatementController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = StatementController::TestUserID
+
     # 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
     # 전자명세서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20191031-05"
+
+    # 메모
+    memo = "메모"
+
+    # 안내메일 제목, 미기재시 기본양식으로 전송.
+    emailSubject = ""
 
     # 전자명세서 정보
     statement = {
@@ -103,7 +112,7 @@ class StatementController < ApplicationController
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20190917",
+        "writeDate" => "20191031",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -198,7 +207,7 @@ class StatementController < ApplicationController
         "receiverContactName" => "수신자 담당자명",
 
         # 수신자 담당자 메일주소
-        "receiverEmail" => "test2@test.com",
+        "receiverEmail" => "code@linkhub.co.kr",
 
         # 수신자 담당자 연락처
         "receiverTEL" => "070-4304-2999",
@@ -252,6 +261,9 @@ class StatementController < ApplicationController
       @Response = StatementController::STMTService.registIssue(
           corpNum,
           statement,
+          memo,
+          userID,
+          emailSubject,
       )
       render "home/response"
     rescue PopbillException => pe

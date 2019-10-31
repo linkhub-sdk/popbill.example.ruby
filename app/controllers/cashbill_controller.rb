@@ -81,8 +81,17 @@ class CashbillController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = CashbillController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = CashbillController::TestUserID
+
     # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190403-02"
+    mgtKey = "20191031-04"
+
+    # 메모
+    memo = "메모"
+
+    # 안내메일 제목, 미기재시 기본양식으로 전송.
+    emailSubject = ""
 
     # 현금영수증 정보
     cashbill = {
@@ -144,7 +153,7 @@ class CashbillController < ApplicationController
         "orderNumber" => "가맹점 주문번호",
 
         # 거래처 이메일
-        "email" => "test@test.com",
+        "email" => "code@linkhub.co.kr",
 
         # 거래처 휴대폰
         "hp" => "010-111-222",
@@ -157,6 +166,9 @@ class CashbillController < ApplicationController
       @Response = CashbillController::CBService.registIssue(
           corpNum,
           cashbill,
+          memo,
+          userID,
+          emailSubject,
       )
       render "home/response"
     rescue PopbillException => pe
