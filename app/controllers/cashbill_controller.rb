@@ -153,6 +153,8 @@ class CashbillController < ApplicationController
         "orderNumber" => "가맹점 주문번호",
 
         # 거래처 이메일
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "email" => "code@linkhub.co.kr",
 
         # 거래처 휴대폰
@@ -250,6 +252,8 @@ class CashbillController < ApplicationController
         "orderNumber" => "가맹점 주문번호",
 
         # 거래처 이메일
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "email" => "test@test.com",
 
         # 거래처 휴대폰
@@ -347,6 +351,8 @@ class CashbillController < ApplicationController
         "orderNumber" => "가맹점 주문번호",
 
         # 거래처 이메일
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "email" => "test@test.com",
 
         # 거래처 휴대폰
@@ -1014,6 +1020,8 @@ class CashbillController < ApplicationController
     mgtKey = "20190403-11"
 
     # 이메일 주소
+    # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+    # 실제 거래처의 메일주소가 기재되지 않도록 주의
     emailAddr = "test@test.com"
 
     begin

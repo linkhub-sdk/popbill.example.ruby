@@ -46,7 +46,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 세금계산서 문서번호 사용여부를 확인합니다.
-  # - 관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
+  # - 문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
   ##############################################################################
   def checkMgtKeyInUse
 
@@ -92,7 +92,7 @@ class TaxinvoiceController < ApplicationController
 
     # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
     # 사업자 별로 중복되지 않도록 구성
-    mgtKey = "20191031-01"
+    mgtKey = "20191031-021"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -175,6 +175,8 @@ class TaxinvoiceController < ApplicationController
         "invoiceeContactName1" => "공급받는자담당자명",
 
         # 공급받는자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "invoiceeEmail1" => "test@test.com",
 
         # 공급받는자 담당자 연락처
@@ -246,13 +248,13 @@ class TaxinvoiceController < ApplicationController
 
         ######################### 수정세금계산서 정보 ##########################
         # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
 
-        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+        # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo) API의 응답필드 중 ItemKey 항목 기재
-        "originalTaxinvoiceKey" => "",
+        # [수정세금계산서 작성시 필수] 원본세금계산서 국세청승인번호 기재
+        "orgNTSConfirmNum" => nil,
 
 
         ######################### 상세항목(품목) 정보 #########################
@@ -311,7 +313,7 @@ class TaxinvoiceController < ApplicationController
     # - 가산세가 부과되더라도 발행을 해야하는 경우에는 forceIssue의 값을 true로 선언하면 됩니다.
     forceIssue = false
 
-    # 거래명세서 동시작성시 거래명세서 관리번호, 미기재시 세금계산서 관리번호로 자동작성
+    # 거래명세서 동시작성시 거래명세서 문서번호, 미기재시 세금계산서 문서번호로 자동작성
     dealInvoiceMgtKey = ''
 
     # 메모
@@ -432,6 +434,8 @@ class TaxinvoiceController < ApplicationController
         "invoiceeContactName1" => "공급받는자담당자명",
 
         # 공급받는자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "invoiceeEmail1" => "test@test.com",
 
         # 공급받는자 담당자 연락처
@@ -508,14 +512,14 @@ class TaxinvoiceController < ApplicationController
 
         ######################### 수정세금계산서 정보 ##########################
         # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
         ###################################################################
 
-        # 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+        # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
-        "originalTaxinvoiceKey" => "",
+        # [수정세금계산서 작성시 필수] 원본세금계산서 국세청승인번호 기재
+        "orgNTSConfirmNum" => nil,
 
 
         ######################### 상세항목(품목) 정보 #########################
@@ -678,6 +682,8 @@ class TaxinvoiceController < ApplicationController
         "invoiceeContactName1" => "공급받는자담당자명",
 
         # 공급받는자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "invoiceeEmail1" => "test@test.com",
 
         # 공급받는자 담당자 연락처
@@ -987,6 +993,8 @@ class TaxinvoiceController < ApplicationController
         "invoiceeContactName1" => "공급받는자담당자명",
 
         # 공급받는자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "invoiceeEmail1" => "test@test.com",
 
         # 공급받는자 담당자 연락처
@@ -1063,14 +1071,14 @@ class TaxinvoiceController < ApplicationController
 
         ######################### 수정세금계산서 정보 ##########################
         # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - http://blog.linkhub.co.kr/650
+        # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
         ###################################################################
 
-        # 수정사유코드, 수정사유에 따라 1~6 중 선택기재, 미기재시 nil 로 처리
+        # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
         "modifyCode" => nil,
 
-        # 원본세금계산서의 ItemKey, 문서확인 (GetInfo API)의 응답결과(ItemKey 항목) 확인
-        "originalTaxinvoiceKey" => "",
+        # [수정세금계산서 작성시 필수] 원본세금계산서 국세청승인번호 기재
+        "orgNTSConfirmNum" => nil,
 
 
         ######################### 상세항목(품목) 정보 #########################
@@ -1929,7 +1937,7 @@ class TaxinvoiceController < ApplicationController
     # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 관리번호
+    # 전자명세서 문서번호
     stmtMgtKey = "20190121-01"
 
     begin
@@ -1964,7 +1972,7 @@ class TaxinvoiceController < ApplicationController
     # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
-    # 전자명세서 관리번호
+    # 전자명세서 문서번호
     stmtMgtKey = "20190121-01"
 
     begin

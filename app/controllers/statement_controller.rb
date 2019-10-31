@@ -41,8 +41,8 @@ class StatementController < ApplicationController
   STMTService.setIpRestrictOnOff(true)
 
   ##############################################################################
-  # 전자명세서 관리번호 사용여부를 확인합니다.
-  # - 관리번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
+  # 전자명세서 문서번호 사용여부를 확인합니다.
+  # - 문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
   ##############################################################################
   def checkMgtKeyInUse
 
@@ -207,7 +207,9 @@ class StatementController < ApplicationController
         "receiverContactName" => "수신자 담당자명",
 
         # 수신자 담당자 메일주소
-        "receiverEmail" => "code@linkhub.co.kr",
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
+        "receiverEmail" => "test@test.com",
 
         # 수신자 담당자 연락처
         "receiverTEL" => "070-4304-2999",
@@ -395,6 +397,8 @@ class StatementController < ApplicationController
         "receiverContactName" => "수신자 담당자명",
 
         # 수신자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "receiverEmail" => "test2@test.com",
 
         # 수신자 담당자 연락처
@@ -580,6 +584,8 @@ class StatementController < ApplicationController
         "receiverContactName" => "수신자 담당자명",
 
         # 수신자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "receiverEmail" => "test2@test.com",
 
         # 수신자 담당자 연락처
@@ -1428,30 +1434,32 @@ class StatementController < ApplicationController
         "receiverCorpNum" => "8888888888",
 
         # 수신자 상호
-        "receiverCorpName" => "발신자 상호",
+        "receiverCorpName" => "수신자 상호",
 
-        # 발신자받는자 대표자 성명
-        "receiverCEOName" => "발신자 대표자 성명",
+        # 수신자 대표자 성명
+        "receiverCEOName" => "수신자 대표자 성명",
 
-        # 발신자받는자 주소
+        # 수신자 주소
         "receiverAddr" => "수신자 주소",
 
-        # 발신자받는자 종목
+        # 수신자 종목
         "receiverBizClass" => "종목",
 
-        # 발신자받는자 업태
+        # 수신자 업태
         "receiverBizType" => "업태",
 
-        # 발신자받는자 담당자 성명
+        # 수신자 담당자 성명
         "receiverContactName" => "수신자 담당자명",
 
-        # 발신자받는자 담당자 메일주소
+        # 수신자 담당자 메일주소
+        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "receiverEmail" => "test2@test.com",
 
-        # 발신자받는자 담당자 연락처
+        # 수신자 담당자 연락처
         "receiverTEL" => "070-4304-2999",
 
-        # 발신자받는자 담당자 휴대폰번호
+        # 수신자 담당자 휴대폰번호
         "receiverHP" => "010-4304-2991",
 
 
