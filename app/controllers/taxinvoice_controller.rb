@@ -92,7 +92,7 @@ class TaxinvoiceController < ApplicationController
 
     # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
     # 사업자 별로 중복되지 않도록 구성
-    mgtKey = "20190917-01"
+    mgtKey = "20191031-01"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -184,7 +184,7 @@ class TaxinvoiceController < ApplicationController
         "invoiceeHP1" => "010-123-1234",
 
         # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20190917",
+        "writeDate" => "20191031",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",
@@ -262,7 +262,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -273,7 +273,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1511,11 +1511,13 @@ class TaxinvoiceController < ApplicationController
     end
   end
 
+
+
   ##############################################################################
-  # 1건의 전자세금계산서 보기 팝업 URL을 반환합니다.
+  # 1건의 전자세금계산서 보기 팝업 URL을 반환합니다. (메뉴/버튼 제외)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
   ##############################################################################
-  def getPopUpURL
+  def getViewURL
 
     # 팝빌회원 사업자번호
     corpNum = TaxinvoiceController::TestCorpNum
@@ -1524,10 +1526,10 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-01"
+    mgtKey = "20191031-01"
 
     begin
-      @value = TaxinvoiceController::TIService.getPopUpURL(
+      @value = TaxinvoiceController::TIService.getViewURL(
           corpNum,
           keyType,
           mgtKey,

@@ -28,6 +28,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/TaxinvoiceExample/getLogs" => 'taxinvoice#getLogs', via: [:get]
   get "/TaxinvoiceExample/getURL" => 'taxinvoice#getURL', via: [:get]
   get "/TaxinvoiceExample/getPopUpURL" => 'taxinvoice#getPopUpURL', via: [:get]
+  get "/TaxinvoiceExample/getViewURL" => 'taxinvoice#getViewURL', via: [:get]
   get "/TaxinvoiceExample/getPrintURL" => 'taxinvoice#getPrintURL', via: [:get]
   get "/TaxinvoiceExample/getMassPrintURL" => 'taxinvoice#getMassPrintURL', via: [:get]
   get "/TaxinvoiceExample/getEPrintURL" => 'taxinvoice#getEPrintURL', via: [:get]

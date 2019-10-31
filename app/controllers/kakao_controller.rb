@@ -236,6 +236,22 @@ class KakaoController < ApplicationController
     # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
     requestNum = ''
 
+    # 버튼 목록 (최대 5개) 템플릿 내용과 일치하게 작성.
+    btns = [
+        {
+            "n" => "앱링크", #버튼
+            "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
+            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
+        },
+        {
+            "n" => "팝빌 바로가기",
+            "t" => "WL",
+            "u1" => "http://www.popbill.com",
+            "u2" => "http://www.popbill.com",
+        }
+    ]
+
     begin
       @value = KakaoController::KakaoService.sendATS_one(
           corpNum,
@@ -249,6 +265,7 @@ class KakaoController < ApplicationController
           receiverName,
           requestNum,
           userID,
+          btns,
       )['receiptNum']
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -310,6 +327,23 @@ class KakaoController < ApplicationController
             "rcvnm" => "수신자명02", # 수신자명
         },
     ]
+
+    # 버튼 목록 (최대 5개) 템플릿 내용과 일치하게 작성.
+    btns = [
+        {
+            "n" => "앱링크", #버튼
+            "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
+            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
+        },
+        {
+            "n" => "팝빌 바로가기",
+            "t" => "WL",
+            "u1" => "http://www.popbill.com",
+            "u2" => "http://www.popbill.com",
+        }
+    ]
+
     begin
       @value = KakaoController::KakaoService.sendATS_same(
           corpNum,
@@ -322,6 +356,7 @@ class KakaoController < ApplicationController
           msg,
           requestNum,
           userID,
+          btns,
       )['receiptNum']
       @name = "receiptNum(접수번호)"
       render "home/result"
@@ -382,6 +417,22 @@ class KakaoController < ApplicationController
         },
     ]
 
+    # 버튼 목록 (최대 5개) 템플릿 내용과 일치하게 작성.
+    btns = [
+        {
+            "n" => "앱링크", #버튼
+            "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            "u1" => "http://www.popbill.com", #[앱링크] Android [웹링크] Mobile
+            "u2" => "http://www.popbill.com", #[앱링크] IOS [웹링크] PC URL
+        },
+        {
+            "n" => "팝빌 바로가기",
+            "t" => "WL",
+            "u1" => "http://www.popbill.com",
+            "u2" => "http://www.popbill.com",
+        }
+    ]
+
     begin
       @value = KakaoController::KakaoService.sendATS_multi(
           corpNum,
@@ -392,6 +443,7 @@ class KakaoController < ApplicationController
           msg,
           requestNum,
           userID,
+          btns,
       )['receiptNum']
       @name = "receiptNum(접수번호)"
       render "home/result"

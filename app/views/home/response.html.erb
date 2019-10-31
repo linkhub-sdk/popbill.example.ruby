@@ -6,6 +6,10 @@
     <ul>
       <li>code (응답코드) : <%= @Response["code"] %></li>
       <li>message (응답메시지) : <%= @Response["message"] %></li>
+
+      <% if @Response["ntsConfirmNum"] %>
+        <li>ntsConfirmNum (국세청승인번호) : <%= @Response["ntsConfirmNum"] %></li>
+      <% end %>
     </ul>
   </fieldset>
 </div>
