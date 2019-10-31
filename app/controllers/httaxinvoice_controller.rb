@@ -63,7 +63,7 @@ class HttaxinvoiceController < ApplicationController
     dType = "S"
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20190801"
+    sDate = "20190901"
 
     # 종료일자, 표시형식(yyyyMMdd)
     eDate = "20191231"
@@ -136,8 +136,11 @@ class HttaxinvoiceController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = HttaxinvoiceController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = HttaxinvoiceController::TestUserID
+
     # 작업아이디
-    jobID = "019040411000000002"
+    jobID = "019103116000000001"
 
     # 문서형태 배열, N-일반세금계산서, M-수정세금계산서
     type = ["N", "M"]
@@ -166,6 +169,9 @@ class HttaxinvoiceController < ApplicationController
     # 정렬 방향, D-내림차순, A-오름차순
     order = "D"
 
+    # 조회 검색어, 거래처 사업자번호 또는 거래처명 like 검색
+    searchString = ""
+
     begin
       @Response = HttaxinvoiceController::HTTIService.search(
           corpNum,
@@ -179,6 +185,8 @@ class HttaxinvoiceController < ApplicationController
           page,
           perPage,
           order,
+          userID,
+          searchString,
       )
       render "httaxinvoice/search"
     rescue PopbillException => pe
@@ -197,8 +205,11 @@ class HttaxinvoiceController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = HttaxinvoiceController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = HttaxinvoiceController::TestUserID
+
     # 작업아이디
-    jobID = "019040411000000002"
+    jobID = "019103116000000001"
 
     # 문서형태 배열, N-일반세금계산서, M-수정세금계산서
     type = ["N", "M"]
@@ -218,6 +229,9 @@ class HttaxinvoiceController < ApplicationController
     # 종사업장 유무, 공백-전체조회, 0-종사업장번호 없음, 1-종사업장번호 조회
     taxRegID = ''
 
+    # 조회 검색어, 거래처 사업자번호 또는 거래처명 like 검색
+    searchString = ''
+
     begin
       @Response = HttaxinvoiceController::HTTIService.summary(
           corpNum,
@@ -228,6 +242,8 @@ class HttaxinvoiceController < ApplicationController
           taxRegIDType,
           taxRegIDYN,
           taxRegID,
+          userID,
+          searchString,
       )
       render "httaxinvoice/summary"
     rescue PopbillException => pe
