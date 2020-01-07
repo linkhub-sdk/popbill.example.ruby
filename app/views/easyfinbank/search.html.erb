@@ -1,0 +1,34 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <ul>
+      <li>code (응답코드) : <%= @Response["code"] %></li>
+      <li>message (응답메시지) : <%= @Response["message"] %></li>
+      <li>total (총 검색결과 건수) : <%= @Response["total"] %></li>
+      <li>perPage (페이지당 검색개수) : <%= @Response["perPage"] %></li>
+      <li>pageNum (페이지 번호) : <%= @Response["pageNum"] %></li>
+      <li>pageCount (페이지 개수) : <%= @Response["pageCount"] %></li>
+    </ul>
+
+    <% @Response["list"].each_with_index do |tradeInfo, index| %>
+      <fieldset class="fieldset2">
+        <legend>거래내역 [<%= (index + 1) %>]</legend>
+        <ul>
+          <li>tid (거래내역 아이디) : <%= tradeInfo["tid"] %></li>
+          <li>trdate (거래일자) : <%= tradeInfo["trdate"] %></li>
+          <li>trserial (거래일자별 거래내역 순번) : <%= tradeInfo["trserial"] %></li>
+          <li>trdt (거래일시) : <%= tradeInfo["trdt"] %></li>
+          <li>accIn (입금액) : <%= tradeInfo["accIn"] %></li>
+          <li>accOut (출금액) : <%= tradeInfo["accOut"] %></li>
+          <li>balance (잔액) : <%= tradeInfo["balance"] %></li>
+          <li>remark1 (비고1) : <%= tradeInfo["remark1"] %></li>
+          <li>remark2 (비고2) : <%= tradeInfo["remark2"] %></li>
+          <li>remark3 (비고3) : <%= tradeInfo["remark3"] %></li>
+          <li>memo (메모) : <%= tradeInfo["memo"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
+  </fieldset>
+</div>

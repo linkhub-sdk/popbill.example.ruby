@@ -1,0 +1,18 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <ul>
+      <li>jobID (작업아이디) : <%= @Response["jobID"] %></li>
+      <li>jobState (수집상태) : <%= @Response["jobState"] %></li>
+      <li>startDate (시작일자) : <%= @Response["startDate"] %></li>
+      <li>endDate (종료일자) : <%= @Response["endDate"] %></li>
+      <li>errorCode (오류코드) : <%= @Response["errorCode"] %></li>
+      <li>errorReason (오류메시지) : <%= @Response["errorReason"] %></li>
+      <li>jobStartDT (작업 시작일시) : <%= @Response["jobStartDT"] %></li>
+      <li>jobEndDT (작업 종료일시) : <%= @Response["jobEndDT"] %></li>
+      <li>regDT (수집 요청일시) : <%= @Response["regDT"] %></li>
+    </ul>
+  </fieldset>
+</div>

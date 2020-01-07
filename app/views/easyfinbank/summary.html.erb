@@ -1,0 +1,14 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <ul>
+      <li>count (수집 결과 건수) : <%= @Response["count"] %></li>
+      <li>cntAccIn (입금거래 건수) : <%= @Response["cntAccIn"] %></li>
+      <li>cntAccOut (출금거래 건수) : <%= @Response["cntAccOut"] %></li>
+      <li>totalAccIn (입금액 금액) : <%= @Response["totalAccIn"] %></li>
+      <li>totalAccOut (출금액 금액) : <%= @Response["totalAccOut"] %></li>
+    </ul>
+  </fieldset>
+</div>

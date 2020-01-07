@@ -1,0 +1,21 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <% @Response.each_with_index do |bankAccountInfo, index| %>
+      <fieldset class="fieldset2">
+        <legend>계좌 목록 확인 [<%= (index + 1) %>/<%= @Response.length %>]</legend>
+        <ul>
+          <li>bankCode (은행코드) : <%= bankAccountInfo["bankCode"] %></li>
+          <li>accountNumber (계좌번호) : <%= bankAccountInfo["accountNumber"] %></li>
+          <li>accountName (계좌이름) : <%= bankAccountInfo["accountName"] %></li>
+          <li>accountType (계좌유형) : <%= bankAccountInfo["accountType"] %></li>
+          <li>state (계좌 정액제 상태) : <%= bankAccountInfo["state"] %></li>
+          <li>regDT (등록일시) : <%= bankAccountInfo["regDT"] %></li>
+          <li>memo (메모) : <%= bankAccountInfo["memo"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
+  </fieldset>
+</div>

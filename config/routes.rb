@@ -5,6 +5,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "fax/index"
   get "message/index"
   get "cashbill/index"
+  get "easyfinbank/index"
   root :to => 'home#index'
 
   # 팝빌 전자세금계산서 API Service Route
@@ -357,4 +358,37 @@ PopbillExampleRuby::Application.routes.draw do
   get "/ClosedownExample/listContact" => 'closedown#listContact', via: [:get]
   get "/ClosedownExample/updateContact" => 'closedown#updateContact', via: [:get]
   get "/ClosedownExample/getAccessURL" => 'closedown#getAccessURL', via: [:get]
+
+
+  get "/EasyFinBankExample" => 'easyfinbank#index'
+
+  get "/EasyFinBankExample/getBankAccountMgtURL" => 'easyfinbank#getBankAccountMgtURL', via: [:get]
+  get "/EasyFinBankExample/listBankAccount" => 'easyfinbank#listBankAccount', via: [:get]
+
+  get "/EasyFinBankExample/requestJob" => 'easyfinbank#requestJob', via: [:get]
+  get "/EasyFinBankExample/getJobState" => 'easyfinbank#getJobState', via: [:get]
+  get "/EasyFinBankExample/listActiveJob" => 'easyfinbank#listActiveJob', via: [:get]
+
+  get "/EasyFinBankExample/search" => 'easyfinbank#search', via: [:get]
+  get "/EasyFinBankExample/summary" => 'easyfinbank#summary', via: [:get]
+  get "/EasyFinBankExample/saveMemo" => 'easyfinbank#saveMemo', via: [:get]
+
+  get "/EasyFinBankExample/getFlatRatePopUpURL" => 'easyfinbank#getFlatRatePopUpURL', via: [:get]
+  get "/EasyFinBankExample/getFlatRateState" => 'easyfinbank#getFlatRateState', via: [:get]
+  get "/EasyFinBankExample/getBalance" => 'easyfinbank#getBalance', via: [:get]
+  get "/EasyFinBankExample/getChargeURL" => 'easyfinbank#getChargeURL', via: [:get]
+  get "/EasyFinBankExample/getPartnerBalance" => 'easyfinbank#getPartnerBalance', via: [:get]
+  get "/EasyFinBankExample/getPartnerURL" => 'easyfinbank#getPartnerURL', via: [:get]
+  get "/EasyFinBankExample/getChargeInfo" => 'easyfinbank#getChargeInfo', via: [:get]
+
+  get "/EasyFinBankExample/checkIsMember" => 'easyfinbank#checkIsMember', via: [:get]
+  get "/EasyFinBankExample/checkID" => 'easyfinbank#checkID', via: [:get]
+  get "/EasyFinBankExample/joinMember" => 'easyfinbank#joinMember', via: [:get]
+  get "/EasyFinBankExample/getAccessURL" => 'easyfinbank#getAccessURL', via: [:get]
+  get "/EasyFinBankExample/getCorpInfo" => 'easyfinbank#getCorpInfo', via: [:get]
+  get "/EasyFinBankExample/updateCorpInfo" => 'easyfinbank#updateCorpInfo', via: [:get]
+  get "/EasyFinBankExample/registContact" => 'easyfinbank#registContact', via: [:get]
+  get "/EasyFinBankExample/listContact" => 'easyfinbank#listContact', via: [:get]
+  get "/EasyFinBankExample/updateContact" => 'easyfinbank#updateContact', via: [:get]
+
 end
