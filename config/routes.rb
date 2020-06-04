@@ -362,6 +362,11 @@ PopbillExampleRuby::Application.routes.draw do
 
   get "/EasyFinBankExample" => 'easyfinbank#index'
 
+  get "/EasyFinBankExample/registBankAccount" => 'easyfinbank#registBankAccount', via: [:get]
+  get "/EasyFinBankExample/updateBankAccount" => 'easyfinbank#updateBankAccount', via: [:get]
+  get "/EasyFinBankExample/closeBankAccount" => 'easyfinbank#closeBankAccount', via: [:get]
+  get "/EasyFinBankExample/revokeCloseBankAccount" => 'easyfinbank#revokeCloseBankAccount', via: [:get]
+  get "/EasyFinBankExample/getBankAccountInfo" => 'easyfinbank#getBankAccountInfo', via: [:get]
   get "/EasyFinBankExample/getBankAccountMgtURL" => 'easyfinbank#getBankAccountMgtURL', via: [:get]
   get "/EasyFinBankExample/listBankAccount" => 'easyfinbank#listBankAccount', via: [:get]
 

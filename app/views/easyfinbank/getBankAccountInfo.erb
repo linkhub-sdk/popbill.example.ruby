@@ -1,0 +1,26 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <ul>
+      <li>bankCode (은행코드) : <%= @Response["bankCode"] %></li>
+      <li>accountNumber (계좌번호) : <%= @Response["accountNumber"] %></li>
+      <li>accountName (계좌이름) : <%= @Response["accountName"] %></li>
+      <li>accountType (계좌유형) : <%= @Response["accountType"] %></li>
+      <li>state (계좌 정액제 상태) : <%= @Response["state"] %></li>
+      <li>regDT (등록일시) : <%= @Response["regDT"] %></li>
+      <li>memo (메모) : <%= @Response["memo"] %></li>
+
+
+      <li>contractDT (정액제 서비스 시작일시) : <%= @Response["contractDT"] %></li>
+      <li>useEndDate (정액제 서비스 종료일자) : <%= @Response["useEndDate"] %></li>
+      <li>baseDate (자동연장 결제일) : <%= @Response["baseDate"] %></li>
+      <li>contractState (정액제 서비스 상태) : <%= @Response["contractState"] %></li>
+      <li>closeRequestYN (정액제 서비스 해지신청 여부) : <%= @Response["closeRequestYN"] %></li>
+      <li>useRestrictYN (정액제 서비스 사용제한 여부) : <%= @Response["useRestrictYN"] %></li>
+      <li>closeOnExpired (정액제 서비스 만료시 해지여부) : <%= @Response["closeOnExpired"] %></li>
+      <li>unPaidYN (미수금 보유 여부) : <%= @Response["unPaidYN"] %></li>
+    </ul>
+  </fieldset>
+</div>
