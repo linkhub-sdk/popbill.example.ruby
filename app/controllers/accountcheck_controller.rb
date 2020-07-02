@@ -56,7 +56,6 @@ class AccountcheckController < ApplicationController
 
     begin
       @Response = AccountcheckController::ACService.checkAccountInfo(corpNum, bankCode, accountNumber)
-      puts @Response
       render "accountcheck/checkAccountInfo"
     rescue PopbillException => pe
       @Response = pe
