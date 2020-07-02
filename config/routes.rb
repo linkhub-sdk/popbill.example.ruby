@@ -6,6 +6,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "message/index"
   get "cashbill/index"
   get "easyfinbank/index"
+  get "accountcheck/index"
   root :to => 'home#index'
 
   # 팝빌 전자세금계산서 API Service Route
@@ -395,5 +396,26 @@ PopbillExampleRuby::Application.routes.draw do
   get "/EasyFinBankExample/registContact" => 'easyfinbank#registContact', via: [:get]
   get "/EasyFinBankExample/listContact" => 'easyfinbank#listContact', via: [:get]
   get "/EasyFinBankExample/updateContact" => 'easyfinbank#updateContact', via: [:get]
+
+
+  # 팝빌 예금주조회 API Service route
+  get "/AccountCheckExample" => 'accountcheck#index'
+  get "/AccountCheckExample/checkAccountInfo" => 'accountcheck#checkAccountInfo', via: [:get]
+  get "/AccountCheckExample/checkCorpNums" => 'accountcheck#checkCorpNums', via: [:get]
+  get "/AccountCheckExample/getBalance" => 'accountcheck#getBalance', via: [:get]
+  get "/AccountCheckExample/getChargeURL" => 'accountcheck#getChargeURL', via: [:get]
+  get "/AccountCheckExample/getPartnerBalance" => 'accountcheck#getPartnerBalance', via: [:get]
+  get "/AccountCheckExample/getPartnerURL" => 'accountcheck#getPartnerURL', via: [:get]
+  get "/AccountCheckExample/getChargeInfo" => 'accountcheck#getChargeInfo', via: [:get]
+  get "/AccountCheckExample/getUnitCost" => 'accountcheck#getUnitCost', via: [:get]
+  get "/AccountCheckExample/checkIsMember" => 'accountcheck#checkIsMember', via: [:get]
+  get "/AccountCheckExample/checkID" => 'accountcheck#checkID', via: [:get]
+  get "/AccountCheckExample/joinMember" => 'accountcheck#joinMember', via: [:get]
+  get "/AccountCheckExample/getCorpInfo" => 'accountcheck#getCorpInfo', via: [:get]
+  get "/AccountCheckExample/updateCorpInfo" => 'accountcheck#updateCorpInfo', via: [:get]
+  get "/AccountCheckExample/registContact" => 'accountcheck#registContact', via: [:get]
+  get "/AccountCheckExample/listContact" => 'accountcheck#listContact', via: [:get]
+  get "/AccountCheckExample/updateContact" => 'accountcheck#updateContact', via: [:get]
+  get "/AccountCheckExample/getAccessURL" => 'accountcheck#getAccessURL', via: [:get]
 
 end
