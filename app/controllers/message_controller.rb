@@ -2,7 +2,7 @@
 #
 # 팝빌 문자 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2020-06-04
+# 업데이트 일자 : 2020-07-14
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -46,6 +46,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 발신번호 관리 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/message/ruby/api#GetSenderNumberMgtURL
   ##############################################################################
   def getSenderNumberMgtURL
 
@@ -70,6 +71,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 문자 발신번호 목록을 반환합니다.
+  # - https://docs.popbill.com/message/ruby/api#GetSenderNumberList
   ##############################################################################
   def getSenderNumberList
 
@@ -94,6 +96,7 @@ class MessageController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/message/ruby/api#SendSMS
   ##############################################################################
   def sendSMS
 
@@ -156,6 +159,7 @@ class MessageController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/message/ruby/api#SendSMS_Multi
   ##############################################################################
   def sendSMS_Multi
 
@@ -223,6 +227,7 @@ class MessageController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/message/ruby/api#SendLMS
   ##############################################################################
   def sendLMS
 
@@ -290,6 +295,7 @@ class MessageController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/message/ruby/api#SendLMS_Multi
   ##############################################################################
   def sendLMS_Multi
 
@@ -361,6 +367,7 @@ class MessageController < ApplicationController
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
   # - 이미지 파일의 크기는 최대 300Kbtye (JPEG), 가로/세로 1000px 이하 권장
+  # - https://docs.popbill.com/message/ruby/api#SendMMS
   ##############################################################################
   def sendMMS
 
@@ -432,6 +439,7 @@ class MessageController < ApplicationController
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
   # - 이미지 파일의 크기는 최대 300Kbtye (JPEG), 가로/세로 1000px 이하 권장
+  # - https://docs.popbill.com/message/ruby/api#SendMMS_Multi
   ##############################################################################
   def sendMMS_Multi
     # 팝빌회원 사업자번호
@@ -507,6 +515,7 @@ class MessageController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/message/ruby/api#SendXMS
   ##############################################################################
   def sendXMS
 
@@ -574,6 +583,7 @@ class MessageController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 > [문자/팩스] > [문자] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/message/ruby/api#SendXMS_Multi
   ##############################################################################
   def sendXMS_Multi
 
@@ -641,6 +651,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 문자전송요청시 발급받은 접수번호(receiptNum)로 예약문자 전송을 취소합니다.
   # - 예약취소는 예약전송시간 10분전까지만 가능합니다.
+  # - https://docs.popbill.com/message/ruby/api#CancelReserve
   ##############################################################################
   def cancelReserve
 
@@ -663,6 +674,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 문자전송요청시 할당한 전송요청번호(requestNum)로 예약문자 전송을 취소합니다.
   # - 예약취소는 예약전송시간 10분전까지만 가능합니다.
+  # - https://docs.popbill.com/message/ruby/api#CancelReserveRN
   ##############################################################################
   def cancelReserveRN
 
@@ -683,7 +695,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 문자전송요청시 발급받은 접수번호(receiptNum)로 전송상태를 확인합니다
-  # - 응답항목에 대한 자세한 사항은 "[문자 API 연동매뉴얼] >  3.3.1. GetMessages (전송내역 확인)을 참조하시기 바랍니다.
+    # - https://docs.popbill.com/message/ruby/api#GetMessages
   ##############################################################################
   def getMessages
 
@@ -704,7 +716,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 문자전송요청시 할당한 전송요청번호(requestNum)로 전송상태를 확인합니다
-  # - 응답항목에 대한 자세한 사항은 "[문자 API 연동매뉴얼] > 3.3.2. GetMessagesRN (전송내역 확인 - 요청번호 할당)을 참조하시기 바랍니다.
+    # - https://docs.popbill.com/message/ruby/api#GetMessagesRN
   ##############################################################################
   def getMessagesRN
 
@@ -725,6 +737,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 문자 전송내역 요약정보를 확인합니다. (최대 1000건)
+  # - https://docs.popbill.com/message/ruby/api#GetStates
   ##############################################################################
   def getStates
     # 팝빌회원 사업자번호
@@ -745,6 +758,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 검색조건을 사용하여 문자전송 내역을 조회합니다.
   # 최대 검색기간 : 6개월 이내
+  # - https://docs.popbill.com/message/ruby/api#Search
   ##############################################################################
   def search
 
@@ -809,6 +823,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 문자 전송내역 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/message/ruby/api#GetSentListURL
   ##############################################################################
   def getSentListURL
 
@@ -833,6 +848,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 080 서비스 수신거부 목록을 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#GetAutoDenyList
   ##############################################################################
   def getAutoDenyList
 
@@ -854,6 +870,7 @@ class MessageController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
+  # - https://docs.popbill.com/message/ruby/api#GetBalance
   ##############################################################################
   def getBalance
 
@@ -873,6 +890,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/message/ruby/api#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -898,6 +916,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
+  # - https://docs.popbill.com/message/ruby/api#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -917,6 +936,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/message/ruby/api#GetPartnerBalance
   ##############################################################################
   def getPartnerURL
 
@@ -941,6 +961,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 문자 API 서비스 전송단가를 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -965,6 +986,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 연동회원의 문자 API 서비스 과금정보를 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -985,6 +1007,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -1008,6 +1031,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#CheckID
   ##############################################################################
   def checkID
 
@@ -1025,6 +1049,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
+  # - https://docs.popbill.com/message/ruby/api#JoinMember
   ##############################################################################
   def joinMember
 
@@ -1087,6 +1112,7 @@ class MessageController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/message/ruby/api#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -1111,6 +1137,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -1128,6 +1155,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
+  # - https://docs.popbill.com/message/ruby/api#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -1167,6 +1195,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
+  # - https://docs.popbill.com/message/ruby/api#RegistContact
   ##############################################################################
   def registContact
 
@@ -1219,6 +1248,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 목록을 확인합니다.
+  # - https://docs.popbill.com/message/ruby/api#ListContact
   ##############################################################################
   def listContact
 
@@ -1236,6 +1266,7 @@ class MessageController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
+  # - https://docs.popbill.com/message/ruby/api#UpdateContact
   ##############################################################################
   def updateContact
 

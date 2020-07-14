@@ -2,7 +2,7 @@
 #
 # 팝빌 휴폐업조회 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2020-06-04
+# 업데이트 일자 : 2020-07-14
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -42,6 +42,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 1건의 사업자에 대한 휴폐업여부를 조회합니다.
+  # - https://docs.popbill.com/closedown/ruby/api#CheckCorpNum
   ##############################################################################
   def checkCorpNum
 
@@ -63,6 +64,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 다수의 사업자에 대한 휴폐업여부를 조회합니다.
+  # - https://docs.popbill.com/closedown/ruby/api#CheckCorpNums
   ##############################################################################
   def checkCorpNums
 
@@ -89,6 +91,7 @@ class ClosedownController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
+  # - https://docs.popbill.com/closedown/ruby/api#GetBalance
   ##############################################################################
   def getBalance
 
@@ -108,6 +111,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/closedown/ruby/api#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -133,6 +137,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
+  # - https://docs.popbill.com/closedown/ruby/api#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -152,6 +157,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/closedown/ruby/api#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -176,6 +182,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 휴폐업 조회단가를 확인합니다.
+  # - https://docs.popbill.com/closedown/ruby/api#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -196,6 +203,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 휴폐업조회 API 서비스 과금정보를 확인합니다.
+  # - https://docs.popbill.com/closedown/ruby/api#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -213,6 +221,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#MemberManage
   ##############################################################################
   def checkIsMember
 
@@ -236,6 +245,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#CheckID
   ##############################################################################
   def checkID
 
@@ -253,6 +263,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#JoinMember
   ##############################################################################
   def joinMember
 
@@ -313,6 +324,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -330,6 +342,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -369,6 +382,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#RegistContact
   ##############################################################################
   def registContact
 
@@ -421,6 +435,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 목록을 확인합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#ListContact
   ##############################################################################
   def listContact
 
@@ -438,6 +453,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#UpdateContact
   ##############################################################################
   def updateContact
 
@@ -491,6 +507,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://dev-docs.linkhub.kr/closedown/ruby/api#GetAccessURL
   ##############################################################################
   def getAccessURL
 

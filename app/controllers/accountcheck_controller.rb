@@ -2,7 +2,7 @@
 #
 # 팝빌 예금주조회 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2020-07-02
+# 업데이트 일자 : 2020-07-14
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -42,6 +42,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 1건의 계좌에 대한 예금주정보를 조회합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#CheckAccountInfo
   ##############################################################################
   def checkAccountInfo
 
@@ -69,6 +70,7 @@ class AccountcheckController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetBalance
   ##############################################################################
   def getBalance
 
@@ -88,6 +90,7 @@ class AccountcheckController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -113,6 +116,7 @@ class AccountcheckController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -132,6 +136,7 @@ class AccountcheckController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -156,6 +161,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 예금주 조회단가를 확인합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -176,6 +182,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 연동회원의 예금주조회 API 서비스 과금정보를 확인합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -193,6 +200,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -216,6 +224,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#CheckID
   ##############################################################################
   def checkID
 
@@ -233,6 +242,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#JoinMember
   ##############################################################################
   def joinMember
 
@@ -293,6 +303,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -310,6 +321,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -349,6 +361,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#RegistContact
   ##############################################################################
   def registContact
 
@@ -401,6 +414,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 목록을 확인합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#ListContact
   ##############################################################################
   def listContact
 
@@ -418,6 +432,7 @@ class AccountcheckController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#UpdateContact
   ##############################################################################
   def updateContact
 
@@ -471,6 +486,7 @@ class AccountcheckController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetAccessURL
   ##############################################################################
   def getAccessURL
 

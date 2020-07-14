@@ -2,7 +2,7 @@
 #
 # 팝빌 카카오톡 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2020-06-04
+# 업데이트 일자 : 2020-07-14
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -55,6 +55,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 플러스친구 계정관리 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetPlusFriendMgtURL
   ##############################################################################
   def getPlusFriendMgtURL
 
@@ -79,6 +80,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 플러스친구 목록을 반환합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#ListPlusFriendID
   ##############################################################################
   def listPlusFriendID
 
@@ -103,6 +105,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 발신번호 관리 팝업 URL을 반환 합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetSenderNumberMgtURL
   ##############################################################################
   def getSenderNumberMgtURL
 
@@ -127,6 +130,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 발신번호 목록을 반환합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetSenderNumberList
   ##############################################################################
   def getSenderNumberList
 
@@ -147,6 +151,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 알림톡 템플릿관리 팝업 URL 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetATSTemplateMgtURL
   ##############################################################################
   def getATSTemplateMgtURL
 
@@ -172,6 +177,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # (주)카카오로부터 심사후 승인된 알림톡 템플릿 목록을 반환합니다.
   # - 반환항목중 템플릿코드(templateCode)는 알림톡 전송시 사용됩니다.
+  # - https://docs.popbill.com/kakao/ruby/api#ListATSTemplate
   ##############################################################################
   def listATSTemplate
 
@@ -199,6 +205,7 @@ class KakaoController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/kakao/ruby/api#SendATS_one
   ##############################################################################
   def sendATS_one
 
@@ -285,6 +292,7 @@ class KakaoController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/kakao/ruby/api#SendATS_same
   ##############################################################################
   def sendATS_same
 
@@ -376,6 +384,7 @@ class KakaoController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/kakao/ruby/api#SendATS_multi
   ##############################################################################
   def sendATS_multi
 
@@ -460,6 +469,7 @@ class KakaoController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/kakao/ruby/api#SendFTS_one
   ##############################################################################
   def sendFTS_one
 
@@ -547,6 +557,7 @@ class KakaoController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/kakao/ruby/api#SendFTS_same
   ##############################################################################
   def sendFTS_same
 
@@ -639,6 +650,7 @@ class KakaoController < ApplicationController
   # - 발신번호 사전등록 방법. (사이트/API 등록방법 제공)
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
+  # - https://docs.popbill.com/kakao/ruby/api#SendFTS_multi
   ##############################################################################
   def sendFTS_multi
 
@@ -730,6 +742,7 @@ class KakaoController < ApplicationController
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
   # - 이미지 전송규격 / jpg 포맷, 용량 최대 500KByte, 이미지 높이/너비 비율 1.333 이하, 1/2 이상
+  # - https://docs.popbill.com/kakao/ruby/api#SendFMS_one
   ##############################################################################
   def sendFMS_one
 
@@ -826,6 +839,7 @@ class KakaoController < ApplicationController
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
   # - 이미지 전송규격 / jpg 포맷, 용량 최대 500KByte, 이미지 높이/너비 비율 1.333 이하, 1/2 이상
+  # - https://docs.popbill.com/kakao/ruby/api#SendFMS_same
   ##############################################################################
   def sendFMS_same
 
@@ -927,6 +941,7 @@ class KakaoController < ApplicationController
   #    1.팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
   #    2.getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
   # - 이미지 전송규격 / jpg 포맷, 용량 최대 500KByte, 이미지 높이/너비 비율 1.333 이하, 1/2 이상
+  # - https://docs.popbill.com/kakao/ruby/api#SendFMS_multi
   ##############################################################################
   def sendFMS_multi
 
@@ -1020,6 +1035,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 알림톡/친구톡 전송요청시 발급받은 접수번호(receiptNum)로 예약전송건을 취소합니다.
   # - 예약전송 취소는 예약전송시간 10분전까지만 가능하다.
+  # - https://docs.popbill.com/kakao/ruby/api#CancelReserve
   ##############################################################################
   def cancelReserve
 
@@ -1048,6 +1064,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 전송요청번호(requestNum)를 할당한 알림톡/친구톡 예약전송건을 취소합니다.
   # - 예약전송 취소는 예약전송시간 10분전까지만 가능하다.
+  # - https://docs.popbill.com/kakao/ruby/api#CancelReserveRN
   ##############################################################################
   def cancelReserveRN
 
@@ -1075,6 +1092,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 알림톡/친구톡 전송요청시 발급받은 접수번호(receiptNum)로 전송결과를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetMessages
   ##############################################################################
   def getMessages
 
@@ -1102,6 +1120,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 전송요청번호(requestNum)를 할당한 알림톡/친구톡 전송내역 및 전송상태를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetMessagesRN
   ##############################################################################
   def getMessagesRN
 
@@ -1131,6 +1150,7 @@ class KakaoController < ApplicationController
   # 카카오톡 전송내역 목록을 조회한다.
   # - 버튼정보를 확인하는 경우는 GetMessages API 사용
   # - 최대 검색기간 : 6개월 이내
+  # - https://docs.popbill.com/kakao/ruby/api#Search
   ##############################################################################
   def search
 
@@ -1195,6 +1215,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 카카오톡 전송내역 팝업 URL을 반환한다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetSentListURL
   ##############################################################################
   def getSentListURL
 
@@ -1219,6 +1240,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 카카오톡 API 서비스 전송단가를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -1243,6 +1265,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 연동회원의 카카오톡 API 서비스 과금정보를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -1265,6 +1288,7 @@ class KakaoController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetBalance
   ##############################################################################
   def getBalance
 
@@ -1284,6 +1308,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -1309,6 +1334,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -1328,6 +1354,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -1352,6 +1379,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -1375,6 +1403,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#CheckID
   ##############################################################################
   def checkID
 
@@ -1392,6 +1421,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#JoinMember
   ##############################################################################
   def joinMember
 
@@ -1453,6 +1483,7 @@ class KakaoController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -1477,6 +1508,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -1494,6 +1526,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -1533,6 +1566,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#RegistContact
   ##############################################################################
   def registContact
 
@@ -1585,6 +1619,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 목록을 확인합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#ListContact
   ##############################################################################
   def listContact
 
@@ -1602,6 +1637,7 @@ class KakaoController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
+  # - https://docs.popbill.com/kakao/ruby/api#UpdateContact
   ##############################################################################
   def updateContact
 
