@@ -2,7 +2,7 @@
 #
 # 팝빌 카카오톡 API Ruby On Rails SDK Example
 #
-# 업데이트 일자 : 2020-07-14
+# 업데이트 일자 : 2020-07-15
 # 연동기술지원 연락처 : 1600-9854 / 070-4304-2991~2
 # 연동기술지원 이메일 : code@linkhub.co.kr
 #
@@ -51,6 +51,9 @@ class KakaoController < ApplicationController
 
   # 인증토큰 IP제한기능 사용여부, true-권장
   KakaoService.setIpRestrictOnOff(true)
+
+  # 팝빌 API 서비스 고정 IP 사용여부(GA), true-사용, false-미사용, 기본값(false)
+  KakaoService.setUseStaticIP(false)
 
   ##############################################################################
   # 플러스친구 계정관리 팝업 URL을 반환합니다.

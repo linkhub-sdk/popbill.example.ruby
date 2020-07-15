@@ -7,7 +7,7 @@ ruby '2.3.0'
 gem 'rails', '~> 5.2.3'
 
 # 팝빌 API Service
-gem 'popbill', '1.15.1'
+gem 'popbill', '1.16.0'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
