@@ -95,7 +95,7 @@ class TaxinvoiceController < ApplicationController
 
     # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
     # 사업자 별로 중복되지 않도록 구성
-    mgtKey = "20191031-021"
+    mgtKey = "20200723-01"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -189,7 +189,7 @@ class TaxinvoiceController < ApplicationController
         "invoiceeHP1" => "010-123-1234",
 
         # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20191031",
+        "writeDate" => "20200723",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",

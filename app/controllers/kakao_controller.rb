@@ -306,10 +306,10 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 알림톡 템플릿코드 (ListATSTemplate API의 반환 항목 중 templateCode 기재)
-    templateCode = '019020000163'
+    templateCode = '018120000044'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
-    snd = '070-4304-2991'
+    snd = '010-4324-5117'
 
     # 알림톡 내용 (최대 1000자)
     content = '테스트 템플릿 입니다.'
@@ -320,7 +320,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-알림톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+    # 예약일시 (작성형식: 20200723012753 yyyyMMddHHmmss)
     sndDT = ''
 
     # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
@@ -332,10 +332,45 @@ class KakaoController < ApplicationController
         {
             "rcv" => "010123456", # [필수] 수신번호
             "rcvnm" => "수신자명01", # 수신자명
+            "interOPRefKey" => "20200723-01", # 파트너 지정키, 수신자 구별용 메모
+
+            # 수신자별로 다른내용의 버튼 전송시 아래코드 참조
+            # "btns" => [
+            #     {
+            #         "n" => "앱링크", #버튼
+            #         "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            #         "u1" => "http://www.popbill.com", #[앱링크] iOS [웹링크] Mobile
+            #         "u2" => "http://www.popbill.com", #[앱링크] Android [웹링크] PC URL
+            #     },
+            #     {
+            #         "n" => "팝빌 바로가기",
+            #         "t" => "WL",
+            #         "u1" => "http://www.testpopbill.com",
+            #         "u2" => "http://www.popbill.com",
+            #     }
+            # ],
+
         },
         {
             "rcv" => "010333999", # [필수] 수신번호
             "rcvnm" => "수신자명02", # 수신자명
+            "interOPRefKey" => "20200723-02", # 파트너 지정키, 수신자 구별용 메모
+
+            # 수신자별로 다른내용의 버튼 전송시 아래코드 참조
+            # "btns" => [
+            #     {
+            #         "n" => "앱링크", #버튼
+            #         "t" => "AL", #버튼유형, (WL-웹링크 / AL-앱링크 / MD-메시지전달 / BK-봇키워드)
+            #         "u1" => "http://www.testpopbill.com", #[앱링크] iOS [웹링크] Mobile
+            #         "u2" => "http://www.popbill.com", #[앱링크] Android [웹링크] PC URL
+            #     },
+            #     {
+            #         "n" => "팝빌 바로가기",
+            #         "t" => "WL",
+            #         "u1" => "http://www.popbill.com",
+            #         "u2" => "http://www.popbill.com",
+            #     }
+            # ],
         },
     ]
 
@@ -1106,7 +1141,7 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 예약전송 요청시 발급 받은 접수번호
-    receiptNum = '019040411012700001'
+    receiptNum = '020072314005100001'
 
     begin
       @Response = KakaoController::KakaoService.getMessages(
