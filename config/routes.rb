@@ -162,6 +162,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/CashbillExample/listContact" => 'cashbill#listContact', via: [:get]
   get "/CashbillExample/updateContact" => 'cashbill#updateContact', via: [:get]
   get "/CashbillExample/registContact" => 'cashbill#registContact', via: [:get]
+  get "/CashbillExample/assignMgtKey" => 'cashbill#assignMgtKey', via: [:get]
 
 
   # 팝빌 문자 API Service route

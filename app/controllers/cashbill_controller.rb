@@ -1628,4 +1628,33 @@ class CashbillController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 팝빌 사이트에서 작성한 현금영수증에 파트너 문서번호를 할당합니다.
+  ##############################################################################
+  def assignMgtKey
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 현금영수증 아이템키, 목록조회(Search) API의 반환항목중 ItemKey 참조
+    itemKey = "020021713524200001"
+
+    # 할당할 문서번호, 숫자, 영문, '-', '_' 조합으로
+    # 최대 24자리까지 사업자번호별 중복없는 고유번호 할당
+    mgtKey = "20200723-05"
+
+    begin
+      @Response = CashbillController::CBService.assignMgtKey(
+          corpNum,
+          itemKey,
+          mgtKey,
+      )
+      render "home/response"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+
+  end
+
 end
