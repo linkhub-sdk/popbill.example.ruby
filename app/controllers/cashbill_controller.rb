@@ -891,6 +891,32 @@ class CashbillController < ApplicationController
   end
 
   ##############################################################################
+  # 1건의 현금영수증 PDF 다운로드 URL을 반환합니다.
+  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  ##############################################################################
+  def getPDFURL
+
+    # 팝빌회원 사업자번호
+    corpNum = CashbillController::TestCorpNum
+
+    # 현금영수증 문서번호
+    mgtKey = "20200722-01"
+
+    begin
+      @value = CashbillController::CBService.getPDFURL(
+          corpNum,
+          mgtKey,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
+  ##############################################################################
   # 1건의 현금영수증 인쇄팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
   # - https://docs.popbill.com/cashbill/ruby/api#GetPrintURL

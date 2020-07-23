@@ -1561,6 +1561,35 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
+  # 1건의 전자세금계산서 PDF 다운로드 팝업 URL을 반환합니다.
+  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  ##############################################################################
+  def getPDFURL
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    keyType = MgtKeyType::SELL
+
+    # 세금계산서 문서번호
+    mgtKey = "20200722-01"
+
+    begin
+      @value = TaxinvoiceController::TIService.getPDFURL(
+          corpNum,
+          keyType,
+          mgtKey,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+
+  ##############################################################################
   # 1건의 전자세금계산서 인쇄팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#GetPrintURL
