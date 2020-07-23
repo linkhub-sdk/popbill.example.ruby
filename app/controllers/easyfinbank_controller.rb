@@ -308,16 +308,16 @@ class EasyfinbankController < ApplicationController
     corpNum = EasyfinbankController::TestCorpNum
 
     # 은행코드
-    bankCode = "0048"
+    bankCode = "0039"
 
     # 계좌번호
-    accountNumber = "131020538645"
+    accountNumber = "2070064402404"
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20191101"
+    sDate = "20200601"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20200107"
+    eDate = "20200723"
 
     begin
       @value = EasyfinbankController::EasyFinBankInstance.requestJob(
@@ -387,7 +387,7 @@ class EasyfinbankController < ApplicationController
     userID = EasyfinbankController::TestUserID
 
     # 작업아이디
-    jobID = "020010711000000008"
+    jobID = "020072311000000002"
 
     # 거래유형 배열, I-입금, O-출금
     tradeType = ["I", "O"]

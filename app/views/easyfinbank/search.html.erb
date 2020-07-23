@@ -10,6 +10,7 @@
       <li>perPage (페이지당 검색개수) : <%= @Response["perPage"] %></li>
       <li>pageNum (페이지 번호) : <%= @Response["pageNum"] %></li>
       <li>pageCount (페이지 개수) : <%= @Response["pageCount"] %></li>
+      <li>lastScrapDT (최종 조회일시) : <%= @Response["lastScrapDT"] %></li>
     </ul>
 
     <% @Response["list"].each_with_index do |tradeInfo, index| %>
