@@ -89,7 +89,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/StatementExample/getEPrintURL" => 'statement#getEPrintURL', via: [:get]
   get "/StatementExample/getMassPrintURL" => 'statement#getMassPrintURL', via: [:get]
   get "/StatementExample/getMailURL" => 'statement#getMailURL', via: [:get]
-  get "/StatementExample/getAccessURL" => 'taxinvoice#getAccessURL', via: [:get]
+  get "/StatementExample/getAccessURL" => 'statement#getAccessURL', via: [:get]
   get "/StatementExample/attachFile" => 'statement#attachFile', via: [:get]
   get "/StatementExample/deleteFile" => 'statement#deleteFile', via: [:get]
   get "/StatementExample/getFiles" => 'statement#getFiles', via: [:get]
@@ -115,7 +115,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/StatementExample/listContact" => 'statement#listContact', via: [:get]
   get "/StatementExample/updateContact" => 'statement#updateContact', via: [:get]
   get "/StatementExample/registContact" => 'statement#registContact', via: [:get]
-
+  get "/StatementExample/getViewURL" => 'statement#getViewURL', via: [:get]
 
   # 팝빌 현금영수증 API Service route
   get "/CashbillExample" => 'cashbill#index'
