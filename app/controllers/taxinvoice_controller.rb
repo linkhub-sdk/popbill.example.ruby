@@ -197,9 +197,6 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
-
         # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
@@ -461,9 +458,6 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
-
         # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
@@ -706,9 +700,6 @@ class TaxinvoiceController < ApplicationController
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
-
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
 
         # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
@@ -1014,9 +1005,6 @@ class TaxinvoiceController < ApplicationController
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
-
-        # [필수] 발행시점
-        "issueTiming" => "직접발행",
 
         # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
