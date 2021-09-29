@@ -42,7 +42,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 계좌조회 서비스를 이용할 은행계좌를 등록한다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#RegistBankAccount
+  # - https://docs.popbill.com/easyfinbank/ruby/api#RegistBankAccount
   ##############################################################################
   def registBankAccount
 
@@ -107,7 +107,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 등록된 은행 계좌정보를 수정합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#UpdateBankAccount
+  # - https://docs.popbill.com/easyfinbank/ruby/api#UpdateBankAccount
   ##############################################################################
   def updateBankAccount
 
@@ -160,7 +160,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 은행계좌의 정액제 해지를 요청한다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#CloseBankAccount
+  # - https://docs.popbill.com/easyfinbank/ruby/api#CloseBankAccount
   ##############################################################################
   def closeBankAccount
 
@@ -199,7 +199,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 은행계좌의 정액제 해지요청을 취소한다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#RevokeCloseBankAccount
+  # - https://docs.popbill.com/easyfinbank/ruby/api#RevokeCloseBankAccount
   ##############################################################################
   def revokeCloseBankAccount
 
@@ -232,7 +232,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 은행계좌 정보를 확인한다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetBankAccountInfo
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetBankAccountInfo
   ##############################################################################
   def getBankAccountInfo
 
@@ -259,7 +259,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 계좌 관리 팝업 URL을 반환합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetBankAccountMgtURL
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetBankAccountMgtURL
   ##############################################################################
   def getBankAccountMgtURL
 
@@ -282,7 +282,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 계좌 목록을 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#ListBankAccount
+  # - https://docs.popbill.com/easyfinbank/ruby/api#ListBankAccount
   ##############################################################################
   def listBankAccount
 
@@ -338,7 +338,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 수집 요청 상태를 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetJobState
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetJobState
   ##############################################################################
   def getJobState
 
@@ -359,7 +359,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 수집 요청건들에 대한 상태 목록을 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#ListActiveJob
+  # - https://docs.popbill.com/easyfinbank/ruby/api#ListActiveJob
   ##############################################################################
   def listActiveJob
 
@@ -377,7 +377,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 수집이 완료된 계좌의 거래내역을 조회합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#Search
+  # - https://docs.popbill.com/easyfinbank/ruby/api#Search
   ##############################################################################
   def search
 
@@ -425,7 +425,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 거래내역 요약정보를 조회합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#Summary
+  # - https://docs.popbill.com/easyfinbank/ruby/api#Summary
   ##############################################################################
   def summary
 
@@ -461,7 +461,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 거래내역에 메모를 저장합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#SaveMemo
+  # - https://docs.popbill.com/easyfinbank/ruby/api#SaveMemo
   ##############################################################################
   def saveMemo
 
@@ -493,7 +493,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 정액제 신청 팝업 URL을 반환합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetFlatRatePopUpURL
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetFlatRatePopUpURL
   ##############################################################################
   def getFlatRatePopUpURL
 
@@ -514,7 +514,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 정액제 서비스 이용상태를 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetFlatRateState
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetFlatRateState
   ##############################################################################
   def getFlatRateState
 
@@ -540,7 +540,7 @@ class EasyfinbankController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetBalance
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetBalance
   ##############################################################################
   def getBalance
 
@@ -560,7 +560,7 @@ class EasyfinbankController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetChargeURL
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -586,7 +586,7 @@ class EasyfinbankController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetPartnerBalance
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -606,7 +606,7 @@ class EasyfinbankController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetPartnerURL
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -631,7 +631,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 연동회원의 API 서비스 과금정보를 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetChargeInfo
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -649,7 +649,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 해당 사업자의 연동회원 가입여부를 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#CheckIsMember
+  # - https://docs.popbill.com/easyfinbank/ruby/api#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -673,7 +673,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#CheckID
+  # - https://docs.popbill.com/easyfinbank/ruby/api#CheckID
   ##############################################################################
   def checkID
 
@@ -691,7 +691,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#JoinMember
+  # - https://docs.popbill.com/easyfinbank/ruby/api#JoinMember
   ##############################################################################
   def joinMember
 
@@ -754,7 +754,7 @@ class EasyfinbankController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetAccessURL
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -779,7 +779,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#GetCorpInfo
+  # - https://docs.popbill.com/easyfinbank/ruby/api#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -797,7 +797,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#UpdateCorpInfo
+  # - https://docs.popbill.com/easyfinbank/ruby/api#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -837,7 +837,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#RegistContact
+  # - https://docs.popbill.com/easyfinbank/ruby/api#RegistContact
   ##############################################################################
   def registContact
 
@@ -890,7 +890,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 목록을 확인합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#ListContact
+  # - https://docs.popbill.com/easyfinbank/ruby/api#ListContact
   ##############################################################################
   def listContact
 
@@ -908,7 +908,7 @@ class EasyfinbankController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#UpdateContact
+  # - https://docs.popbill.com/easyfinbank/ruby/api#UpdateContact
   ##############################################################################
   def updateContact
 
