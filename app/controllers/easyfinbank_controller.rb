@@ -299,8 +299,9 @@ class EasyfinbankController < ApplicationController
   end
 
   ##############################################################################
-  # 계좌 거래내역 수집을 요청합니다
-  # - https://dev-docs.linkhub.kr/easyfinbank/ruby/api#RequestJob
+  # 계좌 거래내역 수집을 요청합니다. (조회기간 단위 : 최대 1개월)
+  # - 조회일로부터 최대 3개월 이전 내역까지 조회할 수 있습니다.
+  # - https://docs.popbill.com/easyfinbank/ruby/api#RequestJob
   ##############################################################################
   def requestJob
 

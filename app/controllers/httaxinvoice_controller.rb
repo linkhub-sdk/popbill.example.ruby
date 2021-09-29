@@ -49,7 +49,7 @@ class HttaxinvoiceController < ApplicationController
   HTTIService.setUseStaticIP(false)
 
   ##############################################################################
-  # 전자세금계산서 매출/매입 내역 수집을 요청합니다
+  # 전자세금계산서 매출/매입 내역 수집을 요청합니다. (조회기간 단위 : 최대 3개월)
   # - https://docs.popbill.com/httaxinvoice/ruby/api#RequestJob
   ##############################################################################
   def requestJob
