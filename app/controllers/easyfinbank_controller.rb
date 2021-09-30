@@ -36,7 +36,7 @@ class EasyfinbankController < ApplicationController
   # 인증토큰 IP제한기능 사용여부, true-권장
   EasyFinBankInstance.setIpRestrictOnOff(true)
 
-  # 팝빌 API 서비스 고정 IP 사용여부(GA), true-사용, false-미사용, 기본값(false)
+  # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   EasyFinBankInstance.setUseStaticIP(false)
 
 
