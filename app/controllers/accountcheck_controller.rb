@@ -44,7 +44,7 @@ class AccountcheckController < ApplicationController
   ACService.setUseStaticIP(false)
 
   ##############################################################################
-  # 1건의 계좌에 대한 예금주정보를 조회합니다.
+  # 1건의 예금주성명을 조회합니다.
   # - https://docs.popbill.com/accountcheck/ruby/api#CheckAccountInfo
   ##############################################################################
   def checkAccountInfo
@@ -67,7 +67,37 @@ class AccountcheckController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 1건의 예금주실명을 조회합니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#CheckDepositorInfo
+  ##############################################################################
+  def checkDepositorInfo
 
+    # 팝빌회원 사업자번호
+    corpNum = AccountcheckController::TestCorpNum
+
+    # 기관코드
+    bankCode = "0004"
+
+    # 계좌번호
+    accountNumber = ""
+
+    # 등록번호 유형 ( P / B 중 택 1 ,  P = 개인, B = 사업자)
+    identityNumType = ""
+
+    # 등록번호
+    # - IdentityNumType 값이 "B" 인 경우 (하이픈 '-' 제외  사업자번호(10)자리 입력 )
+    # - IdentityNumType 값이 "P" 인 경우 (생년월일(6)자리 입력 (형식 : YYMMDD))
+    identityNum = ""
+
+    begin
+      @Response = AccountcheckController::ACService.checkDepositorInfo(corpNum, bankCode, accountNumber, identityNumType, identityNum)
+      render "accountcheck/checkDepositorInfo"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
 
   ##############################################################################
   # 연동회원의 잔여포인트를 확인합니다.
@@ -171,9 +201,17 @@ class AccountcheckController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = AccountcheckController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = AccountcheckController::TestUserID
+
+    # 서비스 유형, 계좌성명조회 - 성명 , 계좌실명조회 - 실명
+    serviceType = "성명"
+
     begin
       @value = AccountcheckController::ACService.getUnitCost(
           corpNum,
+          userID,
+          serviceType
       )
       @name = "unitCost(조회단가)"
       render "home/result"
@@ -192,8 +230,18 @@ class AccountcheckController < ApplicationController
     # 팝빌회원 사업자번호
     corpNum = AccountcheckController::TestCorpNum
 
+    # 팝빌회원 아이디
+    userID = AccountcheckController::TestUserID
+
+    # 서비스 유형, 계좌성명조회 - 성명 , 계좌실명조회 - 실명
+    serviceType = "성명"
+
     begin
-      @Response = AccountcheckController::ACService.getChargeInfo(corpNum)
+      @Response = AccountcheckController::ACService.getChargeInfo(
+            corpNum,
+            userID,
+            serviceType
+          )
       render "home/chargeInfo"
     rescue PopbillException => pe
       @Response = pe

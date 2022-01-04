@@ -405,6 +405,7 @@ PopbillExampleRuby::Application.routes.draw do
   # 팝빌 예금주조회 API Service route
   get "/AccountCheckExample" => 'accountcheck#index'
   get "/AccountCheckExample/checkAccountInfo" => 'accountcheck#checkAccountInfo', via: [:get]
+  get "/AccountCheckExample/checkDepositorInfo" => 'accountcheck#checkDepositorInfo', via: [:get]
   get "/AccountCheckExample/checkCorpNums" => 'accountcheck#checkCorpNums', via: [:get]
   get "/AccountCheckExample/getBalance" => 'accountcheck#getBalance', via: [:get]
   get "/AccountCheckExample/getChargeURL" => 'accountcheck#getChargeURL', via: [:get]
