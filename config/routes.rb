@@ -244,6 +244,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/KakaoExample/getSenderNumberMgtURL" => 'kakao#getSenderNumberMgtURL', via: [:get]
   get "/KakaoExample/getSenderNumberList" => 'kakao#getSenderNumberList', via: [:get]
   get "/KakaoExample/getATSTemplateMgtURL" => 'kakao#getATSTemplateMgtURL', via: [:get]
+  get "/KakaoExample/getATSTemplate" => 'kakao#getATSTemplate', via: [:get]
   get "/KakaoExample/listATSTemplate" => 'kakao#listATSTemplate', via: [:get]
   get "/KakaoExample/sendATS_one" => 'kakao#sendATS_one', via: [:get]
   get "/KakaoExample/sendATS_same" => 'kakao#sendATS_same', via: [:get]

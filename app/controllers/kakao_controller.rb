@@ -178,7 +178,36 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
-  # (주)카카오로부터 심사후 승인된 알림톡 템플릿 목록을 반환합니다.
+  # 승인된 알림톡 템플릿 정보를 확인합니다.
+  # - 반환항목중 템플릿코드(templateCode)는 알림톡 전송시 사용됩니다.
+  # - https://docs.popbill.com/kakao/ruby/api#GetATSTemplate
+  ##############################################################################
+  def getATSTemplate
+
+    # 팝빌회원 사업자번호
+    corpNum = KakaoController::TestCorpNum
+
+    #템플릿 코드
+    templateCode = "021010000076"
+
+    # 팝빌회원 아이디
+    userID = KakaoController::TestUserID
+
+    begin
+      @Response = KakaoController::KakaoService.getATSTemplate(
+          corpNum,
+          templateCode,
+          userID,
+      )
+      render "kakao/getATSTemplate"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 승인된 알림톡 템플릿 목록을 확인합니다.
   # - 반환항목중 템플릿코드(templateCode)는 알림톡 전송시 사용됩니다.
   # - https://docs.popbill.com/kakao/ruby/api#ListATSTemplate
   ##############################################################################
