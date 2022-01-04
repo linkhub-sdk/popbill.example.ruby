@@ -90,7 +90,7 @@ class CashbillController < ApplicationController
     userID = CashbillController::TestUserID
 
     # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20191031-04"
+    mgtKey = "20220104-Rails002"
 
     # 메모
     memo = "메모"
@@ -139,6 +139,9 @@ class CashbillController < ApplicationController
         # 가맹점 상호
         "franchiseCorpName" => "가맹점 상호",
 
+        # 가맹점 종사업장 식별번호
+        "franchiseTaxRegID" => "",
+
         # 가맹점 대표자 성명
         "franchiseCEOName" => "가맹점 대표자 성명",
 
@@ -160,7 +163,7 @@ class CashbillController < ApplicationController
         # 거래처 이메일
         # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
         # 실제 거래처의 메일주소가 기재되지 않도록 주의
-        "email" => "code@linkhub.co.kr",
+        "email" => "code@test.com",
 
         # 거래처 휴대폰
         "hp" => "010-111-222",
@@ -195,7 +198,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190403-03"
+    mgtKey = "20220104-Rails005"
 
     # 현금영수증 정보
     cashbill = {
@@ -237,6 +240,9 @@ class CashbillController < ApplicationController
 
         # 가맹점 상호
         "franchiseCorpName" => "가맹점 상호",
+
+        # 가맹점 종사업장 식별번호
+        "franchiseTaxRegID" => "",
 
         # 가맹점 대표자 성명
         "franchiseCEOName" => "가맹점 대표자 성명",
@@ -291,7 +297,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-03"
+    mgtKey = "20220104-Rails005"
 
     # 현금영수증 정보
     cashbill = {
@@ -336,6 +342,9 @@ class CashbillController < ApplicationController
 
         # 가맹점 상호
         "franchiseCorpName" => "가맹점 상호",
+
+        # 가맹점 종사업장 식별번호
+        "franchiseTaxRegID" => "",
 
         # 가맹점 대표자 성명
         "franchiseCEOName" => "가맹점 대표자 성명",
@@ -721,7 +730,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-06"
+    mgtKey = "20220104-Rails002"
 
     begin
       @Response = CashbillController::CBService.getDetailInfo(
@@ -751,10 +760,10 @@ class CashbillController < ApplicationController
     dType = "R"
 
     # [필수] 시작일자, 날짜형식(yyyyMMdd)
-    sDate = "20190101"
+    sDate = "20220101"
 
     # [필수] 종료일자, 날짜형식(yyyyMMdd)
-    eDate = "20190121"
+    eDate = "20220104"
 
     # 전송상태코드 배열, 미기재시 전체조회, 2,3번째 자리 와일드카드(*) 가능
     # [참조] 현금영수증 API 연동매뉴열 "5.1. 현금영수증 상태코드"
@@ -784,6 +793,10 @@ class CashbillController < ApplicationController
     # 거래유형 배열, N-일반, B-도서공연, T-대중교통
     tradeOpt = ["N", "B", "T"]
 
+    # 가맹점 종사업장 번호
+    # └ 다수건 검색시 콤마(",")로 구분. 예) 1234,1000
+    franchiseTaxRegID = ""
+
     begin
       @Response = CashbillController::CBService.search(
           corpNum,
@@ -799,7 +812,8 @@ class CashbillController < ApplicationController
           order,
           queryString,
           userID,
-          tradeOpt
+          tradeOpt,
+          franchiseTaxRegID
       )
       render "cashbill/search"
     rescue PopbillException => pe
