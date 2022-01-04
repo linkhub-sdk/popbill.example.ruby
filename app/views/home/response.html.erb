@@ -10,6 +10,16 @@
       <% if @Response["ntsConfirmNum"] %>
         <li>ntsConfirmNum (국세청승인번호) : <%= @Response["ntsConfirmNum"] %></li>
       <% end %>
+      <% if @Response["confirmNum"] %>
+        <li>confirmNum (국세청승인번호) : <%= @Response["confirmNum"] %></li>
+      <% end %>
+      <% if @Response["tradeDate"] %>
+        <li>tradeDate (거래일자) : <%= @Response["tradeDate"] %></li>
+      <% end %>
+      <% if @Response["invoiceNum"] %>
+        <li>invoiceNum (팝빌승인번호) : <%= @Response["invoiceNum"] %></li>
+      <% end %>
+
     </ul>
   </fieldset>
 </div>

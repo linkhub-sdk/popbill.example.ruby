@@ -96,7 +96,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서번호
-    mgtKey = "20191031-05"
+    mgtKey = "20220104-001"
 
     # 메모
     memo = "메모"
@@ -117,7 +117,7 @@ class StatementController < ApplicationController
         "mgtKey" => mgtKey,
 
         # [필수] 기재상 작성일자, 날짜형식(yyyyMMdd)
-        "writeDate" => "20191031",
+        "writeDate" => "20220104",
 
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
@@ -230,7 +230,7 @@ class StatementController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20220104", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위
@@ -242,7 +242,7 @@ class StatementController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자 yyyyMMdd
+                "purchaseDT" => "20220104", # 거래일자 yyyyMMdd
                 "itemName" => "테스트1", # 품명
                 "spec" => "규격", # 규격
                 "unit" => "단위", # 단위

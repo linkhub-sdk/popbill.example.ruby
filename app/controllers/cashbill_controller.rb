@@ -90,7 +90,7 @@ class CashbillController < ApplicationController
     userID = CashbillController::TestUserID
 
     # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20220104-Rails002"
+    mgtKey = "20220104-Rails004"
 
     # 메모
     memo = "메모"
