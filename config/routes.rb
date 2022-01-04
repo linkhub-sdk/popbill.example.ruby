@@ -138,6 +138,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/CashbillExample/getLogs" => 'cashbill#getLogs', via: [:get]
   get "/CashbillExample/getURL" => 'cashbill#getURL', via: [:get]
   get "/CashbillExample/getPopUpURL" => 'cashbill#getPopUpURL', via: [:get]
+  get "/CashbillExample/getViewURL" => 'cashbill#getViewURL', via: [:get]
   get "/CashbillExample/getPrintURL" => 'cashbill#getPrintURL', via: [:get]
   get "/CashbillExample/getEPrintURL" => 'cashbill#getEPrintURL', via: [:get]
   get "/CashbillExample/getMassPrintURL" => 'cashbill#getMassPrintURL', via: [:get]
