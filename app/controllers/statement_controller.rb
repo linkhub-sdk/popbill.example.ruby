@@ -1165,6 +1165,32 @@ class StatementController < ApplicationController
   end
 
   ##############################################################################
+  # 인감 및 첨부문서 등록 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/statement/ruby/api#GetSealURL
+  ##############################################################################
+  def getSealURL
+
+    # 팝빌회원 사업자번호
+    corpNum = StatementController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = StatementController::TestUserID
+
+    begin
+      @value = StatementController::STMTService.getSealURL(
+          corpNum,
+          userID
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 전자명세서에 첨부파일을 등록합니다.
   # - 첨부파일 등록은 전자명세서가 [임시저장] 상태인 경우에만 가능합니다.
   # - 첨부파일은 최대 5개까지 등록할 수 있습니다.

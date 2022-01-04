@@ -90,6 +90,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/StatementExample/getMassPrintURL" => 'statement#getMassPrintURL', via: [:get]
   get "/StatementExample/getMailURL" => 'statement#getMailURL', via: [:get]
   get "/StatementExample/getAccessURL" => 'statement#getAccessURL', via: [:get]
+  get "/StatementExample/getSealURL" => 'statement#getSealURL', via: [:get]
   get "/StatementExample/attachFile" => 'statement#attachFile', via: [:get]
   get "/StatementExample/deleteFile" => 'statement#deleteFile', via: [:get]
   get "/StatementExample/getFiles" => 'statement#getFiles', via: [:get]
