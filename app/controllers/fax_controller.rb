@@ -524,7 +524,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팩스전송 접수번호
-    receiptNum = "019040318211300001"
+    receiptNum = "022010414311800001"
 
     begin
       @Response = FaxController::FAXService.getFaxDetail(corpNum, receiptNum)
@@ -545,7 +545,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팩스전송시 할당한 전송요청번호
-    requestNum = "20190403-01"
+    requestNum = "20220104_FAX003"
 
     begin
       @Response = FaxController::FAXService.getFaxDetailRN(corpNum, requestNum)
@@ -570,10 +570,10 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20190701"
+    sDate = "20211201"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20191001"
+    eDate = "20220104"
 
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]
