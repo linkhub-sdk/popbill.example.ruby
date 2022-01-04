@@ -1232,8 +1232,6 @@ class MessageController < ApplicationController
         # 회사조회 권한여부, true(회사조회), false(개인조회)
         "searchAllAllowYN" => true,
 
-        # 관리자 권한여부, true(관리자), false(사용자)
-        "mgrYN" => false,
     }
 
     begin
@@ -1302,9 +1300,6 @@ class MessageController < ApplicationController
 
         # 회사조회 권한여부, true(회사조회), false(개인조회)
         "searchAllAllowYN" => true,
-
-        # 관리자 권한여부, true(관리자), false(사용자)
-        "mgrYN" => false,
     }
 
     begin
