@@ -1,0 +1,22 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+      <fieldset class="fieldset2">
+        <legend>담당자정보</legend>
+        <ul>
+          <li>id (담당자 아이디) : <%= @Response["id"] %></li>
+          <li>personName (담당자 성명) : <%= @Response["personName"] %></li>
+          <li>email (담당자 이메일) : <%= @Response["email"] %></li>
+          <li>hp (담당자 휴대폰번호) : <%= @Response["hp"] %></li>
+          <li>fax (담당자 팩스번호) : <%= @Response["fax"] %></li>
+          <li>tel (담당자 연락처) :<%= @Response["tel"] %></li>
+          <li>regDT (등록일시) : <%= @Response["regDT"] %></li>
+          <li>searchRole (담당자 권한) : <%= @Response["searchRole"] %></li>
+          <li>mgrYN (관리자 여부) : <%= @Response["mgrYN"] %></li>
+          <li>state (상태) : <%= @Response["state"] %></li>
+        </ul>
+      </fieldset>
+  </fieldset>
+</div>

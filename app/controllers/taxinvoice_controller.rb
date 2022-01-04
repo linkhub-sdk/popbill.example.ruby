@@ -2617,9 +2617,31 @@ class TaxinvoiceController < ApplicationController
     end
   end
 
+  ##############################################################################
+  # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
+  # - https://docs.popbill.com/taxinvoice/ruby/api#GetContactInfo
+  ##############################################################################
+  def getContactInfo
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 확인할 담당자 아이디
+    contactID = 'testkorea'
+
+    begin
+      @Response = TaxinvoiceController::TIService.getContactInfo(
+          corpNum,
+          contactID,
+      )
+      render "home/contactInfo"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
 
   ##############################################################################
-  # 연동회원의 담당자 목록을 확인합니다.
+  # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#ListContact
   ##############################################################################
   def listContact
