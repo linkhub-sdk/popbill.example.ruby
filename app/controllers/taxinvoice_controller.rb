@@ -2182,6 +2182,30 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
+  # 연동회원의 국세청 전송 옵션 설정 상태를 확인합니다.
+  # - https://docs.popbill.com/taxinvoice/ruby/api#GetSendToNTSConfig
+  ##############################################################################
+  def getSendToNTSConfig
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = TaxinvoiceController::TestUserID
+
+    begin
+      @Response = TaxinvoiceController::TIService.getSendToNTSConfig(
+          corpNum,
+          userID,
+      )
+      render "taxinvoice/getSendToNTSConfig"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 공인인증서 등록 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#GetTaxCertURL

@@ -50,6 +50,7 @@ PopbillExampleRuby::Application.routes.draw do
   get "/TaxinvoiceExample/assignMgtKey" => 'taxinvoice#assignMgtKey', via: [:get]
   get "/TaxinvoiceExample/listEmailConfig" => 'taxinvoice#listEmailConfig', via: [:get]
   get "/TaxinvoiceExample/updateEmailConfig" => 'taxinvoice#updateEmailConfig', via: [:get]
+  get "/TaxinvoiceExample/getSendToNTSConfig" => 'taxinvoice#getSendToNTSConfig', via: [:get]
   get "/TaxinvoiceExample/getTaxCertURL" => 'taxinvoice#getTaxCertURL', via: [:get]
   get "/TaxinvoiceExample/getCertificateExpireDate" => 'taxinvoice#getCertificateExpireDate', via: [:get]
   get "/TaxinvoiceExample/checkCertValidation" => 'taxinvoice#checkCertValidation', via: [:get]

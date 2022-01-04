@@ -1,0 +1,13 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+      <fieldset class="fieldset2">
+        <legend>국세청 전송 옵션 설정 상태 확인</legend>
+        <ul>
+          <li>sendToNTS (true : 발행 즉시 전송 / false : 익일 자동 전송) : <%= @Response %></li>
+        </ul>
+      </fieldset>
+  </fieldset>
+</div>
