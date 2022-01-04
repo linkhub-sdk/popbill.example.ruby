@@ -56,7 +56,7 @@ class AccountcheckController < ApplicationController
     bankCode = "0004"
 
     # 계좌번호
-    accountNumber = "9432451175815"
+    accountNumber = ""
 
     begin
       @Response = AccountcheckController::ACService.checkAccountInfo(corpNum, bankCode, accountNumber)
