@@ -2,12 +2,13 @@
 #
 # 팝빌 예금주조회 API Ruby On Rails SDK Example
 #
+# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/accountcheck/tutorial/ruby
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
 #
 # <테스트 연동개발 준비사항>
-# 1) 20, 23번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
+# 1) 21, 24번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
 #
 ################################################################################
