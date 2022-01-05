@@ -219,6 +219,155 @@ class FaxController < ApplicationController
   end
 
   ##############################################################################
+  # 파일의 바이너리 데이터를 팩스 전송하기 위해 팝빌에 접수합니다. (최대 전송파일 개수 : 20개)
+  # - https://docs.popbill.com/fax/ruby/api#SendFAXBinary
+  ##############################################################################
+  def sendFaxBinary
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+    # 발신번호
+    sender = "07043042992"
+
+    # 발신자명
+    senderName = "발신자명"
+
+    # 수신번호
+    receiver = "070111222"
+
+    # 수신자명
+    receiverName = "수신자명"
+
+    # 전송파일 데이터
+    file1 = File.open('./test.jpg', "rb")
+
+    # 전송파일 정보 배열 (최대 20개)
+    fileDatas = [
+      {
+        "fileName" => "test.jpg", #전송 파일명
+        "fileData" => file1.read, #전송 파일 바이너리 데이터
+      },
+    ]
+
+    file1.close
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = ""
+
+    # 광고팩스 전송여부
+    adsYN = false
+
+    # 팩스제목
+    title = "팩스전송 제목"
+
+    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
+    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
+    requestNum = ''
+
+    begin
+      @value = FaxController::FAXService.sendFaxBinary(
+          corpNum,
+          sender,
+          senderName,
+          receiver,
+          receiverName,
+          fileDatas,
+          reserveDT,
+          userID,
+          adsYN,
+          title,
+          requestNum,
+      )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 동일한 파일의 바이너리 데이터를 다수의 수신자에게 전송하기 위해 팝빌에 접수합니다. (최대 전송파일 개수 : 20개) (최대 1,000건)
+  # - https://docs.popbill.com/fax/ruby/api#SendFAXBinary_multi
+  ##############################################################################
+  def sendFaxBinary_Multi
+
+    # 팝빌회원 사업자번호
+    corpNum = FaxController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = FaxController::TestUserID
+
+    # 발신번호
+    sender = "07043042992"
+
+    # 발신자명
+    senderName = "발신자명"
+
+    # 전송파일 데이터
+    file1 = File.open('./test.jpg', "rb")
+
+    # 전송파일 정보 배열 (최대 20개)
+    fileDatas = [
+      {
+        "fileName" => "test.jpg", #전송 파일명
+        "fileData" => file1.read, #전송 파일 바이너리 데이터
+      },
+    ]
+
+    # 수신자 정보 배열 (최대 1000개)
+    receivers = [
+        {
+            "rcv" => '070111222', # 수신번호
+            "rcvnm" => '수신자명1' # 수신자명
+        },
+        {
+            "rcv" => '070111333', # 수신번호
+            "rcvnm" => '수신자명2' # 수신자명
+        }
+    ]
+
+    file1.close
+
+    # 예약전송일시(yyyyMMddHHmmss), 미기재시 즉시전송
+    reserveDT = ""
+
+    # 광고팩스 전송여부
+    adsYN = false
+
+    # 팩스제목
+    title = "팩스전송 제목"
+
+    # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
+    # 최대 36자리, 영문, 숫자, 언더바('_'), 하이픈('-')을 조합하여 사업자별로 중복되지 않도록 구성
+    requestNum = ''
+
+    begin
+      @value = FaxController::FAXService.sendFaxBinary_multi(
+          corpNum,
+          sender,
+          senderName,
+          receivers,
+          fileDatas,
+          reserveDT,
+          userID,
+          adsYN,
+          title,
+          requestNum,
+      )
+      @name = "receiptNum(접수번호)"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 팩스를 재전송합니다.
   # - https://docs.popbill.com/fax/ruby/api#ResendFAX
   ##############################################################################

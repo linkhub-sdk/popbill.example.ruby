@@ -224,6 +224,8 @@ PopbillExampleRuby::Application.routes.draw do
   get "/FaxExample/getSenderNumberList" => 'fax#getSenderNumberList', via: [:get]
   get "/FaxExample/sendFAX" => 'fax#sendFax', via: [:get]
   get "/FaxExample/sendFAX_Multi" => 'fax#sendFax_Multi', via: [:get]
+  get "/FaxExample/sendFAXBinary" => 'fax#sendFaxBinary', via: [:get]
+  get "/FaxExample/sendFAXBinary_Multi" => 'fax#sendFaxBinary_Multi', via: [:get]
   get "/FaxExample/resendFAX" => 'fax#resendFax', via: [:get]
   get "/FaxExample/resendFAXRN" => 'fax#resendFAXRN', via: [:get]
   get "/FaxExample/resendFAX_Multi" => 'fax#resendFax_Multi', via: [:get]
