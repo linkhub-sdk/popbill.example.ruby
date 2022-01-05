@@ -56,8 +56,8 @@ class KakaoController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   KakaoService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  KakaoService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  KakaoService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 플러스친구 계정관리 팝업 URL을 반환합니다.

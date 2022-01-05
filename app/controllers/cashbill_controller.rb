@@ -44,8 +44,8 @@ class CashbillController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   CBService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  CBService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  CBService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 현금영수증 문서번호 중복여부를 확인합니다.

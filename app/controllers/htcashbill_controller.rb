@@ -49,8 +49,8 @@ class HtcashbillController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   HTCBService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  HTCBService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  HTCBService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 현금영수증 매출/매입 내역 수집을 요청합니다. (조회기간 단위 : 최대 3개월)

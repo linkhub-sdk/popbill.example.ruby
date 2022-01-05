@@ -44,8 +44,8 @@ class ClosedownController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   CDService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  CDService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  CDService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 1건의 사업자에 대한 휴폐업여부를 조회합니다.

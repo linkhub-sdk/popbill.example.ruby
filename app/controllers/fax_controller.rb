@@ -44,8 +44,8 @@ class FaxController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   FAXService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  FAXService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  FAXService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 발신번호 관리 팝업 URL을 반환합니다.

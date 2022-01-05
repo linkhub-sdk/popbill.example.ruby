@@ -44,8 +44,8 @@ class StatementController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   STMTService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  STMTService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  STMTService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 전자명세서 문서번호 사용여부를 확인합니다.

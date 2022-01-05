@@ -48,8 +48,8 @@ class TaxinvoiceController < ApplicationController
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   TIService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
-  TIService.setUseLocalTimeYN(false)
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  TIService.setUseLocalTimeYN(true)
 
   ##############################################################################
   # 세금계산서 문서번호 사용여부를 확인합니다.
