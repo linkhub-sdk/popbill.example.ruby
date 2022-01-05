@@ -11,9 +11,9 @@
 # 1) 25, 28번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
 #
-# 2) 전자세금계산서 발행을 위해 공인인증서를 등록합니다.
-#    - 팝빌사이트 로그인 > [전자세금계산서] > [환경설정] > [공인인증서 관리]
-#    - 공인인증서 등록 팝업 URL (GetTaxCertURL API)을 이용하여 등록
+# 2) 전자세금계산서 발행을 위해 공동인증서를 등록합니다.
+#    - 팝빌사이트 로그인 > [전자세금계산서] > [환경설정] > [공동인증서 관리]
+#    - 공동인증서 등록 팝업 URL (GetTaxCertURL API)을 이용하여 등록
 #
 ################################################################################
 
@@ -2449,7 +2449,7 @@ class TaxinvoiceController < ApplicationController
   #
   # [정기발송]
   # TAX_SEND_INFO : 전월 귀속분 [매출 발행 대기] 세금계산서 발행 메일 입니다.
-  # ETC_CERT_EXPIRATION : 팝빌에서 이용중인 공인인증서의 갱신 메일 입니다.
+  # ETC_CERT_EXPIRATION : 팝빌에서 이용중인 공동인증서의 갱신 메일 입니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#UpdateEmailConfig
   ##############################################################################
   def updateEmailConfig
@@ -2505,7 +2505,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 공인인증서 등록 URL을 반환합니다.
+  # 공동인증서 등록 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#GetTaxCertURL
   ##############################################################################
@@ -2531,8 +2531,8 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록되어 있는 공인인증서의 만료일자를 확인합니다.
-  # - 공인인증서가 갱신/재발급/비밀번호 변경이 되는 경우 해당 인증서를
+  # 팝빌에 등록되어 있는 공동인증서의 만료일자를 확인합니다.
+  # - 공동인증서가 갱신/재발급/비밀번호 변경이 되는 경우 해당 인증서를
   #   재등록 하셔야 정상적으로 API를 이용하실 수 있습니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#GetCertificateExpireDate
   ##############################################################################
@@ -2545,7 +2545,7 @@ class TaxinvoiceController < ApplicationController
       @value = TaxinvoiceController::TIService.getCertificateExpireDate(
           corpNum,
       )
-      @name = "expireDate(공인인증서 만료일시)"
+      @name = "expireDate(공동인증서 만료일시)"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -2554,7 +2554,7 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 세금계산서 발행을 위해 등록한 공인인증서의 유효성을 확인합니다.
+  # 세금계산서 발행을 위해 등록한 공동인증서의 유효성을 확인합니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#CheckCertValidation
   ##############################################################################
   def checkCertValidation

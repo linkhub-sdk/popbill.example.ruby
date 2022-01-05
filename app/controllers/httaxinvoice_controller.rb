@@ -11,7 +11,7 @@
 # 1) 26, 29번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
 #    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
 #
-# 2) 홈택스 인증정보를 등록 합니다. (부서사용자등록 / 공인인증서 등록)
+# 2) 홈택스 인증정보를 등록 합니다. (부서사용자등록 / 공동인증서 등록)
 #    - 팝빌로그인 > [홈택스연동] > [환경설정] > [인증 관리] 메뉴에서 홈택스 인증 처리를 합니다.
 #    - 홈택스연동 인증 관리 팝업 URL(GetCertificatePopUpURL API) 반환된 URL을 이용하여
 #      홈택스 인증 처리를 합니다.
@@ -351,7 +351,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 홈택스연동 인증관리를 위한 URL을 반환합니다.
   # - 반환된 URL은 보안정책에 따라 30초의 유효시간을 갖습니다.
-  # - 부서사용자 또는 공인인증서 인증이 가능합니다.
+  # - 부서사용자 또는 공동인증서 인증이 가능합니다.
   # - https://docs.popbill.com/httaxinvoice/ruby/api#GetCertificatePopUpURL
   ##############################################################################
   def getCertificatePopUpURL
@@ -372,7 +372,7 @@ class HttaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 등록된 홈택스 공인인증서의 만료일자를 확인합니다.
+  # 등록된 홈택스 공동인증서의 만료일자를 확인합니다.
   # - https://docs.popbill.com/httaxinvoice/ruby/api#GetCertificateExpireDate
   ##############################################################################
   def getCertificateExpireDate
@@ -384,7 +384,7 @@ class HttaxinvoiceController < ApplicationController
       @value = HttaxinvoiceController::HTTIService.getCertificateExpireDate(
           corpNum,
       )
-      @name = "ExpireDate(홈택스 공인인증서 만료일시)"
+      @name = "ExpireDate(홈택스 공동인증서 만료일시)"
       render "home/result"
     rescue PopbillException => pe
       @Response = pe
@@ -393,7 +393,7 @@ class HttaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록된 홈택스 공인인증서의 만료일자를 반환합니다.
+  # 팝빌에 등록된 홈택스 공동인증서의 만료일자를 반환합니다.
   # - https://docs.popbill.com/httaxinvoice/ruby/api#CheckCertValidation
   ##############################################################################
   def checkCertValidation
