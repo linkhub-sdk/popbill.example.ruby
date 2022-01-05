@@ -42,11 +42,14 @@ class HtcashbillController < ApplicationController
   # 연동환경 설정, true-개발용, false-상업용
   HTCBService.setIsTest(true)
 
-  # 인증토큰 IP제한기능 사용여부, true-권장
+  # 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
   HTCBService.setIpRestrictOnOff(true)
 
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   HTCBService.setUseStaticIP(false)
+
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
+  HTCBService.setUseLocalTimeYN(false)
 
   ##############################################################################
   # 현금영수증 매출/매입 내역 수집을 요청합니다. (조회기간 단위 : 최대 3개월)

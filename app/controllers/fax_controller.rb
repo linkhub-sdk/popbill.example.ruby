@@ -37,11 +37,14 @@ class FaxController < ApplicationController
   # 연동환경 설정, true-개발용, false-상업용
   FAXService.setIsTest(true)
 
-  # 인증토큰 IP제한기능 사용여부, true-권장
+  # 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
   FAXService.setIpRestrictOnOff(true)
 
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   FAXService.setUseStaticIP(false)
+
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
+  FAXService.setUseLocalTimeYN(false)
 
   ##############################################################################
   # 발신번호 관리 팝업 URL을 반환합니다.

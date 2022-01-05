@@ -37,11 +37,14 @@ class AccountcheckController < ApplicationController
   # 연동환경 설정, true-개발용, false-상업용
   ACService.setIsTest(true)
 
-  # 인증토큰 IP제한기능 사용여부, true-권장
+  # 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
   ACService.setIpRestrictOnOff(true)
 
   # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
   ACService.setUseStaticIP(false)
+
+  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(false)
+  ACService.setUseLocalTimeYN(false)
 
   ##############################################################################
   # 1건의 예금주성명을 조회합니다.
