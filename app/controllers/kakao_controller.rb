@@ -15,8 +15,8 @@
 #    (1) 팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [발신번호 사전등록] 에서 등록
 #    (2) getSenderNumberMgtURL API를 통해 반환된 URL을 이용하여 발신번호 등록
 
-# 3) 플러스친구 등록 및 알림톡 템플릿을 신청합니다.
-#    (1) 플러스 친구등록 (등록방법은 사이트/API 두가지 방식이 있습니다.)
+# 3) 비즈니스 채널 등록 및 알림톡 템플릿을 신청합니다.
+#    (1) 비즈니스 채널 등록 (등록방법은 사이트/API 두가지 방식이 있습니다.)
 #       -  팝빌 사이트 로그인 [문자/팩스] > [카카오톡] > [카카오톡 관리] > '카카오톡 채널 관리' 메뉴에서 등록
 #       -  GetPlusFriendMgtURL API 를 통해 반환된 URL을 이용하여 등록
 #    (2) 알림톡 템플릿 신청 (등록방법은 사이트/API 두가지 방식이 있습니다.)
@@ -60,7 +60,7 @@ class KakaoController < ApplicationController
   KakaoService.setUseLocalTimeYN(true)
 
   ##############################################################################
-  # 플러스친구 계정관리 팝업 URL을 반환합니다.
+  # 비즈니스 채널 계정관리 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
   # - https://docs.popbill.com/kakao/ruby/api#GetPlusFriendMgtURL
   ##############################################################################
@@ -86,7 +86,7 @@ class KakaoController < ApplicationController
   end
 
   ##############################################################################
-  # 팝빌에 등록된 플러스친구 목록을 반환합니다.
+  # 팝빌에 등록된 비즈니스 채널 목록을 반환합니다.
   # - https://docs.popbill.com/kakao/ruby/api#ListPlusFriendID
   ##############################################################################
   def listPlusFriendID
@@ -550,7 +550,7 @@ class KakaoController < ApplicationController
     # 팝빌회원 아이디
     userID = KakaoController::TestUserID
 
-    # [필수] 팝빌에 등록된 플러스 친구
+    # [필수] 팝빌에 등록된 카카오톡 채널명
     plusFriendID = '@팝빌'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
@@ -638,7 +638,7 @@ class KakaoController < ApplicationController
     # 팝빌회원 아이디
     userID = KakaoController::TestUserID
 
-    # [필수] 팝빌에 등록된 플러스 친구
+    # [필수] 팝빌에 등록된 카카오톡 채널명
     plusFriendID = '@팝빌'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
@@ -731,7 +731,7 @@ class KakaoController < ApplicationController
     # 팝빌회원 아이디
     userID = KakaoController::TestUserID
 
-    # [필수] 팝빌에 등록된 플러스 친구
+    # [필수] 팝빌에 등록된 카카오톡 채널명
     plusFriendID = '@팝빌'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
@@ -823,7 +823,7 @@ class KakaoController < ApplicationController
     # 팝빌회원 아이디
     userID = KakaoController::TestUserID
 
-    # [필수] 팝빌에 등록된 플러스 친구
+    # [필수] 팝빌에 등록된 카카오톡 채널명
     plusFriendID = '@팝빌'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
@@ -920,7 +920,7 @@ class KakaoController < ApplicationController
     # 팝빌회원 아이디
     userID = KakaoController::TestUserID
 
-    # [필수] 팝빌에 등록된 플러스 친구
+    # [필수] 팝빌에 등록된 카카오톡 채널명
     plusFriendID = '@팝빌'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
@@ -1022,7 +1022,7 @@ class KakaoController < ApplicationController
     # 팝빌회원 아이디
     userID = KakaoController::TestUserID
 
-    # [필수] 팝빌에 등록된 플러스 친구
+    # [필수] 팝빌에 등록된 카카오톡 채널명
     plusFriendID = '@팝빌'
 
     # [필수] 발신번호 (팝빌에 등록된 발신번호만 이용가능)
