@@ -769,7 +769,6 @@ class CashbillController < ApplicationController
     eDate = "20220104"
 
     # 전송상태코드 배열, 미기재시 전체조회, 2,3번째 자리 와일드카드(*) 가능
-    # [참조] 현금영수증 API 연동매뉴열 "5.1. 현금영수증 상태코드"
     state = ["1**", "3**"]
 
     # 문서형태 배열, N-일반 현금영수증, C-취소 현금영수증
