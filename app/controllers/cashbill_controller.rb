@@ -1571,8 +1571,8 @@ class CashbillController < ApplicationController
         # 담당자 이메일 (최대 100자)
         "email" => "ruby@linkhub.co.kr",
 
-        # 회사조회 권한여부, true(회사조회), false(개인조회)
-        "searchAllAllowYN" => true,
+        #담당자 권한, 1(개인) 2(읽기) 3(회사)
+        "searchRole"=>3,
 
     }
 
@@ -1663,8 +1663,8 @@ class CashbillController < ApplicationController
         # 담당자 이메일 (최대 100자)
         "email" => "code@linkhub.co.kr",
 
-        # 회사조회 권한여부, true(회사조회), false(개인조회)
-        "searchAllAllowYN" => true,
+        #담당자 권한, 1(개인) 2(읽기) 3(회사)
+        "searchRole"=>3,
 
     }
 

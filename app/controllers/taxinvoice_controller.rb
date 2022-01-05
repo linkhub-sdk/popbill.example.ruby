@@ -2581,7 +2581,7 @@ class TaxinvoiceController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디, 6자 이상 50자 미만
-        "id" => "testkorea20190121",
+        "id" => "railstest002",
 
         # 비밀번호, 6자 이상 20자 미만
         "pwd" => "user_password",
@@ -2601,8 +2601,8 @@ class TaxinvoiceController < ApplicationController
         # 담당자 이메일 (최대 100자)
         "email" => "ruby@linkhub.co.kr",
 
-        # 회사조회 권한여부, true(회사조회), false(개인조회)
-        "searchAllAllowYN" => true,
+        #담당자 권한, 1(개인) 2(읽기) 3(회사)
+        "searchRole"=>3,
     }
 
     begin
@@ -2692,8 +2692,8 @@ class TaxinvoiceController < ApplicationController
         # 담당자 이메일 (최대 100자)
         "email" => "code@linkhub.co.kr",
 
-        # 회사조회 권한여부, true(회사조회), false(개인조회)
-        "searchAllAllowYN" => true,
+        #담당자 권한, 1(개인) 2(읽기) 3(회사)
+        "searchRole"=>3,
     }
 
     begin
