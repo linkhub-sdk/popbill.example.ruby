@@ -65,10 +65,10 @@ class HtcashbillController < ApplicationController
     keyType = KeyType::BUY
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20190801"
+    sDate = "20220101"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20191231"
+    eDate = "20220110"
 
     begin
       @value = HtcashbillController::HTCBService.requestJob(
@@ -765,7 +765,7 @@ class HtcashbillController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea 20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합

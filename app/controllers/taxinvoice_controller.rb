@@ -61,7 +61,7 @@ class TaxinvoiceController < ApplicationController
     corpNum = TaxinvoiceController::TestCorpNum
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-01"
+    mgtKey = "20220101-01"
 
     # 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
     keyType = MgtKeyType::SELL
@@ -98,7 +98,7 @@ class TaxinvoiceController < ApplicationController
 
     # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
     # 사업자 별로 중복되지 않도록 구성
-    mgtKey = "20200723-01"
+    mgtKey = "20210101-01"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -191,8 +191,8 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 담당자 휴대폰번호
         "invoiceeHP1" => "010-123-1234",
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20200723",
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
+        "writeDate" => "20210101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",
@@ -268,7 +268,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -279,7 +279,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -450,7 +450,7 @@ class TaxinvoiceController < ApplicationController
           # 공급받는자 담당자 휴대폰번호
           "invoiceeHP1" => "010-123-1234",
 
-          # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
+          # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
           "writeDate" => "20220105",
 
           # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
@@ -527,7 +527,7 @@ class TaxinvoiceController < ApplicationController
           "detailList" => [
               {
                   "serialNum" => 1, # 일련번호, 1부터 순차기재
-                  "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
+                  "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                   "itemName" => "테스트1", # 품목명
                   "spec" => "규격", # 규격
                   "qty" => "1", # 수량
@@ -538,7 +538,7 @@ class TaxinvoiceController < ApplicationController
               },
               {
                   "serialNum" => 2, # 일련번호, 1부터 순차기재
-                  "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
+                  "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                   "itemName" => "테스트2", # 품목명
                   "spec" => "규격", # 규격
                   "qty" => "1", # 수량
@@ -618,7 +618,7 @@ class TaxinvoiceController < ApplicationController
 
     # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
     # 사업자 별로 중복되지 않도록 구성
-    mgtKey = "20190917-03"
+    mgtKey = "20220101-03"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -717,7 +717,7 @@ class TaxinvoiceController < ApplicationController
         "invoiceeSMSSendYN" => false,
 
         # [필수] 작성일자, 날짜형식 (yyyyMMdd)
-        "writeDate" => "20190917",
+        "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",
@@ -793,7 +793,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -804,7 +804,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -863,7 +863,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 수정할 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -959,8 +959,8 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
-        "writeDate" => "20190917",
+        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
+        "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",
@@ -1023,7 +1023,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1034,7 +1034,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1091,7 +1091,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190402-02"
+    mgtKey = "20220101-02"
 
     # 지연발행 강제여부
     # - 발행마감일이 지난 세금계산서를 발행하는 경우, 가산세가 부과될 수 있습니다.
@@ -1138,7 +1138,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 메모
     memo = ''
@@ -1170,7 +1170,7 @@ class TaxinvoiceController < ApplicationController
     userID = TaxinvoiceController::TestUserID
 
     # 문서번호
-    mgtKey = "20190917-03"
+    mgtKey = "20220101-03"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -1265,7 +1265,7 @@ class TaxinvoiceController < ApplicationController
         "invoiceeSMSSendYN" => false,
 
         # [필수] 작성일자, 날짜형식 (yyyyMMdd)
-        "writeDate" => "20190917",
+        "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "역발행",
@@ -1341,7 +1341,7 @@ class TaxinvoiceController < ApplicationController
         "detailList" => [
             {
                 "serialNum" => 1, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트1", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1352,7 +1352,7 @@ class TaxinvoiceController < ApplicationController
             },
             {
                 "serialNum" => 2, # 일련번호, 1부터 순차기재
-                "purchaseDT" => "20190917", # 거래일자, yyyyMMdd
+                "purchaseDT" => "20220101", # 거래일자, yyyyMMdd
                 "itemName" => "테스트2", # 품목명
                 "spec" => "규격", # 규격
                 "qty" => "1", # 수량
@@ -1397,7 +1397,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::BUY
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-03"
+    mgtKey = "20220101-03"
 
     # 메모
     memo = ''
@@ -1430,7 +1430,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::BUY
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-03"
+    mgtKey = "20220101-03"
 
     # 메모
     memo = ""
@@ -1463,7 +1463,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 메모
     memo = ''
@@ -1497,7 +1497,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-03"
+    mgtKey = "20220101-03"
 
     begin
       @Response = TaxinvoiceController::TIService.delete(
@@ -1526,7 +1526,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @Response = TaxinvoiceController::TIService.sendToNTS(
@@ -1554,7 +1554,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getInfo(
@@ -1582,7 +1582,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호 배열, 최대 1000건
-    mgtKeyList = ["20190917-01", "20190917-02"]
+    mgtKeyList = ["20220101-01", "20220101-02"]
 
     begin
       @Response = TaxinvoiceController::TIService.getInfos(
@@ -1610,7 +1610,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getDetailInfo(
@@ -1644,10 +1644,10 @@ class TaxinvoiceController < ApplicationController
     dType = "W"
 
     # [필수] 시작일자, 날짜형식(yyyyMMdd)
-    sDate = "20200701"
+    sDate = "20210101"
 
     # [필수] 종료일자, 날짜형식(yyyyMMdd)
-    eDate = "20200731"
+    eDate = "20210130"
 
     # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성, 2,3번째 와일드카드 가능
     state = ["3**", "6**"]
@@ -1742,7 +1742,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getLogs(
@@ -1799,7 +1799,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20191031-01"
+    mgtKey = "20220101-01"
 
     begin
       @value = TaxinvoiceController::TIService.getViewURL(
@@ -1827,7 +1827,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20200722-01"
+    mgtKey = "20210101-01"
 
     begin
       @value = TaxinvoiceController::TIService.getPDFURL(
@@ -1858,7 +1858,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @value = TaxinvoiceController::TIService.getPrintURL(
@@ -1918,7 +1918,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @value = TaxinvoiceController::TIService.getEPrintURL(
@@ -1948,7 +1948,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호 배열, 최대 100건
-    mgtKeyList = ["20190917-02", "20190917-01"]
+    mgtKeyList = ["20220101-02", "20220101-01"]
 
     begin
       @value = TaxinvoiceController::TIService.getMassPrintURL(
@@ -1978,7 +1978,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @value = TaxinvoiceController::TIService.getMailURL(
@@ -2061,7 +2061,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 첨부파일경로
     filePath = "/Users/kimhyunjin/SDK/popbill.example.ruby/test.pdf"
@@ -2095,7 +2095,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 파일아이디, GetFiles API 응답항목 중 파일아이디 (AttachedFile) 값 기재
     fileID = "6F4E5AA1-0B61-4775-A837-20E0D87C3010.PBF"
@@ -2128,7 +2128,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     begin
       @Response = TaxinvoiceController::TIService.getFiles(
@@ -2156,7 +2156,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 공급받는자 담당자 메일주소
     emailAddr = "test@test.com"
@@ -2191,7 +2191,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -2234,7 +2234,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 발신번호
     sendNum = "07043042991"
@@ -2270,13 +2270,13 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 첨부할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
     # 전자명세서 문서번호
-    stmtMgtKey = "20190121-01"
+    stmtMgtKey = " 20220101-01"
 
     begin
       @Response = TaxinvoiceController::TIService.attachStatement(
@@ -2306,13 +2306,13 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20190917-02"
+    mgtKey = "20220101-02"
 
     # 첨부해제할 전자명세서 종류코드, 121-거래명세서, 122-청구서, 123-견적서, 124-발주서, 125-입금표, 126-영수증
     itemCode = 121
 
     # 전자명세서 문서번호
-    stmtMgtKey = "20190121-01"
+    stmtMgtKey = " 20220101-01"
 
     begin
       @Response = TaxinvoiceController::TIService.detachStatement(
@@ -2366,7 +2366,7 @@ class TaxinvoiceController < ApplicationController
 
     # 할당할 문서번호, 숫자, 영문, '-', '_' 조합으로
     # 1~24자리까지 사업자번호별 중복없는 고유번호 할당
-    mgtKey = "20190402-005"
+    mgtKey = "20220101-005"
 
     begin
       @Response = TaxinvoiceController::TIService.assignMgtKey(

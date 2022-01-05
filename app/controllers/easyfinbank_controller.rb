@@ -505,7 +505,7 @@ class EasyfinbankController < ApplicationController
     userID = EasyfinbankController::TestUserID
 
     # 거래내역 아이디
-    tid = "01912181100000000120191231000001"
+    tid = "02212181100000000120221231000001"
 
     # 메모
     memo = "ruby-test-02"
@@ -934,7 +934,7 @@ class EasyfinbankController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합

@@ -265,7 +265,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-알림톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+    # 예약일시 (작성형식 - yyyyMMddHHmmss)
     sndDT = ''
 
     # 수신자명
@@ -352,7 +352,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-알림톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20200723012753 yyyyMMddHHmmss)
+    # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
@@ -364,7 +364,7 @@ class KakaoController < ApplicationController
         {
             "rcv" => "010123456", # [필수] 수신번호
             "rcvnm" => "수신자명01", # 수신자명
-            "interOPRefKey" => "20200723-01", # 파트너 지정키, 수신자 구별용 메모
+            "interOPRefKey" => "20210101-01", # 파트너 지정키, 수신자 구별용 메모
 
             # 수신자별로 다른내용의 버튼 전송시 아래코드 참조
             # "btns" => [
@@ -386,7 +386,7 @@ class KakaoController < ApplicationController
         {
             "rcv" => "010333999", # [필수] 수신번호
             "rcvnm" => "수신자명02", # 수신자명
-            "interOPRefKey" => "20200723-02", # 파트너 지정키, 수신자 구별용 메모
+            "interOPRefKey" => "20210101-02", # 파트너 지정키, 수신자 구별용 메모
 
             # 수신자별로 다른내용의 버튼 전송시 아래코드 참조
             # "btns" => [
@@ -473,7 +473,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-알림톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 전송요청번호, 파트너가 전송요청에 대한 관리번호를 직접 할당하여 관리하는 경우 기재
@@ -564,7 +564,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 수신자명
@@ -652,7 +652,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 광고 전송여부
@@ -739,7 +739,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 광고 전송여부
@@ -837,7 +837,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 수신자명
@@ -934,7 +934,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 친구톡 이미지 링크 URL (수신자가 친구톡 상단 이미지 선택시 호출되는 URL)
@@ -1030,7 +1030,7 @@ class KakaoController < ApplicationController
     # 대체문자 유형 (공백-미전송 / C-친구톡내용 / A-대체문자내용)
     altSendType = 'A'
 
-    # 예약일시 (작성형식: 20190120012753 yyyyMMddHHmmss)
+     # 예약일시 (작성형식: yyyyMMddHHmmss)
     sndDT = ''
 
     # 친구톡 이미지 링크 URL (수신자가 친구톡 상단 이미지 선택시 호출되는 URL)
@@ -1145,7 +1145,7 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190917-01'
+    requestNum = '20220101-01'
 
     begin
       @Response = KakaoController::KakaoService.cancelReserveRN(
@@ -1201,7 +1201,7 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190917-01'
+    requestNum = '20220101-01'
 
     begin
       @Response = KakaoController::KakaoService.getMessagesRN(
@@ -1230,10 +1230,10 @@ class KakaoController < ApplicationController
     userID = KakaoController::TestUserID
 
     # [필수] 시작일자, 날자형식(yyyyMMdd)
-    sDate = "20190801"
+    sDate = "20220101"
 
     # [필수] 종료일자, 날자형식(yyyyMMdd)
-    eDate = "20191231"
+    eDate = "20220110"
 
     # 전송상태값 배열 [0-대기, 1-전송중, 2-성공, 3-대체, 4-실패, 5-취소]
     state = [0, 1, 2, 3, 4, 5]
@@ -1699,7 +1699,7 @@ class KakaoController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea 20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합

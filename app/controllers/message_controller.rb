@@ -688,7 +688,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = '20190917-001'
+    requestNum = '20220101-001'
 
     begin
       @Response = MessageController::MSGService.cancelReserveRN(corpNum, requestNum)
@@ -730,7 +730,7 @@ class MessageController < ApplicationController
     corpNum = MessageController::TestCorpNum
 
     # 전송요청시 할당한 전송요청 관리번호
-    requestNum = "20190917-01"
+    requestNum = "20220101-01"
 
     begin
       @Response = MessageController::MSGService.getMessagesRN(corpNum, requestNum)
@@ -775,10 +775,10 @@ class MessageController < ApplicationController
     userID = MessageController::TestUserID
 
     # [필수] 시작일자, 날짜형식(yyyyMMdd)
-    sDate = "20190701"
+    sDate = "20220101"
 
     # [필수] 종료일자, 날짜형식(yyyyMMdd)
-    eDate = "20191231"
+    eDate = "20220110"
 
     # 전송상태값 배열, 1-대기, 2-성공, 3-실패, 4-취소
     state = [1, 2, 3, 4]
@@ -1265,7 +1265,7 @@ class MessageController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea 20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합

@@ -24,7 +24,7 @@
       <li>remark2 (비고2) : <%= @Response["remark2"] %></li>
       <li>remark3 (비고3) : <%= @Response["remark3"] %></li>
 
-      <li>invoicerMgtKey (공급자 관리번호) : <%= @Response["invoicerMgtKey"] %></li>
+      <li>invoicerMgtKey (공급자 문서번호) : <%= @Response["invoicerMgtKey"] %></li>
       <li>invoicerCorpNum (공급자 사업자번호) : <%= @Response["invoicerCorpNum"] %></li>
       <li>invoicerTaxRegID (공급자 종사업장 식별번호) : <%= @Response["invoicerTaxRegID"] %></li>
       <li>invoicerCorpName (공급자 상호) : <%= @Response["invoicerCorpName"] %></li>
@@ -56,8 +56,6 @@
 
       <li>modifyCode (수정 사유코드) : <%= @Response["modifyCode"] %></li>
       <li>orgNTSConfirmNum (원본 국세청승인번호) : <%= @Response["orgNTSConfirmNum"] %></li>
-      <li>originalTaxinvoiceKey (원본 팝빌 관리번호) : <%= @Response["originalTaxinvoiceKey"] %></li>
-
 
       <% @Response["detailList"].each_with_index do |detailInfo, index| %>
         <fieldset class="fieldset2">

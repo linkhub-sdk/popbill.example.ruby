@@ -67,10 +67,10 @@ class HttaxinvoiceController < ApplicationController
     dType = "S"
 
     # 시작일자, 표시형식(yyyyMMdd)
-    sDate = "20190901"
+    sDate = "20220101"
 
     # 종료일자, 표시형식(yyyyMMdd)
-    eDate = "20191231"
+    eDate = "20220110"
 
     begin
       @value = HttaxinvoiceController::HTTIService.requestJob(
@@ -261,7 +261,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 전자세금계산서 국세청 승인번호
-    ntsConfirmNum = "201904024100020300000cc6"
+    ntsConfirmNum = "202204024100020300000cc6"
 
     begin
       @Response = HttaxinvoiceController::HTTIService.getTaxinvoice(corpNum, ntsConfirmNum)
@@ -282,7 +282,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 전자세금계산서 국세청 승인번호
-    ntsConfirmNum = "201904024100020300000cc6"
+    ntsConfirmNum = "202204024100020300000cc6"
 
     begin
       @Response = HttaxinvoiceController::HTTIService.getXML(corpNum, ntsConfirmNum)
@@ -304,7 +304,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 국세청 승인번호
-    ntsConfirmNum = "201904024100020300000cc6"
+    ntsConfirmNum = "202204024100020300000cc6"
 
     begin
       @value = HttaxinvoiceController::HTTIService.getPopUpURL(
@@ -330,7 +330,7 @@ class HttaxinvoiceController < ApplicationController
     corpNum = HttaxinvoiceController::TestCorpNum
 
     # 국세청 승인번호
-    ntsConfirmNum = "201904024100020300000cc6"
+    ntsConfirmNum = "202204024100020300000cc6"
 
     begin
       @value = HttaxinvoiceController::HTTIService.getPrintURL(
@@ -904,7 +904,7 @@ class HttaxinvoiceController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea 20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합

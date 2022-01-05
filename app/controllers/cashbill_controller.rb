@@ -57,7 +57,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호, 최대 24자리로 숫자, 영문 '-', '_' 조합하여 구성
-    mgtKey = "20190403-01"
+    mgtKey = "20220101-01"
 
     begin
       @response = CashbillController::CBService.checkMgtKeyInUse(
@@ -403,7 +403,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-03"
+    mgtKey = "20220101-03"
 
     begin
       @Response = CashbillController::CBService.issue(
@@ -429,7 +429,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-03"
+    mgtKey = "20220101-03"
 
     begin
       @Response = CashbillController::CBService.cancelIssue(
@@ -455,7 +455,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-03"
+    mgtKey = "20220101-03"
 
     begin
       @Response = CashbillController::CBService.delete(
@@ -480,13 +480,13 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190403-08"
+    mgtKey = "20220101-08"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "569090041"
+    orgConfirmNum = "TB0000274"
 
     # [취소거래시 필수] 원본 현금영수증 거래일자
-    orgTradeDate = "20190327"
+    orgTradeDate = "20220101"
 
     begin
       @Response = CashbillController::CBService.revokeRegistIssue(
@@ -516,13 +516,13 @@ class CashbillController < ApplicationController
     userID = CashbillController::TestUserID
 
     # 현금영수증 문서번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
-    mgtKey = "20190403-09"
+    mgtKey = "20220101-09"
 
     # 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "569090041"
+    orgConfirmNum = "TB0000274"
 
     # 원본 현금영수증 거래일자
-    orgTradeDate = "20190327"
+    orgTradeDate = "20220101"
 
     # 안내문자 전송여부
     smssendYN = false
@@ -582,13 +582,13 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
-    mgtKey = "20190403-10"
+    mgtKey = "20220101-10"
 
     # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "569090041"
+    orgConfirmNum = "TB0000274"
 
     # [취소거래시 필수] 원본 현금영수증 거래일자
-    orgTradeDate = "20190327"
+    orgTradeDate = "20220101"
 
     begin
       @Response = CashbillController::CBService.revokeRegister(
@@ -618,13 +618,13 @@ class CashbillController < ApplicationController
     userID = CashbillController::TestUserID
 
     # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20190403-11"
+    mgtKey = "20220101-11"
 
     # 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "569090041"
+    orgConfirmNum = "TB0000274"
 
     # 원본 현금영수증 거래일자
-    orgTradeDate = "20190327"
+    orgTradeDate = "20220101"
 
     # 안내문자 전송여부
     smssendYN = false
@@ -679,7 +679,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = "20220101-11"
 
     begin
       @Response = CashbillController::CBService.getInfo(
@@ -704,12 +704,12 @@ class CashbillController < ApplicationController
 
     # 현금영수증 문서번호 배열, 최대 1000건
     mgtKeyList = Array.new
-    mgtKeyList.push("20190403-01")
-    mgtKeyList.push("20190403-06")
-    mgtKeyList.push("20190403-07")
-    mgtKeyList.push("20190403-08")
-    mgtKeyList.push("20190403-09")
-    mgtKeyList.push("20190403-10")
+    mgtKeyList.push("20220101-01")
+    mgtKeyList.push("20220101-06")
+    mgtKeyList.push("20220101-07")
+    mgtKeyList.push("20220101-08")
+    mgtKeyList.push("20220101-09")
+    mgtKeyList.push("20220101-10")
 
     begin
       @Response = CashbillController::CBService.getInfos(
@@ -835,7 +835,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-09"
+    mgtKey = " 20220101-09"
 
     begin
       @Response = CashbillController::CBService.getLogs(
@@ -886,7 +886,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = " 20220101-11"
 
     begin
       @value = CashbillController::CBService.getPopUpURL(
@@ -937,7 +937,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20200722-01"
+    mgtKey = "20210101-01"
 
     begin
       @value = CashbillController::CBService.getPDFURL(
@@ -964,7 +964,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = " 20220101-11"
 
     begin
       @value = CashbillController::CBService.getPrintURL(
@@ -990,7 +990,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = " 20220101-11"
 
     begin
       @value = CashbillController::CBService.getEPrintURL(
@@ -1017,9 +1017,9 @@ class CashbillController < ApplicationController
 
     # 현금영수증 문서번호 배열, 최대 100건
     mgtKeyList = Array.new
-    mgtKeyList.push("20190403-06")
-    mgtKeyList.push("20190403-07")
-    mgtKeyList.push("20190403-08")
+    mgtKeyList.push(" 20220101-06")
+    mgtKeyList.push(" 20220101-07")
+    mgtKeyList.push(" 20220101-08")
 
     begin
       @value = CashbillController::CBService.getMassPrintURL(
@@ -1045,7 +1045,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-06"
+    mgtKey = " 20220101-06"
 
     begin
       @value = CashbillController::CBService.getMailURL(
@@ -1096,7 +1096,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = " 20220101-11"
 
     # 이메일 주소
     # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
@@ -1128,7 +1128,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = " 20220101-11"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1167,7 +1167,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20190403-11"
+    mgtKey = " 20220101-11"
 
     # 발신번호
     sendNum = "07043042991"
@@ -1607,7 +1607,7 @@ class CashbillController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합
@@ -1751,7 +1751,7 @@ class CashbillController < ApplicationController
 
     # 할당할 문서번호, 숫자, 영문, '-', '_' 조합으로
     # 최대 24자리까지 사업자번호별 중복없는 고유번호 할당
-    mgtKey = "20200723-05"
+    mgtKey = "20210101-05"
 
     begin
       @Response = CashbillController::CBService.assignMgtKey(

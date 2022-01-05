@@ -442,7 +442,7 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # 원본 팩스 전송요청번호
-    orgRequestNum = "20190121-001"
+    orgRequestNum = " 20220101-001"
 
     # 발신번호, 공백처리시 기존전송정보로 전송
     sender = "07043042991"
@@ -568,7 +568,7 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # 원본 팩스 전송요청번호
-    orgReceiptNum = "20190121-01"
+    orgReceiptNum = " 20220101-01"
 
     # 발신번호, 공백처리시 기존전송정보로 전송
     sender = "07043042991"
@@ -655,7 +655,7 @@ class FaxController < ApplicationController
     corpNum = FaxController::TestCorpNum
 
     # 팩스전송시 할당한 전송요청번호
-    requestNum = "20190121-01"
+    requestNum = " 20220101-01"
 
     begin
       @Response = FaxController::FAXService.cancelReserveRN(corpNum, requestNum)
@@ -1211,7 +1211,7 @@ class FaxController < ApplicationController
     contactInfo = {
 
         # 담당자 아이디 (6자 이상 50자 미만)
-        "id" => "testkorea20190121",
+        "id" => "testkorea 20220101",
 
         # 비밀번호 (8자 이상 20자 미만)
         # 영문, 숫자, 특수문자 조합
