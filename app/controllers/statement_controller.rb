@@ -984,6 +984,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서 보기 팝업 URL을 반환합니다. (메뉴, 버튼 제외)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # - https://docs.popbill.com/statement/ruby/api#GetViewURL
   ##############################################################################
   def getViewURL
 
@@ -1914,7 +1915,7 @@ class StatementController < ApplicationController
   end
 
   ##############################################################################
-  # 해당 사업자의 연동회원 가입여부를 확인합니다.
+  # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
   # - https://docs.popbill.com/statement/ruby/api#CheckIsMember
   ##############################################################################
   def checkIsMember
