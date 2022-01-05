@@ -344,6 +344,270 @@ class TaxinvoiceController < ApplicationController
   end
 
   #################################################################################################################
+  # 최대 100건의 세금계산서 발행을 한번의 요청으로 접수합니다.
+  # - https://docs.popbill.com/taxinvoice/ruby/api#BulkSubmit
+  #################################################################################################################
+  def bulkSubmit
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 제출아이디, 최대 36자리 영문, 숫자, '-' 조합으로 구성
+    submitID = 'RAILS-001'
+
+    # 지연발행 가능여부, true (가능) / false (불가능) 중 택 1
+    forceIssue = false
+
+    # 세금계산서 객체정보 배열
+    taxinvoiceList = []
+
+    for i in 1..50
+      taxinvoice = {
+          ######################### 공급자정보 #########################
+
+          # [필수] 공급자 사업자번호, '-' 제외 10자리
+          "invoicerCorpNum" => corpNum,
+
+          # 공급자 종사업장 식별번호, 필요시 숫자 4자리 기재
+          "invoicerTaxRegID" => "",
+
+          # [필수] 공급자 상호
+          "invoicerCorpName" => "상호명",
+
+          # [필수] 공급자 대표자 성명
+          "invoicerCEOName" => "대표자명",
+
+          # [필수] 공급자 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
+          # 사업자 별로 중복되지 않도록 구성
+          "invoicerMgtKey" => submitID + i.to_s,
+
+          # 공급자 주소
+          "invoicerAddr" => "공급자 주소",
+
+          # 공급자 업태
+          "invoicerBizType" => "공급자 업태",
+
+          # 공급자 종목
+          "invoicerBizClass" => "공급자 종목",
+
+          # 공급자 담당자명
+          "invoicerContactName" => "공급자 담당자명",
+
+          # 공급자 담당자 메일주소
+          "invoicerEmail" => "test@test.com",
+
+          # 공급자 담당자 휴대폰번호
+          "invoicerHP" => "010-111-222",
+
+          # 공급자 담당자 연락처
+          "invoicerTEL" => "070-4304-2991",
+
+          # 발행시 알림문자 전송여부 (정발행에서만 사용가능)
+          # - 공급받는자 주)담당자 휴대폰번호(invoiceeHP1)로 전송
+          # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
+          "invoicerSMSSendYN" => false,
+
+
+          ######################### 공급받는자정보 #########################
+
+          # [필수] 공급받는자 구분, {사업자, 개인, 외국인} 중 기재
+          "invoiceeType" => "사업자",
+
+          # [필수] 공급받는자 사업자번호, '-' 제외 10자리
+          "invoiceeCorpNum" => "8888888888",
+
+          # 공급받는자 종사업장 식별번호, 필요시 숫자 4자리 기재
+          "invoiceeTaxRegId" => "",
+
+          # [필수] 공급받는자 상호
+          "invoiceeCorpName" => "공급받는자 상호",
+
+          # [필수] 공급받는자 대표자 성명
+          "invoiceeCEOName" => "대표자 성명",
+
+          # 공급받는자 문서번호
+          "invoiceeMgtKey" => "",
+
+          # 공급받는자 주소
+          "invoiceeAddr" => "공급받는자 주소",
+
+          # 공급받는자 종목
+          "invoiceeBizClass" => "공급받는자 종목",
+
+          # 공급받는자 업태
+          "invoiceeBizType" => "공급받는자 업태",
+
+          # 공급받는자 담당자명
+          "invoiceeContactName1" => "공급받는자담당자명",
+
+          # 공급받는자 담당자 메일주소
+          # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+          # 실제 거래처의 메일주소가 기재되지 않도록 주의
+          "invoiceeEmail1" => "test@test.com",
+
+          # 공급받는자 담당자 연락처
+          "invoiceeTEL1" => "070-1234-1234",
+
+          # 공급받는자 담당자 휴대폰번호
+          "invoiceeHP1" => "010-123-1234",
+
+          # [필수] 작성일자, 표시형식 (yyyyMMdd) ex)20190121
+          "writeDate" => "20220105",
+
+          # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
+          "issueType" => "정발행",
+
+          # [필수] 과세형태, {과세, 영세, 면세} 중 기재
+          "taxType" => "과세",
+
+          # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+          # - 정과금(공급자 과금), 역과금(공급받는자 과금)
+          "chargeDirection" => "정과금",
+
+          # [필수] 영수/청구, {영수, 청구} 중 기재
+          "purposeType" => "영수",
+
+          # [필수] 공급가액 합계
+          "supplyCostTotal" => "20000",
+
+          # [필수] 세액 합계
+          "taxTotal" => "2000",
+
+          # [필수] 합계금액, 공급가액 합계 + 세액합계
+          "totalAmount" => "22000",
+
+          # 기재 상 '일련번호' 항목
+          "serialNum" => "",
+
+          # 기재 상 '권' 항목, 숫자만 입력(0~32767)
+          "kwon" => nil,
+
+          # 기재 상 '호' 항목, 숫자만 입력(0~32767)
+          "ho" => nil,
+
+          # 기재 상 '현금' 항목
+          "cash" => "",
+
+          # 기재 상 '수표' 항목
+          "chkBill" => "",
+
+          # 기재 상 '어음' 항목
+          "note" => "",
+
+          # 기재 상 '외상미수금' 항목
+          "credit" => "",
+
+          # 기재 상 '비고' 항목
+          "remark1" => "비고1",
+          "remark2" => "비고2",
+          "remark3" => "비고3",
+
+          # 사업자등록증 이미지 첨부여부
+          "businessLicenseYN" => false,
+
+          # 통장사본 이미지 첨부여부
+          "bankBookYN" => false,
+
+
+          ######################### 수정세금계산서 정보 ##########################
+          # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
+          # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
+          ##################################################################
+
+          # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
+          "modifyCode" => nil,
+
+          # [수정세금계산서 작성시 필수] 원본세금계산서 국세청승인번호 기재
+          "orgNTSConfirmNum" => nil,
+
+
+          ######################### 상세항목(품목) 정보 #########################
+          # serialNum(일련번호) 1부터 순차기재 (배열로 99개 까지 가능)
+          ##################################################################
+
+          "detailList" => [
+              {
+                  "serialNum" => 1, # 일련번호, 1부터 순차기재
+                  "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
+                  "itemName" => "테스트1", # 품목명
+                  "spec" => "규격", # 규격
+                  "qty" => "1", # 수량
+                  "unitCost" => "10000", # 단가
+                  "supplyCost" => "10000", # 공급가액
+                  "tax" => "1000", # 세액
+                  "remark" => "비고", # 비고
+              },
+              {
+                  "serialNum" => 2, # 일련번호, 1부터 순차기재
+                  "purchaseDT" => "20191031", # 거래일자, yyyyMMdd
+                  "itemName" => "테스트2", # 품목명
+                  "spec" => "규격", # 규격
+                  "qty" => "1", # 수량
+                  "unitCost" => "10000", # 단가
+                  "supplyCost" => "10000", # 공급가액
+                  "tax" => "1000", # 세액
+                  "remark" => "비고", # 비고
+              },
+          ],
+
+          ######################### 추가담당자정보 #########################
+          # 세금계산서 발행안내 메일을 수신받을 공급받는자의 담당자가 다수인 경우 담당자 정보를
+          # 추가하여 발행안내메일을 다수에게 전송할 수 있습니다. (배열로 5까지 기재 가능)
+          ##############################################################
+
+          "addContactList" => [
+              {
+                  "serialNum" => 1, # 일련번호, 1부터 순차기재
+                  "contactName" => "담당자01", # 담당자명
+                  "email" => "test@test.com", # 담당자 메일주소
+              },
+              {
+                  "serialNum" => 2, # 일련번호, 1부터 순차기재
+                  "contactName" => "담당자02", # 담당자명
+                  "email" => "test@test.com", # 담당자 메일주소
+              }
+          ],
+      }
+      taxinvoiceList << taxinvoice
+    end
+
+    begin
+      @Response = TaxinvoiceController::TIService.bulkSubmit(
+          corpNum,
+          submitID,
+          taxinvoiceList,
+          forceIssue,
+      )
+      render "taxinvoice/bulkResponse"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+  #################################################################################################################
+  # 접수시 기재한 SubmitID를 사용하여 세금계산서 접수결과를 확인합니다.
+  # - https://docs.popbill.com/taxinvoice/ruby/api#GetBulkResult
+  #################################################################################################################
+  def getBulkResult
+
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    #제출아이디, 최대 36자리 영문, 숫자, '-' 조합으로 구성
+    submitID = 'RAILS-001'
+
+    begin
+      @Response = TaxinvoiceController::TIService.getBulkResult(
+          corpNum,
+          submitID,
+      )
+      render "taxinvoice/getBulkResult"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  #################################################################################################################
   # 1건의 세금계산서를 [임시저장] 합니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#Register
   #################################################################################################################

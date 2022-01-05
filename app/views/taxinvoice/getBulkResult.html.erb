@@ -1,0 +1,34 @@
+<div id="content">
+  <p class="heading1">Response</p>
+  <br/>
+  <fieldset class="fieldset1">
+    <legend><%= request.env['PATH_INFO'] %></legend>
+    <ul>
+      <li>code (응답코드) : <%= @Response["code"] %></li>
+      <li>message (응답메시지) : <%= @Response["message"] %></li>
+      <li>submitID (제출아이디) : <%= @Response["submitID"] %></li>
+      <li>submitCount (세금계산서 접수 건수) : <%= @Response["submitCount"] %></li>
+      <li>successCount (세금계산서 발행 성공 건수) : <%= @Response["successCount"] %></li>
+      <li>failCount (세금계산서 발행 실패 건수) : <%= @Response["failCount"] %></li>
+      <li>txState (접수상태코드) : <%= @Response["txState"] %></li>
+      <li>txResultCode (접수 결과코드) : <%= @Response["txResultCode"] %></li>
+      <li>txStartDT (발행처리 시작일시) : <%= @Response["txStartDT"] %></li>
+      <li>txEndDT (발행처리 완료일시) : <%= @Response["txEndDT"] %></li>
+      <li>receiptDT	 (접수일시) : <%= @Response["receiptDT"] %></li>
+      <li>receiptID (접수아이디) : <%= @Response["receiptID"] %></li>
+
+    </ul>
+
+    <% @Response["issueResult"].each_with_index do |bulkIssueResult, index| %>
+      <fieldset class="fieldset2">
+        <legend>발행결과 [<%= (index + 1) %>]</legend>
+        <ul>
+          <li>invoicerMgtKey (팝빌 관리번호) : <%= bulkIssueResult["invoicerMgtKey"] %></li>
+          <li>code (과세형태) : <%= bulkIssueResult["code"] %></li>
+          <li>ntsconfirmNum (작성일자) : <%= bulkIssueResult["ntsconfirmNum"] %></li>
+          <li>issueDT (작성일자) : <%= bulkIssueResult["issueDT"] %></li>
+        </ul>
+      </fieldset>
+    <% end %>
+  </fieldset>
+</div>

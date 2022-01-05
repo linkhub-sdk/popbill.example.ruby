@@ -13,6 +13,8 @@ PopbillExampleRuby::Application.routes.draw do
   get "/TaxinvoiceExample" => 'taxinvoice#index'
   get "/TaxinvoiceExample/checkMgtKeyInUse" => 'taxinvoice#checkMgtKeyInUse', via: [:get]
   get "/TaxinvoiceExample/registIssue" => 'taxinvoice#registIssue', via: [:get]
+  get "/TaxinvoiceExample/bulkSubmit" => 'taxinvoice#bulkSubmit', via: [:get]
+  get "/TaxinvoiceExample/getBulkResult" => 'taxinvoice#getBulkResult', via: [:get]
   get "/TaxinvoiceExample/register" => 'taxinvoice#register', via: [:get]
   get "/TaxinvoiceExample/update" => 'taxinvoice#update', via: [:get]
   get "/TaxinvoiceExample/issue" => 'taxinvoice#issue', via: [:get]
