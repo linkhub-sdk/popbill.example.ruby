@@ -147,6 +147,58 @@ class AccountcheckController < ApplicationController
   end
 
   ##############################################################################
+  # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetPaymentURL
+  ##############################################################################
+  def getPaymentURL
+
+    # 팝빌회원 사업자번호
+    corpNum = AccountcheckController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = AccountcheckController::TestUserID
+
+    begin
+      @value = AccountcheckController::ACService.getPaymentURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
+  # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
+  # - https://docs.popbill.com/accountcheck/ruby/api#GetUseHistoryURL
+  ##############################################################################
+  def getUseHistoryURL
+
+    # 팝빌회원 사업자번호
+    corpNum = AccountcheckController::TestCorpNum
+
+    # 팝빌회원 아이디
+    userID = AccountcheckController::TestUserID
+
+    begin
+      @value = AccountcheckController::ACService.getUseHistoryURL(
+          corpNum,
+          userID,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
   # - https://docs.popbill.com/accountcheck/ruby/api#GetPartnerBalance
