@@ -704,8 +704,9 @@ class EasyfinbankController < ApplicationController
         # 아이디, 6자이상 50자미만
         "ID" => "testkorea",
 
-        # 비밀번호, 6자이상 20자 미만
-        "PWD" => "thisispassword",
+        # 비밀번호 (8자 이상 20자 미만)
+        # 영문, 숫자, 특수문자 조합
+        "Password" => "password123!@#",
 
         # 사업자번호, '-' 제외 10자리
         "CorpNum" => "8888888888",
@@ -847,11 +848,12 @@ class EasyfinbankController < ApplicationController
     # 담당자 정보
     contactInfo = {
 
-        # 담당자 아이디, 6자 이상 50자 미만
+        # 담당자 아이디 (6자 이상 50자 미만)
         "id" => "testkorea20190121",
 
-        # 비밀번호, 6자 이상 20자 미만
-        "pwd" => "user_password",
+        # 비밀번호 (8자 이상 20자 미만)
+        # 영문, 숫자, 특수문자 조합
+        "Password" => "password123!@#",
 
         # 담당자명 (최대 100자)
         "personName" => "루비담당자",
