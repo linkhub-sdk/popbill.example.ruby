@@ -16,17 +16,16 @@
       <li>txEndDT (발행처리 완료일시) : <%= @Response["txEndDT"] %></li>
       <li>receiptDT	 (접수일시) : <%= @Response["receiptDT"] %></li>
       <li>receiptID (접수아이디) : <%= @Response["receiptID"] %></li>
-
     </ul>
 
     <% @Response["issueResult"].each_with_index do |bulkIssueResult, index| %>
       <fieldset class="fieldset2">
         <legend>발행결과 [<%= (index + 1) %>]</legend>
         <ul>
-          <li>invoicerMgtKey (팝빌 관리번호) : <%= bulkIssueResult["invoicerMgtKey"] %></li>
-          <li>code (과세형태) : <%= bulkIssueResult["code"] %></li>
-          <li>ntsconfirmNum (작성일자) : <%= bulkIssueResult["ntsconfirmNum"] %></li>
-          <li>issueDT (작성일자) : <%= bulkIssueResult["issueDT"] %></li>
+          <li>invoicerMgtKey (공급자 문서번호) : <%= bulkIssueResult["invoicerMgtKey"] %></li>
+          <li>code (코드) : <%= bulkIssueResult["code"] %></li>
+          <li>ntsconfirmNum (국세청승인번호) : <%= bulkIssueResult["ntsconfirmNum"] %></li>
+          <li>issueDT (발행일시) : <%= bulkIssueResult["issueDT"] %></li>
         </ul>
       </fieldset>
     <% end %>
