@@ -364,7 +364,7 @@ class KakaoController < ApplicationController
         {
             "rcv" => "010123456", # [필수] 수신번호
             "rcvnm" => "수신자명01", # 수신자명
-            "interOPRefKey" => "20210101-01", # 파트너 지정키, 수신자 구별용 메모
+            "interOPRefKey" => "20220101-01", # 파트너 지정키, 수신자 구별용 메모
 
             # 수신자별로 다른내용의 버튼 전송시 아래코드 참조
             # "btns" => [
@@ -386,7 +386,7 @@ class KakaoController < ApplicationController
         {
             "rcv" => "010333999", # [필수] 수신번호
             "rcvnm" => "수신자명02", # 수신자명
-            "interOPRefKey" => "20210101-02", # 파트너 지정키, 수신자 구별용 메모
+            "interOPRefKey" => "20220101-02", # 파트너 지정키, 수신자 구별용 메모
 
             # 수신자별로 다른내용의 버튼 전송시 아래코드 참조
             # "btns" => [

@@ -722,10 +722,10 @@ class FaxController < ApplicationController
     userID = FaxController::TestUserID
 
     # [필수] 시작일자, 형식(yyyyMMdd)
-    sDate = "20211201"
+    sDate = "20220101"
 
     # [필수] 종료일자, 형식(yyyyMMdd)
-    eDate = "20220104"
+    eDate = "20220110"
 
     # 전송상태 배열, 1(대기), 2(성공), 3(실패), 4(취소)
     state = [1, 2, 3, 4]

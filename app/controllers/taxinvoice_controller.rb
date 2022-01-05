@@ -98,7 +98,7 @@ class TaxinvoiceController < ApplicationController
 
     # 문서번호, 1~24자리 (숫자, 영문, '-', '_') 조합으로
     # 사업자 별로 중복되지 않도록 구성
-    mgtKey = "20210101-01"
+    mgtKey = "20220101-01"
 
     # 세금계산서 정보
     taxinvoice = {
@@ -192,7 +192,7 @@ class TaxinvoiceController < ApplicationController
         "invoiceeHP1" => "010-123-1234",
 
         # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
-        "writeDate" => "20210101",
+        "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
         "issueType" => "정발행",
@@ -1644,10 +1644,10 @@ class TaxinvoiceController < ApplicationController
     dType = "W"
 
     # [필수] 시작일자, 날짜형식(yyyyMMdd)
-    sDate = "20210101"
+    sDate = "20220101"
 
     # [필수] 종료일자, 날짜형식(yyyyMMdd)
-    eDate = "20210130"
+    eDate = "20220130"
 
     # 전송상태값 배열, 미기재시 전체상태조회, 문서상태값 3자리숫자 작성, 2,3번째 와일드카드 가능
     state = ["3**", "6**"]
@@ -1827,7 +1827,7 @@ class TaxinvoiceController < ApplicationController
     keyType = MgtKeyType::SELL
 
     # 세금계산서 문서번호
-    mgtKey = "20210101-01"
+    mgtKey = "20220101-01"
 
     begin
       @value = TaxinvoiceController::TIService.getPDFURL(

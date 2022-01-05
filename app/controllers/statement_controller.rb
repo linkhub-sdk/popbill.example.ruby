@@ -1005,7 +1005,7 @@ class StatementController < ApplicationController
     itemCode = 121
 
     # 전자명세서 문서번호
-    mgtKey = "20210101-01"
+    mgtKey = "20220101-01"
 
     begin
       @value = StatementController::STMTService.getViewURL(

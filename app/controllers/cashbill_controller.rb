@@ -937,7 +937,7 @@ class CashbillController < ApplicationController
     corpNum = CashbillController::TestCorpNum
 
     # 현금영수증 문서번호
-    mgtKey = "20210101-01"
+    mgtKey = "20220101-01"
 
     begin
       @value = CashbillController::CBService.getPDFURL(
@@ -1751,7 +1751,7 @@ class CashbillController < ApplicationController
 
     # 할당할 문서번호, 숫자, 영문, '-', '_' 조합으로
     # 최대 24자리까지 사업자번호별 중복없는 고유번호 할당
-    mgtKey = "20210101-05"
+    mgtKey = "20220101-05"
 
     begin
       @Response = CashbillController::CBService.assignMgtKey(
