@@ -1578,7 +1578,8 @@ class TaxinvoiceController < ApplicationController
 
 
   ##############################################################################
-  # 1건의 전자세금계산서 인쇄팝업 URL을 반환합니다.
+  # 세금계산서 1건을 인쇄하기 위한 페이지의 팝업 URL을 반환하며,
+  # 페이지내에서 인쇄 설정값을 "공급자" / "공급받는자" / "공급자+공급받는자"용 중 하나로 지정할 수 있습니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
   # - https://docs.popbill.com/taxinvoice/ruby/api#GetPrintURL
   ##############################################################################
@@ -1594,6 +1595,36 @@ class TaxinvoiceController < ApplicationController
 
     begin
       @value = TaxinvoiceController::TIService.getPrintURL(
+          corpNum,
+          keyType,
+          mgtKey,
+      )
+      @name = "URL"
+      render "home/result"
+    rescue PopbillException => pe
+      @Response = pe
+      render "home/exception"
+    end
+  end
+
+  ##############################################################################
+  # 세금계산서 1건을 구버전 양식으로 인쇄하기 위한 페이지의 팝업 URL을 반환하며,
+  # 페이지내에서 인쇄 설정값을 "공급자" / "공급받는자" / "공급자+공급받는자"용 중 하나로 지정할 수 있습니다.
+  # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # - https://docs.popbill.com/taxinvoice/ruby/api#GetOldPrintURL
+  ##############################################################################
+  def getOldPrintURL
+    # 팝빌회원 사업자번호
+    corpNum = TaxinvoiceController::TestCorpNum
+
+    # 세금계산서 발행유형, SELL-매출, BUY-매입, TRUSTEE-위수탁
+    keyType = MgtKeyType::SELL
+
+    # 세금계산서 문서번호
+    mgtKey = "RUBY-0010"
+
+    begin
+      @value = TaxinvoiceController::TIService.getOldPrintURL(
           corpNum,
           keyType,
           mgtKey,
