@@ -259,7 +259,10 @@ class StatementController < ApplicationController
         ],
 
         ######################### 전자명세서 추가속성 #########################
-
+        # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
+        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #####################################################################
+        
         "propertyBag" => {
             "CBalance" => "15000",
             "Deposit" => "5000",
@@ -449,6 +452,9 @@ class StatementController < ApplicationController
         ],
 
         ######################### 전자명세서 추가속성 #########################
+        # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
+        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #####################################################################
 
         "propertyBag" => {
             "CBalance" => "15000",
@@ -635,6 +641,9 @@ class StatementController < ApplicationController
         ],
 
         ######################### 전자명세서 추가속성 #########################
+        # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
+        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #####################################################################
 
         "propertyBag" => {
             "CBalance" => "15000",
@@ -1568,6 +1577,9 @@ class StatementController < ApplicationController
         ],
 
         ######################### 전자명세서 추가속성 #########################
+        # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
+        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #####################################################################
 
         "propertyBag" => {
             "CBalance" => "15000",
