@@ -41,7 +41,7 @@ class KakaoController < ApplicationController
   # 팝빌 연동회원 아이디
   TestUserID = "testkorea"
 
-  # 팝빌 문자 API Service 초기화
+  # 팝빌 카카오톡 API Service 초기화
   KakaoService = KakaoService.instance(
       KakaoController::LinkID,
       KakaoController::SecretKey
