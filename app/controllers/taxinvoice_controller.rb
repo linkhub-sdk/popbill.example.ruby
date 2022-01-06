@@ -192,7 +192,7 @@ class TaxinvoiceController < ApplicationController
         # 공급받는자 담당자 휴대폰번호
         "invoiceeHP1" => "010-123-1234",
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
+        # [필수] 작성일자, 형식 (yyyyMMdd)
         "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
@@ -205,7 +205,7 @@ class TaxinvoiceController < ApplicationController
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, {영수, 청구} 중 기재
+        # [필수] 영수/청구, {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -451,7 +451,7 @@ class TaxinvoiceController < ApplicationController
           # 공급받는자 담당자 휴대폰번호
           "invoiceeHP1" => "010-123-1234",
 
-          # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
+          # [필수] 작성일자, 형식 (yyyyMMdd)
           "writeDate" => "20220105",
 
           # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
@@ -464,7 +464,7 @@ class TaxinvoiceController < ApplicationController
           # - 정과금(공급자 과금), 역과금(공급받는자 과금)
           "chargeDirection" => "정과금",
 
-          # [필수] 영수/청구, {영수, 청구} 중 기재
+          # [필수] 영수/청구, {영수, 청구, 없음} 중 기재
           "purposeType" => "영수",
 
           # [필수] 공급가액 합계
@@ -717,7 +717,7 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 날짜형식 (yyyyMMdd)
+        # [필수] 작성일자, 형식 (yyyyMMdd)
         "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
@@ -730,7 +730,7 @@ class TaxinvoiceController < ApplicationController
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, {영수, 청구} 중 기재
+        # [필수] 영수/청구, {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -960,7 +960,7 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 표시형식 (yyyyMMdd) ex) 20220101
+        # [필수] 작성일자, 형식 (yyyyMMdd)
         "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
@@ -973,7 +973,7 @@ class TaxinvoiceController < ApplicationController
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, {영수, 청구} 중 기재
+        # [필수] 영수/청구, {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -1265,7 +1265,7 @@ class TaxinvoiceController < ApplicationController
         # - 전송시 포인트가 차감되며 전송실패하는 경우 포인트 환불처리
         "invoiceeSMSSendYN" => false,
 
-        # [필수] 작성일자, 날짜형식 (yyyyMMdd)
+        # [필수] 작성일자, 형식 (yyyyMMdd)
         "writeDate" => "20220101",
 
         # [필수] 발행형태, {정발행, 역발행, 위수탁} 중 기재
@@ -1274,11 +1274,11 @@ class TaxinvoiceController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
+        # [필수] 과금방향, {정과금, 역과금} 중 기재, '역과금'은 역발행 프로세스에서만 이용가능
         # - 정과금(공급자 과금), 역과금(공급받는자 과금)
         "chargeDirection" => "정과금",
 
-        # [필수] 영수/청구, [영수, 청구] 중 기재
+        # [필수] 영수/청구, {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
