@@ -126,7 +126,7 @@ class StatementController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] {영수, 청구} 중 기재
+        # [필수] {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -262,7 +262,7 @@ class StatementController < ApplicationController
         # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
         #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
         #####################################################################
-        
+
         "propertyBag" => {
             "CBalance" => "15000",
             "Deposit" => "5000",
@@ -319,7 +319,7 @@ class StatementController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] {영수, 청구} 중 기재
+        # [필수] {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -509,7 +509,7 @@ class StatementController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] {영수, 청구} 중 기재
+        # [필수] {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
@@ -1446,7 +1446,7 @@ class StatementController < ApplicationController
         # [필수] 과세형태, {과세, 영세, 면세} 중 기재
         "taxType" => "과세",
 
-        # [필수] {영수, 청구} 중 기재
+        # [필수] {영수, 청구, 없음} 중 기재
         "purposeType" => "영수",
 
         # [필수] 공급가액 합계
