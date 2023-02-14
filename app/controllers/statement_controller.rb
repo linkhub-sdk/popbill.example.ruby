@@ -2,7 +2,7 @@
 #
 # 팝빌 전자명세서 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/statement/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/statement/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -50,7 +50,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 전자명세서 문서번호 사용여부를 확인합니다.
   # - 문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#CheckMgtKeyInUse
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#CheckMgtKeyInUse
   ##############################################################################
   def checkMgtKeyInUse
 
@@ -86,7 +86,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 1건의 전자명세서를 즉시발행 처리합니다.
-  # - https://docs.popbill.com/statement/ruby/api#RegistIssue
+  # - https://developers.popbill.com/reference/statement/ruby/api/issue#RegistIssue
   ##############################################################################
   def registIssue
 
@@ -260,7 +260,7 @@ class StatementController < ApplicationController
 
         ######################### 전자명세서 추가속성 #########################
         # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
-        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #* - https://developers.popbill.com/guide/statement/ruby/introduction/statement-form#propertybag-table
         #####################################################################
 
         "propertyBag" => {
@@ -288,7 +288,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서를 임시저장 합니다.
   # - [임시저장] 상태의 전자명세서는 Issue API(발행)를 호출해야만 수신자에게 메일로 전송됩니다.
-  # - https://docs.popbill.com/statement/ruby/api#Register
+  # - https://developers.popbill.com/reference/statement/ruby/api/issue#Register
   ##############################################################################
   def register
 
@@ -453,7 +453,7 @@ class StatementController < ApplicationController
 
         ######################### 전자명세서 추가속성 #########################
         # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
-        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #* - https://developers.popbill.com/guide/statement/ruby/introduction/statement-form#propertybag-table
         #####################################################################
 
         "propertyBag" => {
@@ -478,7 +478,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서를 수정합니다.
   # - [임시저장] 상태의 전자명세서만 수정할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#Update
+  # - https://developers.popbill.com/reference/statement/ruby/api/issue#Update
   ##############################################################################
   def update
 
@@ -642,7 +642,7 @@ class StatementController < ApplicationController
 
         ######################### 전자명세서 추가속성 #########################
         # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
-        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #* - https://developers.popbill.com/guide/statement/ruby/introduction/statement-form#propertybag-table
         #####################################################################
 
         "propertyBag" => {
@@ -669,7 +669,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 1건의 [임시저장] 상태의 전자명세서를 발행처리합니다.
-  # - https://docs.popbill.com/statement/ruby/api#StmIssue
+  # - https://developers.popbill.com/reference/statement/ruby/api/issue#Issue
   ##############################################################################
   def issue
 
@@ -705,7 +705,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 1건의 전자명세서를 [발행취소] 처리합니다.
-  # - https://docs.popbill.com/statement/ruby/api#Cancel
+  # - https://developers.popbill.com/reference/statement/ruby/api/issue#Cancel
   ##############################################################################
   def cancelIssue
 
@@ -739,7 +739,7 @@ class StatementController < ApplicationController
   # 1건의 전자명세서를 삭제합니다.
   # - 삭제시 해당 문서에 할단된 문서번호(mgtKey)를 재사용할 수 있습니다.
   # - 삭제가능한 문서 상태 : [임시저장], [거부], [발행취소]
-  # - https://docs.popbill.com/statement/ruby/api#Delete
+  # - https://developers.popbill.com/reference/statement/ruby/api/issue#Delete
   ##############################################################################
   def delete
 
@@ -767,7 +767,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 1건의 전자명세서 상태/요약 정보를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetInfo
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#GetInfo
   ##############################################################################
   def getInfo
 
@@ -795,7 +795,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 다수건의 전자명세서 상태/요약 정보를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetInfos
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#GetInfos
   ##############################################################################
   def getInfos
 
@@ -823,7 +823,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서 1건의 상세정보를 조회합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetDetailInfo
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#GetDetailInfo
   ##############################################################################
   def getDetailInfo
 
@@ -852,7 +852,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 검색조건을 사용하여 전자명세서 목록을 조회합니다. (조회기간 단위 : 최대 6개월)
-  # - https://docs.popbill.com/statement/ruby/api#Search
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#Search
   ##############################################################################
   def search
 
@@ -909,7 +909,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서 상태 변경이력을 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetLogs
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#GetLogs
   ##############################################################################
   def getLogs
 
@@ -938,7 +938,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 팝빌 전자명세서 관련 문서함 팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/info#GetURL
   ##############################################################################
   def getURL
 
@@ -964,7 +964,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서 보기 팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetPopUpURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/view#GetPopUpURL
   ##############################################################################
   def getPopUpURL
     # 팝빌회원 사업자번호
@@ -993,7 +993,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서 보기 팝업 URL을 반환합니다. (메뉴, 버튼 제외)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetViewURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/view#GetViewURL
   ##############################################################################
   def getViewURL
 
@@ -1023,7 +1023,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서 인쇄팝업 URL을 반환합니다. (발신자/수신자용 인쇄 팝업)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetPrintURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/view#GetPrintURL
   ##############################################################################
   def getPrintURL
 
@@ -1053,7 +1053,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 1건의 전자명세서 인쇄팝업 URL을 반환합니다. (수신자용 인쇄 팝업)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetEPrintURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/view#GetEPrintURL
   ##############################################################################
   def getEPrintURL
 
@@ -1083,7 +1083,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 다수건의 전자명세서 인쇄팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetMassPrintURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/view#GetMassPrintURL
   ##############################################################################
   def getMassPrintURL
 
@@ -1113,7 +1113,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 수신자 메일링크 URL을 반환합니다.
   # - 메일링크 URL은 유효시간이 존재하지 않습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetMailURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/view#GetMailURL
   ##############################################################################
   def getMailURL
 
@@ -1143,7 +1143,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -1169,7 +1169,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 인감 및 첨부문서 등록 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetSealURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#GetSealURL
   ##############################################################################
   def getSealURL
 
@@ -1196,7 +1196,7 @@ class StatementController < ApplicationController
   # 전자명세서에 첨부파일을 등록합니다.
   # - 첨부파일 등록은 전자명세서가 [임시저장] 상태인 경우에만 가능합니다.
   # - 첨부파일은 최대 5개까지 등록할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#AttachFile
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#AttachFile
   ##############################################################################
   def attachFile
 
@@ -1230,7 +1230,7 @@ class StatementController < ApplicationController
   # 전자명세서에 첨부된 파일을 삭제합니다.
   # - 파일을 식별하는 파일아이디는 첨부파일 목록(GetFileList API) 의 응답항목
   #   중 파일아이디(AttachedFile) 값을 통해 확인할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#DeleteFile
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#DeleteFile
   ##############################################################################
   def deleteFile
 
@@ -1264,7 +1264,7 @@ class StatementController < ApplicationController
   # 전자명세서에 첨부된 파일의 목록을 확인합니다.
   # - 응답항목 중 파일아이디(AttachedFile) 항목은 파일삭제(DeleteFile API)
   #   호출시 이용할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetFiles
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#GetFiles
   ##############################################################################
   def getFiles
 
@@ -1292,7 +1292,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 발행 안내메일을 재전송합니다.
-  # - https://docs.popbill.com/statement/ruby/api#SendEmail
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#SendEmail
   ##############################################################################
   def sendEmail
 
@@ -1327,7 +1327,7 @@ class StatementController < ApplicationController
   # - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [문자] > [전송내역] 탭에서
   #   전송결과를 확인할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#SendSMS
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#SendSMS
   ##############################################################################
   def sendSMS
 
@@ -1370,7 +1370,7 @@ class StatementController < ApplicationController
   # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역] 메뉴에서 전송결과를
   #   확인할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#SendFAX
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#SendFAX
   ##############################################################################
   def sendFAX
 
@@ -1409,7 +1409,7 @@ class StatementController < ApplicationController
   # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역]
   #   메뉴에서 전송결과를 확인할 수 있습니다.
-  # - https://docs.popbill.com/statement/ruby/api#FAXSend
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#FAXSend
   ##############################################################################
   def FAXSend
 
@@ -1578,7 +1578,7 @@ class StatementController < ApplicationController
 
         ######################### 전자명세서 추가속성 #########################
         # - 추가속성에 관한 자세한 사항은 아래의 URL을 참조.
-        #* - https://docs.popbill.com/statement/propertyBag?lang=ruby
+        #* - https://developers.popbill.com/guide/statement/ruby/introduction/statement-form#propertybag-table
         #####################################################################
 
         "propertyBag" => {
@@ -1605,7 +1605,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서에 다른 전자명세서 1건을 첨부합니다.
-  # - https://docs.popbill.com/statement/ruby/api#AttachStatement
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#AttachStatement
   ##############################################################################
   def attachStatement
 
@@ -1641,7 +1641,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서에 첨부된 다른 전자명세서를 첨부해제합니다.
-  # - https://docs.popbill.com/statement/ruby/api#DetachStatement
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#DetachStatement
   ##############################################################################
   def detachStatement
 
@@ -1677,7 +1677,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서 메일전송 항목에 대한 전송여부를 목록으로 반환합니다.
-  # - https://docs.popbill.com/statement/ruby/api#ListEmailConfig
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#ListEmailConfig
   ##############################################################################
   def listEmailConfig
 
@@ -1707,7 +1707,7 @@ class StatementController < ApplicationController
   # SMT_DENY : 발신자에게 전자명세서가 거부 되었음을 알려주는 메일입니다.
   # SMT_CANCEL : 수신자에게 전자명세서가 취소 되었음을 알려주는 메일입니다.
   # SMT_CANCEL_ISSUE : 수신자에게 전자명세서가 발행취소 되었음을 알려주는 메일입니다.
-  # - https://docs.popbill.com/statement/ruby/api#UpdateEmailConfig
+  # - https://developers.popbill.com/reference/statement/ruby/api/etc#UpdateEmailConfig
   ##############################################################################
   def updateEmailConfig
 
@@ -1741,7 +1741,7 @@ class StatementController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -1761,7 +1761,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -1787,7 +1787,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -1813,7 +1813,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -1839,7 +1839,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -1859,7 +1859,7 @@ class StatementController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -1884,7 +1884,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원의 전자명세서 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -1903,7 +1903,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 전자명세서 발행단가를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetUnitCost
+  # - https://developers.popbill.com/reference/statement/ruby/api/point#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -1928,7 +1928,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#CheckIsMember
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -1952,7 +1952,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -1970,7 +1970,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/statement/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -2032,7 +2032,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -2050,7 +2050,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://docs.popbill.com/statement/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -2090,7 +2090,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/statement/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -2141,7 +2141,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -2164,7 +2164,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/statement/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -2182,7 +2182,7 @@ class StatementController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/statement/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/statement/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 

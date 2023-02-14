@@ -2,7 +2,7 @@
 #
 # 팝빌 홈택스 전자세금계산서 연동 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/httaxinvoice/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/httaxinvoice/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -54,7 +54,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 매출/매입 내역 수집을 요청합니다. (조회기간 단위 : 최대 3개월)
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#RequestJob
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/job#RequestJob
   ##############################################################################
   def requestJob
 
@@ -91,7 +91,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 수집 요청 상태를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetJobState
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/job#GetJobState
   ##############################################################################
   def getJobState
 
@@ -112,7 +112,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 수집 요청건들에 대한 상태 목록을 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#ListActiveJob
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/job#ListActiveJob
   ##############################################################################
   def listActiveJob
 
@@ -130,7 +130,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 매입/매출 내역의 수집 결과를 조회합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#Search
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/search#Search
   ##############################################################################
   def search
 
@@ -198,7 +198,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 매입/매출 내역의 수집 결과 요약정보를 조회합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#Summary
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/search#Summary
   ##############################################################################
   def summary
 
@@ -254,7 +254,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 1건의 상세정보를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetTaxinvoice
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/search#GetTaxinvoice
   ##############################################################################
   def getTaxinvoice
 
@@ -275,7 +275,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 XML 정보를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetXML
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/search#GetXML
   ##############################################################################
   def getXML
 
@@ -297,7 +297,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 전자세금계산서 보기 팝업 URL을 반환힙니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetPopUpURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/search#GetPopUpURL
   ##############################################################################
   def getPopUpURL
 
@@ -323,7 +323,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 전자세금계산서 인쇄 팝업 URL을 반환힙니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetPrintURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/search#GetPrintURL
   ##############################################################################
   def getPrintURL
 
@@ -352,7 +352,7 @@ class HttaxinvoiceController < ApplicationController
   # 홈택스연동 인증관리를 위한 URL을 반환합니다.
   # - 반환된 URL은 보안정책에 따라 30초의 유효시간을 갖습니다.
   # - 부서사용자 또는 공동인증서 인증이 가능합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetCertificatePopUpURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#GetCertificatePopUpURL
   ##############################################################################
   def getCertificatePopUpURL
 
@@ -373,7 +373,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 등록된 홈택스 공동인증서의 만료일자를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetCertificateExpireDate
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#GetCertificateExpireDate
   ##############################################################################
   def getCertificateExpireDate
 
@@ -394,7 +394,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 홈택스 공동인증서의 만료일자를 반환합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#CheckCertValidation
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#CheckCertValidation
   ##############################################################################
   def checkCertValidation
 
@@ -414,7 +414,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 홈택스 전자세금계산서 부서사용자 계정을 등록합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#RegistDeptUser
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#RegistDeptUser
   ##############################################################################
   def registDeptUser
 
@@ -442,7 +442,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 전자세금계산서 부서사용자 아이디를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#CheckDeptUser
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#CheckDeptUser
   ##############################################################################
   def checkDeptUser
 
@@ -462,7 +462,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 전자세금계산서 부서사용자 계정정보를 이용하여 홈택스 로그인을 테스트합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#CheckLoginDeptUser
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#CheckLoginDeptUser
   ##############################################################################
   def checkLoginDeptUser
 
@@ -482,7 +482,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 전자세금계산서 부서사용자 계정정보를 삭제합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#DeleteDeptUser
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/cert#DeleteDeptUser
   ##############################################################################
   def deleteDeptUser
 
@@ -504,7 +504,7 @@ class HttaxinvoiceController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -524,7 +524,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -550,7 +550,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -576,7 +576,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -602,7 +602,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -622,7 +622,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -647,7 +647,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 홈택스 전자세금계산서 연동 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -666,7 +666,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 정액제 신청 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetFlatRatePopUpURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetFlatRatePopUpURL
   ##############################################################################
   def getFlatRatePopUpURL
 
@@ -687,7 +687,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 정액제 서비스 이용상태를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetFlatRateState
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/point#GetFlatRateState
   ##############################################################################
   def getFlatRateState
 
@@ -705,7 +705,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#CheckIsMember
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -729,7 +729,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -747,7 +747,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -811,7 +811,7 @@ class HttaxinvoiceController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -836,7 +836,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -854,7 +854,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -894,7 +894,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -946,7 +946,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -969,7 +969,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -987,7 +987,7 @@ class HttaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/httaxinvoice/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/httaxinvoice/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 

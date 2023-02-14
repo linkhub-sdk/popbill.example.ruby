@@ -2,7 +2,7 @@
 #
 # 팝빌 휴폐업조회 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/closedown/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/closedown/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -49,7 +49,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 1건의 사업자에 대한 휴폐업여부를 조회합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#CheckCorpNum
+  # - https://developers.popbill.com/reference/closedown/ruby/api/check#CheckCorpNum
   ##############################################################################
   def checkCorpNum
 
@@ -71,7 +71,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 다수의 사업자에 대한 휴폐업여부를 조회합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#CheckCorpNums
+  # - https://developers.popbill.com/reference/closedown/ruby/api/check#CheckCorpNums
   ##############################################################################
   def checkCorpNums
 
@@ -98,7 +98,7 @@ class ClosedownController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -118,7 +118,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -144,7 +144,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -170,7 +170,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -196,7 +196,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -216,7 +216,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -241,7 +241,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 휴폐업 조회단가를 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetUnitCost
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -262,7 +262,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 휴폐업조회 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/closedown/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -280,7 +280,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#MemberManage
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -304,7 +304,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -322,7 +322,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -384,7 +384,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -402,7 +402,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -442,7 +442,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -494,7 +494,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -517,7 +517,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -535,7 +535,7 @@ class ClosedownController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/closedown/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 
@@ -587,7 +587,7 @@ class ClosedownController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/closedown/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/closedown/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 

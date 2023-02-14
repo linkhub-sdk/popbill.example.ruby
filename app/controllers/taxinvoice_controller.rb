@@ -2,7 +2,7 @@
 #
 # 팝빌 전자세금계산서 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/taxinvoice/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/taxinvoice/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -54,7 +54,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 세금계산서 문서번호 사용여부를 확인합니다.
   # - 문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#CheckMgtKeyInUse
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#CheckMgtKeyInUse
   ##############################################################################
   def checkMgtKeyInUse
 
@@ -90,7 +90,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 1건의 세금계산서를 즉시발행 처리합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#RegistIssue
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#RegistIssue
   ##############################################################################
   def registIssue
 
@@ -252,7 +252,7 @@ class TaxinvoiceController < ApplicationController
 
         ######################### 수정세금계산서 정보 ##########################
         # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
+        # - [참고] 수정세금계산서 작성방법 안내 - https://developers.popbill.com/guide/taxinvoice/ruby/introduction/modified-taxinvoice
         ##################################################################
 
         # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
@@ -346,7 +346,7 @@ class TaxinvoiceController < ApplicationController
 
   #################################################################################################################
   # 최대 100건의 세금계산서 발행을 한번의 요청으로 접수합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#BulkSubmit
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#BulkSubmit
   #################################################################################################################
   def bulkSubmit
     # 팝빌회원 사업자번호
@@ -511,7 +511,7 @@ class TaxinvoiceController < ApplicationController
 
           ######################### 수정세금계산서 정보 ##########################
           # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-          # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
+          # - [참고] 수정세금계산서 작성방법 안내 - https://developers.popbill.com/guide/taxinvoice/ruby/introduction/modified-taxinvoice
           ##################################################################
 
           # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
@@ -586,7 +586,7 @@ class TaxinvoiceController < ApplicationController
   end
   #################################################################################################################
   # 접수시 기재한 SubmitID를 사용하여 세금계산서 접수결과를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetBulkResult
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#GetBulkResult
   #################################################################################################################
   def getBulkResult
 
@@ -610,7 +610,7 @@ class TaxinvoiceController < ApplicationController
 
   #################################################################################################################
   # 1건의 세금계산서를 [임시저장] 합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#Register
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#Register
   #################################################################################################################
   def register
 
@@ -777,7 +777,7 @@ class TaxinvoiceController < ApplicationController
 
         ######################### 수정세금계산서 정보 ##########################
         # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
+        # - [참고] 수정세금계산서 작성방법 안내 - https://developers.popbill.com/guide/taxinvoice/ruby/introduction/modified-taxinvoice
         ###################################################################
 
         # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
@@ -853,7 +853,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # [임시저장] 상태의 세금계산서의 항목을 수정합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#Update
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#Update
   ##############################################################################
   def update
 
@@ -1081,7 +1081,7 @@ class TaxinvoiceController < ApplicationController
 
   ######################################################################################
   # [임시저장] 또는 [발행대기] 상태의 세금계산서를 [공급자]가 [발행]합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#TIIssue
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#Issue
   ######################################################################################
   def issue
 
@@ -1128,7 +1128,7 @@ class TaxinvoiceController < ApplicationController
   # - 발행취소된 세금계산서는 국세청에 전송되지 않습니다.
   # - 세금계산서에 할당된 문서번호를 재사용 하기 위해서는 삭제(Delete API)를 호출하여 세금계산서를
   #   삭제해야 합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#CancelIssue
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#CancelIssue
   ##############################################################################
   def cancelIssue
 
@@ -1160,7 +1160,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # [공급받는자]가 공급자에게 역발행 세금계산서를 [즉시 요청]합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#RegistRequest
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#RegistRequest
   ##############################################################################
   def registRequest
 
@@ -1325,7 +1325,7 @@ class TaxinvoiceController < ApplicationController
 
         ######################### 수정세금계산서 정보 ##########################
         # - 수정세금계산서 관련 정보는 연동매뉴얼 또는 개발가이드 링크 참조
-        # - [참고] 수정세금계산서 작성방법 안내 - https://docs.popbill.com/taxinvoice/modify?lang=ruby
+        # - [참고] 수정세금계산서 작성방법 안내 - https://developers.popbill.com/guide/taxinvoice/ruby/introduction/modified-taxinvoice
         ###################################################################
 
         # [수정세금계산서 작성시 필수] 수정사유코드, 수정사유에 따라 1~6중 선택기재, 미기재시 nil 로 처리
@@ -1387,7 +1387,7 @@ class TaxinvoiceController < ApplicationController
   # - 역발행 세금계산서 프로세스를 구현하기 위해서는 공급자/공급받는자가 모두 팝빌에 회원이여야 합니다.
   # - 역발행 요청후 공급자가 [발행] 처리시 포인트가 차감되며 역발행 세금계산서 항목중 과금방향(ChargeDirection)에 기재한 값에 따라
   #   정과금(공급자과금) 또는 역과금(공급받는자과금) 처리됩니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#Request
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#Request
   ##############################################################################
   def requestTI
 
@@ -1420,7 +1420,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # [공급받는자]가 역)발행대기 상태의 세금계산서를 [취소]합니다.
   # - [취소] 상태의 세금계산서에 할당된 문서번호를 재사용하기 위해서는 삭제 (Delete API)를 호출해야 합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#CancelRequest
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#CancelRequest
   ##############################################################################
   def cancelRequest
 
@@ -1453,7 +1453,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 공급받는자로부터 발행을 요청받은 발행대기 상태의 역발행 세금계산서를 공급자가 [거부] 처리합니다.
   # - 세금계산서에 할당된 문서번호를 재사용하기 위해서는 삭제 (Delete) API 를 호출해야 합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#Refuse
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#Refuse
   ##############################################################################
   def refuse
 
@@ -1487,7 +1487,7 @@ class TaxinvoiceController < ApplicationController
   # 1건의 전자세금계산서를 삭제합니다.
   # - 세금계산서를 삭제해야만 문서번호(mgtKey)를 재사용할 수 있습니다.
   # - 삭제가능한 문서 상태 : 임시저장, 발행취소, 역)발행 거부/취소
-  # - https://docs.popbill.com/taxinvoice/ruby/api#Delete
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#Delete
   ##############################################################################
   def delete
 
@@ -1516,7 +1516,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # [발행완료] 상태의 세금계산서를 국세청으로 [즉시전송]합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#SendToNTS
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/issue#SendToNTS
   ##############################################################################
   def sendToNTS
 
@@ -1544,7 +1544,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 1건의 세금계산서 상태/요약 정보를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetInfo
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#GetInfo
   ##############################################################################
   def getInfo
 
@@ -1572,7 +1572,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 대량의 세금계산서 상태/요약 정보를 확인합니다. (최대 1000건)
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetInfos
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#GetInfos
   ##############################################################################
   def getInfos
 
@@ -1600,7 +1600,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 1건의 세금계산서 상세항목을 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetDetailInfo
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#GetDetailInfo
   ##############################################################################
   def getDetailInfo
 
@@ -1628,7 +1628,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 검색조건을 사용하여 세금계산서 목록을 조회합니다. (조회기간 단위 : 최대 6개월)
-  # - https://docs.popbill.com/taxinvoice/ruby/api#Search
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#Search
   ##############################################################################
   def search
 
@@ -1732,7 +1732,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 세금계산서 상태 변경이력을 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetLogs
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#GetLogs
   ##############################################################################
   def getLogs
 
@@ -1761,7 +1761,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 팝빌 전자세금계산서 문서함 팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/info#GetURL
   ##############################################################################
   def getURL
 
@@ -1789,7 +1789,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 1건의 전자세금계산서 보기 팝업 URL을 반환합니다. (메뉴/버튼 제외)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetViewURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetViewURL
   ##############################################################################
   def getViewURL
 
@@ -1819,6 +1819,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 1건의 전자세금계산서 PDF 다운로드 팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetPDFURL
   ##############################################################################
   def getPDFURL
     # 팝빌회원 사업자번호
@@ -1849,7 +1850,7 @@ class TaxinvoiceController < ApplicationController
   # 세금계산서 1건을 인쇄하기 위한 페이지의 팝업 URL을 반환하며,
   # 페이지내에서 인쇄 설정값을 "공급자" / "공급받는자" / "공급자+공급받는자"용 중 하나로 지정할 수 있습니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetPrintURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetPrintURL
   ##############################################################################
   def getPrintURL
     # 팝빌회원 사업자번호
@@ -1879,7 +1880,7 @@ class TaxinvoiceController < ApplicationController
   # 세금계산서 1건을 구버전 양식으로 인쇄하기 위한 페이지의 팝업 URL을 반환하며,
   # 페이지내에서 인쇄 설정값을 "공급자" / "공급받는자" / "공급자+공급받는자"용 중 하나로 지정할 수 있습니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetOldPrintURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetOldPrintURL
   ##############################################################################
   def getOldPrintURL
     # 팝빌회원 사업자번호
@@ -1908,7 +1909,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 세금계산서 인쇄(공급받는자) URL을 반환합니다.
   # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetEPrintURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetEPrintURL
   ##############################################################################
   def getEPrintURL
 
@@ -1938,7 +1939,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 다수건의 전자세금계산서 인쇄팝업 URL을 반환합니다. (최대 100건)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetMassPrintURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetMassPrintURL
   ##############################################################################
   def getMassPrintURL
 
@@ -1968,7 +1969,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 공급받는자 메일링크 URL을 반환합니다.
   # - 메일링크 URL은 유효시간이 존재하지 않습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetMailURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/view#GetMailURL
   ##############################################################################
   def getMailURL
 
@@ -1998,7 +1999,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -2024,7 +2025,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 인감 및 첨부문서 등록 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetSealURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#GetSealURL
   ##############################################################################
   def getSealURL
 
@@ -2051,7 +2052,7 @@ class TaxinvoiceController < ApplicationController
   # 세금계산서에 첨부파일을 등록합니다.
   # - [임시저장] 상태의 세금계산서만 파일을 첨부할수 있습니다.
   # - 첨부파일은 최대 5개까지 등록할 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#AttachFile
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#AttachFile
   ##############################################################################
   def attachFile
 
@@ -2085,7 +2086,7 @@ class TaxinvoiceController < ApplicationController
   # 세금계산서에 첨부된 파일을 삭제합니다.
   # - 파일을 식별하는 파일아이디는 첨부파일 목록(GetFiles API) 의 응답항목
   #   중 파일아이디(AttachedFile) 값을 통해 확인할 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#DeleteFile
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#DeleteFile
   ##############################################################################
   def deleteFile
 
@@ -2118,7 +2119,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 세금계산서에 첨부된 파일의 목록을 확인합니다.
   # - 응답항목 중 파일아이디(AttachedFile) 항목은 파일삭제(DeleteFile API) 호출시 이용할 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetFiles
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#GetFiles
   ##############################################################################
   def getFiles
 
@@ -2146,7 +2147,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 발행 안내메일을 재전송합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#SendEmail
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#SendEmail
   ##############################################################################
   def sendEmail
 
@@ -2181,7 +2182,7 @@ class TaxinvoiceController < ApplicationController
   # - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [문자] > [전송내역] 탭에서 전송결과를
   #   확인할 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#SendSMS
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#SendSMS
   ##############################################################################
   def sendSMS
 
@@ -2224,7 +2225,7 @@ class TaxinvoiceController < ApplicationController
   # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역] 메뉴에서 전송결과를
   #   확인할 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#SendFAX
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#SendFAX
   ##############################################################################
   def sendFax
 
@@ -2260,7 +2261,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 1건의 전자명세서를 세금계산서에 첨부합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#AttachStatement
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#AttachStatement
   ##############################################################################
   def attachStatement
 
@@ -2296,7 +2297,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 세금계산서에 첨부된 전자명세서 1건을 첨부해제합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#DetachStatement
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#DetachStatement
   ##############################################################################
   def detachStatement
 
@@ -2332,7 +2333,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 대용량 연계사업자 메일주소 목록을 반환합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetEmailPublicKeys
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#GetEmailPublicKeys
   ##############################################################################
   def getEmailPublicKeys
 
@@ -2352,7 +2353,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌 사이트에서 작성한 세금계산서에 파트너의 문서번호를 할당합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#AssignMgtKey
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#AssignMgtKey
   ##############################################################################
   def assignMgtKey
 
@@ -2386,7 +2387,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 메일전송 항목에 대한 전송여부를 목록으로 반환합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#ListEmailConfig
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#ListEmailConfig
   ##############################################################################
   def listEmailConfig
 
@@ -2450,7 +2451,7 @@ class TaxinvoiceController < ApplicationController
   # [정기발송]
   # TAX_SEND_INFO : 전월 귀속분 [매출 발행 대기] 세금계산서 발행 메일 입니다.
   # ETC_CERT_EXPIRATION : 팝빌에서 이용중인 공동인증서의 갱신 메일 입니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#UpdateEmailConfig
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#UpdateEmailConfig
   ##############################################################################
   def updateEmailConfig
 
@@ -2482,7 +2483,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 국세청 전송 옵션 설정 상태를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetSendToNTSConfig
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#GetSendToNTSConfig
   ##############################################################################
   def getSendToNTSConfig
 
@@ -2507,7 +2508,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 공동인증서 등록 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetTaxCertURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/cert#GetTaxCertURL
   ##############################################################################
   def getTaxCertURL
 
@@ -2534,7 +2535,7 @@ class TaxinvoiceController < ApplicationController
   # 팝빌에 등록되어 있는 공동인증서의 만료일자를 확인합니다.
   # - 공동인증서가 갱신/재발급/비밀번호 변경이 되는 경우 해당 인증서를
   #   재등록 하셔야 정상적으로 API를 이용하실 수 있습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetCertificateExpireDate
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/cert#GetCertificateExpireDate
   ##############################################################################
   def getCertificateExpireDate
 
@@ -2555,7 +2556,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 세금계산서 발행을 위해 등록한 공동인증서의 유효성을 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#CheckCertValidation
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/cert#CheckCertValidation
   ##############################################################################
   def checkCertValidation
 
@@ -2577,7 +2578,7 @@ class TaxinvoiceController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -2597,7 +2598,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -2623,7 +2624,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -2649,7 +2650,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -2675,7 +2676,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -2695,7 +2696,7 @@ class TaxinvoiceController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -2720,7 +2721,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 전자세금계산서 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -2738,7 +2739,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 전자세금계산서 발행단가를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetUnitCost
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/point#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -2760,7 +2761,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#CheckIsMember
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -2784,7 +2785,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -2802,7 +2803,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -2864,7 +2865,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -2882,7 +2883,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://docs.popbill.com/taxinvoice/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -2922,7 +2923,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -2972,7 +2973,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -2995,7 +2996,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -3014,7 +3015,7 @@ class TaxinvoiceController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/taxinvoice/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 

@@ -2,7 +2,7 @@
 #
 # 팝빌 홈택스 현금영수증 연동 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/htcashbill/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/htcashbill/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -55,7 +55,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 현금영수증 매출/매입 내역 수집을 요청합니다. (조회기간 단위 : 최대 3개월)
   # - 수집 요청후 반환받은 작업아이디(JobID)의 유효시간은 1시간 입니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#RequestJob
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/job#RequestJob
   ##############################################################################
   def requestJob
 
@@ -88,7 +88,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 수집 요청 상태를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetJobState
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/job#GetJobState
   ##############################################################################
   def getJobState
 
@@ -110,7 +110,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 수집 요청건들에 대한 상태 목록을 확인합니다.
   #  - 수집 요청 작업아이디(JobID)의 유효시간은 1시간 입니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#ListActiveJob
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/job#ListActiveJob
   ##############################################################################
   def listActiveJob
 
@@ -128,7 +128,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 현금영수증 매입/매출 내역의 수집 결과를 조회합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#Search
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/search#Search
   ##############################################################################
   def search
 
@@ -172,7 +172,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 현금영수증 매입/매출 내역의 수집결과 요약정보를 조회합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#Summary
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/search#Summary
   ##############################################################################
   def summary
 
@@ -206,7 +206,7 @@ class HtcashbillController < ApplicationController
   # 홈택스연동 인증관리를 위한 URL을 반환합니다.
   # - 반환된 URL은 보안정책에 따라 30초의 유효시간을 갖습니다.
   # - 부서사용자/공동인증서 인증 방식이 있습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetCertificatePopUpURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#GetCertificatePopUpURL
   ##############################################################################
   def getCertificatePopUpURL
 
@@ -227,7 +227,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 홈택스 공동인증서의 만료일자를 반환합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetCertificateExpireDate
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#GetCertificateExpireDate
   ##############################################################################
   def getCertificateExpireDate
 
@@ -248,7 +248,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 공동인증서의 홈택스 로그인을 테스트합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#CheckCertValidation
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#CheckCertValidation
   ##############################################################################
   def checkCertValidation
 
@@ -268,7 +268,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 홈택스 현금영수증 부서사용자 계정을 등록합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#RegistDeptUser
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#RegistDeptUser
   ##############################################################################
   def registDeptUser
 
@@ -296,7 +296,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 부서사용자 아이디를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#CheckDeptUser
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#CheckDeptUser
   ##############################################################################
   def checkDeptUser
 
@@ -316,7 +316,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 부서사용자 계정정보를 이용하여 홈택스 로그인을 테스트합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#CheckLoginDeptUser
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#CheckLoginDeptUser
   ##############################################################################
   def checkLoginDeptUser
 
@@ -336,7 +336,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 부서사용자 계정정보를 삭제합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#DeleteDeptUser
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/cert#DeleteDeptUser
   ##############################################################################
   def deleteDeptUser
 
@@ -358,7 +358,7 @@ class HtcashbillController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -378,7 +378,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -404,7 +404,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -430,7 +430,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -456,7 +456,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -476,7 +476,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -501,7 +501,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 홈택스 현금영수증 연동 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -520,7 +520,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 정액제 신청 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetFlatRatePopUpURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetFlatRatePopUpURL
   ##############################################################################
   def getFlatRatePopUpURL
 
@@ -541,7 +541,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 정액제 서비스 이용상태를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetFlatRateState
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/point#GetFlatRateState
   ##############################################################################
   def getFlatRateState
 
@@ -559,7 +559,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#CheckIsMember
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -583,7 +583,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -601,7 +601,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -664,7 +664,7 @@ class HtcashbillController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -689,7 +689,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -707,7 +707,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://docs.popbill.com/htcashbill/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -747,7 +747,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -798,7 +798,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -821,7 +821,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -839,7 +839,7 @@ class HtcashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/htcashbill/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/htcashbill/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 

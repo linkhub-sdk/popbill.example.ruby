@@ -2,7 +2,7 @@
 #
 # 팝빌 팩스 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/fax/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/fax/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -50,7 +50,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 발신번호 관리 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetSenderNumberMgtURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/sendnum#GetSenderNumberMgtURL
   ##############################################################################
   def getSenderNumberMgtURL
 
@@ -75,7 +75,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팝빌에 등록된 팩스 발신번호 목록을 반환합니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetSenderNumberList
+  # - https://developers.popbill.com/reference/fax/ruby/api/sendnum#GetSenderNumberList
   ##############################################################################
   def getSenderNumberList
 
@@ -95,7 +95,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팩스를 전송합니다. (전송할 파일 개수는 최대 20개까지 가능)
-  # - https://docs.popbill.com/fax/ruby/api#SendFAX
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#SendFAX
   ##############################################################################
   def sendFax
 
@@ -157,7 +157,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # [대량전송] 팩스를 전송합니다. (전송할 파일 개수는 최대 20개까지 가능)
-  # - https://docs.popbill.com/fax/ruby/api#SendFAX_Multi
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#SendFAX_multi
   ##############################################################################
   def sendFax_Multi
 
@@ -224,7 +224,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 파일의 바이너리 데이터를 팩스 전송하기 위해 팝빌에 접수합니다. (최대 전송파일 개수 : 20개)
-  # - https://docs.popbill.com/fax/ruby/api#SendFAXBinary
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#SendFAXBinary
   ##############################################################################
   def sendFaxBinary
 
@@ -296,7 +296,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 동일한 파일의 바이너리 데이터를 다수의 수신자에게 전송하기 위해 팝빌에 접수합니다. (최대 전송파일 개수 : 20개) (최대 1,000건)
-  # - https://docs.popbill.com/fax/ruby/api#SendFAXBinary_multi
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#SendFAXBinary_multi
   ##############################################################################
   def sendFaxBinary_Multi
 
@@ -373,7 +373,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팩스를 재전송합니다.
-  # - https://docs.popbill.com/fax/ruby/api#ResendFAX
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#ResendFAX
   ##############################################################################
   def resendFax
 
@@ -432,7 +432,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 전송요청번호(requestNum)을 할당한 팩스를 재전송합니다.
-  # - https://docs.popbill.com/fax/ruby/api#ResendFAXRN
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#ResendFAXRN
   ##############################################################################
   def resendFAXRN
 
@@ -491,7 +491,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # [대량전송] 팩스를 재전송합니다.
-  # - https://docs.popbill.com/fax/ruby/api#ResendFAX_Multi
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#ResendFAX_multi
   ##############################################################################
   def resendFax_Multi
 
@@ -558,7 +558,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # [대량전송] 전송요청번호(requestNum)을 할당한 팩스를 재전송합니다.
-  # - https://docs.popbill.com/fax/ruby/api#ResendFAXRN_Multi
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#ResendFAXRN_multi
   ##############################################################################
   def resendFAXRN_multi
 
@@ -626,7 +626,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 팩스전송요청시 발급받은 접수번호(receiptNum)로 팩스 예약전송건을 취소합니다.
   # - 예약전송 취소는 예약전송시간 10분전까지 가능합니다.
-  # - https://docs.popbill.com/fax/ruby/api#CancelReserve
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#CancelReserve
   ##############################################################################
   def cancelReserve
 
@@ -648,7 +648,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 팩스전송요청시 할당한 전송요청번호(requestNum)로 팩스 예약전송건을 취소합니다.
   # - 예약전송 취소는 예약전송시간 10분전까지 가능합니다.
-  # - https://docs.popbill.com/fax/ruby/api#CancelReserveRN
+  # - https://developers.popbill.com/reference/fax/ruby/api/send#CancelReserveRN
   ##############################################################################
   def cancelReserveRN
 
@@ -669,7 +669,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팩스 전송요청시 반환받은 접수번호(receiptNum)을 사용하여 팩스전송 결과를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#getFaxDetail
+  # - https://developers.popbill.com/reference/fax/ruby/api/info#GetFaxResult
   ##############################################################################
   def getFaxDetail
 
@@ -690,7 +690,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팩스전송요청시 할당한 요청번호(requestNum)로 전송결과를 확인합니다
-    # - https://docs.popbill.com/fax/ruby/api#getFaxDetailRN
+    # - https://developers.popbill.com/reference/fax/ruby/api/info#GetFaxResultRN
   ##############################################################################
   def getFaxDetailRN
 
@@ -712,7 +712,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 검색조건을 사용하여 팩스전송 내역을 조회합니다. (조회기간 단위 : 최대 2개월)
   # - 팩스 접수일시로부터 2개월 이내 접수건만 조회할 수 있습니다.
-  # - https://docs.popbill.com/fax/ruby/api#Search
+  # - https://developers.popbill.com/reference/fax/ruby/api/info#Search
   ##############################################################################
   def search
 
@@ -773,7 +773,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 팩스 전송내역 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetSentListURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/info#GetSentListURL
   ##############################################################################
   def getSentListURL
 
@@ -800,7 +800,7 @@ class FaxController < ApplicationController
   # 팩스 미리보기 팝업 URL을 반환합니다.
   # - 팩스 미리보기는 변환완료후 가능합니다
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetPreviewURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/info#GetPreviewURL
   ##############################################################################
   def getPreviewURL
 
@@ -831,7 +831,7 @@ class FaxController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -851,7 +851,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -877,7 +877,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -903,7 +903,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -929,7 +929,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -949,7 +949,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -974,7 +974,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원의 팩스 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -992,7 +992,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팩스 전송단가를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetUnitCost
+  # - https://developers.popbill.com/reference/fax/ruby/api/point#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -1013,7 +1013,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#CheckIsMember
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -1037,7 +1037,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -1055,7 +1055,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/fax/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -1118,7 +1118,7 @@ class FaxController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -1143,7 +1143,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -1161,7 +1161,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://docs.popbill.com/fax/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -1201,7 +1201,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/fax/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -1253,7 +1253,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -1276,7 +1276,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/fax/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -1294,7 +1294,7 @@ class FaxController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/fax/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/fax/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 

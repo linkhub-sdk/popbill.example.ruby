@@ -2,7 +2,7 @@
 #
 # 팝빌 현금영수증 API Ruby On Rails SDK Example
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://docs.popbill.com/cashbill/tutorial/ruby
+# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/cashbill/ruby/getting-started/tutorial
 # 업데이트 일자 : 2022-01-05
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
@@ -50,7 +50,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 현금영수증 문서번호 중복여부를 확인합니다.
   # - 문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#CheckMgtKeyInUse
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/info#CheckMgtKeyInUse
   ##############################################################################
   def checkMgtKeyInUse
 
@@ -82,8 +82,8 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 1건의 현금영수증을 즉시발행합니다.
-  # - 현금영수증 국세청 전송 정책 : https://docs.popbill.com/cashbill/ntsSendPolicy?lang=ruby
-  # - https://docs.popbill.com/cashbill/ruby/api#RegistIssue
+  # - 현금영수증 국세청 전송 정책 : https://developers.popbill.com/guide/cashbill/ruby/introduction/policy-of-send-to-nts
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/issue#RegistIssue
   ##############################################################################
   def registIssue
 
@@ -192,263 +192,10 @@ class CashbillController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 현금영수증을 임시저장 합니다.
-  # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
-    # - https://docs.popbill.com/cashbill/ruby/api#Register
-  ##############################################################################
-  def register
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20220104-Rails005"
-
-    # 현금영수증 정보
-    cashbill = {
-
-        # [필수] 문서번호
-        "mgtKey" => mgtKey,
-
-        # [필수] 문서형태
-        "tradeType" => "승인거래",
-
-        # [필수] 거래구분, {소득공제용, 지출증빙용} 중 기재
-        "tradeUsage" => "소득공제용",
-
-        # [필수] 거래유형, {일반, 도서공연, 대중교통} 중 기재
-        "tradeOpt" => "일반",
-
-        # [필수] 식별번호
-        # 거래구분(tradeUsage) - '소득공제용' 인 경우 주민등록/휴대폰/카드번호 기재 가능
-        # 거래구분(tradeUsage) - '지출증빙용' 인 경우 사업자번호/주민등록/휴대폰/카드번호 기재 가능
-        "identityNum" => "0101112222",
-
-        # [필수] 과세형태, {과세, 비과세} 중 기재
-        "taxationType" => "과세",
-
-        # [필수] 공급가액
-        "supplyCost" => "20000",
-
-        # [필수] 부가세
-        "tax" => "2000",
-
-        # [필수] 봉사료
-        "serviceFee" => "0",
-
-        # [필수] 거래금액
-        "totalAmount" => "22000",
-
-        # [필수] 가맹점 사업자번호
-        "franchiseCorpNum" => corpNum,
-
-        # 가맹점 상호
-        "franchiseCorpName" => "가맹점 상호",
-
-        # 가맹점 종사업장 식별번호
-        "franchiseTaxRegID" => "",
-
-        # 가맹점 대표자 성명
-        "franchiseCEOName" => "가맹점 대표자 성명",
-
-        # 가맹점 주소
-        "franchiseAddr" => "가맹점 주소",
-
-        # 가맹점 연락처
-        "franchiseTEL" => "가맹점 연락처",
-
-        # 고객명
-        "customerName" => "고객명",
-
-        # 상품명
-        "itemName" => "상품명",
-
-        # 가맹점 주문번호
-        "orderNumber" => "가맹점 주문번호",
-
-        # 거래처 이메일
-        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
-        # 실제 거래처의 메일주소가 기재되지 않도록 주의
-        "email" => "test@test.com",
-
-        # 거래처 휴대폰
-        "hp" => "010-111-222",
-
-        # 발행안내문자 전송여부
-        "smssendYN" => false,
-    }
-
-    begin
-      @Response = CashbillController::CBService.register(
-          corpNum,
-          cashbill,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 1건의 현금영수증을 수정합니다.
-  # - [임시저장] 상태의 현금영수증만 수정할 수 있습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#Update
-  ##############################################################################
-  def update
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 현금영수증 문서번호
-    mgtKey = "20220104-Rails005"
-
-    # 현금영수증 정보
-    cashbill = {
-
-        # [필수] 문서번호
-        "mgtKey" => mgtKey,
-
-        # [필수] 문서형태
-        "tradeType" => "승인거래",
-
-        # [필수] 거래구분, {소득공제용, 지출증빙용} 중 기재
-        "tradeUsage" => "소득공제용",
-
-        # [필수] 거래유형, {일반, 도서공연, 대중교통} 중 기재
-        "tradeOpt" => "일반",
-
-        # [필수] 식별번호
-        # 거래구분(tradeUsage) - '소득공제용' 인 경우 주민등록/휴대폰/카드번호 기재 가능
-        # 거래구분(tradeUsage) - '지출증빙용' 인 경우 사업자번호/주민등록/휴대폰/카드번호 기재 가능
-        "identityNum" => "0101112222",
-
-        # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-        "orgConfirmNum" => "",
-
-        # [필수] 과세형태, {과세, 비과세} 중 기재
-        "taxationType" => "과세",
-
-        # [필수] 공급가액
-        "supplyCost" => "20000",
-
-        # [필수] 부가세
-        "tax" => "2000",
-
-        # [필수] 봉사료
-        "serviceFee" => "0",
-
-        # [필수] 거래금액
-        "totalAmount" => "22000",
-
-        # [필수] 가맹점 사업자번호
-        "franchiseCorpNum" => corpNum,
-
-        # 가맹점 상호
-        "franchiseCorpName" => "가맹점 상호",
-
-        # 가맹점 종사업장 식별번호
-        "franchiseTaxRegID" => "",
-
-        # 가맹점 대표자 성명
-        "franchiseCEOName" => "가맹점 대표자 성명",
-
-        # 가맹점 주소
-        "franchiseAddr" => "가맹점 주소",
-
-        # 가맹점 연락처
-        "franchiseTEL" => "가맹점 연락처",
-
-        # 고객명
-        "customerName" => "고객명",
-
-        # 상품명
-        "itemName" => "상품명",
-
-        # 가맹점 주문번호
-        "orderNumber" => "가맹점 주문번호",
-
-        # 거래처 이메일
-        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
-        # 실제 거래처의 메일주소가 기재되지 않도록 주의
-        "email" => "test@test.com",
-
-        # 거래처 휴대폰
-        "hp" => "010-111-222",
-
-        # 발행안내문자 전송여부
-        "smssendYN" => false,
-    }
-
-    begin
-      @Response = CashbillController::CBService.update(
-          corpNum,
-          mgtKey,
-          cashbill,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 1건의 임시저장 현금영수증을 발행처리합니다.
-  # - 현금영수증 국세청 전송 정책 : https://docs.popbill.com/cashbill/ntsSendPolicy?lang=ruby
-  # - https://docs.popbill.com/cashbill/ruby/api#CBIssue
-  ##############################################################################
-  def issue
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 현금영수증 문서번호
-    mgtKey = "20220101-03"
-
-    begin
-      @Response = CashbillController::CBService.issue(
-          corpNum,
-          mgtKey,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # [발행완료] 상태의 현금영수증을 [발행취소] 합니다.
-  # - 발행취소는 국세청 전송전에만 가능합니다.
-  # - 발행취소된 형금영수증은 국세청에 전송되지 않습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#CancelIssue
-  ##############################################################################
-  def cancelIssue
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 현금영수증 문서번호
-    mgtKey = "20220101-03"
-
-    begin
-      @Response = CashbillController::CBService.cancelIssue(
-          corpNum,
-          mgtKey,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # 1건의 현금영수증을 삭제합니다.
   # - 현금영수증을 삭제하면 사용된 문서번호(mgtKey)를 재사용할 수 있습니다.
-  # - 삭제가능한 문서 상태 : [임시저장], [발행취소]
-  # - https://docs.popbill.com/cashbill/ruby/api#Delete
+  # - 삭제가능한 문서 상태 : [전송실패]
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/issue#Delete
   ##############################################################################
   def delete
 
@@ -472,8 +219,8 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 1건의 취소현금영수증을 즉시발행합니다.
-  # - 현금영수증 국세청 전송 정책 : https://docs.popbill.com/cashbill/ntsSendPolicy?lang=ruby
-  # - https://docs.popbill.com/cashbill/ruby/api#RevokeRegistIssue
+  # - 현금영수증 국세청 전송 정책 : https://developers.popbill.com/guide/cashbill/ruby/introduction/policy-of-send-to-nts
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/issue#RevokeRegistIssue
   ##############################################################################
   def revokeRegistIssue
 
@@ -505,8 +252,8 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 1건의 (부분) 취소현금영수증을 즉시발행합니다.
-  # - 현금영수증 국세청 전송 정책 : https://docs.popbill.com/cashbill/ntsSendPolicy?lang=ruby
-  # - https://docs.popbill.com/cashbill/ruby/api#RevokeRegistIssue
+  # - 현금영수증 국세청 전송 정책 : https://developers.popbill.com/guide/cashbill/ruby/introduction/policy-of-send-to-nts
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/issue#RevokeRegistIssue
   ##############################################################################
   def revokeRegistIssue_part
 
@@ -573,106 +320,8 @@ class CashbillController < ApplicationController
   end
 
   ##############################################################################
-  # 1건의 취소현금영수증을 임시저장 합니다.
-  # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#RevokeRegister
-  ##############################################################################
-  def revokeRegister
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 현금영수증 문서번호, 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성
-    mgtKey = "20220101-10"
-
-    # [취소거래시 필수] 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "TB0000274"
-
-    # [취소거래시 필수] 원본 현금영수증 거래일자
-    orgTradeDate = "20220101"
-
-    begin
-      @Response = CashbillController::CBService.revokeRegister(
-          corpNum,
-          mgtKey,
-          orgConfirmNum,
-          orgTradeDate,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
-  # 1건의 (부분)취소현금영수증을 임시저장 합니다.
-  # - [임시저장] 상태의 현금영수증은 발행(Issue API)을 호출해야만 국세청에 전송됩니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#RevokeRegister
-  ##############################################################################
-  def revokeRegister_part
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 팝빌회원 아이디
-    userID = CashbillController::TestUserID
-
-    # 현금영수증 문서번호 (문서번호는 1~24자리로 숫자, 영문 '-', '_' 조합으로 구성할 수 있습니다.)
-    mgtKey = "20220101-11"
-
-    # 원본 현금영수증 국세청승인번호
-    orgConfirmNum = "TB0000274"
-
-    # 원본 현금영수증 거래일자
-    orgTradeDate = "20220101"
-
-    # 안내문자 전송여부
-    smssendYN = false
-
-    # 부분취소 여부, true-부분취소, false-전체취소
-    isPartCancel = true
-
-    # 취소사유, 1-거래취소, 2-오류발급취소, 3-기타
-    cancelType = 1
-
-    # [취소] 공급가액
-    supplyCost = "9000"
-
-    # [취소] 부가세
-    tax = "900"
-
-    # [취소] 봉사료
-    serviceFee = "0"
-
-    # [취소] 합계금액
-    totalAmount = "9900"
-
-    begin
-      @Response = CashbillController::CBService.revokeRegister(
-          corpNum,
-          mgtKey,
-          orgConfirmNum,
-          orgTradeDate,
-          smssendYN,
-          userID,
-          isPartCancel,
-          cancelType,
-          supplyCost,
-          tax,
-          serviceFee,
-          totalAmount,
-      )
-      render "home/response"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # 1건의 현금영수증 상태/요약 정보를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetInfo
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/info#GetInfo
   ##############################################################################
   def getInfo
 
@@ -696,7 +345,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 다수건의 현금영수증 상태/요약 정보를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetInfos
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/info#GetInfos
   ##############################################################################
   def getInfos
 
@@ -726,7 +375,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 현금영수증 1건의 상세정보를 조회합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetDetailInfo
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/info#GetDetailInfo
   ##############################################################################
   def getDetailInfo
 
@@ -750,7 +399,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 검색조건을 사용하여 현금영수증 목록을 조회합니다. (조회기간 단위 : 최대 6개월)
-  # - https://docs.popbill.com/cashbill/ruby/api#Search
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/info#Search
   ##############################################################################
   def search
 
@@ -826,33 +475,9 @@ class CashbillController < ApplicationController
   end
 
   ##############################################################################
-  # 현금영수증 상태 변경이력을 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetLogs
-  ##############################################################################
-  def getLogs
-
-    # 팝빌회원 사업자번호
-    corpNum = CashbillController::TestCorpNum
-
-    # 현금영수증 문서번호
-    mgtKey = " 20220101-09"
-
-    begin
-      @Response = CashbillController::CBService.getLogs(
-          corpNum,
-          mgtKey,
-      )
-      render "cashbill/cashbillLogs"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # 팝빌 현금영수증 문서함 관련 팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/info#GetURL
   ##############################################################################
   def getURL
 
@@ -878,7 +503,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 1건의 현금영수증 보기 팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetPopUpURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/view#GetPopUpURL
   ##############################################################################
   def getPopUpURL
 
@@ -904,7 +529,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 1건의 현금영수증 보기 팝업 URL을 반환합니다. (메뉴/버튼 제외)
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetViewURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/view#GetViewURL
   ##############################################################################
   def getViewURL
 
@@ -956,7 +581,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 1건의 현금영수증 인쇄팝업 URL을 반환합니다.
   # - 보안정책으로 인해 반환된 URL의 유효시간은 30초입니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetPrintURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/view#GetPrintURL
   ##############################################################################
   def getPrintURL
 
@@ -982,7 +607,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 현금영수증 인쇄(공급받는자) URL을 반환합니다.
   # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetPrintURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/view#GetPrintURL
   ##############################################################################
   def getEPrintURL
 
@@ -1008,7 +633,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 다수건의 현금영수증 인쇄팝업 URL을 반환합니다. (최대 100건)
   # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetMassPrintURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/view#GetMassPrintURL
   ##############################################################################
   def getMassPrintURL
 
@@ -1037,7 +662,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 현금영수증 수신메일 링크주소 URL을 반환합니다.
   # - URL 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetMailURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/view#GetMailURL
   ##############################################################################
   def getMailURL
 
@@ -1063,7 +688,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 팝빌(www.popbill.com)에 로그인된 팝빌 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetAccessURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#GetAccessURL
   ##############################################################################
   def getAccessURL
 
@@ -1088,7 +713,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 발행 안내메일을 재전송합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#SendEmail
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/etc#SendEmail
   ##############################################################################
   def sendEmail
 
@@ -1120,7 +745,7 @@ class CashbillController < ApplicationController
   # 알림문자를 전송합니다. (단문/SMS- 한글 최대 45자)
   # - 알림문자 전송시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [문자] > [전송내역] 탭에서 전송결과를 확인할 수 있습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#SendSMS
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/etc#SendSMS
   ##############################################################################
   def sendSMS
 
@@ -1159,7 +784,7 @@ class CashbillController < ApplicationController
   # - 팩스 전송 요청시 포인트가 차감됩니다. (전송실패시 환불처리)
   # - 전송내역 확인은 "팝빌 로그인" > [문자 팩스] > [팩스] > [전송내역] 메뉴에서
   #   전송결과를 확인할 수 있습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#SendFAX
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/etc#SendFAX
   ##############################################################################
   def sendFAX
 
@@ -1191,7 +816,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 현금영수증 메일전송 항목에 대한 전송여부를 목록으로 반환한다.
-  # - https://docs.popbill.com/cashbill/ruby/api#ListEmailConfig
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/etc#ListEmailConfig
   ##############################################################################
   def listEmailConfig
 
@@ -1218,7 +843,7 @@ class CashbillController < ApplicationController
   # 메일전송유형
   # CSH_ISSUE : 고객에게 현금영수증이 발행 되었음을 알려주는 메일 입니다.
   # CSH_CANCEL : 고객에게 현금영수증 발행취소 되었음을 알려주는 메일 입니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#UpdateEmailConfig
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/etc#UpdateEmailConfig
   ##############################################################################
   def updateEmailConfig
 
@@ -1252,7 +877,7 @@ class CashbillController < ApplicationController
   # 연동회원의 잔여포인트를 확인합니다.
   # - 과금방식이 파트너과금인 경우 파트너 잔여포인트(GetPartnerBalance API)
   #   를 통해 확인하시기 바랍니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetBalance
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetBalance
   ##############################################################################
   def getBalance
 
@@ -1272,7 +897,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 팝빌 연동회원 포인트 충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetChargeURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetChargeURL
   ##############################################################################
   def getChargeURL
 
@@ -1298,7 +923,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 결제내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetPaymentURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetPaymentURL
   ##############################################################################
   def getPaymentURL
 
@@ -1324,7 +949,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 연동회원 포인트 사용내역 확인을 위한 페이지의 팝업 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetUseHistoryURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetUseHistoryURL
   ##############################################################################
   def getUseHistoryURL
 
@@ -1350,7 +975,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 파트너의 잔여포인트를 확인합니다.
   # - 과금방식이 연동과금인 경우 연동회원 잔여포인트(GetBalance API)를 이용하시기 바랍니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetPartnerBalance
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetPartnerBalance
   ##############################################################################
   def getPartnerBalance
 
@@ -1370,7 +995,7 @@ class CashbillController < ApplicationController
   ##############################################################################
   # 파트너 포인트충전 URL을 반환합니다.
   # - 보안정책에 따라 반환된 URL은 30초의 유효시간을 갖습니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetPartnerURL
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetPartnerURL
   ##############################################################################
   def getPartnerURL
 
@@ -1395,7 +1020,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 현금영수증 발행단가를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetUnitCost
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetUnitCost
   ##############################################################################
   def getUnitCost
 
@@ -1416,7 +1041,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 현금영수증 API 서비스 과금정보를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetChargeInfo
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/point#GetChargeInfo
   ##############################################################################
   def getChargeInfo
 
@@ -1434,7 +1059,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 사업자번호를 조회하여 연동회원 가입여부를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#CheckIsMember
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#CheckIsMember
   ##############################################################################
   def checkIsMember
 
@@ -1458,7 +1083,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌 회원아이디 중복여부를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#CheckID
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#CheckID
   ##############################################################################
   def checkID
 
@@ -1476,7 +1101,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 파트너의 연동회원으로 회원가입을 요청합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#JoinMember
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#JoinMember
   ##############################################################################
   def joinMember
 
@@ -1538,7 +1163,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetCorpInfo
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#GetCorpInfo
   ##############################################################################
   def getCorpInfo
 
@@ -1556,7 +1181,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 회사정보를 수정합니다
-  # - https://docs.popbill.com/cashbill/ruby/api#UpdateCorpInfo
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#UpdateCorpInfo
   ##############################################################################
   def updateCorpInfo
 
@@ -1596,7 +1221,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자를 신규로 등록합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#RegistContact
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#RegistContact
   ##############################################################################
   def registContact
 
@@ -1648,7 +1273,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 정보를 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#GetContactInfo
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#GetContactInfo
   ##############################################################################
   def getContactInfo
     # 팝빌회원 사업자번호
@@ -1671,7 +1296,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원 사업자번호에 등록된 담당자(팝빌 로그인 계정) 목록을 확인합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#ListContact
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#ListContact
   ##############################################################################
   def listContact
 
@@ -1689,7 +1314,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 연동회원의 담당자 정보를 수정합니다.
-  # - https://docs.popbill.com/cashbill/ruby/api#UpdateContact
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/member#UpdateContact
   ##############################################################################
   def updateContact
 
@@ -1740,6 +1365,7 @@ class CashbillController < ApplicationController
 
   ##############################################################################
   # 팝빌 사이트에서 작성한 현금영수증에 파트너 문서번호를 할당합니다.
+  # - https://developers.popbill.com/reference/cashbill/ruby/api/etc#AssignMgtKey
   ##############################################################################
   def assignMgtKey
 
