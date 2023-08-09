@@ -399,6 +399,29 @@ PopbillExampleRuby::Application.routes.draw do
   get "/ClosedownExample/updateContact" => 'closedown#updateContact', via: [:get]
   get "/ClosedownExample/getAccessURL" => 'closedown#getAccessURL', via: [:get]
 
+  # 팝빌 기업정보조회 API Service route
+  get "/BizinfocheckExample" => 'bizinfocheck#index'
+  get "/BizinfocheckExample/checkBizInfo" => 'bizinfocheck#checkBizInfo', via: [:get]
+  get "/BizinfocheckExample/getBalance" => 'bizinfocheck#getBalance', via: [:get]
+  get "/BizinfocheckExample/getChargeURL" => 'bizinfocheck#getChargeURL', via: [:get]
+  get "/BizinfocheckExample/getPaymentURL" => 'bizinfocheck#getPaymentURL', via: [:get]
+  get "/BizinfocheckExample/getUseHistoryURL" => 'bizinfocheck#getUseHistoryURL', via: [:get]
+  get "/BizinfocheckExample/getPartnerBalance" => 'bizinfocheck#getPartnerBalance', via: [:get]
+  get "/BizinfocheckExample/getPartnerURL" => 'bizinfocheck#getPartnerURL', via: [:get]
+  get "/BizinfocheckExample/getChargeInfo" => 'bizinfocheck#getChargeInfo', via: [:get]
+  get "/BizinfocheckExample/getUnitCost" => 'bizinfocheck#getUnitCost', via: [:get]
+  get "/BizinfocheckExample/checkIsMember" => 'bizinfocheck#checkIsMember', via: [:get]
+  get "/BizinfocheckExample/checkID" => 'bizinfocheck#checkID', via: [:get]
+  get "/BizinfocheckExample/joinMember" => 'bizinfocheck#joinMember', via: [:get]
+  get "/BizinfocheckExample/getCorpInfo" => 'bizinfocheck#getCorpInfo', via: [:get]
+  get "/BizinfocheckExample/updateCorpInfo" => 'bizinfocheck#updateCorpInfo', via: [:get]
+  get "/BizinfocheckExample/registContact" => 'bizinfocheck#registContact', via: [:get]
+  get "/BizinfocheckExample/getContactInfo" => 'bizinfocheck#getContactInfo', via: [:get]
+  get "/BizinfocheckExample/listContact" => 'bizinfocheck#listContact', via: [:get]
+  get "/BizinfocheckExample/updateContact" => 'bizinfocheck#updateContact', via: [:get]
+  get "/BizinfocheckExample/getAccessURL" => 'bizinfocheck#getAccessURL', via: [:get]
+
+
 
   get "/EasyFinBankExample" => 'easyfinbank#index'
 
