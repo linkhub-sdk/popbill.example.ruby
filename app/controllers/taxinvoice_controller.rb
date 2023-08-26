@@ -2332,26 +2332,6 @@ class TaxinvoiceController < ApplicationController
   end
 
   ##############################################################################
-  # 대용량 연계사업자 메일주소 목록을 반환합니다.
-  # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#GetEmailPublicKeys
-  ##############################################################################
-  def getEmailPublicKeys
-
-    # 팝빌회원 사업자번호
-    corpNum = TaxinvoiceController::TestCorpNum
-
-    begin
-      @Response = TaxinvoiceController::TIService.getEmailPublicKeys(
-          corpNum,
-      )
-      render "taxinvoice/emailPublicKeys"
-    rescue PopbillException => pe
-      @Response = pe
-      render "home/exception"
-    end
-  end
-
-  ##############################################################################
   # 팝빌 사이트에서 작성한 세금계산서에 파트너의 문서번호를 할당합니다.
   # - https://developers.popbill.com/reference/taxinvoice/ruby/api/etc#AssignMgtKey
   ##############################################################################

@@ -49,7 +49,6 @@ PopbillExampleRuby::Application.routes.draw do
   get "/TaxinvoiceExample/sendFAX" => 'taxinvoice#sendFax', via: [:get]
   get "/TaxinvoiceExample/attachStatement" => 'taxinvoice#attachStatement', via: [:get]
   get "/TaxinvoiceExample/detachStatement" => 'taxinvoice#detachStatement', via: [:get]
-  get "/TaxinvoiceExample/getEmailPublicKeys" => 'taxinvoice#getEmailPublicKeys', via: [:get]
   get "/TaxinvoiceExample/assignMgtKey" => 'taxinvoice#assignMgtKey', via: [:get]
   get "/TaxinvoiceExample/listEmailConfig" => 'taxinvoice#listEmailConfig', via: [:get]
   get "/TaxinvoiceExample/updateEmailConfig" => 'taxinvoice#updateEmailConfig', via: [:get]
