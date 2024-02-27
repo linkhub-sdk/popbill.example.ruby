@@ -1,15 +1,21 @@
 ################################################################################
 #
-# 팝빌 현금영수증 API Ruby On Rails SDK Example
+# 팝빌 현금영수증 API Ruby SDK Rails Example
+# Rails 연동 튜토리얼 안내 : https://developers.popbill.com/guide/cashbill/ruby/getting-started/tutorial
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/cashbill/ruby/getting-started/tutorial
-# 업데이트 일자 : 2022-01-05
+# 업데이트 일자 : 2024-02-27
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
-#
+#         
 # <테스트 연동개발 준비사항>
-# 1) 21, 24번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
-#    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
+# 1) API Key 변경 (연동신청 시 메일로 전달된 정보)
+#     - LinkID : 링크허브에서 발급한 링크아이디
+#     - SecretKey : 링크허브에서 발급한 비밀키
+# 2) SDK 환경설정 옵션 설정
+#     - IsTest : 연동환경 설정, true-테스트, false-운영(Production), (기본값:true)
+#     - IPRestrictOnOff : 인증토큰 IP 검증 설정, true-사용, false-미사용, (기본값:true)
+#     - UseStaticIP : 통신 IP 고정, true-사용, false-미사용, (기본값:false)
+#     - UseLocalTimeYN : 로컬시스템 시간 사용여부, true-사용, false-미사용, (기본값:true)
 #
 ################################################################################
 
@@ -35,16 +41,16 @@ class CashbillController < ApplicationController
       CashbillController::SecretKey
   )
 
-  # 연동환경 설정, true-개발용, false-상업용
+  # 연동환경 설정, true-테스트, false-운영(Production), (기본값:true)
   CBService.setIsTest(true)
 
-  # 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
+  # 인증토큰 IP 검증 설정, true-사용, false-미사용, (기본값:true)
   CBService.setIpRestrictOnOff(true)
 
-  # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
+  # 통신 IP 고정, true-사용, false-미사용, (기본값:false)
   CBService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  # 로컬시스템 시간 사용여부, true-사용, false-미사용, (기본값:true)
   CBService.setUseLocalTimeYN(true)
 
   ##############################################################################
@@ -165,7 +171,7 @@ class CashbillController < ApplicationController
         "orderNumber" => "가맹점 주문번호",
 
         # 거래처 이메일
-        # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+        # 팝빌 테스트 환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
         # 실제 거래처의 메일주소가 기재되지 않도록 주의
         "email" => "code@test.com",
 
@@ -724,7 +730,7 @@ class CashbillController < ApplicationController
     mgtKey = " 20220101-11"
 
     # 이메일 주소
-    # 팝빌 개발환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
+    # 팝빌 테스트 환경에서 테스트하는 경우에도 안내 메일이 전송되므로,
     # 실제 거래처의 메일주소가 기재되지 않도록 주의
     emailAddr = "test@test.com"
 

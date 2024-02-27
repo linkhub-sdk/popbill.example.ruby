@@ -1,18 +1,23 @@
 ################################################################################
 #
-# 팝빌 홈택스 현금영수증 연동 API Ruby On Rails SDK Example
+# 팝빌 홈택스 현금영수증 API Ruby SDK Rails Example
+# Rails 연동 튜토리얼 안내 : https://developers.popbill.com/guide/htcashbill/ruby/getting-started/tutorial
 #
-# Ruby SDK 연동환경 설정방법 안내 : https://developers.popbill.com/guide/htcashbill/ruby/getting-started/tutorial
-# 업데이트 일자 : 2022-01-05
+# 업데이트 일자 : 2024-02-27
 # 연동기술지원 연락처 : 1600-9854
 # 연동기술지원 이메일 : code@linkhubcorp.com
-#
+#         
 # <테스트 연동개발 준비사항>
-# 1) 26, 29번 라인에 선언된 링크아이디(LinkID)와 비밀키(SecretKey)를
-#    링크허브 가입시 메일로 발급받은 인증정보를 참조하여 변경합니다.
-#
-# 2) 홈택스 인증정보를 등록 합니다. (부서사용자등록 / 공동인증서 등록)
-#    - 팝빌로그인 > [홈택스연동] > [환경설정] > [인증 관리] 메뉴에서 홈택스 인증 처리를 합니다.
+# 1) API Key 변경 (연동신청 시 메일로 전달된 정보)
+#     - LinkID : 링크허브에서 발급한 링크아이디
+#     - SecretKey : 링크허브에서 발급한 비밀키
+# 2) SDK 환경설정 옵션 설정
+#     - IsTest : 연동환경 설정, true-테스트, false-운영(Production), (기본값:true)
+#     - IPRestrictOnOff : 인증토큰 IP 검증 설정, true-사용, false-미사용, (기본값:true)
+#     - UseStaticIP : 통신 IP 고정, true-사용, false-미사용, (기본값:false)
+#     - UseLocalTimeYN : 로컬시스템 시간 사용여부, true-사용, false-미사용, (기본값:true)
+# 3) 홈택스 로그인 인증정보를 등록합니다. (부서사용자등록 / 공동인증서 등록)
+#    - 팝빌로그인 > [홈택스연동] > [환경설정] > [인증 관리] 메뉴
 #    - 홈택스연동 인증 관리 팝업 URL(GetCertificatePopUpURL API) 반환된 URL을 이용하여
 #      홈택스 인증 처리를 합니다.
 #
@@ -40,16 +45,16 @@ class HtcashbillController < ApplicationController
       HtcashbillController::SecretKey
   )
 
-  # 연동환경 설정, true-개발용, false-상업용
+  # 연동환경 설정, true-테스트, false-운영(Production), (기본값:true)
   HTCBService.setIsTest(true)
 
-  # 인증토큰 IP제한기능 사용여부, true-사용, false-미사용, 기본값(true)
+  # 인증토큰 IP 검증 설정, true-사용, false-미사용, (기본값:true)
   HTCBService.setIpRestrictOnOff(true)
 
-  # 팝빌 API 서비스 고정 IP 사용여부, true-사용, false-미사용, 기본값(false)
+  # 통신 IP 고정, true-사용, false-미사용, (기본값:false)
   HTCBService.setUseStaticIP(false)
 
-  #로컬시스템 시간 사용여부, true-사용, false-미사용, 기본값(true)
+  # 로컬시스템 시간 사용여부, true-사용, false-미사용, (기본값:true)
   HTCBService.setUseLocalTimeYN(true)
 
   ##############################################################################
